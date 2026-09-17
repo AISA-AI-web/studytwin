@@ -20,7 +20,8 @@
       "heading": "Verify and De-risk Workshop (Lab)",
       "body": [
         "One suspect output is easy to check. Ten is where you need a system. Today you run a verification routine on a whole batch, reach an evidence-backed verdict on each, and then judge which checking strategy you would actually trust."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -29,7 +30,8 @@
         "I can run a verification routine on several suspect outputs and record a clear verdict for each.",
         "I can compare two verification strategies and judge which is more reliable, with a reason.",
         "I can back my verdicts with evidence from a trusted source."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -55,7 +57,8 @@
           "term": "reliable",
           "definition": "A method you can trust to give the right result repeatedly."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -63,7 +66,8 @@
       "body": [
         "When you check many outputs, it is tempting to judge each one by how confident it sounds. A verification [[routine]] stops that: the same fixed steps apply to every output, so a slick output gets no easy pass.",
         "Our routine has four steps - isolate the claim, pick an independent trusted source, compare, and record a verdict. The [[verdict]] can be verified, false, or unclear, and 'unclear' is an honest answer when the evidence is not there."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -71,7 +75,8 @@
       "body": [
         "A single-source check is quick, but if that one source is wrong or out of date, your verdict is wrong too. A two-source cross-check is slower but far harder to fool, because two [[independent sources]] rarely share the same mistake.",
         "Judging which strategy is more [[reliable]] means weighing speed against confidence and asking a sharp question: could these sources fail together? The more independent they are, the more you can trust their agreement."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Choose one tricky output and check it single-source, then two-source.",
         "Judge which strategy is more reliable and why.",
         "For one false output, write the harm and the check that de-risks it."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Which verdict was hardest to reach, and what made it hard?",
         "When is the slower two-source check worth the extra time?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "State which verification strategy you would use and the trade-off you accept.",
         "Note one responsible-use habit this workshop reinforced."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

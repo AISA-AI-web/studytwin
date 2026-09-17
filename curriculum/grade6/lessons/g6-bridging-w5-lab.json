@@ -22,7 +22,8 @@
       "type": "text",
       "body": [
         "Now build it! Today you turn your design into a working helper and make it better by refining the prompt, one change at a time."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
       "items": [
         "I can build a working prototype of my helper.",
         "I can refine the prompt across versions and explain what improved."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -48,7 +50,8 @@
           "term": "Version",
           "definition": "One attempt at your prompt that you can compare with the next."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -57,7 +60,8 @@
         "Run your prompt on the improved data and read the output.",
         "Judge it against your task. Then change one part of the prompt and run it again.",
         "Changing one thing at a time tells you what actually helped."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -72,7 +76,8 @@
         "Log the change and its effect.",
         "Repeat until it meets the task.",
         "Record your best version."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -81,7 +86,8 @@
         "Which change improved your output the most?",
         "Why refine one change at a time?",
         "Is your best prompt precise or just long?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -90,7 +96,8 @@
         "My best prompt version is ...",
         "The change that helped most was ... because ...",
         "Next I will check ..."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

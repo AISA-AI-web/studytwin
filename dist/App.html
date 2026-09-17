@@ -318,10 +318,18 @@
             '<p>' + esc(ctx.continuesFrom) + '</p></div>'
           : '');
 
-      if (lesson.objectives && lesson.objectives.length) {
-        html += '<div class="callout"><div class="eyebrow">Learning objectives</div><ul>' +
+      // The pack states objectives twice: teacher phrasing in the lesson's front matter,
+      // and the student-facing "I can…" list in the body. Showing both repeats the same
+      // three points on one screen, so the header block only appears when the body has
+      // no "I can…" section — and the student-facing wording always wins.
+      var hasObjectiveSection = (lesson.sections || []).some(function (sec) {
+        return sec.role === 'objectives';
+      });
+      if (!hasObjectiveSection && lesson.objectives && lesson.objectives.length) {
+        html += '<section class="section section--objectives">' +
+          '<div class="eyebrow">What you will be able to do</div><ul>' +
           lesson.objectives.map(function (o) { return '<li>' + richText(o) + '</li>'; }).join('') +
-          '</ul></div>';
+          '</ul></section>';
       }
 
       html += (lesson.sections || []).map(renderSection).join('');
@@ -336,28 +344,57 @@
     });
   }
 
+  /*
+   * The lesson design system.
+   *
+   * Every section carries a ROLE assigned at build time from the pack's own heading
+   * conventions, and the role — not the lesson, not the grade — decides how it looks.
+   * A student learns the code once and it holds for every lesson in every grade:
+   * purple means take this in, gold means do something with it.
+   */
+  var ROLE_CHROME = {
+    intro:      { eyebrow: '' },
+    objectives: { eyebrow: 'What you will be able to do' },
+    vocabulary: { eyebrow: 'Words to know' },
+    explain:    { eyebrow: '' },
+    important:  { eyebrow: '' },
+    diagram:    { eyebrow: '' },
+    reference:  { eyebrow: '' },
+    activity:   { eyebrow: 'Do this' },
+    discuss:    { eyebrow: 'Talk about it' },
+    reflect:    { eyebrow: 'Reflect' }
+  };
+
+  /** Wraps a section's inner markup in its role's chrome. */
+  function sectionShell(section, heading, inner) {
+    var role = section.role || 'explain';
+    var chrome = ROLE_CHROME[role] || {};
+    return '<section class="section section--' + esc(role) + '">' +
+      (chrome.eyebrow ? '<div class="eyebrow">' + esc(chrome.eyebrow) + '</div>' : '') +
+      (heading ? '<h3>' + esc(heading) + '</h3>' : '') +
+      inner +
+      authoredNote(section) +
+      '</section>';
+  }
+
   /** Lesson body blocks. Authors pick a type per block in the lesson JSON. */
   function renderSection(section) {
     switch (section.type) {
       case 'text':
-        return '<section class="section">' +
-          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
-          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
-          '</section>';
+        return sectionShell(section, section.heading,
+          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join(''));
 
       case 'list':
-        return '<section class="section">' +
-          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+        return sectionShell(section, section.heading,
           '<ul>' + (section.items || []).map(function (i) {
             return '<li>' + richText(i) + '</li>';
-          }).join('') + '</ul></section>';
+          }).join('') + '</ul>');
 
       case 'steps':
-        return '<section class="section">' +
-          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+        return sectionShell(section, section.heading,
           '<ol class="steps">' + (section.items || []).map(function (i) {
             return '<li>' + richText(i) + '</li>';
-          }).join('') + '</ol></section>';
+          }).join('') + '</ol>');
 
       case 'callout':
         return '<div class="callout">' +
@@ -366,27 +403,176 @@
           '</div>';
 
       case 'vocabulary':
-        return '<section class="section"><h3>' + esc(section.heading || 'Key vocabulary') + '</h3>' +
-          '<div class="grid-2">' + (section.terms || []).map(function (t) {
-            return '<div class="card card--tint"><h4 style="font-size:.95rem;margin-bottom:.25rem">' +
-              esc(t.term) + '</h4><p class="small">' + richText(t.definition) + '</p></div>';
-          }).join('') + '</div></section>';
+        return sectionShell(section, section.heading || 'Key vocabulary',
+          '<div class="vocab-grid">' + (section.terms || []).map(function (t) {
+            return '<div class="vocab"><div class="vocab__term">' + esc(t.term) + '</div>' +
+              '<div class="vocab__def">' + richText(t.definition) + '</div></div>';
+          }).join('') + '</div>');
+
+      case 'diagram':
+        return renderDiagram(section);
+
+      case 'reference':
+        return '<section class="section reference-card">' +
+          '<div class="eyebrow">' + esc(section.label || 'Reference') + '</div>' +
+          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+          (section.intro ? '<p class="muted small">' + richText(section.intro) + '</p>' : '') +
+          '<div class="reference-grid">' + (section.entries || []).map(function (e) {
+            return '<div class="reference-item">' +
+              '<div class="reference-item__term">' + esc(e.term) + '</div>' +
+              '<div class="reference-item__ask">' + richText(e.asks) + '</div>' +
+              (e.test ? '<div class="reference-item__test">' + richText(e.test) + '</div>' : '') +
+              '</div>';
+          }).join('') + '</div>' +
+          authoredNote(section) + '</section>';
 
       case 'activity':
-        return '<div class="card card--accent" style="margin-bottom:1.25rem">' +
-          '<div class="eyebrow">' + esc(section.label || 'Activity') + '</div>' +
-          '<h3 style="margin-bottom:.5rem">' + esc(section.heading || '') + '</h3>' +
+        return sectionShell(section, section.heading || section.label || '',
           (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
           (section.items && section.items.length
-            ? '<ol class="steps" style="margin-top:.6rem">' + section.items.map(function (i) {
+            ? '<ol class="steps">' + section.items.map(function (i) {
                 return '<li>' + richText(i) + '</li>';
               }).join('') + '</ol>'
-            : '') +
-          '</div>';
+            : ''));
 
       default:
         return '';
     }
+  }
+
+  /* ---------------------------------------------------------------------
+   * Diagrams
+   *
+   * Lesson files hold a declarative spec, never markup: the renderer draws the SVG.
+   * That keeps content as pure data — nothing in a lesson can inject markup into the
+   * page — and it keeps every diagram on one visual grid instead of hand-drawn each time.
+   *
+   * Strokes and text use currentColor so both themes work, with the brand gold reserved
+   * for the one element carrying the meaning.
+   * ------------------------------------------------------------------- */
+
+  /** A small marker on anything we wrote rather than took from the published pack. */
+  function authoredNote(section) {
+    if (!section.authored) return '';
+    return '<p class="authored-note">Added by AISA to fill a gap in the published pack \u2014 ' +
+      'not part of the ADEK material.</p>';
+  }
+
+  function renderDiagram(section) {
+    var svg = section.variant === 'compare' ? diagramCompare(section) : diagramFlow(section);
+    return '<figure class="diagram">' +
+      (section.heading ? '<div class="eyebrow">' + esc(section.label || 'Diagram') + '</div>' +
+        '<h3>' + esc(section.heading) + '</h3>' : '') +
+      svg +
+      (section.caption ? '<figcaption>' + richText(section.caption) + '</figcaption>' : '') +
+      authoredNote(section) +
+      '</figure>';
+  }
+
+  function svgOpen(w, h, label) {
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="' + esc(label) + '" ' +
+      'xmlns="http://www.w3.org/2000/svg">' +
+      '<defs><marker id="dgArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" ' +
+      'markerHeight="6" orient="auto-start-reverse">' +
+      '<path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/></marker></defs>';
+  }
+
+  /** Wraps a label to fit a box, returning tspan lines. */
+  function wrapLines(text, perLine) {
+    var words = String(text).split(/\s+/);
+    var lines = [];
+    var line = '';
+    words.forEach(function (w) {
+      if ((line + ' ' + w).trim().length > perLine && line) { lines.push(line); line = w; }
+      else { line = (line + ' ' + w).trim(); }
+    });
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  /** A left-to-right chain: each box causes the next, with the link named on the arrow. */
+  function diagramFlow(section) {
+    var nodes = section.nodes || [];
+    var edges = section.edges || [];
+    var boxW = 180, boxH = 92, gap = 96, padX = 8, padY = 46;
+    var w = padX * 2 + nodes.length * boxW + (nodes.length - 1) * gap;
+    var h = padY + boxH + 30;
+
+    var parts = [svgOpen(w, h, section.altText || section.heading || 'Diagram')];
+
+    nodes.forEach(function (node, i) {
+      var x = padX + i * (boxW + gap);
+      var accent = node.accent === true;
+      parts.push('<rect x="' + x + '" y="' + padY + '" width="' + boxW + '" height="' + boxH +
+        '" rx="8" fill="none" stroke="' + (accent ? '#D8B664' : 'currentColor') +
+        '" stroke-width="' + (accent ? 2.5 : 1.5) + '"/>');
+
+      var label = wrapLines(node.label, 20);
+      label.forEach(function (line, li) {
+        parts.push('<text x="' + (x + boxW / 2) + '" y="' + (padY + 26 + li * 15) +
+          '" text-anchor="middle" font-size="13" font-weight="700" ' +
+          'fill="currentColor">' + esc(line) + '</text>');
+      });
+      if (node.detail) {
+        wrapLines(node.detail, 24).slice(0, 3).forEach(function (line, li) {
+          parts.push('<text x="' + (x + boxW / 2) + '" y="' +
+            (padY + 30 + label.length * 15 + li * 13) + '" text-anchor="middle" font-size="11" ' +
+            'fill="currentColor" opacity="0.72">' + esc(line) + '</text>');
+        });
+      }
+
+      if (i < nodes.length - 1) {
+        var ax = x + boxW + 10, ax2 = x + boxW + gap - 10, ay = padY + boxH / 2;
+        parts.push('<line x1="' + ax + '" y1="' + ay + '" x2="' + ax2 + '" y2="' + ay +
+          '" stroke="currentColor" stroke-width="1.5" marker-end="url(#dgArrow)"/>');
+        var edge = edges[i];
+        if (edge && edge.label) {
+          wrapLines(edge.label, 14).forEach(function (line, li) {
+            parts.push('<text x="' + ((ax + ax2) / 2) + '" y="' + (ay - 12 - (li ? 0 : 0) + li * 12) +
+              '" text-anchor="middle" font-size="11" fill="currentColor" ' +
+              'opacity="0.8">' + esc(line) + '</text>');
+          });
+        }
+      }
+    });
+    return parts.join('') + '</svg>';
+  }
+
+  /** Two mechanisms side by side, so the difference is the thing you look at. */
+  function diagramCompare(section) {
+    var sides = [section.left || {}, section.right || {}];
+    var panelW = 250, gap = 48, stepH = 44, padX = 8, padY = 44;
+    var maxSteps = Math.max((sides[0].steps || []).length, (sides[1].steps || []).length);
+    var w = padX * 2 + panelW * 2 + gap;
+    var h = padY + maxSteps * stepH + 46;
+
+    var parts = [svgOpen(w, h, section.altText || section.heading || 'Comparison')];
+
+    sides.forEach(function (side, si) {
+      var x = padX + si * (panelW + gap);
+      var accent = side.accent === true;
+      parts.push('<rect x="' + x + '" y="' + (padY - 30) + '" width="' + panelW + '" height="' +
+        (maxSteps * stepH + 40) + '" rx="8" fill="none" stroke="' +
+        (accent ? '#D8B664' : 'currentColor') + '" stroke-width="' + (accent ? 2.5 : 1.2) +
+        '" opacity="' + (accent ? 1 : 0.55) + '"/>');
+      parts.push('<text x="' + (x + panelW / 2) + '" y="' + (padY - 8) +
+        '" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">' +
+        esc(side.title || '') + '</text>');
+
+      (side.steps || []).forEach(function (step, i) {
+        var sy = padY + 16 + i * stepH;
+        parts.push('<rect x="' + (x + 16) + '" y="' + sy + '" width="' + (panelW - 32) +
+          '" height="28" rx="5" fill="currentColor" opacity="0.07"/>');
+        parts.push('<text x="' + (x + panelW / 2) + '" y="' + (sy + 18) +
+          '" text-anchor="middle" font-size="12" fill="currentColor">' + esc(step) + '</text>');
+        if (i < (side.steps || []).length - 1) {
+          parts.push('<line x1="' + (x + panelW / 2) + '" y1="' + (sy + 30) + '" x2="' +
+            (x + panelW / 2) + '" y2="' + (sy + stepH - 4) +
+            '" stroke="currentColor" stroke-width="1.4" marker-end="url(#dgArrow)"/>');
+        }
+      });
+    });
+    return parts.join('') + '</svg>';
   }
 
   /* ---------------------------------------------------------------------

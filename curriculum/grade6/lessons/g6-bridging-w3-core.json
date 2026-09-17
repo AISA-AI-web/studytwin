@@ -19,7 +19,8 @@
       "type": "text",
       "body": [
         "Two apps can share the exact same code and still disagree about the same photo. The secret is not in the code it is in what each app was shown. Today you become a data detective, tracing how the examples an app learns from decide the answer it gives."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -28,7 +29,8 @@
         "I can explain, in my own words, how the data fed into a solution shapes the outcome it produces.",
         "I can predict what would happen to the outcome if the data were changed, and give a reason.",
         "I can point to a specific part of the data that most affects the result."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -54,7 +56,8 @@
           "term": "balance",
           "definition": "Whether the data has roughly fair amounts of each category."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -62,7 +65,8 @@
       "body": [
         "When people say an app 'decides', they often picture a programmer writing every rule by hand. Machine-learning solutions do not work that way. They build a **model** by studying [[data]] - lots of examples - and capturing the [[pattern]]s inside.",
         "Because the pattern comes from the examples, the examples quietly control the answer. Feed the model different data and it learns a different pattern, so it gives a different [[outcome]], even with the very same code."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -70,7 +74,8 @@
       "body": [
         "Data influences an outcome in two ways. First, the *amount*: if the model saw 100 sunny photos and only 3 rainy ones, it treats sunny as normal and stumbles on rain.",
         "Second, the [[balance]]: adding more of what the model already has plenty of changes little, but adding examples of a rare or missing category can move the outcome a lot. A data detective looks for the gap."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -85,7 +90,8 @@
         "Draw an arrow from the data batch you think caused that outcome.",
         "Write: 'The outcome is ___ because the data mostly showed ___.'",
         "Check your reason against a second fruit - does the story still hold?"
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -93,7 +99,8 @@
       "items": [
         "Which data batch had the biggest effect on the outcome, and how do you know?",
         "If you could add only one batch of new data, which would you add to make the sorter fairer?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -101,7 +108,8 @@
       "items": [
         "Write one sentence explaining how data shaped today's outcome.",
         "Note one thing you would check before trusting a solution's answer."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

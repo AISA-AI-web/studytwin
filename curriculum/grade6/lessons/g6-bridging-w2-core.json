@@ -20,7 +20,8 @@
       "body": [
         "You ask an AI to 'write about Al Ain' and get a dull, general paragraph. Was the AI wrong - or was the prompt?",
         "Today you become a prompt engineer who sets a clear goal, judges the output against it, and makes one smart change at a time. Best of all, you will be able to say exactly why your change worked."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -29,7 +30,8 @@
         "I can turn a weak prompt into a stronger one that better meets the goal.",
         "I can name the exact change I made and explain why it improved the output.",
         "I can judge an output against the goal instead of just accepting it."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -55,7 +57,8 @@
           "term": "refinement loop",
           "definition": "Goal, judge, name the weakness, change, re-judge - repeated."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -63,7 +66,8 @@
       "body": [
         "You cannot improve an output until you judge it honestly against the [[goal]]. Ask: what is missing, and what is off-target?",
         "Common weaknesses in a prompt are a missing audience, missing format, missing [[constraint]], or an [[ambiguous]] task. Naming the weakness tells you exactly what to fix."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -71,7 +75,8 @@
       "body": [
         "Strong refiners change **one thing at a time** and predict why it should help before they test it. That way, when the output improves, they know which change did it.",
         "Specificity comes from the task, the audience, and the format - never from personal or private information. A precise [[prompt]] is not a personal one."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -86,7 +91,8 @@
         "Write a v2 that targets only that weakness.",
         "Predict how the output should change and why.",
         "Compare with the revealed v2 output and log it."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -94,7 +100,8 @@
       "items": [
         "Why is changing one thing at a time smarter than changing many?",
         "How can you make a prompt specific without adding any private information?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -102,7 +109,8 @@
       "items": [
         "Write the one change that most improved your output and why it worked.",
         "Describe a time a clearer instruction would have helped you get a better result in real life."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

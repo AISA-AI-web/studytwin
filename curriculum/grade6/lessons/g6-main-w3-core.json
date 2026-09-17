@@ -21,7 +21,8 @@
       "heading": "Structured Prompts to Complete a Task",
       "body": [
         "Ask an AI tool a vague question and you get a vague answer. Learn to structure your prompt and you can actually get a task done. Today you learn the trick: **Goal, Context, Format**."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
         "I can write a structured prompt with a clear goal, context and format.",
         "I can say whether the task was completed and why.",
         "I can improve my prompt once to complete the task more fully."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -56,7 +58,8 @@
           "term": "format",
           "definition": "How you want the answer to look."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -64,7 +67,8 @@
       "body": [
         "A vague prompt like 'tell me about the desert' leaves the tool guessing. A [[structured prompt]] tells it exactly what to do.",
         "**Goal**: what you want. **Context**: the details it needs. **Format**: how the answer should look. Together they make the task far more likely to be completed."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -72,7 +76,8 @@
       "body": [
         "Once you get an output, compare it to the task. Did it do everything you asked? If not, change one thing in your prompt and try again.",
         "Two safety rules: never put personal data in a prompt, and always verify the answer - a confident output can still be wrong."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Watch the teacher run it on the approved tool.",
         "Judge whether the task was completed.",
         "Adjust your prompt once and verify the output."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Which part of the structure helped most?",
         "How did you know the task was or was not complete?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "Write the one adjustment that improved your result.",
         "Write one safety rule you used today."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

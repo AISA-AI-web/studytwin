@@ -23,7 +23,8 @@
       "type": "text",
       "body": [
         "A plan on paper looks tidy. Today you find out how it behaves under pressure. You will build a quick prototype, then throw your hardest inputs at it on purpose - the missing item, the messy note, the two-in-one line. When it stumbles, you will not hide the failure; you will design a fallback branch that catches it safely. Engineers stress-test bridges before people cross them. You will stress-test your solution before it is trusted."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -33,7 +34,8 @@
         "I can pressure-test it with a tricky input and spot where it fails.",
         "I can add a fallback branch that says what to do when a check fails.",
         "I can record the change I made and the reason for it."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -59,7 +61,8 @@
           "term": "Error type",
           "definition": "A label for what went wrong: wrong, unclear, or missing."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -67,7 +70,8 @@
       "body": [
         "A [[prototype]] is a fast first version. Running it shows how your design behaves, not just how you hoped it would.",
         "The teacher runs your prompt on the board with a normal curated input. You read the output and decide: did it meet the goal?"
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -76,7 +80,8 @@
         "When a check fails, a good solution follows a [[fallback branch]] instead of giving a confident wrong answer.",
         "Write it as 'If the check fails, then ___ and ask a person.' Keeping a human in the loop is part of responsible design.",
         "Remember: only curated, made-up inputs - never real names or personal data."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -91,7 +96,8 @@
         "Pressure-test with a tricky curated input and record the error type.",
         "Write your fallback branch as an if-then sentence that asks a person.",
         "Log the one change you made and the reason it will help."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -99,7 +105,8 @@
       "items": [
         "Which tricky input broke the most prototypes, and why?",
         "Why is a handled failure safer than a confident wrong answer?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -107,7 +114,8 @@
       "items": [
         "Write the weak spot your pressure test exposed.",
         "Write how your fallback branch will handle it next week."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

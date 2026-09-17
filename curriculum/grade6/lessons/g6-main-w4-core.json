@@ -21,7 +21,8 @@
       "heading": "Judging Outputs - Correct, Incorrect, Unclear",
       "body": [
         "An answer can sound perfectly sure of itself and still be wrong. Today you become the judge who decides whether an output is correct, incorrect, or simply unclear - and you learn to back up every judgement with a reason."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
         "I can sort outputs into correct, incorrect, and unclear.",
         "I can give a reason for each judgement I make.",
         "I can name one action to take when an output cannot be trusted."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -56,7 +58,8 @@
           "term": "Verify",
           "definition": "To check whether something is true using a reliable source."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -64,7 +67,8 @@
       "body": [
         "A language model writes by predicting which words usually come next. That makes its answers smooth and confident, but confidence is a writing style, not proof.",
         "Your job is to separate 'sounds right' from 'is right' by checking the output against the task you set and a source you trust."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -73,7 +77,8 @@
         "**Correct** means the output matches the task and agrees with a trusted source.",
         "**Incorrect** means it clashes with something you can check now - a fact, a number, or your instruction.",
         "**Unclear** means it is vague, incomplete, or you cannot [[verify]] it yet, so it needs more checking before use."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -88,7 +93,8 @@
         "Check it against the task and any source given.",
         "Write your verdict: correct, incorrect, or unclear.",
         "Add a short reason and, if needed, one action."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -96,7 +102,8 @@
       "items": [
         "Which signal most often warned you an output was not trustworthy?",
         "When an output is unclear, is it safer to pause or to proceed?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -104,7 +111,8 @@
       "items": [
         "Write one thing you will now check before trusting an AI answer.",
         "Describe a time a confident answer turned out to be wrong."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

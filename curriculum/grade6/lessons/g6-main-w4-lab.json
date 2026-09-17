@@ -21,7 +21,8 @@
       "heading": "Output Triage Clinic (Lab)",
       "body": [
         "Welcome to the triage clinic. Each output is a patient waiting for a diagnosis - correct, incorrect, or unclear - and a treatment: the action you would take to verify it. By the end you will have ranked them all on a trust ladder."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
         "I can run the triage routine across a full set of outputs.",
         "I can rank outputs by trustworthiness and defend my order.",
         "I can choose a verification action for outputs I cannot trust."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -52,7 +54,8 @@
           "term": "Risk check",
           "definition": "Asking what could go wrong if an output were used as-is."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -60,7 +63,8 @@
       "body": [
         "A fact needs a trusted source. A summary needs comparing back to the original text. A vague instruction needs a clearer prompt before you can even judge it.",
         "Choosing the right check is what turns a guess into a verified judgement."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -68,7 +72,8 @@
       "body": [
         "After triaging, place your outputs on the [[trust ladder]] from most to least trustworthy.",
         "Be ready to defend your order using signals, not preferences: what evidence puts one output above another?"
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -83,7 +88,8 @@
         "Choose a verification action that fits the output type.",
         "Rank all outputs on the trust ladder.",
         "Agree your group's defence and one risk of the least trustworthy output."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -91,7 +97,8 @@
       "items": [
         "Which verification action was hardest to choose, and why?",
         "Did any output move up or down the ladder after you discussed it?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -99,7 +106,8 @@
       "items": [
         "Write one verification action you will reuse in a future task.",
         "Describe how you would explain your ranking to another group."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

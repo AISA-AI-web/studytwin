@@ -21,7 +21,8 @@
       "heading": "Prompt-to-Task Workshop (Lab)",
       "body": [
         "You can structure one prompt - now build something reusable. Today you compare prompt structures on a richer task and design a template you and your class can use again and again."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
         "I can complete a richer task with a structured prompt and compare two structures.",
         "I can design a reusable prompt template for similar tasks.",
         "I can check an output for accuracy and complete a risk check."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -56,7 +58,8 @@
           "term": "risk check",
           "definition": "A quick check for personal data and possible errors."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -64,7 +67,8 @@
       "body": [
         "A [[richer task]] has several requirements, so a weak prompt structure leaves parts unfinished. Run two structures on the same task and compare which completes it and which is more accurate.",
         "Then turn the winner into a [[reusable template]] - a prompt with labelled slots you can fill in for any similar task."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -72,7 +76,8 @@
       "body": [
         "Every good template forces two checks: verify the output against a reliable source, and run a [[risk check]] for personal data and errors.",
         "This is how real AI solutions are designed - and it is the foundation for your signature activity in the coming weeks."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Compare which output completed the task and check accuracy.",
         "Turn the stronger structure into a reusable template.",
         "Add a verification step and a risk check."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Which structure completed more of the task, and how do you know?",
         "Where should the verify step sit in your template?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "Write the biggest difference between your two structures.",
         "Write how your template forces an accuracy check."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

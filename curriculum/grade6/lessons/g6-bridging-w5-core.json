@@ -23,7 +23,8 @@
       "body": [
         "Over four lessons (two weeks, Core and Lab) you will build a **Trustworthy AI Helper** and prove it can be trusted.",
         "Today you design it and test how the data quality changes its output."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -31,7 +32,8 @@
       "items": [
         "I can design a helper with a clear task, a structured prompt, and a data set.",
         "I can test how data quality changes the output and explain why."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -49,7 +51,8 @@
           "term": "Data quality",
           "definition": "How accurate, balanced, and complete the data is."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -57,7 +60,8 @@
       "body": [
         "A [[helper]] is a small solution: a task, a structured prompt, and data.",
         "Its output comes from the data and the prompt, so if the data is poor, the output is poor - even with a good prompt."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -65,7 +69,8 @@
       "body": [
         "Feed your helper clean data, then noisy data, and compare the outputs.",
         "This shows how much the [[data quality]] matters. Poorer data usually gives a poorer, less fair output."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -80,7 +85,8 @@
         "Run on clean data; note the output.",
         "Run on noisy data; note the output.",
         "Explain the difference."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -89,7 +95,8 @@
         "Why is a good prompt not enough on its own?",
         "How did the noisy data change your output?",
         "What will you build in the Lab?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -98,7 +105,8 @@
         "My helper's task is ...",
         "Data quality mattered because ...",
         "In the Lab I will build ..."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

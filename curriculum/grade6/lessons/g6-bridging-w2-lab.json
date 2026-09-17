@@ -20,7 +20,8 @@
       "body": [
         "In the Core lesson you made one smart change to a prompt. Today you run a full workshop: version 1, 2, 3, maybe 4 - each a single change you can defend.",
         "Then comes the real challenge of a designer: chasing two goals at once, clarity and accuracy, and discovering that helping one can cost the other. Your log will prove exactly what worked."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -29,7 +30,8 @@
         "I can iterate a prompt across several versions and log each change and its effect.",
         "I can refine for two goals at once and explain the trade-off between them.",
         "I can use my log as evidence for which change helped the most."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -55,7 +57,8 @@
           "term": "clarity",
           "definition": "How easy the output is to understand."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -63,7 +66,8 @@
       "body": [
         "A designer does not stop at the first improvement. You [[iterate]] - version by version - changing one thing each time and logging its effect.",
         "The log is your **evidence**. When someone asks which change helped most, you point to the row that proves it, because you changed only one thing that version."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -71,7 +75,8 @@
       "body": [
         "Now aim for two goals at once: [[clarity]] and [[accuracy]]. Sometimes a change that makes the output clearer quietly drops an accurate detail.",
         "That is a [[trade-off]]. Your job is not to pretend it away but to choose the version that best balances both goals for your purpose - and to say why."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Add accuracy as a second goal alongside clarity.",
         "Find and record a trade-off where one goal cost the other.",
         "Choose the best-balanced version and justify it from your log."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Which single change gave the biggest quality jump, and how does your log prove it?",
         "Where did clarity and accuracy pull against each other, and how did you decide?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "Write the best-balanced version your team chose and one sentence on why.",
         "Explain what balancing two goals taught you about making design decisions."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

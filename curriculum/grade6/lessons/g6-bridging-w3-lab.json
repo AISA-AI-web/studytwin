@@ -19,7 +19,8 @@
       "type": "text",
       "body": [
         "In the Core lesson you predicted how a data change would move the outcome. A prediction is only a guess until you test it. Today you run a fair test: change one thing, watch the outcome, and let the evidence tell you which data matters most."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -28,7 +29,8 @@
         "I can run a controlled data change and record the outcome before and after.",
         "I can compare data changes and identify which one moved the outcome the most.",
         "I can explain, using my recorded evidence, why that change had the biggest effect."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -54,7 +56,8 @@
           "term": "verify",
           "definition": "To re-test and confirm an effect is real, not a one-off."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -62,7 +65,8 @@
       "body": [
         "To find out how much a data batch matters, you must isolate it. Measure the outcome **before**, change only that one batch, and measure again. The difference is the influence of that batch.",
         "If you change two batches at once and the outcome moves, you cannot tell which batch did it. A fair test changes one variable at a time - the same rule scientists use in any experiment."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -70,7 +74,8 @@
       "body": [
         "Your log is your evidence. Without a written before-and-after, you are relying on memory, and memory blurs across many swaps.",
         "Once you have run several swaps, the most [[influential]] batch is the one with the biggest [[shift]]. [[Verify]] it by re-running on a fresh fruit - if the effect repeats, you have proof, not a coincidence."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Repeat for two more single swaps.",
         "Rank the swaps and star the most influential.",
         "Verify the winner on a fresh fruit and write your conclusion."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Did the evidence match your prediction? Where did it surprise you?",
         "Why might a small batch beat a large one for influence?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "Write your evidence-based conclusion about the most influential data change.",
         "Note one thing a fair test taught you that a guess could not."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

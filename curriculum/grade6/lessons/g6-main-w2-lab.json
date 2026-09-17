@@ -20,7 +20,8 @@
       "type": "text",
       "body": [
         "Today you become a model trainer. You choose the examples, and the examples decide what your model learns - so choose wisely and keep them safe."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "vocabulary",
@@ -46,7 +47,8 @@
           "term": "data-safety rule",
           "definition": "Use only non-personal examples - never faces, voices or names."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -54,7 +56,8 @@
       "body": [
         "First you show the model many labelled [[training data]] examples. It finds the pattern and builds a [[model]].",
         "Then you test it on new examples it has never seen. If it still gets them right, it really learned. If not, it only memorised."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -62,7 +65,8 @@
       "body": [
         "If all your apple pictures are red, the model learns 'red', not 'apple', and fails on a green one. Variety and fairness matter, not just how many.",
         "**Golden rule:** only non-personal examples. No faces, no voices, no names ever go into a training set."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -77,7 +81,8 @@
         "Train using training examples only.",
         "Test the held-back examples and log the results.",
         "Complete the data-safety and risk check."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -85,7 +90,8 @@
       "items": [
         "Which testing example fooled the model, and why?",
         "How did your choice of examples change what it learned?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -93,7 +99,8 @@
       "items": [
         "Write how your training examples shaped the model.",
         "Write one data-safety rule you followed today."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

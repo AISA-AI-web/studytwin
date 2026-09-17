@@ -24,7 +24,8 @@
       "type": "text",
       "body": [
         "Today you build for real. You will follow your approved plan, run your inputs, and look hard at every output - not just the ones that look right. When you find an answer that is wrong or unclear, you flag it, change one thing, and watch what happens. This is how real systems get better: one careful change, one honest result. Keep every prompt free of personal data, and keep a person in the loop for anything you flag."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -34,7 +35,8 @@
         "I can evaluate outputs and flag ones that are wrong or unclear.",
         "I can make one improvement and explain what changed and why.",
         "I can keep personal data out of every prompt."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -60,7 +62,8 @@
           "term": "Iteration loop",
           "definition": "The evaluate -> change -> result cycle that makes a solution better over time."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -68,7 +71,8 @@
       "body": [
         "Building means running your approved prompt structure on defined inputs, not inventing new prompts on the spot.",
         "Record each output before you change anything. That way you can see what your solution really does."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -76,7 +80,8 @@
       "body": [
         "Evaluate each output against your check: correct, unclear, or wrong. Flag anything that fails.",
         "Then make one improvement and re-run. Record it as **evaluate -> change -> result** so the cause of the improvement is clear."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -90,7 +95,8 @@
         "Evaluate each output and flag the wrong or unclear ones.",
         "Make one improvement in response to a flag and re-run it.",
         "Log the loop as evaluate -> change -> result."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -98,7 +104,8 @@
       "items": [
         "How did you tell a subtly wrong output from a correct one?",
         "Why is one change at a time better than many at once?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -106,7 +113,8 @@
       "items": [
         "Write the one improvement you made and why.",
         "Write what you would evaluate more carefully next time."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

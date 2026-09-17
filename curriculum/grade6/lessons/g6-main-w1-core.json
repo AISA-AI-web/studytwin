@@ -23,7 +23,8 @@
       "type": "text",
       "body": [
         "Some machines are told every single step. Others are shown lots of examples and work out the pattern themselves. This term you become a system detective - can you tell which kind you are looking at?"
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -32,7 +33,8 @@
         "I can ask at least two genuine questions about rule-based and learning systems.",
         "I can sort three systems into 'follows fixed rules' or 'learns from data' and give a reason for each.",
         "I can help write our class responsible-use rules for AI tools."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -58,7 +60,8 @@
           "term": "example",
           "definition": "One piece of data, like one photo or one email."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -66,7 +69,8 @@
       "body": [
         "A [[rule-based system]] is like a recipe. A person writes every step, and the machine follows them exactly. A Salik toll gate charges you when your car passes - a person set that rule.",
         "A [[learning system]] is different. Nobody writes a rule for every case. Instead it is shown many examples - this is [[data]] - and it finds the pattern by itself. The pattern it builds is called a [[model]]."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -74,7 +78,8 @@
       "body": [
         "If you know which kind a system is, you can guess when it might fail. A rule-based system fails when something happens that has no rule. A learning system can fail if it was shown poor or unfair examples.",
         "Neither kind is magic, and neither understands like a person. That is why we always check what a machine tells us."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -89,7 +94,8 @@
         "Write a reason under each card.",
         "Post two questions on the class question wall.",
         "Help agree one class rule for safe AI use."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -97,7 +103,8 @@
       "items": [
         "Which system was hardest to sort, and why?",
         "What is one clue that a system learned from examples?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -105,7 +112,8 @@
       "items": [
         "Write one thing you now understand about how machines make decisions.",
         "Write one question you still have."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

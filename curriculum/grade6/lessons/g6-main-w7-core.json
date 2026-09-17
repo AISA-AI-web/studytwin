@@ -23,7 +23,8 @@
       "type": "text",
       "body": [
         "Today you become a designer, not just a prompter. Before anyone types a single word into an AI tool, you will plan a small solution with five parts that fit together: a goal, a prompt structure, inputs, a check, and a risk plan. A good plan is like a bridge design drawn before the first bolt is placed - it lets you find weak spots on paper, where fixing them is cheap."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -33,7 +34,8 @@
         "I can lay out a prompt structure with a role, a task, and one rule.",
         "I can name the inputs my solution needs and how I will check the output.",
         "I can describe one risk and one way my plan reduces it."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -59,7 +61,8 @@
           "term": "Risk mitigation",
           "definition": "A design choice that lowers the chance or impact of something going wrong."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -67,7 +70,8 @@
       "body": [
         "In Grade 5 you improved a single prompt. This term you design a solution: a set of parts that work together to do one simple job well.",
         "The five parts are the goal, the [[prompt structure]], the inputs, the [[evaluation method]], and the risk plan. If any part is missing, the solution is harder to trust."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -75,7 +79,8 @@
       "body": [
         "A [[prompt structure]] names a role ('You are a timetable helper'), a task ('list the three earliest buses'), and one rule ('if a time is missing, say so').",
         "The role focuses the AI, the task says exactly what to do, and the rule keeps the output honest and easy to check."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -83,7 +88,8 @@
       "body": [
         "An [[evaluation method]] says how you will judge accuracy, such as comparing the output to a known-correct answer key.",
         "A risk plan names one thing that could go wrong, like a confident wrong answer, and one design choice that reduces it, like a 'say if unsure' rule plus a human check. Never put personal or identifying data into a prompt."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -98,7 +104,8 @@
         "List the inputs your prompt needs, checking there is no personal data.",
         "Write your evaluation method and one risk with its mitigation.",
         "Self-check against the five-part list, then submit for the approve-to-build gate."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -106,7 +113,8 @@
       "items": [
         "Which part of a plan is easiest to forget, and why does that matter?",
         "How does a 'say if unsure' rule make an output safer to trust?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -114,7 +122,8 @@
       "items": [
         "Write the one part of your plan you are most confident about.",
         "Write the one part you will strengthen before building next week."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

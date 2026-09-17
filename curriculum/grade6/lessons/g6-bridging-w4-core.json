@@ -20,7 +20,8 @@
       "heading": "Misinformation Risks and Verification",
       "body": [
         "An AI can write an answer that sounds completely sure and is completely wrong. It is built to sound right, not to be right. Today you learn to spot the exact risk in an output and pair it with a check that makes it trustworthy before you ever share it."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -29,7 +30,8 @@
         "I can explain a specific way an AI output could be wrong and spread misinformation.",
         "I can propose a concrete verification step and say why it makes the claim more trustworthy.",
         "I can move from 'it might be wrong' to naming the exact risk and the exact check."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -55,7 +57,8 @@
           "term": "layered check",
           "definition": "Verifying with more than one independent source for extra reliability."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -63,7 +66,8 @@
       "body": [
         "An AI language system predicts the next likely word, over and over, to build fluent text. It is optimised to sound plausible, not to check facts, so it can state a wrong number as confidently as a right one.",
         "That is what makes AI output a [[misinformation]] risk. The output gives no signal for which parts are reliable, so a made-up statistic can look exactly like a real one and spread when people repeat it."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -71,7 +75,8 @@
       "body": [
         "Good evaluation is specific. Instead of 'this might be wrong', say exactly what is at risk: the number, the name, the date, or the source.",
         "Then pair that risk with a concrete check against a [[trusted source]] that is independent of the AI. If you can, layer two sources - one source can be wrong too."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -86,7 +91,8 @@
         "Choose a trusted source that could settle it.",
         "Write the check and why it helps.",
         "Watch one live verification and record the verdict."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -94,7 +100,8 @@
       "items": [
         "Which output was the hardest to spot a risk in, and why?",
         "Why is verifying before sharing part of using AI responsibly?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -102,7 +109,8 @@
       "items": [
         "Write the strongest risk-and-verify pair you made today.",
         "Note one habit you will use before sharing any AI answer."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

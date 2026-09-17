@@ -23,7 +23,8 @@
       "type": "text",
       "body": [
         "This is your moment to show what you built and what you learned. You will present your finished solution, explain the choices behind it, complete a short assessment, and set a goal to grow even more next term."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -32,7 +33,8 @@
         "I can present my finished solution and explain at least two design or evaluation choices.",
         "I can show the term's key outcomes in a short assessment task.",
         "I can state one thing I learned and set one goal for next term."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -58,7 +60,8 @@
           "term": "Goal",
           "definition": "A clear target for your next step of learning."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -66,7 +69,8 @@
       "body": [
         "A strong [[pitch]] names your user, the problem, how your solution works, and the evidence that it is accurate, useful and safe.",
         "Explain two choices by giving reasons, not just descriptions. Be honest about one limit. Honesty makes your work more trustworthy, not weaker."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -74,7 +78,8 @@
       "body": [
         "The short [[assessment]] lets you show all four strands: understanding, building, evaluating and using responsibly, and wider effects.",
         "Finish by naming one thing you learned and setting a [[goal]] for next term, aiming toward the Proficient tier."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -89,7 +94,8 @@
         "Prepare a 60-second pitch with two justified choices.",
         "Present to your group and answer one 'why' question.",
         "Write one thing learned and one Term-2 goal."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -97,7 +103,8 @@
       "items": [
         "Which of your two choices are you proudest of, and why?",
         "What limit of your solution is important to be honest about?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -105,7 +112,8 @@
       "items": [
         "Write one thing you learned this term.",
         "Set one goal for Term 2 that moves you toward Proficient."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

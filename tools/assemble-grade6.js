@@ -62,6 +62,44 @@ const PROMPT_FIXES = [
 ];
 
 /**
+ * Assigns each section a ROLE, which is what the interface colour-codes on.
+ *
+ * Every lesson in the published pack follows the same shape and uses the same headings —
+ * "I can…", "Words to know", "Let's try it", "Think about it", "My reflection" — in all
+ * 32 Grade 6 lessons. Keying the design system to those conventions rather than to
+ * per-lesson styling means any future grade extracted from the same pack format inherits
+ * the identical treatment with no extra work.
+ *
+ * A section whose role cannot be determined falls back to `explain`, which is the plain
+ * reading style. That degrades quietly rather than looking broken.
+ */
+const ROLE_BY_HEADING = [
+  [/^i can/i, 'objectives'],
+  [/words to know|key vocabulary|vocabulary/i, 'vocabulary'],
+  [/let'?s try it|hands-on|have a go/i, 'activity'],
+  [/think about it|talk about|discuss/i, 'discuss'],
+  [/my reflection|reflect/i, 'reflect'],
+];
+
+function assignRole(section, index) {
+  if (section.role) return;
+
+  if (section.type === 'vocabulary') { section.role = 'vocabulary'; return; }
+  if (section.type === 'activity') { section.role = 'activity'; return; }
+  if (section.type === 'steps') { section.role = 'activity'; return; }
+  if (section.type === 'callout') { section.role = 'important'; return; }
+  if (section.type === 'diagram') { section.role = 'diagram'; return; }
+  if (section.type === 'reference') { section.role = 'reference'; return; }
+
+  const heading = String(section.heading || section.label || '');
+  const match = ROLE_BY_HEADING.filter(function (pair) { return pair[0].test(heading); })[0];
+  if (match) { section.role = match[1]; return; }
+
+  // The opening paragraph, before any other section, sets up the lesson.
+  section.role = index === 0 ? 'intro' : 'explain';
+}
+
+/**
  * Reconciles the field names the extraction used with the ones the platform reads.
  *
  * Some weeks wrote `instruction` rather than `prompt`, and some numbered questions bare
@@ -155,6 +193,12 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const byTrack = { bridging: [], main: [] };
 let promptsCleaned = 0;
+let supplementsApplied = 0;
+
+/* Content AISA has written to fill gaps in the published pack; see its own _readme. */
+const supplementsPath = path.join(root, 'curriculum/grade6/supplements.json');
+const supplements = fs.existsSync(supplementsPath)
+  ? JSON.parse(fs.readFileSync(supplementsPath, 'utf8')) : {};
 let openCount = 0;
 let scoredCount = 0;
 
@@ -167,6 +211,8 @@ weeks.forEach((week) => {
     catch (e) { problems.push(`${where}: sectionsJson is not valid JSON — ${e.message}`); return; }
     try { worksheet = JSON.parse(raw.worksheetJson); }
     catch (e) { problems.push(`${where}: worksheetJson is not valid JSON — ${e.message}`); return; }
+
+    sections.forEach(assignRole);
 
     const strands = normaliseStrands(raw.strands, where);
     if (!strands.length) problems.push(`${where}: no strands resolved`);
@@ -193,6 +239,28 @@ weeks.forEach((week) => {
         problems.push(`${where} ${q.id}: no frameworkRefs`);
       }
       delete q.heading;   // not part of the schema; the prompt carries the block name
+    });
+
+    (supplements[raw.id] || []).forEach((add) => {
+      const section = Object.assign({ authored: true }, add.section);
+      assignRole(section, 99);
+      if (add.insertAfter === 'start') { sections.unshift(section); supplementsApplied++; return; }
+      // After the lesson's own opening, so a diagram never pre-empts the text that sets it up.
+      if (add.insertAfter === 'intro') {
+        const introAt = sections.findIndex((sec) => sec.role === 'intro');
+        sections.splice(introAt === -1 ? 0 : introAt + 1, 0, section);
+        supplementsApplied++;
+        return;
+      }
+      const at = sections.findIndex((sec) =>
+        String(sec.heading || sec.label || '').trim() === String(add.insertAfter).trim());
+      if (at === -1) {
+        problems.push(`${where}: supplement anchored to "${add.insertAfter}", ` +
+          `which is not a heading in this lesson`);
+        return;
+      }
+      sections.splice(at + 1, 0, section);
+      supplementsApplied++;
     });
 
     const lesson = {
@@ -270,6 +338,7 @@ fs.readdirSync(outDir).forEach((f) => {
 console.log(`Types           : ${Object.entries(typeCounts)
   .sort((a, b) => b[1] - a[1]).map(([t, n]) => `${n} ${t}`).join(', ')}`);
 console.log(`Prompts cleaned : ${promptsCleaned} (figure-spec text removed)`);
+console.log(`Supplements     : ${supplementsApplied} AISA-authored section(s) inserted`);
 
 if (problems.length) {
   console.error(`\n${problems.length} problem(s):\n`);

@@ -22,7 +22,8 @@
       "body": [
         "An AI answer can look helpful and still put someone at risk - through a mistake you did not check, or through personal data you should never have shared.",
         "Today you learn to spot those risks and to name the rule that keeps people safe."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -31,7 +32,8 @@
         "I can name two genuine risks of using an AI tool.",
         "I can explain who each risk could affect.",
         "I can state a responsible-use rule that reduces a risk."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -57,7 +59,8 @@
           "term": "Responsible-use rule",
           "definition": "An agreed habit that reduces a risk."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -65,7 +68,8 @@
       "body": [
         "**Accuracy risk** is the danger of using a confident but incorrect output without checking it. The mistake can spread into your work and anyone who trusts it.",
         "**Safety and privacy risk** is the danger of entering [[personal data]] or identifying data, which may be stored or used to train future systems and could expose you or someone else."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -73,7 +77,8 @@
       "body": [
         "A real risk always names who could be harmed - you, a classmate, or your family.",
         "[[Responsible-use rule]]s are simple habits, agreed together, that reduce a risk: verify before you use, never enter personal data, and tell an adult if you are unsure."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Decide: accuracy risk or safety/privacy risk.",
         "Name who could be affected.",
         "Attach a responsible-use rule that reduces the risk."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Which risk do you think is easiest to forget about, and why?",
         "Is a rule useful if it is too hard to follow?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "Write one responsible-use rule you will follow from now on.",
         "Describe a situation where you would refuse to enter data into a tool."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

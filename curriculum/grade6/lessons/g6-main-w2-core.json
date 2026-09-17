@@ -20,7 +20,35 @@
       "type": "text",
       "body": [
         "Two machines can do the same job in totally different ways. Today you learn the two features that reveal which is which - and you will never be fooled by a shiny screen again."
-      ]
+      ],
+      "role": "intro"
+    },
+    {
+      "authored": true,
+      "type": "diagram",
+      "variant": "compare",
+      "label": "The difference you are looking for",
+      "heading": "Two ways a system can reach an answer",
+      "altText": "Two columns. A rule-based system takes an input, follows a rule a person wrote, and gives an output. A learning system takes labelled examples, finds a pattern itself, and uses that pattern on a new input.",
+      "caption": "Both give an answer. The difference is **where the rule came from** — a person wrote it, or the system found it.",
+      "left": {
+        "title": "Rule-based system",
+        "steps": [
+          "An input arrives",
+          "Follow the rule a person wrote",
+          "Give the answer"
+        ]
+      },
+      "right": {
+        "title": "Learning system",
+        "accent": true,
+        "steps": [
+          "Study labelled examples",
+          "Find the pattern itself",
+          "Use it on a new input"
+        ]
+      },
+      "role": "diagram"
     },
     {
       "type": "vocabulary",
@@ -46,7 +74,8 @@
           "term": "feature",
           "definition": "A true characteristic you use to classify a system, not a surface look."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -54,7 +83,8 @@
       "body": [
         "**Feature one** - where does the logic come from? In a [[rule-based system]] a person writes it. In a [[learning system]] it comes from data.",
         "**Feature two** - what happens with something new? A rule-based system only handles cases its rules cover. A learning system can handle new cases that look like its examples."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -62,7 +92,8 @@
       "body": [
         "Be careful with words. The [[data]] is the examples. The [[model]] is the pattern built from them. Change the data and you can change the model.",
         "A learning system does not understand meaning - it matches patterns. Always check its answers."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -76,7 +107,8 @@
         "Classify two everyday systems.",
         "Underline the feature that decided each answer.",
         "Write two sentences using data and model correctly."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -84,7 +116,8 @@
       "items": [
         "Which feature is the strongest proof of a learning system?",
         "Why is 'it looks modern' not a good reason?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -92,7 +125,8 @@
       "items": [
         "Write the two features you now use to classify systems.",
         "Write one system you are still unsure about and why."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

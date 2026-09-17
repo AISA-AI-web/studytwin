@@ -190,10 +190,88 @@
     font-size: .48rem; letter-spacing: .06em; opacity: .75; font-weight: 700;
   }
 
-  /* ---------- Lesson content ---------- */
+  /* ---------- Lesson content ----------
+     THE LESSON DESIGN SYSTEM
+
+     Each section carries a role assigned at build time from the pack's own headings, and
+     the role decides its treatment. The code is deliberately simple so a Grade 6 student
+     picks it up without being taught:
+
+       purple  — take this in   (intro, vocabulary, reference)
+       gold    — do something   (objectives, activity, reflect)
+       plain   — read on        (explain)
+
+     Because it keys on role rather than on the lesson, every grade added later inherits
+     exactly this, with nothing to configure.
+  */
   .lesson-head { margin-bottom: 1.5rem; }
-  .section { margin-bottom: 1.5rem; }
+  .section { margin-bottom: 1.4rem; }
   .section h3 { margin-bottom: .5rem; }
+
+  /* Shared shell for the roles that carry a coloured band. */
+  .section--intro,
+  .section--objectives,
+  .section--vocabulary,
+  .section--activity,
+  .section--discuss,
+  .section--reflect {
+    padding: 1rem 1.15rem;
+    border-radius: var(--aisa-radius);
+    border-left: 4px solid transparent;
+  }
+
+  /* Take this in */
+  .section--intro {
+    background: var(--aisa-purple-tint);
+    border-left-color: var(--aisa-purple);
+    font-size: 1.02rem;
+  }
+  .section--intro p:last-child { margin-bottom: 0; }
+
+  .section--vocabulary {
+    background: var(--aisa-purple-tint);
+    border-left-color: var(--aisa-purple);
+  }
+  .vocab-grid { display: grid; gap: .55rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .vocab {
+    background: var(--aisa-white); border-radius: 6px; padding: .6rem .75rem;
+    border: 1px solid var(--aisa-purple-border);
+  }
+  .vocab__term { font-weight: 700; color: var(--aisa-purple); font-size: .92rem; }
+  .vocab__def { font-size: .86rem; color: var(--aisa-near-black); }
+
+  /* Do something */
+  .section--objectives {
+    background: var(--aisa-white);
+    border: 1px solid var(--aisa-purple-border);
+    border-left: 4px solid var(--aisa-gold);
+  }
+  .section--objectives ul { list-style: none; margin-left: 0; }
+  .section--objectives li { position: relative; padding-left: 1.6rem; }
+  .section--objectives li::before {
+    content: '\2713'; position: absolute; left: 0; top: 0;
+    color: var(--aisa-gold); font-weight: 700;
+  }
+
+  .section--activity {
+    background: #FDF8EC;
+    border-left-color: var(--aisa-gold);
+  }
+  .section--activity .eyebrow { color: #8A6D1F; }
+
+  .section--reflect {
+    background: #FDFBF5;
+    border-left-color: var(--aisa-gold);
+  }
+  .section--reflect .eyebrow { color: #8A6D1F; }
+
+  /* Read on / talk */
+  .section--discuss {
+    background: var(--aisa-white);
+    border: 1px dashed var(--aisa-purple-border);
+    border-left: 4px dashed var(--aisa-purple);
+  }
+  .section--explain { padding: 0; }
   .section p { margin-bottom: .7rem; }
   .section ul, .section ol { margin: 0 0 .8rem 1.3rem; }
   .section li { margin-bottom: .3rem; }
@@ -216,6 +294,48 @@
     width: 1.6rem; height: 1.6rem; border-radius: 50%;
     background: var(--aisa-gold); color: var(--aisa-purple);
     font-weight: 700; font-size: .8rem; display: grid; place-items: center;
+  }
+
+  /* ---------- Diagrams and reference cards ---------- */
+  .diagram {
+    margin: 0 0 1.5rem; padding: 1.1rem 1.2rem;
+    border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
+    background: var(--aisa-white);
+  }
+  .diagram svg {
+    display: block; width: 100%; max-width: 100%; height: auto;
+    margin: .5rem auto .4rem; color: var(--aisa-purple);
+  }
+  .diagram figcaption {
+    font-size: .86rem; color: var(--aisa-muted-gray); text-align: center;
+    padding-top: .3rem; border-top: 1px solid var(--aisa-purple-tint);
+  }
+
+  .reference-card {
+    border: 1px solid var(--aisa-purple-border); border-left: 4px solid var(--aisa-purple);
+    border-radius: var(--aisa-radius); padding: 1.1rem 1.2rem; background: var(--aisa-white);
+  }
+  .reference-grid { display: grid; gap: .6rem; margin-top: .7rem; }
+  .reference-item {
+    display: grid; grid-template-columns: 8rem 1fr; gap: .2rem .9rem;
+    padding: .6rem .75rem; background: var(--aisa-purple-tint); border-radius: 6px;
+  }
+  .reference-item__term {
+    font-weight: 700; color: var(--aisa-purple); grid-row: span 2; align-self: center;
+  }
+  .reference-item__ask { font-size: .9rem; }
+  .reference-item__test { font-size: .82rem; color: var(--aisa-muted-gray); }
+
+  /* Anything we wrote rather than took from the published pack is labelled as such,
+     so a teacher can always tell ADEK's material from ours. */
+  .authored-note {
+    font-size: .72rem; color: var(--aisa-muted-gray); font-style: italic;
+    margin-top: .7rem; padding-top: .5rem; border-top: 1px dashed var(--aisa-purple-border);
+  }
+
+  @media (max-width: 560px) {
+    .reference-item { grid-template-columns: 1fr; }
+    .reference-item__term { grid-row: auto; }
   }
 
   /* ---------- Worksheet ---------- */

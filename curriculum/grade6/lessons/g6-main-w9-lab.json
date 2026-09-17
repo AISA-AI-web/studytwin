@@ -24,7 +24,8 @@
       "heading": "Overview",
       "body": [
         "Time for the final polish. In this Lab you make your last improvement, then act like a safety checker, running a full risk review so you can promise your solution is safe and fair before showcase."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -33,7 +34,8 @@
         "I can run a final evaluation across accuracy, usefulness and risk and act on one improvement.",
         "I can complete a risk review and confirm my solution is safe and fair.",
         "I can record my final iteration with clear before-and-after evidence."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -59,7 +61,8 @@
           "term": "Freeze",
           "definition": "To stop changing the version you have evaluated."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -67,7 +70,8 @@
       "body": [
         "Not every risk is equal. A risk that is both likely and serious needs action now. A rare but very serious risk still needs a plan.",
         "Place each risk on the [[risk matrix]], then decide: fix it now, or watch it. Always confirm no personal data is anywhere in your solution."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -75,7 +79,8 @@
       "body": [
         "Make your final planned change and re-test with known answers. Record before and after so others can trust your evidence.",
         "Then **freeze** the version. The solution you show at the carousel must be the exact one you tested and judged safe."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -91,7 +96,8 @@
         "List risks and place each on the matrix.",
         "Decide actions and confirm no personal data is used.",
         "Write a safe-and-fair statement and freeze the version."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -99,7 +105,8 @@
       "items": [
         "Which risk surprised you most when you placed it on the matrix?",
         "How did freezing change how carefully you tested?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -107,7 +114,8 @@
       "items": [
         "Write your safe-and-fair statement in one sentence.",
         "Name the risk you are most confident you have managed."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

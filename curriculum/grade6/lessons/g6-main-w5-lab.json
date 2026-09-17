@@ -21,7 +21,8 @@
       "heading": "Class AI Risk Audit (Lab)",
       "body": [
         "Today your group becomes a class safety board. You will audit how AI has actually been used, rank the risks you find, and decide which one to fix first - then write the rule that fixes it."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
         "I can audit our AI use against a rule set and find a gap.",
         "I can place risks on a matrix by likelihood and impact.",
         "I can propose one rule to reduce the highest-priority risk."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -56,7 +58,8 @@
           "term": "Gap",
           "definition": "A place where practice does not meet the rule."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -64,7 +67,8 @@
       "body": [
         "An [[audit]] compares what actually happened with what should happen. You read the anonymised class use-log and flag any entry that breaks or stretches a responsible-use rule.",
         "The log is anonymised on purpose: you fix systems and habits, *never* blame a person."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -72,7 +76,8 @@
       "body": [
         "Place each flagged risk on the matrix by its [[likelihood]] and [[impact]], then pick the highest-priority one.",
         "Finally, write one realistic responsible-use rule that would close that gap - and be ready to pitch it for the class charter."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Plot risks on the likelihood-impact matrix.",
         "Circle the highest-priority risk.",
         "Write and pitch one mitigation rule."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Which risk surprised you as higher priority than expected?",
         "How do you make a rule strong but still realistic?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "Write one change you will make to your own AI use after this audit.",
         "Explain why anonymising the log matters."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

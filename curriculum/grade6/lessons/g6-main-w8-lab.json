@@ -23,7 +23,8 @@
       "type": "text",
       "body": [
         "This is the finish line for your signature solution - but finishing is not just getting one right answer. Today you prove it works by running it across several test inputs and counting how many it gets right. When one fails, your fallback catches it gracefully and you document the fix. Finally you run a basic risk check: is it accurate, is it clear, and is any prompt free of personal data? A solution you can measure and defend is one people can trust."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -33,7 +34,8 @@
         "I can evaluate its outputs across several test inputs and measure accuracy.",
         "I can handle an incorrect output gracefully using my fallback.",
         "I can run a basic risk check and document the fix I made."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -59,7 +61,8 @@
           "term": "Risk check",
           "definition": "A quick review of accuracy, clarity, and data safety before a solution is trusted."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -67,7 +70,8 @@
       "body": [
         "One correct answer is not proof. Run your finished solution across a **test set** of several curated inputs and count how many outputs are correct.",
         "Report accuracy as a simple count, like 5 out of 6, so your claim is honest and checkable."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -75,7 +79,8 @@
       "body": [
         "When an output is wrong, let your fallback catch it and keep a person in the loop, then document the fix and its effect.",
         "Finish with a basic risk check: accurate enough? clear enough? any personal data used? The data answer must always be no, because we use only curated inputs."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -89,7 +94,8 @@
         "Run all six curated inputs and record each result.",
         "Compute accuracy and handle any failure with your fallback, documenting the fix.",
         "Complete the three-question risk check and note the biggest remaining risk."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -97,7 +103,8 @@
       "items": [
         "Why is an accuracy count across several inputs fairer than judging one output?",
         "What is the biggest remaining risk in your solution, and who should check it?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -105,7 +112,8 @@
       "items": [
         "Write your accuracy result and the fix you documented.",
         "Write one thing your risk check made you notice."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

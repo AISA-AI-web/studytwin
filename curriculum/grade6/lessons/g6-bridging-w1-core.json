@@ -21,7 +21,8 @@
       "heading": "Data Quality and AI Outputs",
       "body": [
         "Imagine teaching a younger cousin to recognise dates using a photo album. If half the photos are blurry and one photo is actually a stone, incorrectly labelled as a date, what will your cousin get wrong? An AI learns the same way you would teach - from the examples it is shown. Today you become a data detective who can predict an AI's mistakes just by studying its data."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
         "I can explain, using a clear example, how the quality of data changes what an AI produces.",
         "I can predict whether an output will get better or worse when the data is made cleaner or noisier, and say why.",
         "I can tell the difference between the amount of data and the quality of data."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -56,7 +58,8 @@
           "term": "causal chain",
           "definition": "A step-by-step link from a cause to its effect."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -64,7 +67,41 @@
       "body": [
         "An AI model is not filled with rules that a person typed. Instead it studies a dataset and adjusts itself to match the patterns it finds.",
         "This means the dataset is really the model's teacher. If the teacher shows wrong examples, the model learns the wrong lesson - and it does so confidently."
-      ]
+      ],
+      "role": "explain"
+    },
+    {
+      "authored": true,
+      "type": "diagram",
+      "variant": "flow",
+      "label": "How a data problem becomes an output mistake",
+      "heading": "One flaw, traced all the way to the answer",
+      "altText": "A chain of three boxes: a data problem leads to a wrong learned pattern, which leads to a wrong output.",
+      "caption": "This is the chain you trace on your worksheet. Start at the data, not the answer.",
+      "nodes": [
+        {
+          "label": "A problem in the data",
+          "detail": "one stone is labelled 'date'"
+        },
+        {
+          "label": "The model learns it",
+          "detail": "small round = date"
+        },
+        {
+          "label": "The output is wrong",
+          "accent": true,
+          "detail": "it calls a pebble a date"
+        }
+      ],
+      "edges": [
+        {
+          "label": "so the model learns"
+        },
+        {
+          "label": "so the output will"
+        }
+      ],
+      "role": "diagram"
     },
     {
       "type": "text",
@@ -72,7 +109,38 @@
       "body": [
         "It is tempting to think more data always helps. But a huge dataset full of mistakes just teaches the wrong pattern more strongly.",
         "A small, clean, well-chosen dataset can beat a giant messy one. Before trusting any output, a careful builder checks the quality of the data behind it - and never puts personal or identifying information into a tool."
-      ]
+      ],
+      "role": "explain"
+    },
+    {
+      "authored": true,
+      "type": "reference",
+      "label": "Your dataset card",
+      "heading": "What a dataset card shows you",
+      "intro": "Your teacher gives you a card describing one dataset. Read it in this order — the flaw is never announced, you have to find it.",
+      "entries": [
+        {
+          "term": "The examples",
+          "asks": "How many items are there, and what is each one a picture of?",
+          "test": "A small set is not automatically a bad one."
+        },
+        {
+          "term": "The labels",
+          "asks": "What is each example called? Is every label correct?",
+          "test": "One wrong label teaches one wrong lesson."
+        },
+        {
+          "term": "The spread",
+          "asks": "Does the set cover the real range of cases, or only some of them?",
+          "test": "A gap is as damaging as an error."
+        },
+        {
+          "term": "The noise",
+          "asks": "Is anything blurry, inconsistent or irrelevant?",
+          "test": "Noise makes the pattern harder to find."
+        }
+      ],
+      "role": "reference"
     },
     {
       "type": "activity",
@@ -87,7 +155,8 @@
         "Predict one exact output mistake and write it down before the reveal.",
         "Compare your prediction with the revealed clean and degraded outputs.",
         "Write one sentence linking the data cause to the output effect."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +164,8 @@
       "items": [
         "When could a bigger dataset actually make an AI worse?",
         "How can an output be wrong and still sound completely sure of itself?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +173,8 @@
       "items": [
         "Write one thing you can now predict about an AI just by looking at its data.",
         "Name one place in daily life where poor-quality data could lead to an unfair result."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

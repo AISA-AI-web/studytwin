@@ -39,6 +39,87 @@ Three inline markers work anywhere student-facing text appears:
 
 Everything else is escaped, so lesson text can never inject markup into the page.
 
+## The lesson design system
+
+Every section is given a **role** at build time, and the role — not the lesson, not the
+grade — decides how it looks. A student learns the code once and it holds everywhere:
+
+| Role | Looks like | Assigned when |
+|---|---|---|
+| `intro` | Purple panel, purple band | The first section of the lesson |
+| `objectives` | White card, gold band, ticks | Heading starts *"I can"* |
+| `vocabulary` | Purple panel, word cards | `type: vocabulary`, or a *"Words to know"* heading |
+| `explain` | Plain, no chrome | Anything else — the reading baseline |
+| `diagram` | Bordered figure | `type: diagram` |
+| `reference` | Purple left band | `type: reference` |
+| `important` | Purple tint, gold band | `type: callout` |
+| `activity` | Warm gold panel, gold band | `type: activity`/`steps`, or *"Let's try it"* |
+| `discuss` | Dashed purple band | Heading matches *"Think about it"* |
+| `reflect` | Pale gold panel | Heading matches *"My reflection"* |
+
+The colour logic is deliberately simple enough for a Grade 6 reader:
+
+> **Purple — take this in.  Gold — do something.  Plain — read on.**
+
+Roles are derived in `tools/assemble-grade6.js` from the published pack's own heading
+conventions, which are identical in all 32 Grade 6 lessons. **A grade added later inherits
+the whole system with nothing to configure**, provided the pack keeps those conventions.
+Anything unrecognised falls back to `explain`, which degrades quietly rather than looking
+broken.
+
+To override, set `"role"` explicitly on a section.
+
+## Filling gaps in the published pack
+
+The packs refer to printed artefacts a teacher hands out — a dataset card, a criteria card
+— and to figures that exist only as images in the PDF. A student reading on screen is told
+to *"read the three lenses on the criteria card"* with no card in front of them.
+
+Write those in `curriculum/<grade>/supplements.json`, never by editing a lesson file: the
+assembler regenerates lesson files from the extraction, so a direct edit is lost on the next
+build. Keeping them separate also means ADEK's material and AISA's additions stay
+distinguishable, which matters because attainment hangs off the former.
+
+```jsonc
+{
+  "g6-main-w9-core": [
+    { "insertAfter": "Judging your solution three ways",   // a heading, "start", or "intro"
+      "section": { "type": "reference", "heading": "The three lenses", "entries": [ … ] } }
+  ]
+}
+```
+
+Every supplement is marked `authored: true` and renders with a line saying it was added by
+AISA and is not ADEK material. **Do not use supplements to change a worksheet task, a
+look-for or a framework tag** — those feed a student's recorded attainment, and they must
+stay as published.
+
+### Two extra section types for this purpose
+
+**`diagram`** — a declarative spec the interface draws as SVG. Lesson files hold no markup,
+so nothing in a lesson can inject anything into the page.
+
+```jsonc
+{ "type": "diagram", "variant": "flow",        // or "compare"
+  "heading": "…", "caption": "…", "altText": "…",   // altText is required for screen readers
+  "nodes": [{ "label": "…", "detail": "…", "accent": true }],
+  "edges": [{ "label": "so the model learns" }] }   // one fewer edge than nodes
+```
+
+`variant: "compare"` takes `left` and `right`, each `{ title, steps: [], accent }`.
+
+Draw a diagram only where it shows a **mechanism** a sentence cannot — how a data flaw
+becomes a wrong answer, how two systems differ. A box with a label on it is worth less than
+the sentence it replaced.
+
+**`reference`** — a card to consult, for the printed handouts students do not have.
+
+```jsonc
+{ "type": "reference", "label": "Criteria card", "heading": "The three lenses",
+  "intro": "…",
+  "entries": [{ "term": "Accuracy", "asks": "…", "test": "…" }] }
+```
+
 ## Section types
 
 | `type` | Fields | Use for |

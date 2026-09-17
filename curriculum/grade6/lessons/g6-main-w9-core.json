@@ -24,7 +24,8 @@
       "heading": "Overview",
       "body": [
         "You are almost there. This week you become the judge of your own work, checking it for accuracy, usefulness and risk, then making one smart change that you can prove made it better."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -33,7 +34,8 @@
         "I can finish my solution so it meets the success criteria our class agreed on.",
         "I can judge my solution for accuracy, usefulness and risk using the rubric.",
         "I can explain one change I made and say why it made the solution better."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -59,7 +61,8 @@
           "term": "Evidence",
           "definition": "Proof from testing, not just an opinion."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -67,7 +70,33 @@
       "body": [
         "A good builder does not just ask 'do I like it?'. You measure your work against the criteria the class agreed.",
         "**Accuracy**: test with examples where you know the right answer. **Usefulness**: check it helps your real user. **Risk**: ask what could go wrong and whether any private data is exposed."
-      ]
+      ],
+      "role": "explain"
+    },
+    {
+      "authored": true,
+      "type": "reference",
+      "label": "Criteria card",
+      "heading": "The three lenses",
+      "intro": "Judge your solution through each lens in turn. A solution can be accurate and still fail the other two.",
+      "entries": [
+        {
+          "term": "Accuracy",
+          "asks": "How often does it give the right or sensible answer?",
+          "test": "Test it with examples where you already know the correct answer, and record the score."
+        },
+        {
+          "term": "Usefulness",
+          "asks": "Does it actually help your user do their task?",
+          "test": "Check it against the real task you designed it for, not a task that happens to suit it."
+        },
+        {
+          "term": "Risk",
+          "asks": "What could go wrong, and who could be harmed?",
+          "test": "Check for unfair results and for any private data being exposed."
+        }
+      ],
+      "role": "reference"
     },
     {
       "type": "text",
@@ -75,7 +104,8 @@
       "body": [
         "You do not need many changes. Choose the one improvement that matters most to your user.",
         "Make the change, then re-test. If accuracy went up and nothing else broke, you have evidence it worked. Write it in your refinement note."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -91,7 +121,8 @@
         "Do a basic risk check for harm, fairness and privacy.",
         "Pick one improvement, make it, and re-test.",
         "Swap for 'two stars and a wish' feedback."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -99,7 +130,8 @@
       "items": [
         "Which lens was hardest to judge, and why?",
         "How did re-testing change your confidence in your solution?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -107,7 +139,8 @@
       "items": [
         "Write the one change you made and the evidence it helped.",
         "Name one risk you are now sure your solution avoids."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {

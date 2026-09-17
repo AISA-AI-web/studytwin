@@ -1,0 +1,143 @@
+{
+  "_readme": [
+    "Content AISA has written to fill gaps in the published ADEK pack.",
+    "",
+    "The pack's lessons refer to printed artefacts a teacher hands out — a dataset card, a",
+    "criteria card — and to diagrams that exist as images in the PDF and so did not survive",
+    "text extraction. A student reading the lesson on screen is told to 'read the three lenses",
+    "on the criteria card' with no card in front of them.",
+    "",
+    "These supplements fill those specific holes. They are kept separate from the extracted",
+    "lessons, and every section is marked authored:true so it renders with a note saying it is",
+    "AISA's addition and not ADEK material. Nothing here changes a worksheet task, a mark",
+    "scheme or a framework tag — only what a student reads.",
+    "",
+    "insertAfter names the heading of the published section this should follow; 'start' places",
+    "it first."
+  ],
+  "g6-bridging-w1-core": [
+    {
+      "insertAfter": "The model learns from its examples",
+      "section": {
+        "type": "diagram",
+        "variant": "flow",
+        "label": "How a data problem becomes an output mistake",
+        "heading": "One flaw, traced all the way to the answer",
+        "altText": "A chain of three boxes: a data problem leads to a wrong learned pattern, which leads to a wrong output.",
+        "caption": "This is the chain you trace on your worksheet. Start at the data, not the answer.",
+        "nodes": [
+          {
+            "label": "A problem in the data",
+            "detail": "one stone is labelled 'date'"
+          },
+          {
+            "label": "The model learns it",
+            "detail": "small round = date"
+          },
+          {
+            "label": "The output is wrong",
+            "accent": true,
+            "detail": "it calls a pebble a date"
+          }
+        ],
+        "edges": [
+          {
+            "label": "so the model learns"
+          },
+          {
+            "label": "so the output will"
+          }
+        ]
+      }
+    },
+    {
+      "insertAfter": "Quality is not the same as quantity",
+      "section": {
+        "type": "reference",
+        "label": "Your dataset card",
+        "heading": "What a dataset card shows you",
+        "intro": "Your teacher gives you a card describing one dataset. Read it in this order — the flaw is never announced, you have to find it.",
+        "entries": [
+          {
+            "term": "The examples",
+            "asks": "How many items are there, and what is each one a picture of?",
+            "test": "A small set is not automatically a bad one."
+          },
+          {
+            "term": "The labels",
+            "asks": "What is each example called? Is every label correct?",
+            "test": "One wrong label teaches one wrong lesson."
+          },
+          {
+            "term": "The spread",
+            "asks": "Does the set cover the real range of cases, or only some of them?",
+            "test": "A gap is as damaging as an error."
+          },
+          {
+            "term": "The noise",
+            "asks": "Is anything blurry, inconsistent or irrelevant?",
+            "test": "Noise makes the pattern harder to find."
+          }
+        ]
+      }
+    }
+  ],
+  "g6-main-w2-core": [
+    {
+      "insertAfter": "intro",
+      "section": {
+        "type": "diagram",
+        "variant": "compare",
+        "label": "The difference you are looking for",
+        "heading": "Two ways a system can reach an answer",
+        "altText": "Two columns. A rule-based system takes an input, follows a rule a person wrote, and gives an output. A learning system takes labelled examples, finds a pattern itself, and uses that pattern on a new input.",
+        "caption": "Both give an answer. The difference is **where the rule came from** — a person wrote it, or the system found it.",
+        "left": {
+          "title": "Rule-based system",
+          "steps": [
+            "An input arrives",
+            "Follow the rule a person wrote",
+            "Give the answer"
+          ]
+        },
+        "right": {
+          "title": "Learning system",
+          "accent": true,
+          "steps": [
+            "Study labelled examples",
+            "Find the pattern itself",
+            "Use it on a new input"
+          ]
+        }
+      }
+    }
+  ],
+  "g6-main-w9-core": [
+    {
+      "insertAfter": "Judging your solution three ways",
+      "section": {
+        "type": "reference",
+        "label": "Criteria card",
+        "heading": "The three lenses",
+        "intro": "Judge your solution through each lens in turn. A solution can be accurate and still fail the other two.",
+        "entries": [
+          {
+            "term": "Accuracy",
+            "asks": "How often does it give the right or sensible answer?",
+            "test": "Test it with examples where you already know the correct answer, and record the score."
+          },
+          {
+            "term": "Usefulness",
+            "asks": "Does it actually help your user do their task?",
+            "test": "Check it against the real task you designed it for, not a task that happens to suit it."
+          },
+          {
+            "term": "Risk",
+            "asks": "What could go wrong, and who could be harmed?",
+            "test": "Check for unfair results and for any private data being exposed."
+          }
+        ]
+      }
+    }
+  ]
+}

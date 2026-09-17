@@ -21,7 +21,8 @@
       "heading": "Data Quality Investigation (Lab)",
       "body": [
         "In the Core lesson you predicted one AI mistake from its data. Today you run a proper investigation: four versions of the same dataset, four sets of outputs, and one big question - which data quality problem does the most damage? By the end you will rank them and defend your order with evidence, just like a real AI auditor."
-      ]
+      ],
+      "role": "intro"
     },
     {
       "type": "list",
@@ -30,7 +31,8 @@
         "I can run a fair comparison of clean and noisy data and record what changes in the output.",
         "I can rank several datasets from best to worst expected output and justify my ranking.",
         "I can use evidence from the comparison to explain the data-to-output link."
-      ]
+      ],
+      "role": "objectives"
     },
     {
       "type": "vocabulary",
@@ -56,7 +58,8 @@
           "term": "audit",
           "definition": "A careful check of data or a system before you trust it."
         }
-      ]
+      ],
+      "role": "vocabulary"
     },
     {
       "type": "text",
@@ -64,7 +67,8 @@
       "body": [
         "To find out how data quality changes an output, you must be fair: keep the task and the model the same, and change only the dataset.",
         "Then any difference you see in the output can be traced back to the data - that is what makes your evidence trustworthy."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "text",
@@ -72,7 +76,8 @@
       "body": [
         "After you see how each dataset changed the output, you rank them from best to worst expected quality.",
         "The hard part is the middle: when two datasets are both weak, you decide which flaw hurt the output more, and you point to the exact output change that proves it."
-      ]
+      ],
+      "role": "explain"
     },
     {
       "type": "activity",
@@ -87,7 +92,8 @@
         "Match each change to its data flaw.",
         "Score each dataset on accuracy, completeness, and consistency.",
         "Place all four on the ranking line and justify the order."
-      ]
+      ],
+      "role": "activity"
     },
     {
       "type": "list",
@@ -95,7 +101,8 @@
       "items": [
         "Which data flaw did the most damage, and what evidence proves it?",
         "When two datasets are both weak, how did your team decide which was worse?"
-      ]
+      ],
+      "role": "discuss"
     },
     {
       "type": "list",
@@ -103,7 +110,8 @@
       "items": [
         "Write the one output change that most convinced you of your top ranking.",
         "Describe how you would audit a dataset before trusting an AI built on it."
-      ]
+      ],
+      "role": "reflect"
     }
   ],
   "worksheet": {
