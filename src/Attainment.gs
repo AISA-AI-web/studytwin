@@ -9,6 +9,13 @@
  * Marks a question carries are credited in full to each standard it is tagged
  * with rather than split between them. A question tagged with two standards is
  * evidence for both; halving it would understate attainment in each.
+ *
+ * That full crediting is correct per standard but must NOT be summed to produce
+ * an overall figure — a question tagged twice would count twice, inflating the
+ * total. The overall score is therefore computed separately, straight from the
+ * marked results, counting every question exactly once. Without this split a
+ * student who scored 46% on every paper reports as 52% overall, which reads as
+ * a pass.
  */
 
 /**
@@ -22,6 +29,10 @@ function computeAttainment_(gradeKey, submissions) {
   const standardsIndex = getStandardsIndex_(gradeKey);
   const totals = {}; // code -> { awarded, available, questions }
 
+  // Counted once per question, regardless of how many standards it is tagged with.
+  let rawAwarded = 0;
+  let rawAvailable = 0;
+
   submissions.forEach(function (submission) {
     let results;
     try {
@@ -32,6 +43,9 @@ function computeAttainment_(gradeKey, submissions) {
     }
 
     results.forEach(function (result) {
+      rawAwarded   += Number(result.marksAwarded)   || 0;
+      rawAvailable += Number(result.marksAvailable) || 0;
+
       (result.standards || []).forEach(function (code) {
         if (!totals[code]) totals[code] = { awarded: 0, available: 0, questions: 0 };
         totals[code].awarded   += Number(result.marksAwarded)   || 0;
@@ -63,16 +77,14 @@ function computeAttainment_(gradeKey, submissions) {
 
   byStandard.sort(function (a, b) { return a.code.localeCompare(b.code); });
 
-  const awarded   = byStandard.reduce(function (s, r) { return s + r.marksAwarded; }, 0);
-  const available = byStandard.reduce(function (s, r) { return s + r.marksAvailable; }, 0);
-  const overallPercent = available > 0 ? (awarded / available) * 100 : 0;
+  const overallPercent = rawAvailable > 0 ? (rawAwarded / rawAvailable) * 100 : 0;
   const overallBand = bandFor_(overallPercent);
 
   return {
     byStandard: byStandard,
     overall: {
-      marksAwarded: round2_(awarded),
-      marksAvailable: round2_(available),
+      marksAwarded: round2_(rawAwarded),
+      marksAvailable: round2_(rawAvailable),
       percent: round2_(overallPercent),
       band: overallBand.key,
       bandLabel: overallBand.label,

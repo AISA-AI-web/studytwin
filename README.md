@@ -74,6 +74,17 @@ npm run test       # run the marking engine tests
 npm run build      # compile curriculum JSON into the Apps Script project
 ```
 
+### See it without deploying
+
+```bash
+npm run preview
+```
+
+Writes `preview/index.html` — open it in any browser. It inlines the real marking,
+content and attainment code with a demo cohort, so worksheets are genuinely marked by
+the same engine that runs in production. A bar at the top switches between the student,
+teacher and admin views. Nothing is saved; reload to reset.
+
 To deploy it for real, follow [`docs/deployment.md`](docs/deployment.md).
 To write or edit lessons, follow [`docs/authoring-lessons.md`](docs/authoring-lessons.md).
 

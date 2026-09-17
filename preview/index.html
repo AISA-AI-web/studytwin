@@ -1,0 +1,2966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudyTwin — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* AISA brand tokens — never hardcode these values in rules below. */
+  :root {
+    --aisa-purple:        #21076C;
+    --aisa-purple-mid:    #4B2E9E;
+    --aisa-gold:          #D8B664;
+    --aisa-white:         #FFFFFF;
+    --aisa-near-black:    #1A1A1A;
+    --aisa-muted-gray:    #555555;
+    --aisa-purple-tint:   #F2EFFA;
+    --aisa-purple-border: #C8BEE8;
+    --aisa-font:          'DM Sans', system-ui, sans-serif;
+    --aisa-radius:        8px;
+    --shadow-sm: 0 1px 2px rgba(33, 7, 108, .06);
+    --shadow-md: 0 4px 16px rgba(33, 7, 108, .10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--aisa-font);
+    background: var(--aisa-white);
+    color: var(--aisa-near-black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 { color: var(--aisa-purple); font-weight: 700; line-height: 1.25; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.1rem; }
+  a { color: var(--aisa-purple-mid); }
+
+  .eyebrow {
+    font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--aisa-gold); margin-bottom: .35rem;
+  }
+  .muted { color: var(--aisa-muted-gray); }
+  .small { font-size: .85rem; }
+  .center { text-align: center; }
+
+  /* ---------- App shell ---------- */
+  .app-header {
+    background: var(--aisa-purple); color: var(--aisa-white);
+    padding: .85rem 1.5rem; display: flex; align-items: center;
+    gap: 1rem; flex-wrap: wrap; position: sticky; top: 0; z-index: 20;
+  }
+  .app-header .brand {
+    font-size: 1.3rem; font-weight: 700; color: var(--aisa-gold); letter-spacing: .04em;
+  }
+  .app-header .brand span { color: var(--aisa-white); font-weight: 500; }
+  .app-header .school { font-size: .8rem; color: rgba(255,255,255,.7); }
+  .header-spacer { flex: 1; }
+
+  .nav { display: flex; gap: .35rem; flex-wrap: wrap; }
+  .nav button {
+    background: transparent; border: 1px solid rgba(255,255,255,.28);
+    color: var(--aisa-white); font-family: inherit; font-size: .85rem;
+    padding: .4rem .85rem; border-radius: 999px; cursor: pointer; transition: .15s;
+  }
+  .nav button:hover { background: rgba(255,255,255,.12); }
+  .nav button.active { background: var(--aisa-gold); color: var(--aisa-purple); font-weight: 700; border-color: var(--aisa-gold); }
+
+  .user-chip {
+    display: flex; align-items: center; gap: .55rem;
+    background: rgba(255,255,255,.1); padding: .3rem .75rem .3rem .3rem; border-radius: 999px;
+  }
+  .avatar {
+    width: 28px; height: 28px; border-radius: 50%; background: var(--aisa-gold);
+    color: var(--aisa-purple); font-weight: 700; font-size: .8rem;
+    display: grid; place-items: center; flex: none;
+  }
+  .user-chip .name { font-size: .85rem; }
+  .user-chip .role {
+    font-size: .65rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--aisa-gold); font-weight: 700;
+  }
+
+  main { max-width: 68rem; margin: 0 auto; padding: 1.75rem 1.5rem 4rem; }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--aisa-white); border: 1px solid var(--aisa-purple-border);
+    border-radius: var(--aisa-radius); padding: 1.25rem; box-shadow: var(--shadow-sm);
+  }
+  .card--tint { background: var(--aisa-purple-tint); }
+  .card--accent { border-left: 4px solid var(--aisa-gold); }
+
+  /* ---------- Progress hero ---------- */
+  .hero {
+    background: var(--aisa-purple); color: var(--aisa-white);
+    border-radius: var(--aisa-radius); padding: 1.75rem; margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+  }
+  .hero h1 { color: var(--aisa-white); margin-bottom: .3rem; }
+  .hero .eyebrow { color: var(--aisa-gold); }
+  .hero-text { flex: 1; min-width: 15rem; }
+  .hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .stat .value { font-size: 2.1rem; font-weight: 700; color: var(--aisa-gold); line-height: 1.1; }
+  .stat .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.72); }
+
+  .ring { width: 104px; height: 104px; flex: none; position: relative; }
+  .ring svg { transform: rotate(-90deg); }
+  .ring .ring-label {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 1.4rem; font-weight: 700; color: var(--aisa-white);
+  }
+
+  /* ---------- Lesson cards ---------- */
+  .unit { margin-bottom: 2rem; }
+  .unit-head { margin-bottom: .9rem; padding-bottom: .5rem; border-bottom: 2px solid var(--aisa-purple-tint); }
+  .lesson-grid { display: grid; gap: .85rem; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
+
+  .lesson-card {
+    border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
+    padding: 1.1rem; cursor: pointer; transition: .18s; background: var(--aisa-white);
+    display: flex; flex-direction: column; gap: .6rem; text-align: left; font-family: inherit;
+    width: 100%;
+  }
+  .lesson-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: var(--aisa-purple); }
+  .lesson-card .top { display: flex; align-items: center; gap: .6rem; }
+  .lesson-num {
+    width: 2rem; height: 2rem; border-radius: 6px; background: var(--aisa-purple);
+    color: var(--aisa-white); font-weight: 700; font-size: .9rem;
+    display: grid; place-items: center; flex: none;
+  }
+  .lesson-card.is-lab .lesson-num { background: var(--aisa-gold); color: var(--aisa-purple); }
+  .lesson-card h3 { font-size: 1rem; }
+  .lesson-card p { font-size: .85rem; color: var(--aisa-muted-gray); }
+  .lesson-meta { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: auto; padding-top: .5rem; }
+
+  .pill {
+    font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .18rem .55rem; border-radius: 999px; white-space: nowrap;
+  }
+  .pill--lesson { background: var(--aisa-purple-tint); color: var(--aisa-purple); }
+  .pill--lab { background: #FBF3DF; color: #7A6124; }
+  .pill--complete { background: #E6F4EA; color: #1B6E3C; }
+  .pill--attempted { background: #FDF1DC; color: #8A5A00; }
+  .pill--not-started { background: #F1F1F4; color: var(--aisa-muted-gray); }
+
+  .progress-bar { height: 6px; background: var(--aisa-purple-tint); border-radius: 999px; overflow: hidden; }
+  .progress-bar > i { display: block; height: 100%; background: var(--aisa-gold); border-radius: 999px; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    font-family: inherit; font-size: .9rem; font-weight: 700; cursor: pointer;
+    border-radius: 6px; padding: .6rem 1.2rem; border: 1px solid transparent; transition: .15s;
+  }
+  .btn--primary { background: var(--aisa-purple); color: var(--aisa-white); }
+  .btn--primary:hover { background: var(--aisa-purple-mid); }
+  .btn--gold { background: var(--aisa-gold); color: var(--aisa-purple); }
+  .btn--gold:hover { filter: brightness(1.06); }
+  .btn--ghost { background: transparent; color: var(--aisa-purple); border-color: var(--aisa-purple-border); }
+  .btn--ghost:hover { background: var(--aisa-purple-tint); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* ---------- Lesson content ---------- */
+  .lesson-head { margin-bottom: 1.5rem; }
+  .section { margin-bottom: 1.5rem; }
+  .section h3 { margin-bottom: .5rem; }
+  .section p { margin-bottom: .7rem; }
+  .section ul, .section ol { margin: 0 0 .8rem 1.3rem; }
+  .section li { margin-bottom: .3rem; }
+
+  .callout {
+    background: var(--aisa-purple-tint); border-left: 4px solid var(--aisa-gold);
+    border-radius: var(--aisa-radius); padding: 1rem 1.15rem; margin-bottom: 1.1rem;
+  }
+  .callout .eyebrow { margin-bottom: .25rem; }
+  .keyword {
+    display: inline-block; background: var(--aisa-purple); color: var(--aisa-white);
+    padding: .1rem .45rem; border-radius: 4px; font-weight: 500; font-size: .92em;
+  }
+  .steps { counter-reset: step; list-style: none; margin-left: 0; }
+  .steps li {
+    counter-increment: step; position: relative; padding-left: 2.2rem; margin-bottom: .7rem;
+  }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 0; top: .1rem;
+    width: 1.6rem; height: 1.6rem; border-radius: 50%;
+    background: var(--aisa-gold); color: var(--aisa-purple);
+    font-weight: 700; font-size: .8rem; display: grid; place-items: center;
+  }
+
+  /* ---------- Worksheet ---------- */
+  .question {
+    border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
+    padding: 1.15rem; margin-bottom: 1rem;
+  }
+  .question.is-correct { border-left: 4px solid #1B6E3C; background: #F7FCF8; }
+  .question.is-partial { border-left: 4px solid var(--aisa-gold); background: #FFFDF7; }
+  .question.is-wrong   { border-left: 4px solid #B3261E; background: #FFF8F8; }
+
+  .q-head { display: flex; gap: .75rem; align-items: baseline; margin-bottom: .75rem; }
+  .q-num { font-weight: 700; color: var(--aisa-purple); flex: none; }
+  .q-prompt { flex: 1; font-weight: 500; }
+  .q-marks { font-size: .75rem; color: var(--aisa-muted-gray); white-space: nowrap; }
+
+  .option {
+    display: flex; gap: .65rem; align-items: flex-start; padding: .6rem .8rem;
+    border: 1px solid var(--aisa-purple-border); border-radius: 6px;
+    margin-bottom: .45rem; cursor: pointer; transition: .12s;
+  }
+  .option:hover { background: var(--aisa-purple-tint); }
+  .option input { margin-top: .3rem; accent-color: var(--aisa-purple); flex: none; }
+  .option.selected { background: var(--aisa-purple-tint); border-color: var(--aisa-purple); }
+
+  input[type="text"], input[type="number"], textarea, select {
+    font-family: inherit; font-size: .95rem; width: 100%;
+    padding: .6rem .75rem; border: 1px solid var(--aisa-purple-border);
+    border-radius: 6px; color: var(--aisa-near-black); background: var(--aisa-white);
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--aisa-purple); outline-offset: 1px; border-color: var(--aisa-purple);
+  }
+  textarea { min-height: 5rem; resize: vertical; }
+
+  .match-row { display: flex; gap: .7rem; align-items: center; margin-bottom: .5rem; flex-wrap: wrap; }
+  .match-row .left { flex: 1; min-width: 10rem; }
+  .match-row select { flex: 1; min-width: 10rem; width: auto; }
+
+  .order-item {
+    display: flex; gap: .7rem; align-items: center; padding: .55rem .8rem;
+    border: 1px solid var(--aisa-purple-border); border-radius: 6px; margin-bottom: .4rem;
+    background: var(--aisa-white);
+  }
+  .order-item .handle { font-weight: 700; color: var(--aisa-gold); }
+  .order-item .text { flex: 1; }
+  .order-btn {
+    background: var(--aisa-purple-tint); border: none; border-radius: 4px;
+    width: 1.8rem; height: 1.8rem; cursor: pointer; color: var(--aisa-purple); font-weight: 700;
+  }
+  .order-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+  .blanks { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .blanks input { width: auto; min-width: 8rem; flex: 1; }
+
+  .feedback {
+    margin-top: .75rem; padding: .7rem .85rem; border-radius: 6px;
+    background: var(--aisa-purple-tint); font-size: .88rem;
+  }
+  .feedback .model { color: var(--aisa-purple); font-weight: 500; }
+
+  /* ---------- Attainment ---------- */
+  .band-chip {
+    display: inline-block; padding: .2rem .6rem; border-radius: 999px;
+    font-size: .72rem; font-weight: 700; color: var(--aisa-white); white-space: nowrap;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: .6rem .7rem; border-bottom: 1px solid var(--aisa-purple-border); }
+  th {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--aisa-muted-gray); font-weight: 700; white-space: nowrap;
+  }
+  tbody tr:hover { background: var(--aisa-purple-tint); }
+  tbody tr.clickable { cursor: pointer; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius); }
+
+  .standard-row { display: flex; align-items: center; gap: .9rem; padding: .7rem 0; border-bottom: 1px solid var(--aisa-purple-tint); }
+  .standard-row .code { font-weight: 700; color: var(--aisa-purple); font-size: .8rem; min-width: 5.5rem; flex: none; }
+  .standard-row .desc { flex: 1; font-size: .87rem; min-width: 12rem; }
+  .standard-row .meter { width: 8rem; flex: none; }
+
+  .dist { display: flex; height: 8px; border-radius: 999px; overflow: hidden; width: 8rem; }
+  .dist > i { display: block; height: 100%; }
+
+  /* ---------- Utility ---------- */
+  .row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .between { justify-content: space-between; }
+  .stack > * + * { margin-top: 1rem; }
+  .grid-2 { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+
+  .spinner {
+    width: 2rem; height: 2rem; border: 3px solid var(--aisa-purple-tint);
+    border-top-color: var(--aisa-purple); border-radius: 50%;
+    animation: spin .8s linear infinite; margin: 3rem auto;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .toast {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    background: var(--aisa-purple); color: var(--aisa-white);
+    padding: .8rem 1.3rem; border-radius: 999px; box-shadow: var(--shadow-md);
+    font-size: .88rem; z-index: 50; max-width: 90vw;
+  }
+  .toast.error { background: #B3261E; }
+
+  .empty { text-align: center; padding: 3rem 1rem; color: var(--aisa-muted-gray); }
+  .empty h3 { margin-bottom: .4rem; }
+
+  .breadcrumb {
+    background: none; border: none; font-family: inherit; font-size: .85rem;
+    color: var(--aisa-purple-mid); cursor: pointer; padding: 0; margin-bottom: .9rem;
+  }
+  .breadcrumb:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    main { padding: 1.25rem 1rem 3rem; }
+    .hero { padding: 1.25rem; gap: 1.25rem; }
+    h1 { font-size: 1.5rem; }
+    .app-header { padding: .7rem 1rem; }
+    .app-header .school { display: none; }
+  }
+
+  @media print {
+    .app-header, .nav, .btn { display: none !important; }
+    .card, .question { break-inside: avoid; }
+  }
+</style>
+
+</head>
+<body>
+
+<div id="previewBar" style="background:#1A1A1A;color:#fff;padding:.5rem 1.5rem;
+     font-family:'DM Sans',sans-serif;font-size:.8rem;display:flex;gap:.75rem;
+     align-items:center;flex-wrap:wrap">
+  <strong style="color:#D8B664">PREVIEW</strong>
+  <span style="opacity:.7">Demo data. Worksheets are marked by the real engine.</span>
+  <span style="flex:1"></span>
+  <span style="opacity:.7">View as:</span>
+  <button data-role="student" class="pv">Student</button>
+  <button data-role="teacher" class="pv">Teacher</button>
+  <button data-role="admin" class="pv">Admin</button>
+</div>
+<style>
+  .pv { font-family:'DM Sans',sans-serif; font-size:.78rem; cursor:pointer;
+        background:transparent; color:#fff; border:1px solid rgba(255,255,255,.35);
+        border-radius:999px; padding:.25rem .8rem; }
+  .pv:hover { background:rgba(255,255,255,.14); }
+  .pv.active { background:#D8B664; color:#21076C; font-weight:700; border-color:#D8B664; }
+</style>
+<script>
+  var PREVIEW_USERS = {
+    student: { email: 'amina.hassan@aisa.sch.ae', displayName: 'Amina Hassan',
+               role: 'student', grade: '6', className: '6A' },
+    teacher: { email: 'f.mansour@aisa.sch.ae', displayName: 'Fatima Mansour',
+               role: 'teacher', grade: '6', className: '' },
+    admin:   { email: 'b.abaki@aisa.sch.ae', displayName: 'Brandon Abaki',
+               role: 'admin', grade: '6', className: '' }
+  };
+  var saved = null;
+  try { saved = localStorage.getItem('studytwin-preview-role'); } catch (e) {}
+  var startRole = PREVIEW_USERS[saved] ? saved : 'student';
+  window.CURRENT_USER = PREVIEW_USERS[startRole];
+  window.BOOTSTRAP_USER = window.CURRENT_USER;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var bar = document.getElementById('previewBar');
+    Array.prototype.forEach.call(bar.querySelectorAll('[data-role]'), function (btn) {
+      var role = btn.getAttribute('data-role');
+      if (role === startRole) btn.classList.add('active');
+      btn.onclick = function () {
+        try { localStorage.setItem('studytwin-preview-role', role); } catch (e) {}
+        location.reload();
+      };
+    });
+  });
+</script>
+
+  <header class="app-header">
+    <div class="brand">StudyTwin<span></span></div>
+    <div class="school">American International School in Abu Dhabi</div>
+    <div class="header-spacer"></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="user-chip" id="userChip"></div>
+  </header>
+
+  <main id="view"><div class="spinner" role="status" aria-label="Loading"></div></main>
+
+  <script>
+/**
+ * Central configuration.
+ *
+ * Nothing secret lives here. The one environment-specific value — the ID of the
+ * spreadsheet used as the datastore — is held in Script Properties so this file
+ * stays identical across the dev and live deployments.
+ */
+
+const CONFIG = {
+  /** Only accounts on this domain may use the app. Enforced server-side on every call. */
+  ALLOWED_DOMAIN: 'aisa.sch.ae',
+
+  /** Display name of the platform, shown in the UI header. */
+  APP_NAME: 'StudyTwin',
+  SCHOOL_NAME: 'American International School in Abu Dhabi',
+
+  /** Script Property key holding the datastore spreadsheet ID. */
+  PROP_SPREADSHEET_ID: 'STUDYTWIN_SPREADSHEET_ID',
+
+  /**
+   * Attainment bands. A student's percentage against a standard is compared
+   * top-down; the first band whose `min` is met is awarded.
+   * Mirrors the four-point scale ADEK uses for the AI Standards.
+   */
+  ATTAINMENT_BANDS: [
+    { key: 'mastery',    label: 'Mastery',    min: 85, color: '#21076C' },
+    { key: 'secure',     label: 'Secure',     min: 70, color: '#4B2E9E' },
+    { key: 'developing', label: 'Developing', min: 50, color: '#D8B664' },
+    { key: 'emerging',   label: 'Emerging',   min: 0,  color: '#9A8248' }
+  ],
+
+  /** A lesson counts as complete once the worksheet is submitted at or above this %. */
+  PASS_PERCENT: 50,
+
+  /** Students may retry a worksheet up to this many times. Best attempt counts. */
+  MAX_ATTEMPTS: 3,
+
+  /** Seconds to cache curriculum + roster lookups. Content is static; identity is not. */
+  CACHE_SECONDS: 300
+};
+
+/** Sheet names used in the datastore workbook. */
+const SHEETS = {
+  STAFF: 'Staff',
+  ROSTER: 'Roster',
+  PROGRESS: 'Progress',
+  SUBMISSIONS: 'Submissions',
+  AUDIT: 'AuditLog'
+};
+
+/** Column order for each sheet. Changing these means migrating the workbook. */
+const COLUMNS = {
+  STAFF:       ['email', 'role', 'displayName', 'addedAt', 'addedBy'],
+  ROSTER:      ['email', 'displayName', 'grade', 'className', 'active'],
+  PROGRESS:    ['email', 'lessonId', 'status', 'startedAt', 'updatedAt', 'completedAt'],
+  SUBMISSIONS: ['email', 'lessonId', 'attempt', 'submittedAt', 'marksAwarded',
+                'marksAvailable', 'percent', 'answersJson', 'resultsJson'],
+  AUDIT:       ['timestamp', 'actor', 'action', 'detail']
+};
+
+
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ *
+ * Built from curriculum/** by tools/build-content.js (`npm run build`).
+ * Edit the JSON under curriculum/ and rebuild; changes made here are overwritten.
+ *
+ * Built: 2026-09-17T10:07:46.294Z
+ */
+
+const CURRICULUM = {
+  "grade6": {
+    "meta": {
+      "grade": 6,
+      "title": "Grade 6 — Artificial Intelligence",
+      "subtitle": "ADEK AI Curriculum",
+      "provisional": true,
+      "note": "Structure and content are placeholders pending the official ADEK Grade 6 curriculum document. Standards codes, lesson titles and worksheet content must be replaced with the published versions before this is used for reporting."
+    },
+    "units": [
+      {
+        "id": "g6-u1",
+        "title": "Understanding Artificial Intelligence",
+        "summary": "What AI is, where students already meet it, and how machines learn from data rather than from rules.",
+        "lessons": [
+          "g6-l01",
+          "g6-l02"
+        ]
+      }
+    ],
+    "standards": [
+      {
+        "code": "AI.6.1.1",
+        "strand": "Understanding AI",
+        "descriptor": "Define artificial intelligence and distinguish it from ordinary computer programs.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.1.2",
+        "strand": "Understanding AI",
+        "descriptor": "Identify examples of artificial intelligence in everyday technology and explain how they are used.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.1.3",
+        "strand": "Understanding AI",
+        "descriptor": "Describe the difference between narrow AI and general AI.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.2.1",
+        "strand": "Data and Machine Learning",
+        "descriptor": "Explain that machine learning systems learn patterns from data rather than following written rules.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.2.2",
+        "strand": "Data and Machine Learning",
+        "descriptor": "Describe the role of training data in the accuracy of an AI system.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.2.3",
+        "strand": "Data and Machine Learning",
+        "descriptor": "Sequence the stages of a simple machine learning workflow.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.3.1",
+        "strand": "Ethics and Society",
+        "descriptor": "Recognise that AI systems can be biased and explain how biased data causes unfair outcomes.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.3.2",
+        "strand": "Ethics and Society",
+        "descriptor": "Discuss responsible and safe use of AI tools, including privacy of personal data.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.4.1",
+        "strand": "Creating with AI",
+        "descriptor": "Use an AI tool to complete a defined task and evaluate the quality of its output.",
+        "provisional": true
+      },
+      {
+        "code": "AI.6.4.2",
+        "strand": "Creating with AI",
+        "descriptor": "Refine an instruction or prompt to improve the result an AI tool produces.",
+        "provisional": true
+      }
+    ],
+    "lessons": {
+      "g6-l01": {
+        "id": "g6-l01",
+        "number": 1,
+        "type": "core",
+        "provisional": true,
+        "title": "What is Artificial Intelligence?",
+        "summary": "Meet the difference between a machine that follows rules and a machine that learns.",
+        "duration": "45 minutes",
+        "standards": [
+          "AI.6.1.1",
+          "AI.6.1.2",
+          "AI.6.1.3",
+          "AI.6.2.1"
+        ],
+        "objectives": [
+          "Define **artificial intelligence** in your own words",
+          "Explain how AI is different from an ordinary computer program",
+          "Identify at least three examples of AI you already use",
+          "Describe what is meant by [[narrow AI]] and [[general AI]]"
+        ],
+        "sections": [
+          {
+            "type": "text",
+            "heading": "Machines that follow rules",
+            "body": [
+              "Every computer program is a set of instructions. A calculator adds two numbers because a programmer wrote the rule for adding. A traffic light changes colour because someone wrote the rule for when to change. The machine never decides anything — it follows what it was told, exactly, every single time.",
+              "This works brilliantly when the rules are easy to write down. But some problems are almost impossible to write rules for. Try writing the rules for recognising your friend's face. Where do you start? Eye colour? Distance between the eyes? What if they smile, or wear a hat, or stand in the shade?"
+            ]
+          },
+          {
+            "type": "text",
+            "heading": "Machines that learn",
+            "body": [
+              "**Artificial intelligence** is what we call it when a machine does something that would normally need human thinking — recognising a face, understanding a sentence, spotting a pattern.",
+              "Most modern AI does not work from rules a person wrote. Instead it is shown thousands of examples and finds the patterns by itself. Show a system enough photographs labelled *cat* and *not a cat*, and it works out what makes a cat a cat. Nobody ever writes down the rule. This is called [[machine learning]]."
+            ]
+          },
+          {
+            "type": "vocabulary",
+            "heading": "Key vocabulary",
+            "terms": [
+              {
+                "term": "Artificial Intelligence (AI)",
+                "definition": "A computer system that performs tasks normally needing human intelligence."
+              },
+              {
+                "term": "Machine Learning",
+                "definition": "A way of building AI by learning patterns from examples instead of following written rules."
+              },
+              {
+                "term": "Training data",
+                "definition": "The examples an AI system learns from."
+              },
+              {
+                "term": "Narrow AI",
+                "definition": "AI that is very good at one specific task and cannot do anything else."
+              },
+              {
+                "term": "General AI",
+                "definition": "A hypothetical AI that could learn any task a human can. It does not exist yet."
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "label": "Important",
+            "body": [
+              "Every AI system that exists today is **narrow AI**. A system that plays chess at world-champion level cannot tell you the weather. A system that recognises faces cannot play chess. General AI — a machine that could do anything a person can — is still science fiction."
+            ]
+          },
+          {
+            "type": "list",
+            "heading": "AI you already use",
+            "items": [
+              "**Voice assistants** — turning the sound of your voice into words, then into an action",
+              "**Map apps** — predicting which route will be fastest using live traffic patterns",
+              "**Video and music apps** — recommending what you might like based on what you watched before",
+              "**Camera apps** — finding faces in the frame so the picture stays in focus",
+              "**Spam filters** — learning which emails are junk from millions of examples",
+              "**Translation apps** — converting one language to another from patterns in translated text"
+            ]
+          },
+          {
+            "type": "activity",
+            "label": "Class activity",
+            "heading": "Rule or pattern?",
+            "body": [
+              "Work with a partner. For each task below, decide whether a programmer could reasonably write the rules, or whether the machine would need to learn from examples."
+            ],
+            "items": [
+              "Working out change from a 50 dirham note",
+              "Deciding whether a photograph contains a camel",
+              "Sorting a list of names into alphabetical order",
+              "Telling whether a film review is positive or negative",
+              "Checking whether a password is at least eight characters long"
+            ]
+          }
+        ],
+        "worksheet": {
+          "title": "Lesson 1 worksheet",
+          "questions": [
+            {
+              "id": "l01q1",
+              "type": "mcq",
+              "marks": 2,
+              "standards": [
+                "AI.6.1.1"
+              ],
+              "prompt": "Which of these best describes artificial intelligence?",
+              "options": [
+                {
+                  "id": "a",
+                  "text": "Any computer program that runs quickly"
+                },
+                {
+                  "id": "b",
+                  "text": "A computer system that performs tasks normally requiring human intelligence"
+                },
+                {
+                  "id": "c",
+                  "text": "A robot with arms and legs"
+                },
+                {
+                  "id": "d",
+                  "text": "A website that stores a lot of information"
+                }
+              ],
+              "answer": "b",
+              "feedback": {
+                "correct": "Exactly — it is about the kind of task, not the kind of machine.",
+                "incorrect": "AI is defined by what the system does, not by how fast it is or what it looks like."
+              }
+            },
+            {
+              "id": "l01q2",
+              "type": "truefalse",
+              "marks": 1,
+              "standards": [
+                "AI.6.1.3"
+              ],
+              "prompt": "General AI — a machine that can learn any task a human can — already exists today.",
+              "answer": false,
+              "feedback": {
+                "correct": "Correct. Every AI system today is narrow AI.",
+                "incorrect": "Not quite. General AI does not exist yet; everything today is narrow AI."
+              }
+            },
+            {
+              "id": "l01q3",
+              "type": "multi",
+              "marks": 3,
+              "standards": [
+                "AI.6.1.2"
+              ],
+              "prompt": "Select **all** of the everyday tools below that use artificial intelligence.",
+              "options": [
+                {
+                  "id": "a",
+                  "text": "A voice assistant that responds when you speak to it"
+                },
+                {
+                  "id": "b",
+                  "text": "A calculator app adding two numbers"
+                },
+                {
+                  "id": "c",
+                  "text": "A video app recommending what to watch next"
+                },
+                {
+                  "id": "d",
+                  "text": "A spam filter deciding which emails are junk"
+                },
+                {
+                  "id": "e",
+                  "text": "A digital clock displaying the time"
+                }
+              ],
+              "answer": [
+                "a",
+                "c",
+                "d"
+              ],
+              "feedback": {
+                "correct": "Well spotted — all three learn from patterns rather than following fixed rules.",
+                "partial": "Some right. Remember: a calculator and a clock follow rules a programmer wrote.",
+                "incorrect": "Look for tools that learn from examples rather than following a fixed rule."
+              }
+            },
+            {
+              "id": "l01q4",
+              "type": "matching",
+              "marks": 4,
+              "standards": [
+                "AI.6.1.2",
+                "AI.6.2.1"
+              ],
+              "prompt": "Match each AI system to the kind of data it learns from.",
+              "left": [
+                {
+                  "id": "l1",
+                  "text": "Face recognition in a camera"
+                },
+                {
+                  "id": "l2",
+                  "text": "A translation app"
+                },
+                {
+                  "id": "l3",
+                  "text": "A spam filter"
+                },
+                {
+                  "id": "l4",
+                  "text": "A music recommendation system"
+                }
+              ],
+              "right": [
+                {
+                  "id": "r1",
+                  "text": "Thousands of labelled photographs"
+                },
+                {
+                  "id": "r2",
+                  "text": "Sentences already translated by people"
+                },
+                {
+                  "id": "r3",
+                  "text": "Emails marked as junk or not junk"
+                },
+                {
+                  "id": "r4",
+                  "text": "What millions of listeners played before"
+                }
+              ],
+              "answer": {
+                "l1": "r1",
+                "l2": "r2",
+                "l3": "r3",
+                "l4": "r4"
+              },
+              "feedback": {
+                "correct": "Every AI system learns from examples of the thing it needs to do.",
+                "partial": "Some correct. Ask yourself what examples each system would need to see."
+              }
+            },
+            {
+              "id": "l01q5",
+              "type": "fillBlank",
+              "marks": 2,
+              "standards": [
+                "AI.6.2.1"
+              ],
+              "prompt": "Complete the sentence: Machine learning systems find patterns in ______ instead of following ______ written by a programmer.",
+              "blanks": [
+                "first blank",
+                "second blank"
+              ],
+              "answer": [
+                [
+                  "data",
+                  "examples",
+                  "training data"
+                ],
+                [
+                  "rules",
+                  "instructions",
+                  "a rule"
+                ]
+              ],
+              "feedback": {
+                "correct": "That is the key difference in one sentence.",
+                "partial": "One of the two is right — reread the section on machines that learn."
+              }
+            },
+            {
+              "id": "l01q6",
+              "type": "shortText",
+              "marks": 3,
+              "standards": [
+                "AI.6.1.1",
+                "AI.6.2.1"
+              ],
+              "prompt": "Explain in your own words why it is easier to teach a computer to recognise a cat by showing it examples than by writing rules.",
+              "placeholder": "Write two or three sentences…",
+              "maxLength": 600,
+              "keywordsAny": [
+                "pattern",
+                "example",
+                "learn",
+                "rule",
+                "hard to describe",
+                "too many",
+                "different",
+                "vary"
+              ],
+              "keywordsNeeded": 2,
+              "modelAnswer": "Cats look different from each other and appear in different positions, colours and lighting, so it would take an enormous number of rules to describe every possible cat. Showing the system many labelled examples lets it find the patterns itself.",
+              "hint": "Think about how many different ways a cat can appear in a photograph.",
+              "feedback": {
+                "correct": "Good explanation.",
+                "partial": "You are on the right track — try to mention both the examples and why rules are hard.",
+                "incorrect": "Reread 'Machines that follow rules'. Think about why a face or a cat is hard to describe in rules."
+              }
+            }
+          ]
+        }
+      },
+      "g6-l02": {
+        "id": "g6-l02",
+        "number": 2,
+        "type": "lab",
+        "provisional": true,
+        "title": "Lab: Train your own image classifier",
+        "summary": "Build a working machine learning model in the browser, then find out what happens when the training data is poor.",
+        "duration": "60 minutes",
+        "standards": [
+          "AI.6.2.1",
+          "AI.6.2.2",
+          "AI.6.2.3",
+          "AI.6.3.1",
+          "AI.6.4.1"
+        ],
+        "objectives": [
+          "Train a machine learning model using your own examples",
+          "Describe the stages of a [[machine learning workflow]]",
+          "Measure how accurate a model is",
+          "Explain how **biased training data** produces unfair results"
+        ],
+        "sections": [
+          {
+            "type": "callout",
+            "label": "Before you start",
+            "body": [
+              "You will need a device with a webcam and an internet connection. Nothing you make in this lab is uploaded or saved to anyone else's computer — the model trains inside your browser and disappears when you close the tab."
+            ]
+          },
+          {
+            "type": "text",
+            "heading": "What you are building",
+            "body": [
+              "You are going to teach a computer to tell two things apart — for example, a pen and a rubber, or your hand showing a thumbs up and a thumbs down. You will not write a single rule. You will only show it examples.",
+              "This is exactly how the image recognition in a phone camera is built, just much smaller."
+            ]
+          },
+          {
+            "type": "steps",
+            "heading": "Part 1 — Train a model",
+            "items": [
+              "Open **Teachable Machine** in your browser and choose **Image Project**, then **Standard image model**.",
+              "Rename **Class 1** to the name of your first object, for example *Pen*.",
+              "Click **Webcam** and hold the object in front of the camera. Hold the record button for about ten seconds, moving the object around as you go. You should collect roughly 100 images.",
+              "Rename **Class 2** to your second object, for example *Rubber*, and record about 100 images the same way.",
+              "Click **Train Model**. Do not switch tabs while it trains.",
+              "When training finishes, hold each object up to the webcam and watch the confidence bars move."
+            ]
+          },
+          {
+            "type": "activity",
+            "label": "Record your results",
+            "heading": "Part 2 — Test it properly",
+            "body": [
+              "Testing a model on the same images you trained it with tells you nothing. You have to test it on things it has never seen.",
+              "Show each object to the camera **ten times**, in different positions and different lighting. Count how many times the model gets it right out of the twenty tests in total."
+            ],
+            "items": [
+              "Test your first object ten times. Write down how many were correct.",
+              "Test your second object ten times. Write down how many were correct.",
+              "Add the two numbers together to get your score out of 20."
+            ]
+          },
+          {
+            "type": "steps",
+            "heading": "Part 3 — Break it on purpose",
+            "items": [
+              "Start a **new** Image Project.",
+              "Train it again with the same two objects — but this time record all of your examples in one position only, without moving the object at all.",
+              "Use only about 20 images per class instead of 100.",
+              "Train the model, then test it by holding the objects at completely different angles.",
+              "Notice how much worse it performs. The model has not become less clever. It has simply never seen anything like what you are now showing it."
+            ]
+          },
+          {
+            "type": "callout",
+            "label": "The big idea",
+            "body": [
+              "A machine learning model can only recognise what its **training data** taught it. If the examples are few, or all the same, or only show one kind of thing, the model will fail on everything else.",
+              "This is where [[bias]] comes from. A face recognition system trained mostly on one group of people works badly for everyone else — not because anyone intended that, but because of what it was shown."
+            ]
+          }
+        ],
+        "worksheet": {
+          "title": "Lab 2 worksheet",
+          "questions": [
+            {
+              "id": "l02q1",
+              "type": "ordering",
+              "marks": 4,
+              "standards": [
+                "AI.6.2.3"
+              ],
+              "prompt": "Put the stages of a machine learning project into the correct order.",
+              "items": [
+                {
+                  "id": "s1",
+                  "text": "Collect examples for each class"
+                },
+                {
+                  "id": "s2",
+                  "text": "Train the model on the examples"
+                },
+                {
+                  "id": "s3",
+                  "text": "Test the model on new things it has not seen"
+                },
+                {
+                  "id": "s4",
+                  "text": "Improve the training data and train again"
+                }
+              ],
+              "answer": [
+                "s1",
+                "s2",
+                "s3",
+                "s4"
+              ],
+              "feedback": {
+                "correct": "That is the loop every machine learning project goes round.",
+                "partial": "Close. Remember you cannot test before you have trained."
+              }
+            },
+            {
+              "id": "l02q2",
+              "type": "numeric",
+              "marks": 2,
+              "standards": [
+                "AI.6.4.1"
+              ],
+              "prompt": "A model was tested 20 times and got 17 correct. What is its accuracy as a percentage?",
+              "answer": 85,
+              "tolerance": 0.5,
+              "placeholder": "Percentage",
+              "hint": "Divide the number correct by the number of tests, then multiply by 100.",
+              "feedback": {
+                "correct": "17 out of 20 is 85%.",
+                "incorrect": "17 ÷ 20 = 0.85, and 0.85 × 100 = 85%."
+              }
+            },
+            {
+              "id": "l02q3",
+              "type": "mcq",
+              "marks": 2,
+              "standards": [
+                "AI.6.2.2"
+              ],
+              "prompt": "Why must you test a model on images it has never seen before?",
+              "options": [
+                {
+                  "id": "a",
+                  "text": "Because testing on training images only shows it can remember, not that it can recognise"
+                },
+                {
+                  "id": "b",
+                  "text": "Because the training images get deleted after training"
+                },
+                {
+                  "id": "c",
+                  "text": "Because new images train the model further"
+                },
+                {
+                  "id": "d",
+                  "text": "Because it makes the model run faster"
+                }
+              ],
+              "answer": "a",
+              "feedback": {
+                "correct": "Right — a model that only works on what it has already seen is useless.",
+                "incorrect": "Think about the difference between remembering an answer and understanding it."
+              }
+            },
+            {
+              "id": "l02q4",
+              "type": "multi",
+              "marks": 3,
+              "standards": [
+                "AI.6.2.2",
+                "AI.6.3.1"
+              ],
+              "prompt": "In Part 3 you trained a deliberately weak model. Select **all** the reasons it performed badly.",
+              "options": [
+                {
+                  "id": "a",
+                  "text": "There were far fewer training images"
+                },
+                {
+                  "id": "b",
+                  "text": "Every image was taken from the same position"
+                },
+                {
+                  "id": "c",
+                  "text": "The computer was running too slowly"
+                },
+                {
+                  "id": "d",
+                  "text": "The model had never seen the objects at other angles"
+                },
+                {
+                  "id": "e",
+                  "text": "The objects themselves had changed"
+                }
+              ],
+              "answer": [
+                "a",
+                "b",
+                "d"
+              ],
+              "feedback": {
+                "correct": "All three are problems with the training data, not the model.",
+                "partial": "Some right. The model and the computer were identical both times — only the data changed."
+              }
+            },
+            {
+              "id": "l02q5",
+              "type": "shortText",
+              "marks": 4,
+              "standards": [
+                "AI.6.3.1"
+              ],
+              "prompt": "A company builds a face recognition system and trains it almost entirely on photographs of adults. Explain what problem this is likely to cause, and how the company could fix it.",
+              "placeholder": "Write three or four sentences…",
+              "maxLength": 800,
+              "keywordsAny": [
+                "children",
+                "child",
+                "young",
+                "bias",
+                "biased",
+                "unfair",
+                "fail",
+                "worse",
+                "more data",
+                "varied",
+                "diverse",
+                "range",
+                "different people"
+              ],
+              "keywordsNeeded": 3,
+              "modelAnswer": "The system would work poorly on children's faces, because it has never been shown examples of them. That is unfair to anyone the training data left out, and it could mean children are not recognised or are misidentified. The company should fix it by collecting a much more varied set of training photographs covering people of all ages, and then testing the system separately on each group to check it works for everyone.",
+              "hint": "Who is missing from the training data, and what happens to them?",
+              "feedback": {
+                "correct": "Good — you identified who is affected and what would fix it.",
+                "partial": "You have part of it. Make sure you say who is affected *and* what the company should do.",
+                "incorrect": "Reread 'The big idea'. Think about who is missing from the training data."
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+};
+
+
+/**
+ * Auto-marking engine.
+ *
+ * Marking always happens on the server against the authoritative copy of the
+ * content. Answer keys are stripped before any lesson is sent to a browser
+ * (see stripAnswerKey_ in Content.gs), so a student cannot read the answers out
+ * of the page source, and a crafted request cannot award itself marks — the
+ * client only ever submits responses, never scores.
+ *
+ * Supported question types and how each is credited:
+ *
+ *   mcq        single correct option           all or nothing
+ *   truefalse  a boolean                       all or nothing
+ *   multi      several correct options         partial credit, penalised for wrong picks
+ *   matching   left/right pairs                partial credit per correct pair
+ *   ordering   a correct sequence              partial credit per item in the right place
+ *   numeric    a value with a tolerance        all or nothing, tolerance-aware
+ *   shortText  accepted answers / keywords     normalised comparison
+ *   fillBlank  several short answers in a row  partial credit per blank
+ */
+
+/**
+ * Marks a full worksheet submission.
+ *
+ * @param {Object} worksheet Authoritative worksheet definition (with answer keys).
+ * @param {Object} answers   Map of questionId -> student response.
+ * @return {{marksAwarded:number, marksAvailable:number, percent:number, results:Array}}
+ */
+function markWorksheet_(worksheet, answers) {
+  answers = answers || {};
+  const results = [];
+  let awarded = 0;
+  let available = 0;
+
+  (worksheet.questions || []).forEach(function (question) {
+    const response = answers[question.id];
+    const result = markQuestion_(question, response);
+    results.push(result);
+    awarded += result.marksAwarded;
+    available += result.marksAvailable;
+  });
+
+  return {
+    marksAwarded: round2_(awarded),
+    marksAvailable: round2_(available),
+    percent: available > 0 ? round2_((awarded / available) * 100) : 0,
+    results: results
+  };
+}
+
+/** Marks a single question, dispatching on its type. */
+function markQuestion_(question, response) {
+  const marksAvailable = Number(question.marks) || 0;
+  let awarded = 0;
+
+  const answered = response !== undefined && response !== null && response !== '' &&
+                   !(Array.isArray(response) && response.length === 0);
+
+  if (answered) {
+    switch (question.type) {
+      case 'mcq':       awarded = markChoice_(question, response) * marksAvailable; break;
+      case 'truefalse': awarded = markTrueFalse_(question, response) * marksAvailable; break;
+      case 'multi':     awarded = markMulti_(question, response) * marksAvailable; break;
+      case 'matching':  awarded = markMatching_(question, response) * marksAvailable; break;
+      case 'ordering':  awarded = markOrdering_(question, response) * marksAvailable; break;
+      case 'numeric':   awarded = markNumeric_(question, response) * marksAvailable; break;
+      case 'shortText': awarded = markShortText_(question, response) * marksAvailable; break;
+      case 'fillBlank': awarded = markFillBlank_(question, response) * marksAvailable; break;
+      default:
+        console.warn('Unknown question type "' + question.type + '" on ' + question.id);
+        awarded = 0;
+    }
+  }
+
+  awarded = round2_(Math.max(0, Math.min(awarded, marksAvailable)));
+  const fraction = marksAvailable > 0 ? awarded / marksAvailable : 0;
+
+  return {
+    questionId: question.id,
+    type: question.type,
+    answered: answered,
+    correct: fraction >= 0.999,
+    partial: fraction > 0 && fraction < 0.999,
+    marksAwarded: awarded,
+    marksAvailable: marksAvailable,
+    standards: question.standards || [],
+    feedback: pickFeedback_(question, fraction, answered),
+    // The model answer is released only after marking, so students learn from mistakes.
+    modelAnswer: describeAnswer_(question)
+  };
+}
+
+/* ---------------------------------------------------------------------------
+ * Per-type markers. Each returns a fraction of the available marks, 0..1.
+ * ------------------------------------------------------------------------- */
+
+function markChoice_(question, response) {
+  return String(response).trim() === String(question.answer).trim() ? 1 : 0;
+}
+
+function markTrueFalse_(question, response) {
+  return toBool_(response) === toBool_(question.answer) ? 1 : 0;
+}
+
+/**
+ * Multi-select.
+ *
+ * Credit is (proportion of correct options found) minus (proportion of
+ * distractors wrongly selected), floored at zero. Scoring the two proportions
+ * against their own totals is what makes ticking every box score exactly zero:
+ * it earns 1 for finding them all and loses 1 for taking every distractor.
+ *
+ * A simpler (hits - misses) / correctCount does not hold that property — with
+ * three correct options and two distractors, ticking everything would still pay
+ * out a third of the marks for pure guessing.
+ */
+function markMulti_(question, response) {
+  const key = (question.answer || []).map(normaliseKey_);
+  const given = (Array.isArray(response) ? response : [response]).map(normaliseKey_);
+  if (key.length === 0) return 0;
+
+  const distractorCount = Math.max(0, (question.options || []).length - key.length);
+  const unique = given.filter(function (v, i) { return given.indexOf(v) === i; });
+
+  let hits = 0, misses = 0;
+  unique.forEach(function (v) {
+    if (key.indexOf(v) !== -1) hits++; else misses++;
+  });
+
+  // With no distractors there is nothing to wrongly select, so no penalty applies.
+  const penalty = distractorCount > 0 ? (misses / distractorCount) : 0;
+  return Math.max(0, (hits / key.length) - penalty);
+}
+
+/** Matching pairs: response is { leftId: rightId }. Credit per correct pair. */
+function markMatching_(question, response) {
+  const key = question.answer || {};
+  const keys = Object.keys(key);
+  if (keys.length === 0) return 0;
+  if (typeof response !== 'object' || response === null) return 0;
+
+  let hits = 0;
+  keys.forEach(function (leftId) {
+    if (normaliseKey_(response[leftId]) === normaliseKey_(key[leftId])) hits++;
+  });
+  return hits / keys.length;
+}
+
+/** Ordering: credit for each item sitting in its correct position. */
+function markOrdering_(question, response) {
+  const key = (question.answer || []).map(normaliseKey_);
+  const given = (Array.isArray(response) ? response : []).map(normaliseKey_);
+  if (key.length === 0) return 0;
+
+  let hits = 0;
+  for (let i = 0; i < key.length; i++) {
+    if (given[i] === key[i]) hits++;
+  }
+  return hits / key.length;
+}
+
+/** Numeric with an inclusive tolerance (absolute, defaults to exact). */
+function markNumeric_(question, response) {
+  const expected = Number(question.answer);
+  const given = Number(String(response).replace(/[, ]/g, ''));
+  if (isNaN(given) || isNaN(expected)) return 0;
+
+  const tolerance = Number(question.tolerance) || 0;
+  return Math.abs(given - expected) <= tolerance + 1e-9 ? 1 : 0;
+}
+
+/**
+ * Short free text. Three matching strategies, in order of preference:
+ *
+ *   acceptedAnswers  normalised exact match against any listed answer
+ *   keywordsAll      every listed keyword must appear (credit is all-or-nothing)
+ *   keywordsAny      credit scales with how many listed keywords appear
+ *
+ * Normalisation strips case, punctuation and filler words so that
+ * "A computer program!" and "computer program" both match.
+ */
+function markShortText_(question, response) {
+  const text = normaliseText_(response);
+  if (!text) return 0;
+
+  if (question.acceptedAnswers && question.acceptedAnswers.length) {
+    const matched = question.acceptedAnswers.some(function (accepted) {
+      return normaliseText_(accepted) === text;
+    });
+    if (matched) return 1;
+    // Fall through: a longer sentence containing an accepted answer still counts.
+    const contained = question.acceptedAnswers.some(function (accepted) {
+      const norm = normaliseText_(accepted);
+      return norm.length > 2 && text.indexOf(norm) !== -1;
+    });
+    if (contained) return 1;
+  }
+
+  if (question.keywordsAll && question.keywordsAll.length) {
+    const all = question.keywordsAll.every(function (kw) {
+      return text.indexOf(normaliseText_(kw)) !== -1;
+    });
+    return all ? 1 : 0;
+  }
+
+  if (question.keywordsAny && question.keywordsAny.length) {
+    const hits = question.keywordsAny.filter(function (kw) {
+      return text.indexOf(normaliseText_(kw)) !== -1;
+    }).length;
+    const needed = Number(question.keywordsNeeded) || 1;
+    return Math.min(1, hits / needed);
+  }
+
+  return 0;
+}
+
+/** A row of blanks: response is an array, credit per blank filled correctly. */
+function markFillBlank_(question, response) {
+  const blanks = question.answer || [];
+  if (blanks.length === 0) return 0;
+  const given = Array.isArray(response) ? response : [response];
+
+  let hits = 0;
+  blanks.forEach(function (accepted, i) {
+    const options = Array.isArray(accepted) ? accepted : [accepted];
+    const answer = normaliseText_(given[i]);
+    if (answer && options.some(function (o) { return normaliseText_(o) === answer; })) {
+      hits++;
+    }
+  });
+  return hits / blanks.length;
+}
+
+/* ---------------------------------------------------------------------------
+ * Helpers
+ * ------------------------------------------------------------------------- */
+
+/** Lowercase, strip punctuation and filler words, collapse whitespace. */
+function normaliseText_(value) {
+  if (value === undefined || value === null) return '';
+  return String(value)
+    .toLowerCase()
+    .replace(/[‘’“”]/g, "'")
+    .replace(/[^a-z0-9'\s]/g, ' ')
+    .replace(/\b(a|an|the|is|are|it|that|this|of|to)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** Identifier comparison — case and whitespace insensitive, punctuation preserved. */
+function normaliseKey_(value) {
+  if (value === undefined || value === null) return '';
+  return String(value).toLowerCase().trim();
+}
+
+function toBool_(value) {
+  if (typeof value === 'boolean') return value;
+  const s = String(value).toLowerCase().trim();
+  return s === 'true' || s === 'yes' || s === '1' || s === 't';
+}
+
+/** Chooses the feedback line a student sees for this question after marking. */
+function pickFeedback_(question, fraction, answered) {
+  const fb = question.feedback || {};
+  if (!answered) return fb.unanswered || 'You did not answer this question.';
+  if (fraction >= 0.999) return fb.correct || 'Correct.';
+  if (fraction > 0) return fb.partial || fb.incorrect || 'Partly right — check the model answer.';
+  return fb.incorrect || 'Not quite — check the model answer.';
+}
+
+/** Renders the answer key into something readable for post-submission review. */
+function describeAnswer_(question) {
+  switch (question.type) {
+    case 'mcq': {
+      const opt = (question.options || []).filter(function (o) {
+        return String(o.id) === String(question.answer);
+      })[0];
+      return opt ? opt.text : String(question.answer);
+    }
+    case 'truefalse':
+      return toBool_(question.answer) ? 'True' : 'False';
+    case 'multi': {
+      const byId = {};
+      (question.options || []).forEach(function (o) { byId[String(o.id)] = o.text; });
+      return (question.answer || []).map(function (id) {
+        return byId[String(id)] || id;
+      }).join('; ');
+    }
+    case 'matching': {
+      const key = question.answer || {};
+      const leftText = {}, rightText = {};
+      (question.left || []).forEach(function (o) { leftText[String(o.id)] = o.text; });
+      (question.right || []).forEach(function (o) { rightText[String(o.id)] = o.text; });
+      return Object.keys(key).map(function (l) {
+        return (leftText[l] || l) + ' → ' + (rightText[String(key[l])] || key[l]);
+      }).join('; ');
+    }
+    case 'ordering': {
+      const text = {};
+      (question.items || []).forEach(function (o) { text[String(o.id)] = o.text; });
+      return (question.answer || []).map(function (id, i) {
+        return (i + 1) + '. ' + (text[String(id)] || id);
+      }).join('  ');
+    }
+    case 'numeric':
+      return String(question.answer) +
+        (question.tolerance ? ' (±' + question.tolerance + ')' : '');
+    case 'fillBlank':
+      return (question.answer || []).map(function (a) {
+        return Array.isArray(a) ? a[0] : a;
+      }).join(', ');
+    case 'shortText':
+      return question.modelAnswer ||
+        (question.acceptedAnswers || []).join(' / ') ||
+        (question.keywordsAll || question.keywordsAny || []).join(', ');
+    default:
+      return '';
+  }
+}
+
+function round2_(n) {
+  return Math.round(n * 100) / 100;
+}
+
+
+/**
+ * Curriculum content access.
+ *
+ * The curriculum itself lives in `curriculum/**` as plain JSON and is compiled
+ * into `generated/CurriculumData.gs` by `npm run build`. Apps Script projects can
+ * only hold .gs and .html files, so the build wraps the JSON rather than us
+ * authoring lessons as code. The JSON stays the source of truth and stays
+ * portable if the platform ever moves off Apps Script.
+ */
+
+/** Returns the course shell for a grade: units, lesson titles, standards. No answers. */
+function getCourse_(gradeKey) {
+  const course = CURRICULUM[gradeKey];
+  if (!course) throw new Error('UNKNOWN_GRADE');
+  return course;
+}
+
+/** Every lesson in a grade, in teaching order. */
+function listLessons_(gradeKey) {
+  const course = getCourse_(gradeKey);
+  const ordered = [];
+  (course.units || []).forEach(function (unit) {
+    (unit.lessons || []).forEach(function (lessonId) {
+      const lesson = course.lessons[lessonId];
+      if (lesson) ordered.push(lesson);
+    });
+  });
+  return ordered;
+}
+
+/** The authoritative lesson, answer keys intact. Server-side use only. */
+function getLessonAuthoritative_(gradeKey, lessonId) {
+  const course = getCourse_(gradeKey);
+  const lesson = course.lessons[lessonId];
+  if (!lesson) throw new Error('UNKNOWN_LESSON');
+  return lesson;
+}
+
+/**
+ * The student-safe copy of a lesson.
+ *
+ * This is the only version that ever crosses to a browser. Without the stripping
+ * below, a student could open devtools and read every answer straight out of the
+ * page payload, which would make the marks meaningless.
+ */
+function getLessonForStudent_(gradeKey, lessonId) {
+  const lesson = getLessonAuthoritative_(gradeKey, lessonId);
+  return stripAnswerKey_(lesson);
+}
+
+/** Deep-copies a lesson, removing every field that reveals or hints at an answer. */
+function stripAnswerKey_(lesson) {
+  const copy = JSON.parse(JSON.stringify(lesson));
+
+  if (copy.worksheet && copy.worksheet.questions) {
+    copy.worksheet.questions = copy.worksheet.questions.map(function (q) {
+      const safe = {
+        id: q.id,
+        type: q.type,
+        prompt: q.prompt,
+        marks: q.marks,
+        standards: q.standards || [],
+        hint: q.hint || ''
+      };
+
+      // Presentation data the student legitimately needs in order to answer.
+      if (q.options) {
+        safe.options = q.options.map(function (o) { return { id: o.id, text: o.text }; });
+      }
+      if (q.left)  safe.left  = q.left.map(function (o) { return { id: o.id, text: o.text }; });
+      if (q.right) safe.right = q.right.map(function (o) { return { id: o.id, text: o.text }; });
+      if (q.items) safe.items = shuffle_(q.items.map(function (o) {
+        return { id: o.id, text: o.text };
+      }));
+      if (q.blanks)      safe.blanks = q.blanks;
+      if (q.placeholder) safe.placeholder = q.placeholder;
+      if (q.maxLength)   safe.maxLength = q.maxLength;
+
+      return safe;
+    });
+  }
+  return copy;
+}
+
+/**
+ * Fisher-Yates. Ordering questions ship shuffled, otherwise the items arrive in
+ * the correct sequence and the question marks itself.
+ */
+function shuffle_(array) {
+  const out = array.slice();
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = out[i]; out[i] = out[j]; out[j] = tmp;
+  }
+  return out;
+}
+
+/** Flat map of standard code -> standard definition, for labelling attainment. */
+function getStandardsIndex_(gradeKey) {
+  const course = getCourse_(gradeKey);
+  const index = {};
+  (course.standards || []).forEach(function (s) { index[s.code] = s; });
+  return index;
+}
+
+/** Total marks available across a whole grade — the denominator for overall progress. */
+function getTotalMarksForGrade_(gradeKey) {
+  return listLessons_(gradeKey).reduce(function (sum, lesson) {
+    const questions = (lesson.worksheet && lesson.worksheet.questions) || [];
+    return sum + questions.reduce(function (s, q) { return s + (Number(q.marks) || 0); }, 0);
+  }, 0);
+}
+
+
+/**
+ * Attainment against the AI Standards.
+ *
+ * Every worksheet question is tagged with the standard(s) it evidences. A
+ * student's attainment against a standard is the marks they earned on questions
+ * carrying that tag, over the marks available on those questions — counting only
+ * their best attempt at each lesson.
+ *
+ * Marks a question carries are credited in full to each standard it is tagged
+ * with rather than split between them. A question tagged with two standards is
+ * evidence for both; halving it would understate attainment in each.
+ *
+ * That full crediting is correct per standard but must NOT be summed to produce
+ * an overall figure — a question tagged twice would count twice, inflating the
+ * total. The overall score is therefore computed separately, straight from the
+ * marked results, counting every question exactly once. Without this split a
+ * student who scored 46% on every paper reports as 52% overall, which reads as
+ * a pass.
+ */
+
+/**
+ * Builds the attainment picture for one student.
+ *
+ * @param {string} gradeKey
+ * @param {Array}  submissions Best-attempt submission rows for this student.
+ * @return {{byStandard: Array, overall: Object}}
+ */
+function computeAttainment_(gradeKey, submissions) {
+  const standardsIndex = getStandardsIndex_(gradeKey);
+  const totals = {}; // code -> { awarded, available, questions }
+
+  // Counted once per question, regardless of how many standards it is tagged with.
+  let rawAwarded = 0;
+  let rawAvailable = 0;
+
+  submissions.forEach(function (submission) {
+    let results;
+    try {
+      results = JSON.parse(submission.resultsJson || '[]');
+    } catch (err) {
+      console.warn('Unparseable resultsJson on submission for ' + submission.lessonId);
+      return;
+    }
+
+    results.forEach(function (result) {
+      rawAwarded   += Number(result.marksAwarded)   || 0;
+      rawAvailable += Number(result.marksAvailable) || 0;
+
+      (result.standards || []).forEach(function (code) {
+        if (!totals[code]) totals[code] = { awarded: 0, available: 0, questions: 0 };
+        totals[code].awarded   += Number(result.marksAwarded)   || 0;
+        totals[code].available += Number(result.marksAvailable) || 0;
+        totals[code].questions += 1;
+      });
+    });
+  });
+
+  const byStandard = Object.keys(totals).map(function (code) {
+    const t = totals[code];
+    const percent = t.available > 0 ? (t.awarded / t.available) * 100 : 0;
+    const definition = standardsIndex[code] || {};
+    const band = bandFor_(percent);
+
+    return {
+      code: code,
+      strand: definition.strand || '',
+      descriptor: definition.descriptor || '',
+      marksAwarded: round2_(t.awarded),
+      marksAvailable: round2_(t.available),
+      questionsAttempted: t.questions,
+      percent: round2_(percent),
+      band: band.key,
+      bandLabel: band.label,
+      bandColor: band.color
+    };
+  });
+
+  byStandard.sort(function (a, b) { return a.code.localeCompare(b.code); });
+
+  const overallPercent = rawAvailable > 0 ? (rawAwarded / rawAvailable) * 100 : 0;
+  const overallBand = bandFor_(overallPercent);
+
+  return {
+    byStandard: byStandard,
+    overall: {
+      marksAwarded: round2_(rawAwarded),
+      marksAvailable: round2_(rawAvailable),
+      percent: round2_(overallPercent),
+      band: overallBand.key,
+      bandLabel: overallBand.label,
+      bandColor: overallBand.color,
+      standardsEvidenced: byStandard.length,
+      standardsTotal: Object.keys(standardsIndex).length
+    }
+  };
+}
+
+/** First band whose threshold the percentage meets. Bands are ordered high to low. */
+function bandFor_(percent) {
+  const bands = CONFIG.ATTAINMENT_BANDS;
+  for (let i = 0; i < bands.length; i++) {
+    if (percent >= bands[i].min) return bands[i];
+  }
+  return bands[bands.length - 1];
+}
+
+/**
+ * Class-level rollup: one row per standard with the cohort average and a
+ * distribution across bands, so a teacher can see at a glance which standards
+ * the class as a whole is weak on rather than reading 30 individual reports.
+ */
+function computeClassAttainment_(gradeKey, studentAttainments) {
+  const standardsIndex = getStandardsIndex_(gradeKey);
+  const agg = {}; // code -> { awarded, available, bands: {} , students: 0 }
+
+  studentAttainments.forEach(function (student) {
+    (student.attainment.byStandard || []).forEach(function (row) {
+      if (!agg[row.code]) {
+        agg[row.code] = { awarded: 0, available: 0, students: 0, bands: {} };
+      }
+      const a = agg[row.code];
+      a.awarded   += row.marksAwarded;
+      a.available += row.marksAvailable;
+      a.students  += 1;
+      a.bands[row.band] = (a.bands[row.band] || 0) + 1;
+    });
+  });
+
+  return Object.keys(agg).map(function (code) {
+    const a = agg[code];
+    const percent = a.available > 0 ? (a.awarded / a.available) * 100 : 0;
+    const band = bandFor_(percent);
+    const definition = standardsIndex[code] || {};
+
+    return {
+      code: code,
+      strand: definition.strand || '',
+      descriptor: definition.descriptor || '',
+      studentsAssessed: a.students,
+      averagePercent: round2_(percent),
+      band: band.key,
+      bandLabel: band.label,
+      bandColor: band.color,
+      distribution: CONFIG.ATTAINMENT_BANDS.map(function (b) {
+        return { band: b.key, label: b.label, color: b.color, count: a.bands[b.key] || 0 };
+      })
+    };
+  }).sort(function (x, y) { return x.averagePercent - y.averagePercent; }); // weakest first
+}
+
+  </script>
+
+<script>
+/**
+ * In-memory stand-in for Api.gs. Mirrors the same envelopes and shapes, backed
+ * by the real marking and attainment code inlined above.
+ */
+(function () {
+  var DEMO_CLASSES = ['6A', '6B'];
+  var DEMO_STUDENTS = [
+    { email: 'amina.hassan@aisa.sch.ae',  displayName: 'Amina Hassan',  className: '6A', skill: 0.95 },
+    { email: 'omar.khalid@aisa.sch.ae',   displayName: 'Omar Khalid',   className: '6A', skill: 0.78 },
+    { email: 'layla.ahmed@aisa.sch.ae',   displayName: 'Layla Ahmed',   className: '6A', skill: 0.62 },
+    { email: 'yusuf.rahman@aisa.sch.ae',  displayName: 'Yusuf Rahman',  className: '6A', skill: 0.44 },
+    { email: 'sara.mansoori@aisa.sch.ae', displayName: 'Sara Al Mansoori', className: '6B', skill: 0.88 },
+    { email: 'khalid.saeed@aisa.sch.ae',  displayName: 'Khalid Saeed',  className: '6B', skill: 0.71 },
+    { email: 'noor.jassim@aisa.sch.ae',   displayName: 'Noor Al Jassim', className: '6B', skill: 0.55 },
+    { email: 'hamad.zaabi@aisa.sch.ae',   displayName: 'Hamad Al Zaabi', className: '6B', skill: 0.30 }
+  ];
+
+  var GRADE = 'grade6';
+  var submissions = [];   // { email, lessonId, attempt, percent, marksAwarded, marksAvailable, resultsJson, submittedAt }
+  var auditLog = [];
+
+  function lessonsInOrder() { return listLessons_(GRADE); }
+
+  /** Deterministic pseudo-random so the demo looks the same on every reload. */
+  function seeded(seed) {
+    var x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  }
+
+  /**
+   * Generates a plausible attempt for a demo student by answering each question
+   * correctly with probability = their skill, then marking it for real.
+   */
+  function simulate(student, lesson, seedBase) {
+    var answers = {};
+    (lesson.worksheet.questions || []).forEach(function (q, qi) {
+      var roll = seeded(seedBase + qi * 7.13);
+      if (roll > student.skill) return;  // leaves it blank or wrong
+
+      switch (q.type) {
+        case 'mcq': case 'truefalse': answers[q.id] = q.answer; break;
+        case 'multi': answers[q.id] = q.answer.slice(); break;
+        case 'matching': answers[q.id] = JSON.parse(JSON.stringify(q.answer)); break;
+        case 'ordering': answers[q.id] = q.answer.slice(); break;
+        case 'numeric': answers[q.id] = q.answer; break;
+        case 'fillBlank':
+          answers[q.id] = q.answer.map(function (a) { return Array.isArray(a) ? a[0] : a; });
+          break;
+        case 'shortText': answers[q.id] = q.modelAnswer; break;
+      }
+    });
+    return markWorksheet_(lesson.worksheet, answers);
+  }
+
+  // Seed the cohort so the teacher view has something real to show.
+  DEMO_STUDENTS.forEach(function (student, si) {
+    lessonsInOrder().forEach(function (lesson, li) {
+      // Weaker students have not reached the later lessons yet.
+      if (seeded(si * 3.7 + li * 11.9) > student.skill + 0.25) return;
+      var marked = simulate(student, lesson, si * 100 + li * 17);
+      submissions.push({
+        email: student.email, lessonId: lesson.id, attempt: 1,
+        percent: marked.percent, marksAwarded: marked.marksAwarded,
+        marksAvailable: marked.marksAvailable,
+        resultsJson: JSON.stringify(marked.results),
+        submittedAt: new Date(Date.now() - (si + li) * 86400000 * 1.5)
+      });
+    });
+  });
+
+  function mine(email) {
+    return submissions.filter(function (s) { return s.email === email; });
+  }
+  function bestByLesson(rows) {
+    var best = {};
+    rows.forEach(function (r) {
+      if (!best[r.lessonId] || r.percent > best[r.lessonId].percent) best[r.lessonId] = r;
+    });
+    return best;
+  }
+  function values(o) { return Object.keys(o).map(function (k) { return o[k]; }); }
+  function totalMarks(lesson) {
+    return ((lesson.worksheet && lesson.worksheet.questions) || [])
+      .reduce(function (s, q) { return s + (q.marks || 0); }, 0);
+  }
+
+  var API = {
+    api_getBootstrap: function () {
+      var user = window.CURRENT_USER;
+      var best = bestByLesson(mine(user.email));
+      return {
+        user: user,
+        app: { name: 'StudyTwin', school: 'American International School in Abu Dhabi',
+               domain: 'aisa.sch.ae' },
+        course: { key: GRADE, title: CURRICULUM[GRADE].meta.title, grade: 6 },
+        units: CURRICULUM[GRADE].units,
+        lessons: lessonsInOrder().map(function (lesson) {
+          var s = best[lesson.id];
+          return {
+            id: lesson.id, number: lesson.number, type: lesson.type, title: lesson.title,
+            summary: lesson.summary || '', duration: lesson.duration || '',
+            standards: lesson.standards || [], marksAvailable: totalMarks(lesson),
+            attempts: mine(user.email).filter(function (r) { return r.lessonId === lesson.id; }).length,
+            maxAttempts: CONFIG.MAX_ATTEMPTS,
+            status: s ? (s.percent >= CONFIG.PASS_PERCENT ? 'complete' : 'attempted') : 'not-started',
+            percent: s ? s.percent : null,
+            marksAwarded: s ? s.marksAwarded : null
+          };
+        }),
+        bands: CONFIG.ATTAINMENT_BANDS,
+        attainment: computeAttainment_(GRADE, values(best))
+      };
+    },
+
+    api_getLesson: function (lessonId) {
+      var user = window.CURRENT_USER;
+      var attempts = mine(user.email).filter(function (r) { return r.lessonId === lessonId; }).length;
+      var best = bestByLesson(mine(user.email))[lessonId];
+      return {
+        lesson: getLessonForStudent_(GRADE, lessonId),
+        attempts: attempts,
+        maxAttempts: CONFIG.MAX_ATTEMPTS,
+        canAttempt: attempts < CONFIG.MAX_ATTEMPTS,
+        best: best ? {
+          percent: best.percent, marksAwarded: best.marksAwarded,
+          marksAvailable: best.marksAvailable, submittedAt: best.submittedAt,
+          results: JSON.parse(best.resultsJson), answers: {}
+        } : null
+      };
+    },
+
+    api_submitWorksheet: function (lessonId, answers) {
+      var user = window.CURRENT_USER;
+      var lesson = getLessonAuthoritative_(GRADE, lessonId);
+      var attempts = mine(user.email).filter(function (r) { return r.lessonId === lessonId; }).length;
+      var marked = markWorksheet_(lesson.worksheet, answers || {});
+
+      submissions.push({
+        email: user.email, lessonId: lessonId, attempt: attempts + 1,
+        percent: marked.percent, marksAwarded: marked.marksAwarded,
+        marksAvailable: marked.marksAvailable,
+        resultsJson: JSON.stringify(marked.results), submittedAt: new Date()
+      });
+      auditLog.push({ timestamp: new Date(), actor: user.email, action: 'SUBMIT',
+                      detail: lessonId + ' scored ' + marked.percent + '%' });
+
+      return {
+        percent: marked.percent, marksAwarded: marked.marksAwarded,
+        marksAvailable: marked.marksAvailable,
+        passed: marked.percent >= CONFIG.PASS_PERCENT,
+        results: marked.results, attempt: attempts + 1,
+        attemptsRemaining: CONFIG.MAX_ATTEMPTS - (attempts + 1)
+      };
+    },
+
+    api_getMyResults: function () {
+      var user = window.CURRENT_USER;
+      var best = bestByLesson(mine(user.email));
+      return {
+        attainment: computeAttainment_(GRADE, values(best)),
+        lessons: lessonsInOrder().map(function (lesson) {
+          var s = best[lesson.id];
+          return {
+            id: lesson.id, number: lesson.number, title: lesson.title, type: lesson.type,
+            percent: s ? s.percent : null, marksAwarded: s ? s.marksAwarded : null,
+            marksAvailable: totalMarks(lesson), submittedAt: s ? s.submittedAt : null
+          };
+        })
+      };
+    },
+
+    api_getClassOverview: function (className) {
+      var lessons = lessonsInOrder();
+      var roster = DEMO_STUDENTS.filter(function (s) {
+        return !className || s.className === className;
+      });
+      var students = roster.map(function (entry) {
+        var best = bestByLesson(mine(entry.email));
+        var attainment = computeAttainment_(GRADE, values(best));
+        var completed = lessons.filter(function (l) {
+          return best[l.id] && best[l.id].percent >= CONFIG.PASS_PERCENT;
+        }).length;
+        var dates = mine(entry.email).map(function (r) { return r.submittedAt; }).sort();
+        return {
+          email: entry.email, displayName: entry.displayName, className: entry.className,
+          lessonsCompleted: completed, lessonsTotal: lessons.length,
+          percentComplete: lessons.length ? Math.round((completed / lessons.length) * 100) : 0,
+          overallPercent: attainment.overall.percent,
+          band: attainment.overall.band, bandLabel: attainment.overall.bandLabel,
+          bandColor: attainment.overall.bandColor,
+          lastActive: dates.length ? dates[dates.length - 1] : null,
+          attainment: attainment
+        };
+      });
+      return {
+        students: students,
+        classAttainment: computeClassAttainment_(GRADE, students),
+        lessons: lessons.map(function (l) {
+          return { id: l.id, number: l.number, title: l.title, type: l.type };
+        }),
+        classes: DEMO_CLASSES,
+        bands: CONFIG.ATTAINMENT_BANDS
+      };
+    },
+
+    api_getStudentDetail: function (email) {
+      var entry = DEMO_STUDENTS.filter(function (s) { return s.email === email; })[0] ||
+                  { email: email, displayName: email, className: '' };
+      var rows = mine(email);
+      var best = bestByLesson(rows);
+      return {
+        student: { email: entry.email, displayName: entry.displayName, className: entry.className },
+        attainment: computeAttainment_(GRADE, values(best)),
+        lessons: lessonsInOrder().map(function (lesson) {
+          var s = best[lesson.id];
+          return {
+            id: lesson.id, number: lesson.number, title: lesson.title, type: lesson.type,
+            marksAvailable: totalMarks(lesson),
+            percent: s ? s.percent : null, marksAwarded: s ? s.marksAwarded : null,
+            submittedAt: s ? s.submittedAt : null,
+            attempts: rows.filter(function (r) { return r.lessonId === lesson.id; }).length,
+            results: s ? JSON.parse(s.resultsJson) : []
+          };
+        })
+      };
+    },
+
+    api_getAdminData: function () {
+      return {
+        roster: DEMO_STUDENTS.map(function (s) {
+          return { email: s.email, displayName: s.displayName, grade: '6',
+                   className: s.className, active: true };
+        }),
+        staff: [
+          { email: 'b.abaki@aisa.sch.ae', role: 'admin', addedBy: 'deployment' },
+          { email: 'f.mansour@aisa.sch.ae', role: 'teacher', addedBy: 'b.abaki@aisa.sch.ae' }
+        ],
+        spreadsheetUrl: '#preview-no-spreadsheet',
+        audit: auditLog.slice().reverse()
+      };
+    },
+
+    api_importRoster: function (text) {
+      var lines = String(text || '').split(/\r?\n/).filter(function (l) { return l.trim(); });
+      var rejected = lines.filter(function (l) { return l.indexOf('@aisa.sch.ae') === -1; })
+        .map(function (l) { return l + '  — not an @aisa.sch.ae address'; });
+      return { added: lines.length - rejected.length, updated: 0, rejected: rejected };
+    },
+
+    api_setStaffRole: function (email, role) { return { email: email, role: role }; },
+
+    api_exportCsv: function () {
+      var lessons = lessonsInOrder();
+      var header = ['Email', 'Name', 'Class']
+        .concat(lessons.map(function (l) { return 'L' + l.number + ' %'; }))
+        .concat(['Overall %', 'Band']);
+      var rows = DEMO_STUDENTS.map(function (s) {
+        var best = bestByLesson(mine(s.email));
+        var a = computeAttainment_(GRADE, values(best));
+        return [s.email, s.displayName, s.className]
+          .concat(lessons.map(function (l) { return best[l.id] ? best[l.id].percent : ''; }))
+          .concat([a.overall.percent, a.overall.bandLabel]);
+      });
+      return { csv: [header].concat(rows).map(function (r) { return r.join(','); }).join('\n') };
+    }
+  };
+
+  /** Stub of google.script.run, including the success/failure handler chaining. */
+  window.google = { script: { run: {} } };
+  function makeRunner(onSuccess, onFailure) {
+    var runner = {
+      withSuccessHandler: function (fn) { return makeRunner(fn, onFailure); },
+      withFailureHandler: function (fn) { return makeRunner(onSuccess, fn); }
+    };
+    Object.keys(API).forEach(function (name) {
+      runner[name] = function () {
+        var args = arguments;
+        setTimeout(function () {      // mimic the network hop
+          try {
+            onSuccess({ ok: true, data: API[name].apply(null, args) });
+          } catch (err) {
+            console.error(err);
+            if (onFailure) onFailure(err);
+          }
+        }, 140);
+      };
+    });
+    return runner;
+  }
+  window.google.script.run = makeRunner(function () {}, function () {});
+})();
+</script>
+<script>
+/**
+ * StudyTwin single-page app.
+ *
+ * Apps Script serves one HTML document, so navigation happens here rather than
+ * over the network — important because each Apps Script page load costs a
+ * cold start. Data comes from Api.gs via google.script.run.
+ */
+(function () {
+  'use strict';
+
+  var state = {
+    user: window.BOOTSTRAP_USER || null,
+    bootstrap: null,
+    view: 'home',
+    params: {},
+    answers: {},     // current worksheet answers, keyed by question id
+    lastResults: null
+  };
+
+  var view = document.getElementById('view');
+  var nav = document.getElementById('nav');
+  var userChip = document.getElementById('userChip');
+
+  /* ---------------------------------------------------------------------
+   * Server bridge
+   * ------------------------------------------------------------------- */
+
+  /** Promise wrapper around google.script.run, unwrapping the Api.gs envelope. */
+  function call(name) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return new Promise(function (resolve, reject) {
+      var runner = google.script.run
+        .withSuccessHandler(function (res) {
+          if (res && res.ok) resolve(res.data);
+          else reject(new Error((res && res.message) || 'Request failed.'));
+        })
+        .withFailureHandler(function (err) {
+          reject(new Error((err && err.message) || 'Could not reach the server.'));
+        });
+      runner[name].apply(runner, args);
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Helpers
+   * ------------------------------------------------------------------- */
+
+  /** Escapes text before it goes anywhere near innerHTML. */
+  function esc(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  /**
+   * Renders the small subset of inline markup lesson authors may use.
+   * Everything is escaped first, so only these exact patterns survive —
+   * lesson JSON can style text without being able to inject scripts.
+   */
+  function richText(value) {
+    return esc(value)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[\[(.+?)\]\]/g, '<span class="keyword">$1</span>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+
+  function initials(name) {
+    return String(name || '?').split(/\s+/).slice(0, 2)
+      .map(function (p) { return p.charAt(0).toUpperCase(); }).join('');
+  }
+
+  function formatDate(value) {
+    if (!value) return '—';
+    var d = new Date(value);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function toast(message, isError) {
+    var el = document.createElement('div');
+    el.className = 'toast' + (isError ? ' error' : '');
+    el.textContent = message;
+    document.body.appendChild(el);
+    setTimeout(function () { el.remove(); }, isError ? 6000 : 3000);
+  }
+
+  function showSpinner() {
+    view.innerHTML = '<div class="spinner" role="status" aria-label="Loading"></div>';
+  }
+
+  function showError(err) {
+    view.innerHTML = '<div class="empty"><h3>Something went wrong</h3>' +
+      '<p class="muted">' + esc(err.message) + '</p>' +
+      '<p style="margin-top:1rem"><button class="btn btn--ghost" id="retry">Try again</button></p></div>';
+    document.getElementById('retry').onclick = function () { route(state.view, state.params); };
+  }
+
+  /** Percentage ring used in the progress hero. */
+  function ring(percent) {
+    var r = 44, c = 2 * Math.PI * r;
+    var offset = c * (1 - Math.max(0, Math.min(100, percent)) / 100);
+    return '<div class="ring"><svg width="104" height="104">' +
+      '<circle cx="52" cy="52" r="' + r + '" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="9"/>' +
+      '<circle cx="52" cy="52" r="' + r + '" fill="none" stroke="#D8B664" stroke-width="9" ' +
+      'stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + offset + '"/>' +
+      '</svg><div class="ring-label">' + Math.round(percent) + '%</div></div>';
+  }
+
+  function bandChip(label, color) {
+    return '<span class="band-chip" style="background:' + esc(color || '#555') + '">' +
+      esc(label) + '</span>';
+  }
+
+  /* ---------------------------------------------------------------------
+   * Chrome: nav + user chip
+   * ------------------------------------------------------------------- */
+
+  function renderChrome() {
+    var user = state.user || {};
+    userChip.innerHTML =
+      '<div class="avatar">' + esc(initials(user.displayName)) + '</div>' +
+      '<div><div class="name">' + esc(user.displayName) + '</div>' +
+      '<div class="role">' + esc(user.role) + '</div></div>';
+
+    var items = [
+      { key: 'home', label: 'My Learning' },
+      { key: 'results', label: 'My Progress' }
+    ];
+    if (user.role === 'teacher' || user.role === 'admin') {
+      items.push({ key: 'teacher', label: 'Class Tracking' });
+    }
+    if (user.role === 'admin') {
+      items.push({ key: 'admin', label: 'Admin' });
+    }
+
+    nav.innerHTML = items.map(function (item) {
+      var active = state.view === item.key ||
+        (item.key === 'teacher' && state.view === 'student-detail') ||
+        (item.key === 'home' && state.view === 'lesson');
+      return '<button data-nav="' + item.key + '"' + (active ? ' class="active"' : '') + '>' +
+        esc(item.label) + '</button>';
+    }).join('');
+
+    Array.prototype.forEach.call(nav.querySelectorAll('[data-nav]'), function (btn) {
+      btn.onclick = function () { route(btn.getAttribute('data-nav'), {}); };
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Router
+   * ------------------------------------------------------------------- */
+
+  function route(name, params) {
+    state.view = name;
+    state.params = params || {};
+    renderChrome();
+    showSpinner();
+    window.scrollTo(0, 0);
+
+    var views = {
+      'home': viewHome,
+      'lesson': viewLesson,
+      'results': viewResults,
+      'teacher': viewTeacher,
+      'student-detail': viewStudentDetail,
+      'admin': viewAdmin
+    };
+    (views[name] || viewHome)().catch(showError);
+  }
+
+  /* ---------------------------------------------------------------------
+   * Student: course home
+   * ------------------------------------------------------------------- */
+
+  function viewHome() {
+    return call('api_getBootstrap').then(function (data) {
+      state.bootstrap = data;
+      state.user = data.user;
+      renderChrome();
+
+      var lessons = data.lessons;
+      var completed = lessons.filter(function (l) { return l.status === 'complete'; }).length;
+      var pct = lessons.length ? (completed / lessons.length) * 100 : 0;
+      var byId = {};
+      lessons.forEach(function (l) { byId[l.id] = l; });
+
+      var html =
+        '<section class="hero">' +
+          ring(pct) +
+          '<div class="hero-text">' +
+            '<div class="eyebrow">' + esc(data.course.title) + '</div>' +
+            '<h1>Hello, ' + esc((data.user.displayName || '').split(' ')[0]) + '</h1>' +
+            '<p style="color:rgba(255,255,255,.8)">' +
+              (completed === 0
+                ? 'Start with Lesson 1 below. Work through each lesson, then complete its worksheet to record your marks.'
+                : 'You have completed ' + completed + ' of ' + lessons.length + ' lessons. Keep going.') +
+            '</p>' +
+          '</div>' +
+          '<div class="hero-stats">' +
+            '<div class="stat"><div class="value">' + completed + '/' + lessons.length + '</div>' +
+              '<div class="label">Lessons done</div></div>' +
+            '<div class="stat"><div class="value">' + Math.round(data.attainment.overall.percent) + '%</div>' +
+              '<div class="label">Average mark</div></div>' +
+          '</div>' +
+        '</section>';
+
+      html += data.units.map(function (unit) {
+        var cards = (unit.lessons || []).map(function (id) {
+          return byId[id] ? lessonCard(byId[id]) : '';
+        }).join('');
+        return '<section class="unit">' +
+          '<div class="unit-head"><div class="eyebrow">Unit</div><h2>' + esc(unit.title) + '</h2>' +
+          (unit.summary ? '<p class="muted small">' + esc(unit.summary) + '</p>' : '') + '</div>' +
+          '<div class="lesson-grid">' + cards + '</div></section>';
+      }).join('');
+
+      view.innerHTML = html;
+      bindLessonCards();
+    });
+  }
+
+  function lessonCard(lesson) {
+    var statusLabels = { 'complete': 'Complete', 'attempted': 'Attempted', 'not-started': 'Not started' };
+    var isLab = lesson.type === 'lab';
+    return '<button class="lesson-card' + (isLab ? ' is-lab' : '') + '" data-lesson="' + esc(lesson.id) + '">' +
+      '<div class="top">' +
+        '<div class="lesson-num">' + esc(lesson.number) + '</div>' +
+        '<span class="pill ' + (isLab ? 'pill--lab' : 'pill--lesson') + '">' +
+          (isLab ? 'Lab' : 'Lesson') + '</span>' +
+        (lesson.duration ? '<span class="muted small">' + esc(lesson.duration) + '</span>' : '') +
+      '</div>' +
+      '<h3>' + esc(lesson.title) + '</h3>' +
+      '<p>' + esc(lesson.summary) + '</p>' +
+      '<div class="lesson-meta">' +
+        '<span class="pill pill--' + esc(lesson.status) + '">' + esc(statusLabels[lesson.status]) + '</span>' +
+        (lesson.percent !== null
+          ? '<span class="muted small">' + Math.round(lesson.percent) + '% · ' +
+            esc(lesson.marksAwarded) + '/' + esc(lesson.marksAvailable) + ' marks</span>'
+          : '<span class="muted small">' + esc(lesson.marksAvailable) + ' marks available</span>') +
+      '</div></button>';
+  }
+
+  function bindLessonCards() {
+    Array.prototype.forEach.call(view.querySelectorAll('[data-lesson]'), function (el) {
+      el.onclick = function () { route('lesson', { id: el.getAttribute('data-lesson') }); };
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Student: a single lesson
+   * ------------------------------------------------------------------- */
+
+  function viewLesson() {
+    return call('api_getLesson', state.params.id).then(function (data) {
+      state.answers = {};
+      state.lastResults = null;
+      var lesson = data.lesson;
+      var isLab = lesson.type === 'lab';
+
+      var html = '<button class="breadcrumb" id="back">← Back to My Learning</button>' +
+        '<div class="lesson-head">' +
+          '<div class="eyebrow">' + (isLab ? 'Lab' : 'Lesson') + ' ' + esc(lesson.number) +
+            (lesson.duration ? ' · ' + esc(lesson.duration) : '') + '</div>' +
+          '<h1>' + esc(lesson.title) + '</h1>' +
+          (lesson.summary ? '<p class="muted">' + esc(lesson.summary) + '</p>' : '') +
+        '</div>';
+
+      if (lesson.objectives && lesson.objectives.length) {
+        html += '<div class="callout"><div class="eyebrow">Learning objectives</div><ul>' +
+          lesson.objectives.map(function (o) { return '<li>' + richText(o) + '</li>'; }).join('') +
+          '</ul></div>';
+      }
+
+      html += (lesson.sections || []).map(renderSection).join('');
+
+      if (lesson.worksheet && lesson.worksheet.questions && lesson.worksheet.questions.length) {
+        html += renderWorksheet(lesson.worksheet, data);
+      }
+
+      view.innerHTML = html;
+      document.getElementById('back').onclick = function () { route('home', {}); };
+      bindWorksheet(data);
+    });
+  }
+
+  /** Lesson body blocks. Authors pick a type per block in the lesson JSON. */
+  function renderSection(section) {
+    switch (section.type) {
+      case 'text':
+        return '<section class="section">' +
+          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
+          '</section>';
+
+      case 'list':
+        return '<section class="section">' +
+          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+          '<ul>' + (section.items || []).map(function (i) {
+            return '<li>' + richText(i) + '</li>';
+          }).join('') + '</ul></section>';
+
+      case 'steps':
+        return '<section class="section">' +
+          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+          '<ol class="steps">' + (section.items || []).map(function (i) {
+            return '<li>' + richText(i) + '</li>';
+          }).join('') + '</ol></section>';
+
+      case 'callout':
+        return '<div class="callout">' +
+          '<div class="eyebrow">' + esc(section.label || 'Remember') + '</div>' +
+          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
+          '</div>';
+
+      case 'vocabulary':
+        return '<section class="section"><h3>' + esc(section.heading || 'Key vocabulary') + '</h3>' +
+          '<div class="grid-2">' + (section.terms || []).map(function (t) {
+            return '<div class="card card--tint"><h4 style="font-size:.95rem;margin-bottom:.25rem">' +
+              esc(t.term) + '</h4><p class="small">' + richText(t.definition) + '</p></div>';
+          }).join('') + '</div></section>';
+
+      case 'activity':
+        return '<div class="card card--accent" style="margin-bottom:1.25rem">' +
+          '<div class="eyebrow">' + esc(section.label || 'Activity') + '</div>' +
+          '<h3 style="margin-bottom:.5rem">' + esc(section.heading || '') + '</h3>' +
+          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
+          (section.items && section.items.length
+            ? '<ol class="steps" style="margin-top:.6rem">' + section.items.map(function (i) {
+                return '<li>' + richText(i) + '</li>';
+              }).join('') + '</ol>'
+            : '') +
+          '</div>';
+
+      default:
+        return '';
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+   * Worksheet rendering
+   * ------------------------------------------------------------------- */
+
+  function renderWorksheet(worksheet, data) {
+    var total = worksheet.questions.reduce(function (s, q) { return s + (q.marks || 0); }, 0);
+    var locked = !data.canAttempt;
+
+    var head = '<section class="section" style="margin-top:2.5rem;padding-top:1.5rem;' +
+      'border-top:2px solid var(--aisa-purple-tint)">' +
+      '<div class="eyebrow">Worksheet</div>' +
+      '<h2>' + esc(worksheet.title || 'Check your understanding') + '</h2>' +
+      '<p class="muted small">' + total + ' marks · attempt ' +
+        Math.min(data.attempts + 1, data.maxAttempts) + ' of ' + data.maxAttempts +
+        ' · your best attempt is the one that counts</p>';
+
+    if (locked) {
+      head += '<div class="callout" style="margin-top:1rem"><div class="eyebrow">Attempts used</div>' +
+        '<p>You have used all ' + data.maxAttempts + ' attempts. Your best score was ' +
+        Math.round(data.best ? data.best.percent : 0) + '%. Speak to your teacher if you need another try.</p></div>';
+    }
+    head += '</section>';
+
+    var questions = '<form id="worksheet">' +
+      worksheet.questions.map(function (q, i) {
+        return renderQuestion(q, i + 1, locked);
+      }).join('') + '</form>';
+
+    var actions = locked ? '' :
+      '<div class="row between" style="margin-top:1.5rem">' +
+        '<span class="muted small" id="answeredCount"></span>' +
+        '<button type="button" class="btn btn--primary" id="submitBtn">Submit worksheet</button>' +
+      '</div>';
+
+    return head + questions + actions + '<div id="resultsPanel"></div>';
+  }
+
+  function renderQuestion(q, number, locked) {
+    var body = '';
+    var dis = locked ? ' disabled' : '';
+
+    switch (q.type) {
+      case 'mcq':
+      case 'truefalse': {
+        var options = q.type === 'truefalse'
+          ? [{ id: 'true', text: 'True' }, { id: 'false', text: 'False' }]
+          : (q.options || []);
+        body = options.map(function (o) {
+          return '<label class="option"><input type="radio" name="' + esc(q.id) + '" value="' +
+            esc(o.id) + '"' + dis + '><span>' + richText(o.text) + '</span></label>';
+        }).join('');
+        break;
+      }
+      case 'multi':
+        body = '<p class="muted small" style="margin-bottom:.5rem">Select all that apply.</p>' +
+          (q.options || []).map(function (o) {
+            return '<label class="option"><input type="checkbox" name="' + esc(q.id) + '" value="' +
+              esc(o.id) + '"' + dis + '><span>' + richText(o.text) + '</span></label>';
+          }).join('');
+        break;
+
+      case 'matching':
+        body = (q.left || []).map(function (l) {
+          return '<div class="match-row"><div class="left">' + richText(l.text) + '</div>' +
+            '<select data-match="' + esc(q.id) + '" data-left="' + esc(l.id) + '"' + dis + '>' +
+            '<option value="">Choose…</option>' +
+            (q.right || []).map(function (r) {
+              return '<option value="' + esc(r.id) + '">' + esc(r.text) + '</option>';
+            }).join('') + '</select></div>';
+        }).join('');
+        break;
+
+      case 'ordering':
+        body = '<p class="muted small" style="margin-bottom:.5rem">Use the arrows to put these in order.</p>' +
+          '<div data-order="' + esc(q.id) + '">' + (q.items || []).map(function (item, i) {
+            return '<div class="order-item" data-item="' + esc(item.id) + '">' +
+              '<span class="handle">' + (i + 1) + '</span>' +
+              '<span class="text">' + richText(item.text) + '</span>' +
+              '<button type="button" class="order-btn" data-move="up"' + dis + '>↑</button>' +
+              '<button type="button" class="order-btn" data-move="down"' + dis + '>↓</button>' +
+              '</div>';
+          }).join('') + '</div>';
+        break;
+
+      case 'numeric':
+        body = '<input type="number" step="any" data-input="' + esc(q.id) + '" ' +
+          'placeholder="' + esc(q.placeholder || 'Your answer') + '"' + dis + '>';
+        break;
+
+      case 'fillBlank':
+        body = '<div class="blanks">' + (q.blanks || []).map(function (label, i) {
+          return '<input type="text" data-blank="' + esc(q.id) + '" data-index="' + i + '" ' +
+            'placeholder="' + esc(label) + '"' + dis + '>';
+        }).join('') + '</div>';
+        break;
+
+      case 'shortText':
+      default:
+        body = '<textarea data-input="' + esc(q.id) + '" ' +
+          'placeholder="' + esc(q.placeholder || 'Write your answer…') + '"' +
+          (q.maxLength ? ' maxlength="' + esc(q.maxLength) + '"' : '') + dis + '></textarea>';
+        break;
+    }
+
+    return '<div class="question" data-question="' + esc(q.id) + '" data-type="' + esc(q.type) + '">' +
+      '<div class="q-head"><span class="q-num">' + number + '.</span>' +
+      '<span class="q-prompt">' + richText(q.prompt) + '</span>' +
+      '<span class="q-marks">' + esc(q.marks) + ' mark' + (q.marks === 1 ? '' : 's') + '</span></div>' +
+      body +
+      (q.hint ? '<p class="muted small" style="margin-top:.5rem">Hint: ' + richText(q.hint) + '</p>' : '') +
+      '</div>';
+  }
+
+  /* ---------------------------------------------------------------------
+   * Worksheet interaction
+   * ------------------------------------------------------------------- */
+
+  function bindWorksheet(data) {
+    var form = document.getElementById('worksheet');
+    if (!form) return;
+
+    // Highlight the chosen option and keep the answer map current.
+    form.addEventListener('change', function (e) {
+      var input = e.target;
+      var question = input.closest('.question');
+      if (question && (input.type === 'radio' || input.type === 'checkbox')) {
+        Array.prototype.forEach.call(question.querySelectorAll('.option'), function (opt) {
+          var box = opt.querySelector('input');
+          opt.classList.toggle('selected', box && box.checked);
+        });
+      }
+      updateAnsweredCount();
+    });
+    form.addEventListener('input', updateAnsweredCount);
+
+    // Ordering controls.
+    form.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-move]');
+      if (!btn) return;
+      var item = btn.closest('.order-item');
+      var list = item.parentNode;
+      if (btn.getAttribute('data-move') === 'up' && item.previousElementSibling) {
+        list.insertBefore(item, item.previousElementSibling);
+      } else if (btn.getAttribute('data-move') === 'down' && item.nextElementSibling) {
+        list.insertBefore(item.nextElementSibling, item);
+      }
+      renumberOrder(list);
+      updateAnsweredCount();
+    });
+
+    Array.prototype.forEach.call(form.querySelectorAll('[data-order]'), renumberOrder);
+    updateAnsweredCount();
+
+    var submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) submitBtn.onclick = function () { submitWorksheet(data); };
+  }
+
+  function renumberOrder(list) {
+    Array.prototype.forEach.call(list.querySelectorAll('.order-item'), function (item, i, all) {
+      item.querySelector('.handle').textContent = i + 1;
+      item.querySelector('[data-move="up"]').disabled = (i === 0);
+      item.querySelector('[data-move="down"]').disabled = (i === all.length - 1);
+    });
+  }
+
+  /** Reads every question's current answer out of the DOM. */
+  function collectAnswers() {
+    var answers = {};
+    Array.prototype.forEach.call(document.querySelectorAll('.question'), function (el) {
+      var id = el.getAttribute('data-question');
+      var type = el.getAttribute('data-type');
+
+      if (type === 'mcq' || type === 'truefalse') {
+        var picked = el.querySelector('input:checked');
+        if (picked) answers[id] = picked.value;
+
+      } else if (type === 'multi') {
+        var boxes = el.querySelectorAll('input:checked');
+        if (boxes.length) {
+          answers[id] = Array.prototype.map.call(boxes, function (b) { return b.value; });
+        }
+
+      } else if (type === 'matching') {
+        var map = {};
+        var any = false;
+        Array.prototype.forEach.call(el.querySelectorAll('select[data-left]'), function (sel) {
+          if (sel.value) { map[sel.getAttribute('data-left')] = sel.value; any = true; }
+        });
+        if (any) answers[id] = map;
+
+      } else if (type === 'ordering') {
+        answers[id] = Array.prototype.map.call(el.querySelectorAll('.order-item'), function (item) {
+          return item.getAttribute('data-item');
+        });
+
+      } else if (type === 'fillBlank') {
+        var values = Array.prototype.map.call(el.querySelectorAll('[data-blank]'), function (input) {
+          return input.value.trim();
+        });
+        if (values.some(function (v) { return v; })) answers[id] = values;
+
+      } else {
+        var field = el.querySelector('[data-input]');
+        if (field && String(field.value).trim()) answers[id] = String(field.value).trim();
+      }
+    });
+    return answers;
+  }
+
+  function updateAnsweredCount() {
+    var counter = document.getElementById('answeredCount');
+    if (!counter) return;
+    var total = document.querySelectorAll('.question').length;
+    var done = Object.keys(collectAnswers()).length;
+    counter.textContent = done + ' of ' + total + ' answered';
+  }
+
+  function submitWorksheet(data) {
+    var answers = collectAnswers();
+    var total = document.querySelectorAll('.question').length;
+    var unanswered = total - Object.keys(answers).length;
+
+    if (unanswered > 0) {
+      var ok = window.confirm(unanswered + ' question' + (unanswered === 1 ? '' : 's') +
+        ' still blank. Unanswered questions score zero. Submit anyway?');
+      if (!ok) return;
+    }
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Marking…';
+
+    call('api_submitWorksheet', state.params.id, answers)
+      .then(function (result) {
+        state.lastResults = result;
+        showResults(result);
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Submit worksheet';
+        toast(err.message, true);
+      });
+  }
+
+  /** Marks each question in place and shows the score panel. */
+  function showResults(result) {
+    var byId = {};
+    result.results.forEach(function (r) { byId[r.questionId] = r; });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.question'), function (el) {
+      var r = byId[el.getAttribute('data-question')];
+      if (!r) return;
+
+      el.classList.add(r.correct ? 'is-correct' : (r.partial ? 'is-partial' : 'is-wrong'));
+      Array.prototype.forEach.call(el.querySelectorAll('input, textarea, select, button'), function (f) {
+        f.disabled = true;
+      });
+
+      var fb = document.createElement('div');
+      fb.className = 'feedback';
+      fb.innerHTML = '<strong>' + r.marksAwarded + '/' + r.marksAvailable + '</strong> · ' +
+        esc(r.feedback) +
+        (!r.correct && r.modelAnswer
+          ? '<div class="model" style="margin-top:.4rem">Answer: ' + esc(r.modelAnswer) + '</div>'
+          : '');
+      el.appendChild(fb);
+    });
+
+    var actions = document.getElementById('submitBtn');
+    if (actions && actions.parentNode) actions.parentNode.remove();
+
+    var panel = document.getElementById('resultsPanel');
+    panel.innerHTML =
+      '<div class="hero" style="margin-top:1.5rem">' +
+        ring(result.percent) +
+        '<div class="hero-text">' +
+          '<div class="eyebrow">Attempt ' + result.attempt + '</div>' +
+          '<h1 style="font-size:1.5rem">' + (result.passed ? 'Lesson complete' : 'Keep practising') + '</h1>' +
+          '<p style="color:rgba(255,255,255,.8)">You scored <strong>' + result.marksAwarded +
+            ' out of ' + result.marksAvailable + '</strong> marks.' +
+            (result.attemptsRemaining > 0
+              ? ' You have ' + result.attemptsRemaining + ' attempt' +
+                (result.attemptsRemaining === 1 ? '' : 's') + ' left — your best score counts.'
+              : ' This was your final attempt.') +
+          '</p>' +
+          '<div class="row" style="margin-top:1rem">' +
+            '<button class="btn btn--gold" id="backHome">Back to My Learning</button>' +
+            (result.attemptsRemaining > 0
+              ? '<button class="btn btn--ghost" style="background:rgba(255,255,255,.12);' +
+                'color:#fff;border-color:rgba(255,255,255,.3)" id="retry">Try again</button>'
+              : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    document.getElementById('backHome').onclick = function () { route('home', {}); };
+    var retryBtn = document.getElementById('retry');
+    if (retryBtn) retryBtn.onclick = function () { route('lesson', { id: state.params.id }); };
+
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Student: progress and attainment
+   * ------------------------------------------------------------------- */
+
+  function viewResults() {
+    return call('api_getMyResults').then(function (data) {
+      var a = data.attainment;
+
+      var html = '<div class="eyebrow">My progress</div><h1>Attainment in the AI Standards</h1>' +
+        '<p class="muted" style="margin-bottom:1.5rem">Your attainment is worked out from the ' +
+        'worksheet questions linked to each standard, using your best attempt at every lesson.</p>';
+
+      html += '<div class="grid-2" style="margin-bottom:2rem">' +
+        '<div class="card card--tint"><div class="eyebrow">Overall</div>' +
+          '<div style="font-size:2.4rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
+          Math.round(a.overall.percent) + '%</div>' +
+          '<div style="margin-top:.4rem">' + bandChip(a.overall.bandLabel, a.overall.bandColor) + '</div>' +
+          '<p class="muted small" style="margin-top:.5rem">' + a.overall.marksAwarded + ' of ' +
+          a.overall.marksAvailable + ' marks</p></div>' +
+        '<div class="card card--tint"><div class="eyebrow">Standards evidenced</div>' +
+          '<div style="font-size:2.4rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
+          a.overall.standardsEvidenced + '<span style="font-size:1.2rem;color:var(--aisa-muted-gray)">/' +
+          a.overall.standardsTotal + '</span></div>' +
+          '<p class="muted small" style="margin-top:.5rem">Standards you have produced work against</p></div>' +
+        '</div>';
+
+      if (a.byStandard.length) {
+        html += '<h2 style="margin-bottom:.5rem">By standard</h2><div class="card">' +
+          a.byStandard.map(function (s) {
+            return '<div class="standard-row">' +
+              '<span class="code">' + esc(s.code) + '</span>' +
+              '<span class="desc">' + esc(s.descriptor) +
+                (s.strand ? '<br><span class="muted small">' + esc(s.strand) + '</span>' : '') + '</span>' +
+              '<span class="meter"><div class="progress-bar"><i style="width:' + s.percent +
+                '%;background:' + esc(s.bandColor) + '"></i></div>' +
+                '<span class="muted small">' + Math.round(s.percent) + '% · ' +
+                s.marksAwarded + '/' + s.marksAvailable + '</span></span>' +
+              bandChip(s.bandLabel, s.bandColor) + '</div>';
+          }).join('') + '</div>';
+      } else {
+        html += '<div class="empty"><h3>No results yet</h3>' +
+          '<p>Complete a worksheet and your attainment will appear here.</p></div>';
+      }
+
+      html += '<h2 style="margin:2rem 0 .5rem">Lesson by lesson</h2><div class="table-wrap"><table>' +
+        '<thead><tr><th>#</th><th>Lesson</th><th>Type</th><th>Marks</th><th>Score</th><th>Submitted</th></tr></thead><tbody>' +
+        data.lessons.map(function (l) {
+          return '<tr><td>' + esc(l.number) + '</td><td>' + esc(l.title) + '</td>' +
+            '<td><span class="pill ' + (l.type === 'lab' ? 'pill--lab' : 'pill--lesson') + '">' +
+              (l.type === 'lab' ? 'Lab' : 'Lesson') + '</span></td>' +
+            '<td>' + (l.marksAwarded !== null ? esc(l.marksAwarded) + '/' + esc(l.marksAvailable)
+                                              : '—') + '</td>' +
+            '<td>' + (l.percent !== null ? Math.round(l.percent) + '%' : '—') + '</td>' +
+            '<td class="muted small">' + formatDate(l.submittedAt) + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+
+      view.innerHTML = html;
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Teacher: class tracking
+   * ------------------------------------------------------------------- */
+
+  function viewTeacher() {
+    return call('api_getClassOverview', state.params.className || '').then(function (data) {
+      var html = '<div class="row between" style="margin-bottom:1.25rem">' +
+        '<div><div class="eyebrow">Class tracking</div><h1>Grade 6 — AI Curriculum</h1></div>' +
+        '<div class="row">' +
+          (data.classes.length
+            ? '<select id="classFilter" style="width:auto"><option value="">All classes</option>' +
+              data.classes.map(function (c) {
+                return '<option value="' + esc(c) + '"' +
+                  (state.params.className === c ? ' selected' : '') + '>' + esc(c) + '</option>';
+              }).join('') + '</select>'
+            : '') +
+          '<button class="btn btn--ghost" id="exportBtn">Export CSV</button>' +
+        '</div></div>';
+
+      if (!data.students.length) {
+        html += '<div class="empty"><h3>No students on the roster yet</h3>' +
+          '<p>An admin needs to import the Grade 6 roster before progress appears here.</p></div>';
+        view.innerHTML = html;
+        bindTeacherControls();
+        return;
+      }
+
+      var avg = data.students.reduce(function (s, st) { return s + st.overallPercent; }, 0) /
+                data.students.length;
+      var done = data.students.reduce(function (s, st) { return s + st.lessonsCompleted; }, 0);
+
+      html += '<div class="grid-2" style="margin-bottom:1.75rem">' +
+        statCard('Students', data.students.length, 'on the roster') +
+        statCard('Class average', Math.round(avg) + '%', 'across all marked work') +
+        statCard('Lessons completed', done, 'total across the cohort') +
+        '</div>';
+
+      html += '<h2 style="margin-bottom:.6rem">Students</h2>' +
+        '<div class="table-wrap"><table><thead><tr>' +
+        '<th>Student</th><th>Class</th><th>Progress</th><th>Lessons</th><th>Average</th><th>Band</th><th>Last active</th>' +
+        '</tr></thead><tbody>' +
+        data.students.map(function (s) {
+          return '<tr class="clickable" data-student="' + esc(s.email) + '">' +
+            '<td><strong>' + esc(s.displayName) + '</strong><br>' +
+              '<span class="muted small">' + esc(s.email) + '</span></td>' +
+            '<td>' + esc(s.className || '—') + '</td>' +
+            '<td style="min-width:7rem"><div class="progress-bar"><i style="width:' +
+              s.percentComplete + '%"></i></div>' +
+              '<span class="muted small">' + s.percentComplete + '%</span></td>' +
+            '<td>' + s.lessonsCompleted + '/' + s.lessonsTotal + '</td>' +
+            '<td>' + Math.round(s.overallPercent) + '%</td>' +
+            '<td>' + bandChip(s.bandLabel, s.bandColor) + '</td>' +
+            '<td class="muted small">' + formatDate(s.lastActive) + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+
+      if (data.classAttainment.length) {
+        html += '<h2 style="margin:2rem 0 .5rem">Attainment by standard</h2>' +
+          '<p class="muted small" style="margin-bottom:.75rem">Weakest standards first — ' +
+          'use this to decide what to reteach.</p><div class="card">' +
+          data.classAttainment.map(function (s) {
+            var total = s.distribution.reduce(function (n, d) { return n + d.count; }, 0) || 1;
+            return '<div class="standard-row">' +
+              '<span class="code">' + esc(s.code) + '</span>' +
+              '<span class="desc">' + esc(s.descriptor) + '</span>' +
+              '<span class="meter"><div class="dist">' + s.distribution.map(function (d) {
+                return '<i style="width:' + ((d.count / total) * 100) + '%;background:' +
+                  esc(d.color) + '" title="' + esc(d.label) + ': ' + d.count + '"></i>';
+              }).join('') + '</div><span class="muted small">avg ' +
+              Math.round(s.averagePercent) + '% · n=' + s.studentsAssessed + '</span></span>' +
+              bandChip(s.bandLabel, s.bandColor) + '</div>';
+          }).join('') + '</div>';
+      }
+
+      view.innerHTML = html;
+      bindTeacherControls();
+    });
+  }
+
+  function statCard(label, value, sub) {
+    return '<div class="card card--tint"><div class="eyebrow">' + esc(label) + '</div>' +
+      '<div style="font-size:2.2rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
+      esc(value) + '</div><p class="muted small" style="margin-top:.3rem">' + esc(sub) + '</p></div>';
+  }
+
+  function bindTeacherControls() {
+    Array.prototype.forEach.call(view.querySelectorAll('[data-student]'), function (row) {
+      row.onclick = function () {
+        route('student-detail', { email: row.getAttribute('data-student') });
+      };
+    });
+
+    var filter = document.getElementById('classFilter');
+    if (filter) {
+      filter.onchange = function () { route('teacher', { className: filter.value }); };
+    }
+
+    var exportBtn = document.getElementById('exportBtn');
+    if (exportBtn) {
+      exportBtn.onclick = function () {
+        exportBtn.disabled = true;
+        exportBtn.textContent = 'Preparing…';
+        call('api_exportCsv').then(function (res) {
+          downloadCsv(res.csv, 'studytwin-grade6-' + new Date().toISOString().slice(0, 10) + '.csv');
+          exportBtn.disabled = false;
+          exportBtn.textContent = 'Export CSV';
+        }).catch(function (err) {
+          exportBtn.disabled = false;
+          exportBtn.textContent = 'Export CSV';
+          toast(err.message, true);
+        });
+      };
+    }
+  }
+
+  function downloadCsv(csv, filename) {
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  /* ---------------------------------------------------------------------
+   * Teacher: one student in detail
+   * ------------------------------------------------------------------- */
+
+  function viewStudentDetail() {
+    return call('api_getStudentDetail', state.params.email).then(function (data) {
+      var a = data.attainment;
+      var html = '<button class="breadcrumb" id="back">← Back to class tracking</button>' +
+        '<div class="row between" style="margin-bottom:1.25rem">' +
+          '<div><div class="eyebrow">' + esc(data.student.className || 'Grade 6') + '</div>' +
+          '<h1>' + esc(data.student.displayName) + '</h1>' +
+          '<p class="muted small">' + esc(data.student.email) + '</p></div>' +
+          '<div class="center"><div style="font-size:2.2rem;font-weight:700;color:var(--aisa-purple)">' +
+          Math.round(a.overall.percent) + '%</div>' +
+          bandChip(a.overall.bandLabel, a.overall.bandColor) + '</div>' +
+        '</div>';
+
+      html += '<h2 style="margin-bottom:.5rem">Lesson results</h2><div class="table-wrap"><table>' +
+        '<thead><tr><th>#</th><th>Lesson</th><th>Type</th><th>Attempts</th><th>Marks</th>' +
+        '<th>Score</th><th>Submitted</th></tr></thead><tbody>' +
+        data.lessons.map(function (l) {
+          return '<tr><td>' + esc(l.number) + '</td><td>' + esc(l.title) + '</td>' +
+            '<td><span class="pill ' + (l.type === 'lab' ? 'pill--lab' : 'pill--lesson') + '">' +
+              (l.type === 'lab' ? 'Lab' : 'Lesson') + '</span></td>' +
+            '<td>' + esc(l.attempts) + '</td>' +
+            '<td>' + (l.marksAwarded !== null ? esc(l.marksAwarded) + '/' + esc(l.marksAvailable)
+                                              : '—') + '</td>' +
+            '<td>' + (l.percent !== null ? Math.round(l.percent) + '%' : '—') + '</td>' +
+            '<td class="muted small">' + formatDate(l.submittedAt) + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+
+      if (a.byStandard.length) {
+        html += '<h2 style="margin:2rem 0 .5rem">Attainment by standard</h2><div class="card">' +
+          a.byStandard.map(function (s) {
+            return '<div class="standard-row">' +
+              '<span class="code">' + esc(s.code) + '</span>' +
+              '<span class="desc">' + esc(s.descriptor) + '</span>' +
+              '<span class="meter"><div class="progress-bar"><i style="width:' + s.percent +
+                '%;background:' + esc(s.bandColor) + '"></i></div>' +
+                '<span class="muted small">' + s.marksAwarded + '/' + s.marksAvailable + ' marks</span></span>' +
+              bandChip(s.bandLabel, s.bandColor) + '</div>';
+          }).join('') + '</div>';
+      }
+
+      view.innerHTML = html;
+      document.getElementById('back').onclick = function () { route('teacher', {}); };
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Admin
+   * ------------------------------------------------------------------- */
+
+  function viewAdmin() {
+    return call('api_getAdminData').then(function (data) {
+      var html = '<div class="eyebrow">Administration</div><h1>Platform settings</h1>' +
+        '<p class="muted" style="margin-bottom:1.5rem">Only @' +
+        esc((state.user && state.bootstrap && state.bootstrap.app.domain) || 'aisa.sch.ae') +
+        ' accounts can reach this platform. Everyone is a student unless listed as staff below.</p>';
+
+      html += '<div class="card" style="margin-bottom:1.5rem"><h2 style="margin-bottom:.5rem">Import roster</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">One student per line: ' +
+        '<code>email, name, class</code>. Re-importing updates existing students rather than duplicating them.</p>' +
+        '<textarea id="rosterInput" style="min-height:8rem" ' +
+        'placeholder="amina.hassan@aisa.sch.ae, Amina Hassan, 6A&#10;omar.khalid@aisa.sch.ae, Omar Khalid, 6A"></textarea>' +
+        '<div class="row" style="margin-top:.75rem">' +
+        '<button class="btn btn--primary" id="importBtn">Import students</button>' +
+        '<span class="muted small">' + data.roster.length + ' students currently on the roster</span>' +
+        '</div><div id="importResult"></div></div>';
+
+      html += '<div class="card" style="margin-bottom:1.5rem"><h2 style="margin-bottom:.5rem">Staff access</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">Teachers can see all student progress. ' +
+        'Admins can additionally manage the roster and staff list.</p>' +
+        '<div class="row" style="margin-bottom:1rem">' +
+        '<input type="text" id="staffEmail" placeholder="teacher@aisa.sch.ae" style="flex:1;min-width:14rem">' +
+        '<select id="staffRole" style="width:auto"><option value="teacher">Teacher</option>' +
+        '<option value="admin">Admin</option><option value="student">Remove access</option></select>' +
+        '<button class="btn btn--primary" id="staffBtn">Save</button></div>' +
+        (data.staff.length
+          ? '<div class="table-wrap"><table><thead><tr><th>Email</th><th>Role</th><th>Added by</th></tr></thead><tbody>' +
+            data.staff.map(function (s) {
+              return '<tr><td>' + esc(s.email) + '</td><td><span class="pill pill--lesson">' +
+                esc(s.role) + '</span></td><td class="muted small">' + esc(s.addedBy || '—') +
+                '</td></tr>';
+            }).join('') + '</tbody></table></div>'
+          : '<p class="muted small">No staff added yet — you are an admin because you deployed the app.</p>') +
+        '</div>';
+
+      html += '<div class="card card--accent"><h2 style="margin-bottom:.5rem">Data</h2>' +
+        '<p class="small">All student work is stored in a Google Sheet inside AISA’s own Workspace. ' +
+        'Nothing is sent to any third party.</p>' +
+        '<p style="margin-top:.6rem"><a href="' + esc(data.spreadsheetUrl) +
+        '" target="_blank" rel="noopener">Open the datastore spreadsheet ↗</a></p>' +
+        '<p class="muted small" style="margin-top:.5rem">Keep this spreadsheet private. ' +
+        'Students must never be given access to it — it holds every mark.</p></div>';
+
+      if (data.audit.length) {
+        html += '<h2 style="margin:2rem 0 .5rem">Recent activity</h2><div class="table-wrap"><table>' +
+          '<thead><tr><th>When</th><th>Who</th><th>Action</th><th>Detail</th></tr></thead><tbody>' +
+          data.audit.slice(0, 40).map(function (r) {
+            return '<tr><td class="muted small">' + formatDate(r.timestamp) + '</td>' +
+              '<td class="small">' + esc(r.actor) + '</td>' +
+              '<td class="small">' + esc(r.action) + '</td>' +
+              '<td class="muted small">' + esc(r.detail) + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }
+
+      view.innerHTML = html;
+      bindAdmin();
+    });
+  }
+
+  function bindAdmin() {
+    document.getElementById('importBtn').onclick = function () {
+      var btn = this;
+      var text = document.getElementById('rosterInput').value;
+      if (!text.trim()) { toast('Paste at least one student first.', true); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Importing…';
+      call('api_importRoster', text).then(function (res) {
+        var panel = document.getElementById('importResult');
+        panel.innerHTML = '<div class="callout" style="margin-top:1rem">' +
+          '<div class="eyebrow">Import complete</div>' +
+          '<p>' + res.added + ' added, ' + res.updated + ' updated.</p>' +
+          (res.rejected.length
+            ? '<p style="margin-top:.5rem"><strong>Skipped ' + res.rejected.length + ':</strong></p><ul>' +
+              res.rejected.map(function (r) { return '<li class="small">' + esc(r) + '</li>'; }).join('') +
+              '</ul>'
+            : '') + '</div>';
+        btn.disabled = false;
+        btn.textContent = 'Import students';
+        document.getElementById('rosterInput').value = '';
+      }).catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Import students';
+        toast(err.message, true);
+      });
+    };
+
+    document.getElementById('staffBtn').onclick = function () {
+      var email = document.getElementById('staffEmail').value.trim();
+      var role = document.getElementById('staffRole').value;
+      if (!email) { toast('Enter an email address.', true); return; }
+
+      call('api_setStaffRole', email, role).then(function () {
+        toast(email + ' set to ' + role);
+        route('admin', {});
+      }).catch(function (err) { toast(err.message, true); });
+    };
+  }
+
+  /* ---------------------------------------------------------------------
+   * Boot
+   * ------------------------------------------------------------------- */
+
+  route('home', {});
+})();
+</script>
+
+</body>
+</html>

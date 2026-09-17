@@ -163,6 +163,53 @@ check('every standard tagged in the worksheets is evidenced',
   `evidenced ${attainment.byStandard.length} standards: ` +
   attainment.byStandard.map((s) => s.code).join(', '));
 
+// Regression: the overall figure must count each question once, not once per
+// standard tag. Summing the per-standard rows reported a student who scored
+// 46.67% on every paper as 52.5% overall — above the 50% pass mark.
+const partialSubs = ['g6-l01', 'g6-l02'].map((id) => {
+  const lesson = api.CURRICULUM.grade6.lessons[id];
+  const answers = perfectAnswers(lesson.worksheet);
+  // Drop the multi-standard questions so double-counting would show up.
+  lesson.worksheet.questions.forEach((q) => {
+    if ((q.standards || []).length > 1) delete answers[q.id];
+  });
+  const marked = api.markWorksheet_(lesson.worksheet, answers);
+  return { lessonId: id, resultsJson: JSON.stringify(marked.results), marked: marked };
+});
+const partialAttainment = api.computeAttainment_('grade6', partialSubs);
+const rawAwarded = partialSubs.reduce((n, s) => n + s.marked.marksAwarded, 0);
+const rawAvailable = partialSubs.reduce((n, s) => n + s.marked.marksAvailable, 0);
+const rawPercent = Math.round((rawAwarded / rawAvailable) * 100 * 100) / 100;
+
+check('overall marks equal the sum of the worksheet marks',
+  partialAttainment.overall.marksAwarded === rawAwarded &&
+  partialAttainment.overall.marksAvailable === rawAvailable,
+  `attainment says ${partialAttainment.overall.marksAwarded}/${partialAttainment.overall.marksAvailable}, ` +
+  `worksheets say ${rawAwarded}/${rawAvailable}`);
+check('overall percent equals the true average worksheet mark',
+  Math.abs(partialAttainment.overall.percent - rawPercent) < 0.01,
+  `attainment ${partialAttainment.overall.percent}% vs worksheets ${rawPercent}%`);
+check('per-standard totals still exceed the raw total (full credit per tag)',
+  partialAttainment.byStandard.reduce((n, r) => n + r.marksAvailable, 0) > rawAvailable,
+  'multi-tagged questions should still count toward every standard they evidence');
+
+// A student below the pass mark on every paper must not report above it.
+const failing = ['g6-l01'].map((id) => {
+  const lesson = api.CURRICULUM.grade6.lessons[id];
+  const answers = perfectAnswers(lesson.worksheet);
+  let dropped = 0;
+  lesson.worksheet.questions.forEach((q) => {
+    if (dropped < 3) { delete answers[q.id]; dropped++; }
+  });
+  const marked = api.markWorksheet_(lesson.worksheet, answers);
+  return { lessonId: id, resultsJson: JSON.stringify(marked.results), percent: marked.percent };
+});
+check('a student scoring below the pass mark reports below it overall',
+  (failing[0].percent < api.CONFIG.PASS_PERCENT) ===
+  (api.computeAttainment_('grade6', failing).overall.percent < api.CONFIG.PASS_PERCENT),
+  `worksheet ${failing[0].percent}% vs overall ` +
+  `${api.computeAttainment_('grade6', failing).overall.percent}%`);
+
 const empty = api.computeAttainment_('grade6', []);
 check('a student with no work is 0% and evidences nothing',
   empty.overall.percent === 0 && empty.byStandard.length === 0);
