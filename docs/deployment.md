@@ -7,6 +7,35 @@ administrator. Budget about 20 minutes.
 > is automatically the first admin. If that person leaves the school, ownership has to
 > be transferred, so prefer a departmental account over an individual's if you have one.
 
+## 0. Before you start
+
+Three things to have in place, because each one blocks the step after it.
+
+**Node.js 18 or newer**, on whatever machine you are deploying from.
+`node --version` should print something starting `v18`, `v20` or `v22`. If not, install
+it from nodejs.org.
+
+**The repository, cloned locally.** It is private, so you will be asked to authenticate:
+
+```bash
+git clone https://github.com/AISA-AI-web/studytwin.git
+cd studytwin
+```
+
+**The Apps Script API switched on for your Google account.** This is the single most
+common reason `clasp` fails with a confusing error, and it is not obvious:
+
+1. Open <https://script.google.com/home/usersettings>
+2. Turn **Google Apps Script API** to **ON**
+
+It is off by default. Without it, `clasp create` fails with a "User has not enabled the
+Apps Script API" message that reads like a permissions problem with the repository.
+
+> **A Workspace admin can block this domain-wide.** If the toggle will not stay on, or
+> `clasp login` is refused, AISA's Google Workspace administrator has restricted Apps
+> Script. They can allow it in the Admin console under **Apps → Additional Google
+> services → Apps Script**. Worth checking before you spend time on the rest.
+
 ## 1. Install the tooling
 
 ```bash
@@ -45,7 +74,18 @@ npx clasp open
 ```
 
 In the Apps Script editor, choose the `setup` function from the dropdown and press
-**Run**. Google will ask you to authorise the script the first time; approve it.
+**Run**. Google will ask you to authorise the script the first time.
+
+> **You will see a scary-looking warning**, along the lines of *"Google hasn't verified
+> this app"*. That is expected and is not a problem: it appears for any Apps Script that
+> has not gone through Google's public app-verification process, which an internal school
+> tool neither needs nor qualifies for. You are the author of the script and it is running
+> in your own Workspace. Click **Advanced**, then **Go to StudyTwin (unsafe)**, then
+> **Allow**.
+>
+> Read the permission list before approving. It should ask only for spreadsheets, your
+> email address, and external requests. If it asks for anything else, stop and check you
+> are running the right script.
 
 The log prints the URL of the spreadsheet that now holds all student data. Open it once
 to confirm it exists, then **leave its sharing settings alone**. It must stay private to
@@ -100,12 +140,38 @@ Then in the editor, **Deploy → Manage deployments → edit (pencil) → Versio
 > means students following the old link see the old content. Always edit the existing
 > deployment.
 
+## How to tell it worked
+
+Four checks, in order. Each one confirms a different layer.
+
+1. **Open the web app URL yourself.** You should land in the app as an admin, with the
+   Admin tab visible. If you see "Sign-in required", see the multi-login note below.
+2. **Check the datastore exists.** Admin → Data → *Open the datastore spreadsheet*. It
+   should have seven tabs: Staff, Roster, Progress, Submissions, Judgements, Readiness,
+   AuditLog.
+3. **Have a colleague open the link.** They should get in without you granting anything,
+   and see only the student view — no Class Tracking, no Admin. That confirms the domain
+   restriction and the role defaults are working.
+4. **Try it from a personal Gmail account**, signed out of your AISA account. Google
+   should refuse before the app loads at all. That is the domain lock doing its job.
+
+If all four behave, the security model is intact.
+
 ## Troubleshooting
 
 **"Sign-in required" for a legitimate AISA user**
 Their browser is signed into a personal Google account as well. Ask them to open the link
 in an incognito window, or switch accounts. This is a Google multi-login quirk, not a bug
 in the platform.
+
+**`clasp create` fails with "User has not enabled the Apps Script API"**
+The toggle in step 0. Turn it on at <https://script.google.com/home/usersettings>, wait
+a minute, and try again.
+
+**`clasp push` says "Invalid manifest" or a file is missing**
+Run `npm run build` first. The curriculum is compiled into `src/generated/` at build
+time and that folder is gitignored, so a fresh clone has no content until you build.
+`npm run push` does this for you.
 
 **Students report "the system is busy"**
 Thirty simultaneous submissions queue behind the document lock. Waiting a moment and
