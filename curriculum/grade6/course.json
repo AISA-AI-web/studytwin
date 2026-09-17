@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "grade": 6,
+    "title": "Grade 6 — Artificial Intelligence",
+    "subtitle": "ADEK AI Curriculum",
+    "provisional": true,
+    "note": "Structure and content are placeholders pending the official ADEK Grade 6 curriculum document. Standards codes, lesson titles and worksheet content must be replaced with the published versions before this is used for reporting."
+  },
+  "units": [
+    {
+      "id": "g6-u1",
+      "title": "Understanding Artificial Intelligence",
+      "summary": "What AI is, where students already meet it, and how machines learn from data rather than from rules.",
+      "lessons": ["g6-l01", "g6-l02"]
+    }
+  ]
+}

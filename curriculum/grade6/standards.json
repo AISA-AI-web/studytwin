@@ -1,0 +1,62 @@
+[
+  {
+    "code": "AI.6.1.1",
+    "strand": "Understanding AI",
+    "descriptor": "Define artificial intelligence and distinguish it from ordinary computer programs.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.1.2",
+    "strand": "Understanding AI",
+    "descriptor": "Identify examples of artificial intelligence in everyday technology and explain how they are used.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.1.3",
+    "strand": "Understanding AI",
+    "descriptor": "Describe the difference between narrow AI and general AI.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.2.1",
+    "strand": "Data and Machine Learning",
+    "descriptor": "Explain that machine learning systems learn patterns from data rather than following written rules.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.2.2",
+    "strand": "Data and Machine Learning",
+    "descriptor": "Describe the role of training data in the accuracy of an AI system.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.2.3",
+    "strand": "Data and Machine Learning",
+    "descriptor": "Sequence the stages of a simple machine learning workflow.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.3.1",
+    "strand": "Ethics and Society",
+    "descriptor": "Recognise that AI systems can be biased and explain how biased data causes unfair outcomes.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.3.2",
+    "strand": "Ethics and Society",
+    "descriptor": "Discuss responsible and safe use of AI tools, including privacy of personal data.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.4.1",
+    "strand": "Creating with AI",
+    "descriptor": "Use an AI tool to complete a defined task and evaluate the quality of its output.",
+    "provisional": true
+  },
+  {
+    "code": "AI.6.4.2",
+    "strand": "Creating with AI",
+    "descriptor": "Refine an instruction or prompt to improve the result an AI tool produces.",
+    "provisional": true
+  }
+]

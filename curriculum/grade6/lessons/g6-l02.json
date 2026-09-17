@@ -1,0 +1,171 @@
+{
+  "id": "g6-l02",
+  "number": 2,
+  "type": "lab",
+  "provisional": true,
+  "title": "Lab: Train your own image classifier",
+  "summary": "Build a working machine learning model in the browser, then find out what happens when the training data is poor.",
+  "duration": "60 minutes",
+  "standards": ["AI.6.2.1", "AI.6.2.2", "AI.6.2.3", "AI.6.3.1", "AI.6.4.1"],
+  "objectives": [
+    "Train a machine learning model using your own examples",
+    "Describe the stages of a [[machine learning workflow]]",
+    "Measure how accurate a model is",
+    "Explain how **biased training data** produces unfair results"
+  ],
+  "sections": [
+    {
+      "type": "callout",
+      "label": "Before you start",
+      "body": [
+        "You will need a device with a webcam and an internet connection. Nothing you make in this lab is uploaded or saved to anyone else's computer — the model trains inside your browser and disappears when you close the tab."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "What you are building",
+      "body": [
+        "You are going to teach a computer to tell two things apart — for example, a pen and a rubber, or your hand showing a thumbs up and a thumbs down. You will not write a single rule. You will only show it examples.",
+        "This is exactly how the image recognition in a phone camera is built, just much smaller."
+      ]
+    },
+    {
+      "type": "steps",
+      "heading": "Part 1 — Train a model",
+      "items": [
+        "Open **Teachable Machine** in your browser and choose **Image Project**, then **Standard image model**.",
+        "Rename **Class 1** to the name of your first object, for example *Pen*.",
+        "Click **Webcam** and hold the object in front of the camera. Hold the record button for about ten seconds, moving the object around as you go. You should collect roughly 100 images.",
+        "Rename **Class 2** to your second object, for example *Rubber*, and record about 100 images the same way.",
+        "Click **Train Model**. Do not switch tabs while it trains.",
+        "When training finishes, hold each object up to the webcam and watch the confidence bars move."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Record your results",
+      "heading": "Part 2 — Test it properly",
+      "body": [
+        "Testing a model on the same images you trained it with tells you nothing. You have to test it on things it has never seen.",
+        "Show each object to the camera **ten times**, in different positions and different lighting. Count how many times the model gets it right out of the twenty tests in total."
+      ],
+      "items": [
+        "Test your first object ten times. Write down how many were correct.",
+        "Test your second object ten times. Write down how many were correct.",
+        "Add the two numbers together to get your score out of 20."
+      ]
+    },
+    {
+      "type": "steps",
+      "heading": "Part 3 — Break it on purpose",
+      "items": [
+        "Start a **new** Image Project.",
+        "Train it again with the same two objects — but this time record all of your examples in one position only, without moving the object at all.",
+        "Use only about 20 images per class instead of 100.",
+        "Train the model, then test it by holding the objects at completely different angles.",
+        "Notice how much worse it performs. The model has not become less clever. It has simply never seen anything like what you are now showing it."
+      ]
+    },
+    {
+      "type": "callout",
+      "label": "The big idea",
+      "body": [
+        "A machine learning model can only recognise what its **training data** taught it. If the examples are few, or all the same, or only show one kind of thing, the model will fail on everything else.",
+        "This is where [[bias]] comes from. A face recognition system trained mostly on one group of people works badly for everyone else — not because anyone intended that, but because of what it was shown."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Lab 2 worksheet",
+    "questions": [
+      {
+        "id": "l02q1",
+        "type": "ordering",
+        "marks": 4,
+        "standards": ["AI.6.2.3"],
+        "prompt": "Put the stages of a machine learning project into the correct order.",
+        "items": [
+          { "id": "s1", "text": "Collect examples for each class" },
+          { "id": "s2", "text": "Train the model on the examples" },
+          { "id": "s3", "text": "Test the model on new things it has not seen" },
+          { "id": "s4", "text": "Improve the training data and train again" }
+        ],
+        "answer": ["s1", "s2", "s3", "s4"],
+        "feedback": {
+          "correct": "That is the loop every machine learning project goes round.",
+          "partial": "Close. Remember you cannot test before you have trained."
+        }
+      },
+      {
+        "id": "l02q2",
+        "type": "numeric",
+        "marks": 2,
+        "standards": ["AI.6.4.1"],
+        "prompt": "A model was tested 20 times and got 17 correct. What is its accuracy as a percentage?",
+        "answer": 85,
+        "tolerance": 0.5,
+        "placeholder": "Percentage",
+        "hint": "Divide the number correct by the number of tests, then multiply by 100.",
+        "feedback": {
+          "correct": "17 out of 20 is 85%.",
+          "incorrect": "17 ÷ 20 = 0.85, and 0.85 × 100 = 85%."
+        }
+      },
+      {
+        "id": "l02q3",
+        "type": "mcq",
+        "marks": 2,
+        "standards": ["AI.6.2.2"],
+        "prompt": "Why must you test a model on images it has never seen before?",
+        "options": [
+          { "id": "a", "text": "Because testing on training images only shows it can remember, not that it can recognise" },
+          { "id": "b", "text": "Because the training images get deleted after training" },
+          { "id": "c", "text": "Because new images train the model further" },
+          { "id": "d", "text": "Because it makes the model run faster" }
+        ],
+        "answer": "a",
+        "feedback": {
+          "correct": "Right — a model that only works on what it has already seen is useless.",
+          "incorrect": "Think about the difference between remembering an answer and understanding it."
+        }
+      },
+      {
+        "id": "l02q4",
+        "type": "multi",
+        "marks": 3,
+        "standards": ["AI.6.2.2", "AI.6.3.1"],
+        "prompt": "In Part 3 you trained a deliberately weak model. Select **all** the reasons it performed badly.",
+        "options": [
+          { "id": "a", "text": "There were far fewer training images" },
+          { "id": "b", "text": "Every image was taken from the same position" },
+          { "id": "c", "text": "The computer was running too slowly" },
+          { "id": "d", "text": "The model had never seen the objects at other angles" },
+          { "id": "e", "text": "The objects themselves had changed" }
+        ],
+        "answer": ["a", "b", "d"],
+        "feedback": {
+          "correct": "All three are problems with the training data, not the model.",
+          "partial": "Some right. The model and the computer were identical both times — only the data changed."
+        }
+      },
+      {
+        "id": "l02q5",
+        "type": "shortText",
+        "marks": 4,
+        "standards": ["AI.6.3.1"],
+        "prompt": "A company builds a face recognition system and trains it almost entirely on photographs of adults. Explain what problem this is likely to cause, and how the company could fix it.",
+        "placeholder": "Write three or four sentences…",
+        "maxLength": 800,
+        "keywordsAny": ["children", "child", "young", "bias", "biased", "unfair", "fail", "worse", "more data", "varied", "diverse", "range", "different people"],
+        "keywordsNeeded": 3,
+        "modelAnswer": "The system would work poorly on children's faces, because it has never been shown examples of them. That is unfair to anyone the training data left out, and it could mean children are not recognised or are misidentified. The company should fix it by collecting a much more varied set of training photographs covering people of all ages, and then testing the system separately on each group to check it works for everyone.",
+        "hint": "Who is missing from the training data, and what happens to them?",
+        "feedback": {
+          "correct": "Good — you identified who is affected and what would fix it.",
+          "partial": "You have part of it. Make sure you say who is affected *and* what the company should do.",
+          "incorrect": "Reread 'The big idea'. Think about who is missing from the training data."
+        }
+      }
+    ]
+  }
+}
