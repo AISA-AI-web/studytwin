@@ -186,7 +186,8 @@ const mock = `
       return {
         user: user,
         app: { name: 'StudyTwin', school: 'American International School in Abu Dhabi',
-               domain: 'aisa.sch.ae' },
+               domain: 'aisa.sch.ae',
+               switchAccountUrl: 'https://accounts.google.com/AccountChooser' },
         course: { key: GRADE, title: CURRICULUM[GRADE].meta.title, grade: 6 },
         units: CURRICULUM[GRADE].units,
         lessons: lessonsInOrder().map(function (lesson) {

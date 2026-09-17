@@ -70,10 +70,19 @@
     color: var(--aisa-purple); font-weight: 700; font-size: .8rem;
     display: grid; place-items: center; flex: none;
   }
-  .user-chip .name { font-size: .85rem; }
-  .user-chip .role {
-    font-size: .65rem; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--aisa-gold); font-weight: 700;
+  .user-chip .name { font-size: .85rem; line-height: 1.2; }
+  .user-chip .account {
+    font-size: .68rem; color: rgba(255,255,255,.65); line-height: 1.3;
+    max-width: 14rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .user-chip .role-tag {
+    font-size: .6rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--aisa-purple); background: var(--aisa-gold); font-weight: 700;
+    padding: .1rem .4rem; border-radius: 3px; align-self: center;
+  }
+  .user-chip .switch {
+    font-size: .68rem; color: var(--aisa-gold); text-decoration: underline;
+    align-self: center; white-space: nowrap;
   }
 
   main { max-width: 68rem; margin: 0 auto; padding: 1.75rem 1.5rem 4rem; }

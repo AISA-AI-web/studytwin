@@ -117,6 +117,32 @@ check('answer keys are still stripped for students',
   api.getLessonForStudent_('grade6', 'g6-l01').worksheet.questions
     .every((q) => q.answer === undefined));
 
+console.log('\nApps Script API usage suits a standalone web app');
+
+/*
+ * getDocumentLock() is for container-bound scripts. This is a standalone web app with
+ * no container document, so that lock cannot be acquired and every write throws — which
+ * is how the first student submission failed with "Something went wrong". A script lock
+ * is also the right scope here: it serialises writes across all users of the one shared
+ * datastore.
+ */
+// Match the CALL, not the word — the source comments mention getDocumentLock precisely
+// to explain why it must not be used, and a bare word match flags its own documentation.
+check('no container-bound lock is used',
+  !/LockService\s*\.\s*getDocumentLock\s*\(/.test(bundle),
+  'getDocumentLock() yields an unusable lock in a standalone script — use getScriptLock()');
+check('writes are serialised with a script lock',
+  /LockService\.getScriptLock\(\)/.test(bundle));
+
+// Same class of mistake: these only exist for container-bound scripts and would throw here.
+[['SpreadsheetApp', 'getActiveSpreadsheet'],
+ ['DocumentApp', 'getActiveDocument'],
+ ['SpreadsheetApp', 'getUi']].forEach(([service, call]) => {
+  const pattern = new RegExp(service + '\\s*\\.\\s*' + call + '\\s*\\(');
+  check(`no container-bound call: ${service}.${call}()`, !pattern.test(bundle),
+    `${call}() requires a bound container and throws in a standalone web app`);
+});
+
 console.log('\nUI include paths are flattened for the editor');
 
 // The earlier version of this test matched only include('ui/...'), the same blind spot
