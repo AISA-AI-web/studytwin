@@ -1,0 +1,192 @@
+{
+  "id": "g6-l01",
+  "number": 1,
+  "type": "core",
+  "provisional": true,
+  "title": "What is Artificial Intelligence?",
+  "summary": "Meet the difference between a machine that follows rules and a machine that learns.",
+  "duration": "45 minutes",
+  "standards": ["AI.6.1.1", "AI.6.1.2", "AI.6.1.3", "AI.6.2.1"],
+  "objectives": [
+    "Define **artificial intelligence** in your own words",
+    "Explain how AI is different from an ordinary computer program",
+    "Identify at least three examples of AI you already use",
+    "Describe what is meant by [[narrow AI]] and [[general AI]]"
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Machines that follow rules",
+      "body": [
+        "Every computer program is a set of instructions. A calculator adds two numbers because a programmer wrote the rule for adding. A traffic light changes colour because someone wrote the rule for when to change. The machine never decides anything — it follows what it was told, exactly, every single time.",
+        "This works brilliantly when the rules are easy to write down. But some problems are almost impossible to write rules for. Try writing the rules for recognising your friend's face. Where do you start? Eye colour? Distance between the eyes? What if they smile, or wear a hat, or stand in the shade?"
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Machines that learn",
+      "body": [
+        "**Artificial intelligence** is what we call it when a machine does something that would normally need human thinking — recognising a face, understanding a sentence, spotting a pattern.",
+        "Most modern AI does not work from rules a person wrote. Instead it is shown thousands of examples and finds the patterns by itself. Show a system enough photographs labelled *cat* and *not a cat*, and it works out what makes a cat a cat. Nobody ever writes down the rule. This is called [[machine learning]]."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Key vocabulary",
+      "terms": [
+        { "term": "Artificial Intelligence (AI)", "definition": "A computer system that performs tasks normally needing human intelligence." },
+        { "term": "Machine Learning", "definition": "A way of building AI by learning patterns from examples instead of following written rules." },
+        { "term": "Training data", "definition": "The examples an AI system learns from." },
+        { "term": "Narrow AI", "definition": "AI that is very good at one specific task and cannot do anything else." },
+        { "term": "General AI", "definition": "A hypothetical AI that could learn any task a human can. It does not exist yet." }
+      ]
+    },
+    {
+      "type": "callout",
+      "label": "Important",
+      "body": [
+        "Every AI system that exists today is **narrow AI**. A system that plays chess at world-champion level cannot tell you the weather. A system that recognises faces cannot play chess. General AI — a machine that could do anything a person can — is still science fiction."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "AI you already use",
+      "items": [
+        "**Voice assistants** — turning the sound of your voice into words, then into an action",
+        "**Map apps** — predicting which route will be fastest using live traffic patterns",
+        "**Video and music apps** — recommending what you might like based on what you watched before",
+        "**Camera apps** — finding faces in the frame so the picture stays in focus",
+        "**Spam filters** — learning which emails are junk from millions of examples",
+        "**Translation apps** — converting one language to another from patterns in translated text"
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Class activity",
+      "heading": "Rule or pattern?",
+      "body": [
+        "Work with a partner. For each task below, decide whether a programmer could reasonably write the rules, or whether the machine would need to learn from examples."
+      ],
+      "items": [
+        "Working out change from a 50 dirham note",
+        "Deciding whether a photograph contains a camel",
+        "Sorting a list of names into alphabetical order",
+        "Telling whether a film review is positive or negative",
+        "Checking whether a password is at least eight characters long"
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Lesson 1 worksheet",
+    "questions": [
+      {
+        "id": "l01q1",
+        "type": "mcq",
+        "marks": 2,
+        "standards": ["AI.6.1.1"],
+        "prompt": "Which of these best describes artificial intelligence?",
+        "options": [
+          { "id": "a", "text": "Any computer program that runs quickly" },
+          { "id": "b", "text": "A computer system that performs tasks normally requiring human intelligence" },
+          { "id": "c", "text": "A robot with arms and legs" },
+          { "id": "d", "text": "A website that stores a lot of information" }
+        ],
+        "answer": "b",
+        "feedback": {
+          "correct": "Exactly — it is about the kind of task, not the kind of machine.",
+          "incorrect": "AI is defined by what the system does, not by how fast it is or what it looks like."
+        }
+      },
+      {
+        "id": "l01q2",
+        "type": "truefalse",
+        "marks": 1,
+        "standards": ["AI.6.1.3"],
+        "prompt": "General AI — a machine that can learn any task a human can — already exists today.",
+        "answer": false,
+        "feedback": {
+          "correct": "Correct. Every AI system today is narrow AI.",
+          "incorrect": "Not quite. General AI does not exist yet; everything today is narrow AI."
+        }
+      },
+      {
+        "id": "l01q3",
+        "type": "multi",
+        "marks": 3,
+        "standards": ["AI.6.1.2"],
+        "prompt": "Select **all** of the everyday tools below that use artificial intelligence.",
+        "options": [
+          { "id": "a", "text": "A voice assistant that responds when you speak to it" },
+          { "id": "b", "text": "A calculator app adding two numbers" },
+          { "id": "c", "text": "A video app recommending what to watch next" },
+          { "id": "d", "text": "A spam filter deciding which emails are junk" },
+          { "id": "e", "text": "A digital clock displaying the time" }
+        ],
+        "answer": ["a", "c", "d"],
+        "feedback": {
+          "correct": "Well spotted — all three learn from patterns rather than following fixed rules.",
+          "partial": "Some right. Remember: a calculator and a clock follow rules a programmer wrote.",
+          "incorrect": "Look for tools that learn from examples rather than following a fixed rule."
+        }
+      },
+      {
+        "id": "l01q4",
+        "type": "matching",
+        "marks": 4,
+        "standards": ["AI.6.1.2", "AI.6.2.1"],
+        "prompt": "Match each AI system to the kind of data it learns from.",
+        "left": [
+          { "id": "l1", "text": "Face recognition in a camera" },
+          { "id": "l2", "text": "A translation app" },
+          { "id": "l3", "text": "A spam filter" },
+          { "id": "l4", "text": "A music recommendation system" }
+        ],
+        "right": [
+          { "id": "r1", "text": "Thousands of labelled photographs" },
+          { "id": "r2", "text": "Sentences already translated by people" },
+          { "id": "r3", "text": "Emails marked as junk or not junk" },
+          { "id": "r4", "text": "What millions of listeners played before" }
+        ],
+        "answer": { "l1": "r1", "l2": "r2", "l3": "r3", "l4": "r4" },
+        "feedback": {
+          "correct": "Every AI system learns from examples of the thing it needs to do.",
+          "partial": "Some correct. Ask yourself what examples each system would need to see."
+        }
+      },
+      {
+        "id": "l01q5",
+        "type": "fillBlank",
+        "marks": 2,
+        "standards": ["AI.6.2.1"],
+        "prompt": "Complete the sentence: Machine learning systems find patterns in ______ instead of following ______ written by a programmer.",
+        "blanks": ["first blank", "second blank"],
+        "answer": [
+          ["data", "examples", "training data"],
+          ["rules", "instructions", "a rule"]
+        ],
+        "feedback": {
+          "correct": "That is the key difference in one sentence.",
+          "partial": "One of the two is right — reread the section on machines that learn."
+        }
+      },
+      {
+        "id": "l01q6",
+        "type": "shortText",
+        "marks": 3,
+        "standards": ["AI.6.1.1", "AI.6.2.1"],
+        "prompt": "Explain in your own words why it is easier to teach a computer to recognise a cat by showing it examples than by writing rules.",
+        "placeholder": "Write two or three sentences…",
+        "maxLength": 600,
+        "keywordsAny": ["pattern", "example", "learn", "rule", "hard to describe", "too many", "different", "vary"],
+        "keywordsNeeded": 2,
+        "modelAnswer": "Cats look different from each other and appear in different positions, colours and lighting, so it would take an enormous number of rules to describe every possible cat. Showing the system many labelled examples lets it find the patterns itself.",
+        "hint": "Think about how many different ways a cat can appear in a photograph.",
+        "feedback": {
+          "correct": "Good explanation.",
+          "partial": "You are on the right track — try to mention both the examples and why rules are hard.",
+          "incorrect": "Reread 'Machines that follow rules'. Think about why a face or a cat is hard to describe in rules."
+        }
+      }
+    ]
+  }
+}

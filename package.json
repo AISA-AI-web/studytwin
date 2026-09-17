@@ -1,0 +1,18 @@
+{
+  "name": "studytwin",
+  "version": "0.1.0",
+  "description": "AISA student hub for the ADEK AI curriculum — lessons, labs, auto-marked worksheets and attainment tracking, hosted inside AISA's own Google Workspace.",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-content.js",
+    "validate": "node tools/validate-content.js",
+    "push": "npm run check && npm run validate && npm run test && npm run build && clasp push",
+    "deploy": "npm run push && clasp deploy",
+    "check": "node tools/check-syntax.js",
+    "test": "node tools/test/marking.test.js",
+    "preview": "npm run build && node tools/build-preview.js"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2"
+  }
+}
