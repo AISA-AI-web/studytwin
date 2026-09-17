@@ -11,11 +11,49 @@
  * mid-worksheet needs a usable message rather than a silent failure.
  */
 
+/**
+ * Makes a value safe to send across google.script.run.
+ *
+ * The client boundary accepts primitives, plain objects and arrays — and nothing else.
+ * A Date anywhere in the payload makes the ENTIRE reply arrive as undefined, silently:
+ * no exception, no entry in the execution log, and the browser's success handler simply
+ * receives nothing. It is invisible from the server too, because JSON.stringify handles
+ * Dates perfectly well, so a payload can serialise fine in the editor and still vanish
+ * in transit.
+ *
+ * That is what broke Class Tracking and Admin: both read sheets that hold timestamps, and
+ * both only started failing once those sheets had rows in them. Endpoints that returned
+ * no Dates kept working, which made it look like a permissions problem.
+ *
+ * Dates become ISO strings, which the UI already parses. undefined becomes null, since it
+ * is dropped in transit and a missing key is harder to reason about than an explicit null.
+ */
+function toClientSafe_(value) {
+  if (value === undefined) return null;
+  if (value === null) return null;
+  if (value instanceof Date) {
+    return isNaN(value.getTime()) ? null : value.toISOString();
+  }
+  if (Array.isArray(value)) {
+    return value.map(toClientSafe_);
+  }
+  if (typeof value === 'object') {
+    const out = {};
+    Object.keys(value).forEach(function (key) {
+      out[key] = toClientSafe_(value[key]);
+    });
+    return out;
+  }
+  if (typeof value === 'number' && !isFinite(value)) return null;
+  return value;
+}
+
 /** Wraps an endpoint with auth, error handling and a consistent envelope. */
 function handle_(fn) {
   try {
     const user = getCurrentUser();
-    return { ok: true, data: fn(user) };
+    // Every reply goes through this. Individual endpoints must not have to remember.
+    return { ok: true, data: toClientSafe_(fn(user)) };
   } catch (err) {
     const code = err && err.message ? err.message : 'UNKNOWN';
     console.error(code + (err && err.stack ? '\n' + err.stack : ''));

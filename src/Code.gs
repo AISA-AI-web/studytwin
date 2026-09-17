@@ -201,13 +201,15 @@ function diagnose() {
       return;
     }
     const kb = Math.round(json.length / 1024);
-    lines.push('\u2713 ' + name + '  ' + kb + ' KB' + (kb > 900 ? '  \u26A0 LARGE' : ''));
 
-    // Undefined values are dropped by JSON but can break the transport; find them.
-    const undef = findUndefined_(result.data, name, []);
-    undef.slice(0, 5).forEach(function (pathStr) {
-      lines.push('    \u26A0 undefined at ' + pathStr);
-    });
+    // JSON.stringify happily serialises a Date; google.script.run does not, and a single
+    // one makes the whole reply arrive as undefined in the browser. Checking the payload
+    // with JSON alone therefore reports healthy for a call that cannot reach the page.
+    const hazards = findHazards_(result.data, name, []);
+    lines.push((hazards.length ? '\u2717 ' : '\u2713 ') + name + '  ' + kb + ' KB' +
+      (kb > 900 ? '  \u26A0 LARGE' : '') +
+      (hazards.length ? '  \u2014 ' + hazards.length + ' value(s) the client cannot receive' : ''));
+    hazards.slice(0, 6).forEach(function (h) { lines.push('    \u26A0 ' + h); });
   });
 
   const report = lines.join('\n');
@@ -215,21 +217,30 @@ function diagnose() {
   return report;
 }
 
-/** Walks a value looking for undefined, which does not survive the client boundary. */
-function findUndefined_(value, label, found) {
+/**
+ * Walks a value for anything google.script.run cannot carry to the browser.
+ *
+ * Only primitives, plain objects and arrays survive. A Date, an undefined or a
+ * non-finite number anywhere in the tree makes the entire reply arrive as undefined.
+ */
+function findHazards_(value, label, found) {
   if (found.length > 20) return found;
-  if (value === undefined) { found.push(label); return found; }
+  if (value === undefined) { found.push('undefined at ' + label); return found; }
+  if (value instanceof Date) { found.push('Date at ' + label); return found; }
+  if (typeof value === 'number' && !isFinite(value)) {
+    found.push('non-finite number at ' + label); return found;
+  }
   if (value === null || typeof value !== 'object') return found;
-  if (value instanceof Date) return found;
+  if (typeof value === 'function') { found.push('function at ' + label); return found; }
 
   if (Array.isArray(value)) {
     for (let i = 0; i < value.length && found.length <= 20; i++) {
-      findUndefined_(value[i], label + '[' + i + ']', found);
+      findHazards_(value[i], label + '[' + i + ']', found);
     }
     return found;
   }
   Object.keys(value).forEach(function (k) {
-    findUndefined_(value[k], label + '.' + k, found);
+    findHazards_(value[k], label + '.' + k, found);
   });
   return found;
 }

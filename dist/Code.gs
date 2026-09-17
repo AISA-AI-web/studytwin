@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-17T15:15:38.158Z
+ * Built: 2026-09-17T15:23:56.801Z
  */
 
 /* ==========================================================================
@@ -1151,11 +1151,49 @@ function computeClassProfile_(gradeKey, studentProfiles) {
  * mid-worksheet needs a usable message rather than a silent failure.
  */
 
+/**
+ * Makes a value safe to send across google.script.run.
+ *
+ * The client boundary accepts primitives, plain objects and arrays — and nothing else.
+ * A Date anywhere in the payload makes the ENTIRE reply arrive as undefined, silently:
+ * no exception, no entry in the execution log, and the browser's success handler simply
+ * receives nothing. It is invisible from the server too, because JSON.stringify handles
+ * Dates perfectly well, so a payload can serialise fine in the editor and still vanish
+ * in transit.
+ *
+ * That is what broke Class Tracking and Admin: both read sheets that hold timestamps, and
+ * both only started failing once those sheets had rows in them. Endpoints that returned
+ * no Dates kept working, which made it look like a permissions problem.
+ *
+ * Dates become ISO strings, which the UI already parses. undefined becomes null, since it
+ * is dropped in transit and a missing key is harder to reason about than an explicit null.
+ */
+function toClientSafe_(value) {
+  if (value === undefined) return null;
+  if (value === null) return null;
+  if (value instanceof Date) {
+    return isNaN(value.getTime()) ? null : value.toISOString();
+  }
+  if (Array.isArray(value)) {
+    return value.map(toClientSafe_);
+  }
+  if (typeof value === 'object') {
+    const out = {};
+    Object.keys(value).forEach(function (key) {
+      out[key] = toClientSafe_(value[key]);
+    });
+    return out;
+  }
+  if (typeof value === 'number' && !isFinite(value)) return null;
+  return value;
+}
+
 /** Wraps an endpoint with auth, error handling and a consistent envelope. */
 function handle_(fn) {
   try {
     const user = getCurrentUser();
-    return { ok: true, data: fn(user) };
+    // Every reply goes through this. Individual endpoints must not have to remember.
+    return { ok: true, data: toClientSafe_(fn(user)) };
   } catch (err) {
     const code = err && err.message ? err.message : 'UNKNOWN';
     console.error(code + (err && err.stack ? '\n' + err.stack : ''));
@@ -2075,13 +2113,15 @@ function diagnose() {
       return;
     }
     const kb = Math.round(json.length / 1024);
-    lines.push('\u2713 ' + name + '  ' + kb + ' KB' + (kb > 900 ? '  \u26A0 LARGE' : ''));
 
-    // Undefined values are dropped by JSON but can break the transport; find them.
-    const undef = findUndefined_(result.data, name, []);
-    undef.slice(0, 5).forEach(function (pathStr) {
-      lines.push('    \u26A0 undefined at ' + pathStr);
-    });
+    // JSON.stringify happily serialises a Date; google.script.run does not, and a single
+    // one makes the whole reply arrive as undefined in the browser. Checking the payload
+    // with JSON alone therefore reports healthy for a call that cannot reach the page.
+    const hazards = findHazards_(result.data, name, []);
+    lines.push((hazards.length ? '\u2717 ' : '\u2713 ') + name + '  ' + kb + ' KB' +
+      (kb > 900 ? '  \u26A0 LARGE' : '') +
+      (hazards.length ? '  \u2014 ' + hazards.length + ' value(s) the client cannot receive' : ''));
+    hazards.slice(0, 6).forEach(function (h) { lines.push('    \u26A0 ' + h); });
   });
 
   const report = lines.join('\n');
@@ -2089,21 +2129,30 @@ function diagnose() {
   return report;
 }
 
-/** Walks a value looking for undefined, which does not survive the client boundary. */
-function findUndefined_(value, label, found) {
+/**
+ * Walks a value for anything google.script.run cannot carry to the browser.
+ *
+ * Only primitives, plain objects and arrays survive. A Date, an undefined or a
+ * non-finite number anywhere in the tree makes the entire reply arrive as undefined.
+ */
+function findHazards_(value, label, found) {
   if (found.length > 20) return found;
-  if (value === undefined) { found.push(label); return found; }
+  if (value === undefined) { found.push('undefined at ' + label); return found; }
+  if (value instanceof Date) { found.push('Date at ' + label); return found; }
+  if (typeof value === 'number' && !isFinite(value)) {
+    found.push('non-finite number at ' + label); return found;
+  }
   if (value === null || typeof value !== 'object') return found;
-  if (value instanceof Date) return found;
+  if (typeof value === 'function') { found.push('function at ' + label); return found; }
 
   if (Array.isArray(value)) {
     for (let i = 0; i < value.length && found.length <= 20; i++) {
-      findUndefined_(value[i], label + '[' + i + ']', found);
+      findHazards_(value[i], label + '[' + i + ']', found);
     }
     return found;
   }
   Object.keys(value).forEach(function (k) {
-    findUndefined_(value[k], label + '.' + k, found);
+    findHazards_(value[k], label + '.' + k, found);
   });
   return found;
 }
