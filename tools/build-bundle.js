@@ -34,48 +34,49 @@ if (!fs.existsSync(generated)) {
  * the generated curriculum is referenced by Content.gs. Both come first so the bundle
  * evaluates cleanly top to bottom.
  */
-const ORDER = [
-  'Config.gs',
-  'generated/CurriculumData.gs',
-  'Auth.gs',
-  'Db.gs',
-  'Content.gs',
-  'Marking.gs',
-  'Attainment.gs',
-  'Api.gs',
-  'Code.gs'
+const BUNDLES = [
+  // The curriculum is split out so neither paste is enormous. A large paste can
+  // truncate silently in the browser, and the resulting parse error points at a
+  // line that is perfectly fine, which sends you looking in the wrong place.
+  { out: 'Data.gs', files: ['Config.gs', 'generated/CurriculumData.gs'] },
+  { out: 'Code.gs', files: ['Auth.gs', 'Db.gs', 'Content.gs', 'Marking.gs',
+                            'Attainment.gs', 'Api.gs', 'Code.gs'] }
 ];
 
 const banner = (name) =>
   `\n/* ${'='.repeat(74)}\n * ${name}\n * ${'='.repeat(74)} */\n\n`;
 
-let code = `/**
- * StudyTwin — bundled server code.
+fs.rmSync(dist, { recursive: true, force: true });
+fs.mkdirSync(dist, { recursive: true });
+
+BUNDLES.forEach((bundle) => {
+  let code = `/**
+ * StudyTwin — ${bundle.out}
  *
  * GENERATED FILE. Every section below is one file from src/ in the repository.
- * Do not edit this in the Apps Script editor: regenerate it with \`npm run bundle\`
+ * Do not edit this in the Apps Script editor: regenerate with \`npm run bundle\`
  * and paste it again, or the next rebuild will silently discard your change.
  *
  * Built: ${new Date().toISOString()}
  */
 `;
+  bundle.files.forEach((file) => {
+    const full = path.join(src, file);
+    if (!fs.existsSync(full)) {
+      console.error(`Missing ${file} — bundle would be incomplete.`);
+      process.exit(1);
+    }
+    code += banner(file) + fs.readFileSync(full, 'utf8').trimEnd() + '\n';
+  });
 
-ORDER.forEach((file) => {
-  const full = path.join(src, file);
-  if (!fs.existsSync(full)) {
-    console.error(`Missing ${file} — bundle would be incomplete.`);
-    process.exit(1);
-  }
-  code += banner(file) + fs.readFileSync(full, 'utf8').trimEnd() + '\n';
+  // The editor will not accept "/" in a filename, so the UI files flatten to Index,
+  // Styles and App, and the include() calls are rewritten to match.
+  code = code.replace(/include\('ui\/(\w+)'\)/g, "include('$1')");
+
+  // A marker on the last line, so a truncated paste is visible at a glance.
+  code += `\n// --- END OF ${bundle.out} --- if you cannot see this line, the paste was cut short.\n`;
+  fs.writeFileSync(path.join(dist, bundle.out), code);
 });
-
-// The editor will not accept "/" in a filename, so the UI files flatten to Index,
-// Styles and App, and the include() calls are rewritten to match.
-code = code.replace(/include\('ui\/(\w+)'\)/g, "include('$1')");
-
-fs.rmSync(dist, { recursive: true, force: true });
-fs.mkdirSync(dist, { recursive: true });
-fs.writeFileSync(path.join(dist, 'Code.gs'), code);
 
 ['Index', 'Styles', 'App'].forEach((name) => {
   let html = fs.readFileSync(path.join(src, 'ui', `${name}.html`), 'utf8');
@@ -92,4 +93,6 @@ files.forEach((f) => {
   const type = f.endsWith('.gs') ? 'Script' : f.endsWith('.html') ? 'HTML' : 'manifest';
   console.log(`  ${f.padEnd(20)} ${String(kb).padStart(4)} KB   (${type})`);
 });
-console.log(`\n${files.length} files instead of 13. See docs/deployment.md.`);
+console.log(`\n${files.length} files instead of 13.`);
+console.log('Each .gs ends with an "END OF" marker — if it is not visible after pasting,');
+console.log('the paste truncated. Run verifyInstall() in the editor to check.');

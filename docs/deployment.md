@@ -27,13 +27,20 @@ Both produce exactly the same thing. Start with A unless you know you want B.
 They are in `dist/` in the repository. On GitHub, open each one and use the **copy raw
 contents** button (the icon at the top right of the file view):
 
-| File | What it is |
-|---|---|
-| `dist/Code.gs` | All the server code in one file |
-| `dist/Index.html` | The page shell |
-| `dist/Styles.html` | The stylesheet |
-| `dist/App.html` | The app itself |
-| `dist/appsscript.json` | The manifest — permissions and web app settings |
+| File | Paste as | What it is |
+|---|---|---|
+| `dist/Data.gs` | Script, named `Data` | Settings and the curriculum |
+| `dist/Code.gs` | Script, replacing the stub `Code` | The server code |
+| `dist/Index.html` | HTML, named `Index` | The page shell |
+| `dist/Styles.html` | HTML, named `Styles` | The stylesheet |
+| `dist/App.html` | HTML, named `App` | The app itself |
+| `dist/appsscript.json` | The manifest | Permissions and web app settings |
+
+> **Each `.gs` file ends with a line reading `--- END OF … ---`.** After pasting, scroll to
+> the bottom and check you can see it. If you cannot, the paste was cut short — that is by
+> far the most common problem here, and its symptom is a syntax error reading
+> *"Unexpected end of input"* pointing at a line that is perfectly fine. The parser simply
+> ran out of text. Re-paste that file.
 
 ## A2. Create the Apps Script project
 
@@ -48,18 +55,27 @@ that will own this.
 
 1. The editor opens with a file called `Code.gs` containing a stub `myFunction`.
    **Select all of it and replace it** with the contents of `dist/Code.gs`. Save (Ctrl/Cmd+S).
-2. Click **+** next to *Files* → **HTML**. Name it exactly `Index` (the editor adds `.html`).
-   Replace its contents with `dist/Index.html`. Save.
-3. Repeat for `Styles` and `App`.
-4. Click **⚙ Project Settings** in the left sidebar and tick
+2. Click **+** next to *Files* → **Script**. Name it exactly `Data`. Replace its contents
+   with `dist/Data.gs`. Save.
+3. Click **+** → **HTML**. Name it exactly `Index`. Paste `dist/Index.html`. Save.
+4. Repeat for `Styles` and `App`.
+5. Click **⚙ Project Settings** in the left sidebar and tick
    **Show "appsscript.json" manifest file in editor**.
-5. Back in the editor, open `appsscript.json` and replace it with `dist/appsscript.json`. Save.
+6. Back in the editor, open `appsscript.json` and replace it with `dist/appsscript.json`. Save.
 
-You should end up with exactly five files: `Code.gs`, `Index.html`, `Styles.html`,
+You should end up with six files: `Code.gs`, `Data.gs`, `Index.html`, `Styles.html`,
 `App.html`, `appsscript.json`.
 
 > **The names matter.** The app loads its own pages by name, so `Index`, `Styles` and `App`
 > must be spelled exactly that way, with that capitalisation.
+
+## A4. Check it arrived intact
+
+In the function dropdown at the top, choose **`verifyInstall`** and press **Run**.
+
+It prints a checklist to the execution log. If anything is missing it names which piece and
+which file to re-paste, rather than leaving you with a parse error. Do this before anything
+else — every later step assumes the code is complete.
 
 Now skip to **step 4** below.
 
@@ -172,9 +188,9 @@ Open the web app URL. You will land in the app as an admin.
 
 ## Updating lessons later
 
-**Option A (browser):** ask for a fresh `dist/Code.gs`, then paste it over the existing
-`Code.gs` in the editor and save. The other four files only change if the interface
-changes. Then make a new version, below.
+**Option A (browser):** a content change only touches `dist/Data.gs` — paste it over the
+existing `Data` file and save. `Code.gs` and the HTML files only change when the
+application itself changes. Then make a new version, below.
 
 **Option B (clasp):** edit the JSON under `curriculum/`, then:
 

@@ -13,7 +13,8 @@ const path = require('path');
 const vm = require('vm');
 
 const root = path.join(__dirname, '..', '..');
-const bundlePath = path.join(root, 'dist', 'Code.gs');
+// Data.gs must load first: it holds CONFIG and the curriculum that Code.gs uses.
+const BUNDLE_FILES = ['Data.gs', 'Code.gs'];
 
 let passed = 0, failed = 0;
 function check(name, cond, detail) {
@@ -21,11 +22,14 @@ function check(name, cond, detail) {
   else { failed++; console.error(`  FAIL ${name}${detail ? ' — ' + detail : ''}`); }
 }
 
-if (!fs.existsSync(bundlePath)) {
-  console.error('dist/Code.gs missing. Run `npm run bundle` first.');
-  process.exit(1);
-}
-const bundle = fs.readFileSync(bundlePath, 'utf8');
+BUNDLE_FILES.forEach((f) => {
+  if (!fs.existsSync(path.join(root, 'dist', f))) {
+    console.error(`dist/${f} missing. Run \`npm run bundle\` first.`);
+    process.exit(1);
+  }
+});
+const bundle = BUNDLE_FILES
+  .map((f) => fs.readFileSync(path.join(root, 'dist', f), 'utf8')).join('\n');
 
 console.log('\nBundle integrity');
 
@@ -36,12 +40,26 @@ vm.createContext(sandbox);
 
 let loadError = null;
 try {
-  vm.runInContext(bundle, sandbox, { filename: 'dist/Code.gs' });
+  BUNDLE_FILES.forEach((f) => {
+    vm.runInContext(fs.readFileSync(path.join(root, 'dist', f), 'utf8'),
+      sandbox, { filename: 'dist/' + f });
+  });
 } catch (err) {
   loadError = err;
 }
-check('the bundle parses and evaluates as a single file',
+check('both bundle files parse and evaluate together',
   loadError === null, loadError && loadError.message);
+
+// A truncated paste is the failure mode this guards against, so the marker that
+// makes truncation visible must actually be there.
+BUNDLE_FILES.forEach((f) => {
+  const text = fs.readFileSync(path.join(root, 'dist', f), 'utf8');
+  check(`dist/${f} ends with the truncation marker`,
+    /--- END OF .+ --- if you cannot see this line/.test(text.trimEnd().split('\n').pop()));
+});
+
+check('verifyInstall is available to run in the editor',
+  /function verifyInstall\(\)/.test(bundle));
 
 if (loadError) { console.log(`\n${passed} passed, ${failed} failed.`); process.exit(1); }
 
@@ -55,8 +73,21 @@ check('CONFIG survived concatenation', !!api.CONFIG && api.CONFIG.ALLOWED_DOMAIN
 check('LEVEL_ORDINAL computed at load time from CONFIG',
   api.LEVEL_ORDINAL && api.LEVEL_ORDINAL.emerging === 1);
 check('the curriculum is present', !!api.CURRICULUM && !!api.CURRICULUM.grade6);
-check('the framework catalogue is present',
-  !!api.FRAMEWORK && Object.keys(api.FRAMEWORK.grades).length === 14);
+check('the framework catalogue is present', !!api.FRAMEWORK && !!api.FRAMEWORK.grades);
+
+// The bundle carries only the grades this deployment needs: the grade being taught,
+// plus the prior grades its Bridging weeks reference. Shipping all fourteen is what
+// pushed the paste past the size where it truncates.
+const shipped = Object.keys(api.FRAMEWORK.grades).sort();
+check('the framework is trimmed to the grades actually needed',
+  shipped.join(',') === 'grade4,grade5,grade6', shipped.join(','));
+check('Grade 6 Bridging references still resolve in the trimmed catalogue',
+  api.FRAMEWORK.grades.grade5.SD.tiers.advanced.descriptor ===
+    'Refines prompts to improve output quality and explains why.' &&
+  !!api.FRAMEWORK.grades.grade4.CE.tiers.advanced.descriptor,
+  'bridging cites AIF\u00B7SD\u00B7G5\u00B7A and AIF\u00B7CE\u00B7G4\u00B7A');
+check('grades this deployment does not teach are not shipped',
+  api.FRAMEWORK.grades.grade12 === undefined && api.FRAMEWORK.grades.kg1 === undefined);
 
 console.log('\nBehaviour matches the multi-file source');
 
