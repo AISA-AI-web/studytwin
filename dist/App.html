@@ -1,0 +1,1246 @@
+<script>
+/**
+ * StudyTwin single-page app.
+ *
+ * Apps Script serves one HTML document, so navigation happens here rather than
+ * over the network — important because each Apps Script page load costs a
+ * cold start. Data comes from Api.gs via google.script.run.
+ */
+(function () {
+  'use strict';
+
+  var state = {
+    user: window.BOOTSTRAP_USER || null,
+    bootstrap: null,
+    view: 'home',
+    params: {},
+    answers: {},     // current worksheet answers, keyed by question id
+    lastResults: null
+  };
+
+  var view = document.getElementById('view');
+  var nav = document.getElementById('nav');
+  var userChip = document.getElementById('userChip');
+
+  /* ---------------------------------------------------------------------
+   * Server bridge
+   * ------------------------------------------------------------------- */
+
+  /** Promise wrapper around google.script.run, unwrapping the Api.gs envelope. */
+  function call(name) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return new Promise(function (resolve, reject) {
+      var runner = google.script.run
+        .withSuccessHandler(function (res) {
+          if (res && res.ok) resolve(res.data);
+          else reject(new Error((res && res.message) || 'Request failed.'));
+        })
+        .withFailureHandler(function (err) {
+          reject(new Error((err && err.message) || 'Could not reach the server.'));
+        });
+      runner[name].apply(runner, args);
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Helpers
+   * ------------------------------------------------------------------- */
+
+  /** Escapes text before it goes anywhere near innerHTML. */
+  function esc(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  /**
+   * Renders the small subset of inline markup lesson authors may use.
+   * Everything is escaped first, so only these exact patterns survive —
+   * lesson JSON can style text without being able to inject scripts.
+   */
+  function richText(value) {
+    return esc(value)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[\[(.+?)\]\]/g, '<span class="keyword">$1</span>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+
+  function initials(name) {
+    return String(name || '?').split(/\s+/).slice(0, 2)
+      .map(function (p) { return p.charAt(0).toUpperCase(); }).join('');
+  }
+
+  function formatDate(value) {
+    if (!value) return '—';
+    var d = new Date(value);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function toast(message, isError) {
+    var el = document.createElement('div');
+    el.className = 'toast' + (isError ? ' error' : '');
+    el.textContent = message;
+    document.body.appendChild(el);
+    setTimeout(function () { el.remove(); }, isError ? 6000 : 3000);
+  }
+
+  function showSpinner() {
+    view.innerHTML = '<div class="spinner" role="status" aria-label="Loading"></div>';
+  }
+
+  function showError(err) {
+    view.innerHTML = '<div class="empty"><h3>Something went wrong</h3>' +
+      '<p class="muted">' + esc(err.message) + '</p>' +
+      '<p style="margin-top:1rem"><button class="btn btn--ghost" id="retry">Try again</button></p></div>';
+    document.getElementById('retry').onclick = function () { route(state.view, state.params); };
+  }
+
+  /** Percentage ring used in the progress hero. */
+  function ring(percent) {
+    var r = 44, c = 2 * Math.PI * r;
+    var offset = c * (1 - Math.max(0, Math.min(100, percent)) / 100);
+    return '<div class="ring"><svg width="104" height="104">' +
+      '<circle cx="52" cy="52" r="' + r + '" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="9"/>' +
+      '<circle cx="52" cy="52" r="' + r + '" fill="none" stroke="#D8B664" stroke-width="9" ' +
+      'stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + offset + '"/>' +
+      '</svg><div class="ring-label">' + Math.round(percent) + '%</div></div>';
+  }
+
+  /* ---------------------------------------------------------------------
+   * Chrome: nav + user chip
+   * ------------------------------------------------------------------- */
+
+  function renderChrome() {
+    var user = state.user || {};
+    userChip.innerHTML =
+      '<div class="avatar">' + esc(initials(user.displayName)) + '</div>' +
+      '<div><div class="name">' + esc(user.displayName) + '</div>' +
+      '<div class="role">' + esc(user.role) + '</div></div>';
+
+    var items = [
+      { key: 'home', label: 'My Learning' },
+      { key: 'results', label: 'My Progress' }
+    ];
+    if (user.role === 'teacher' || user.role === 'admin') {
+      items.push({ key: 'teacher', label: 'Class Tracking' });
+    }
+    if (user.role === 'admin') {
+      items.push({ key: 'admin', label: 'Admin' });
+    }
+
+    nav.innerHTML = items.map(function (item) {
+      var active = state.view === item.key ||
+        (item.key === 'teacher' && state.view === 'student-detail') ||
+        (item.key === 'home' && state.view === 'lesson');
+      return '<button data-nav="' + item.key + '"' + (active ? ' class="active"' : '') + '>' +
+        esc(item.label) + '</button>';
+    }).join('');
+
+    Array.prototype.forEach.call(nav.querySelectorAll('[data-nav]'), function (btn) {
+      btn.onclick = function () { route(btn.getAttribute('data-nav'), {}); };
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Router
+   * ------------------------------------------------------------------- */
+
+  function route(name, params) {
+    state.view = name;
+    state.params = params || {};
+    renderChrome();
+    showSpinner();
+    window.scrollTo(0, 0);
+
+    var views = {
+      'home': viewHome,
+      'lesson': viewLesson,
+      'results': viewResults,
+      'teacher': viewTeacher,
+      'student-detail': viewStudentDetail,
+      'admin': viewAdmin
+    };
+    (views[name] || viewHome)().catch(showError);
+  }
+
+  /* ---------------------------------------------------------------------
+   * Student: course home
+   * ------------------------------------------------------------------- */
+
+  function viewHome() {
+    return call('api_getBootstrap').then(function (data) {
+      state.bootstrap = data;
+      state.user = data.user;
+      renderChrome();
+
+      var lessons = data.lessons;
+      var submitted = lessons.filter(function (l) { return l.status === 'submitted'; }).length;
+      var pct = lessons.length ? (submitted / lessons.length) * 100 : 0;
+      var byId = {};
+      lessons.forEach(function (l) { byId[l.id] = l; });
+
+      var html =
+        '<section class="hero">' +
+          ring(pct) +
+          '<div class="hero-text">' +
+            '<div class="eyebrow">' + esc(data.course.title) + '</div>' +
+            '<h1>Hello, ' + esc((data.user.displayName || '').split(' ')[0]) + '</h1>' +
+            '<p style="color:rgba(255,255,255,.8)">' +
+              (submitted === 0
+                ? 'Start with Lesson 1 below. Work through each lesson, then complete its worksheet.'
+                : 'You have handed in ' + submitted + ' of ' + lessons.length + ' worksheets. Keep going.') +
+            '</p>' +
+          '</div>' +
+          '<div class="hero-stats">' +
+            '<div class="stat"><div class="value">' + submitted + '/' + lessons.length + '</div>' +
+              '<div class="label">Worksheets in</div></div>' +
+            '<div class="stat"><div class="value">' + data.profile.judgedCount + '/' +
+              data.profile.strandsTotal + '</div>' +
+              '<div class="label">Strands judged</div></div>' +
+          '</div>' +
+        '</section>';
+
+      html += data.units.map(function (unit) {
+        var cards = (unit.lessons || []).map(function (id) {
+          return byId[id] ? lessonCard(byId[id]) : '';
+        }).join('');
+        return '<section class="unit">' +
+          '<div class="unit-head"><div class="eyebrow">Unit</div><h2>' + esc(unit.title) + '</h2>' +
+          (unit.summary ? '<p class="muted small">' + esc(unit.summary) + '</p>' : '') + '</div>' +
+          '<div class="lesson-grid">' + cards + '</div></section>';
+      }).join('');
+
+      view.innerHTML = html;
+      bindLessonCards();
+    });
+  }
+
+  function lessonCard(lesson) {
+    var statusLabels = { 'submitted': 'Handed in', 'not-started': 'Not started' };
+    var isLab = lesson.type === 'lab';
+    return '<button class="lesson-card' + (isLab ? ' is-lab' : '') + '" data-lesson="' + esc(lesson.id) + '">' +
+      '<div class="top">' +
+        '<div class="lesson-num">' + esc(lesson.number) + '</div>' +
+        '<span class="pill ' + (isLab ? 'pill--lab' : 'pill--lesson') + '">' +
+          (isLab ? 'Lab' : 'Lesson') + '</span>' +
+        (lesson.duration ? '<span class="muted small">' + esc(lesson.duration) + '</span>' : '') +
+      '</div>' +
+      '<h3>' + esc(lesson.title) + '</h3>' +
+      '<p>' + esc(lesson.summary) + '</p>' +
+      '<div class="lesson-meta">' +
+        '<span class="pill pill--' + esc(lesson.status) + '">' + esc(statusLabels[lesson.status]) + '</span>' +
+        (lesson.worksheetScore !== null
+          ? '<span class="muted small">' + esc(lesson.marksAwarded) + '/' +
+            esc(lesson.marksAvailable) + ' marks</span>'
+          : '<span class="muted small">' + esc(lesson.marksAvailable) + ' marks available</span>') +
+      '</div></button>';
+  }
+
+  function bindLessonCards() {
+    Array.prototype.forEach.call(view.querySelectorAll('[data-lesson]'), function (el) {
+      el.onclick = function () { route('lesson', { id: el.getAttribute('data-lesson') }); };
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Student: a single lesson
+   * ------------------------------------------------------------------- */
+
+  function viewLesson() {
+    return call('api_getLesson', state.params.id).then(function (data) {
+      state.answers = {};
+      state.lastResults = null;
+      var lesson = data.lesson;
+      var isLab = lesson.type === 'lab';
+
+      var html = '<button class="breadcrumb" id="back">← Back to My Learning</button>' +
+        '<div class="lesson-head">' +
+          '<div class="eyebrow">' + (isLab ? 'Lab' : 'Lesson') + ' ' + esc(lesson.number) +
+            (lesson.duration ? ' · ' + esc(lesson.duration) : '') + '</div>' +
+          '<h1>' + esc(lesson.title) + '</h1>' +
+          (lesson.summary ? '<p class="muted">' + esc(lesson.summary) + '</p>' : '') +
+        '</div>';
+
+      if (lesson.objectives && lesson.objectives.length) {
+        html += '<div class="callout"><div class="eyebrow">Learning objectives</div><ul>' +
+          lesson.objectives.map(function (o) { return '<li>' + richText(o) + '</li>'; }).join('') +
+          '</ul></div>';
+      }
+
+      html += (lesson.sections || []).map(renderSection).join('');
+
+      if (lesson.worksheet && lesson.worksheet.questions && lesson.worksheet.questions.length) {
+        html += renderWorksheet(lesson.worksheet, data);
+      }
+
+      view.innerHTML = html;
+      document.getElementById('back').onclick = function () { route('home', {}); };
+      bindWorksheet(data);
+    });
+  }
+
+  /** Lesson body blocks. Authors pick a type per block in the lesson JSON. */
+  function renderSection(section) {
+    switch (section.type) {
+      case 'text':
+        return '<section class="section">' +
+          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
+          '</section>';
+
+      case 'list':
+        return '<section class="section">' +
+          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+          '<ul>' + (section.items || []).map(function (i) {
+            return '<li>' + richText(i) + '</li>';
+          }).join('') + '</ul></section>';
+
+      case 'steps':
+        return '<section class="section">' +
+          (section.heading ? '<h3>' + esc(section.heading) + '</h3>' : '') +
+          '<ol class="steps">' + (section.items || []).map(function (i) {
+            return '<li>' + richText(i) + '</li>';
+          }).join('') + '</ol></section>';
+
+      case 'callout':
+        return '<div class="callout">' +
+          '<div class="eyebrow">' + esc(section.label || 'Remember') + '</div>' +
+          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
+          '</div>';
+
+      case 'vocabulary':
+        return '<section class="section"><h3>' + esc(section.heading || 'Key vocabulary') + '</h3>' +
+          '<div class="grid-2">' + (section.terms || []).map(function (t) {
+            return '<div class="card card--tint"><h4 style="font-size:.95rem;margin-bottom:.25rem">' +
+              esc(t.term) + '</h4><p class="small">' + richText(t.definition) + '</p></div>';
+          }).join('') + '</div></section>';
+
+      case 'activity':
+        return '<div class="card card--accent" style="margin-bottom:1.25rem">' +
+          '<div class="eyebrow">' + esc(section.label || 'Activity') + '</div>' +
+          '<h3 style="margin-bottom:.5rem">' + esc(section.heading || '') + '</h3>' +
+          (section.body || []).map(function (p) { return '<p>' + richText(p) + '</p>'; }).join('') +
+          (section.items && section.items.length
+            ? '<ol class="steps" style="margin-top:.6rem">' + section.items.map(function (i) {
+                return '<li>' + richText(i) + '</li>';
+              }).join('') + '</ol>'
+            : '') +
+          '</div>';
+
+      default:
+        return '';
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+   * Worksheet rendering
+   * ------------------------------------------------------------------- */
+
+  function renderWorksheet(worksheet, data) {
+    var total = worksheet.questions.reduce(function (s, q) { return s + (q.marks || 0); }, 0);
+    var openCount = worksheet.questions.filter(function (q) { return q.autoMarked === false; }).length;
+    var markedCount = worksheet.questions.length - openCount;
+    var locked = !data.canAttempt;
+
+    var head = '<section class="section" style="margin-top:2.5rem;padding-top:1.5rem;' +
+      'border-top:2px solid var(--aisa-purple-tint)">' +
+      '<div class="eyebrow">Worksheet</div>' +
+      '<h2>' + esc(worksheet.title || 'Check your understanding') + '</h2>' +
+      '<p class="muted small">' +
+        (markedCount ? markedCount + ' marked question' + (markedCount === 1 ? '' : 's') +
+          ' worth ' + total + ' mark' + (total === 1 ? '' : 's') : '') +
+        (markedCount && openCount ? ' · ' : '') +
+        (openCount ? openCount + ' written response' + (openCount === 1 ? '' : 's') +
+          ' your teacher reads' : '') +
+        ' · attempt ' + Math.min(data.attempts + 1, data.maxAttempts) + ' of ' +
+        data.maxAttempts + '</p>';
+
+    if (locked) {
+      head += '<div class="callout" style="margin-top:1rem"><div class="eyebrow">Attempts used</div>' +
+        '<p>You have used all ' + data.maxAttempts + ' attempts. Your best score was ' +
+        Math.round(data.best ? data.best.percent : 0) + '%. Speak to your teacher if you need another try.</p></div>';
+    }
+    head += '</section>';
+
+    var questions = '<form id="worksheet">' +
+      worksheet.questions.map(function (q, i) {
+        return renderQuestion(q, i + 1, locked);
+      }).join('') + '</form>';
+
+    var actions = locked ? '' :
+      '<div class="row between" style="margin-top:1.5rem">' +
+        '<span class="muted small" id="answeredCount"></span>' +
+        '<button type="button" class="btn btn--primary" id="submitBtn">Submit worksheet</button>' +
+      '</div>';
+
+    return head + questions + actions + '<div id="resultsPanel"></div>';
+  }
+
+  function renderQuestion(q, number, locked) {
+    var body = '';
+    var dis = locked ? ' disabled' : '';
+
+    switch (q.type) {
+      case 'mcq':
+      case 'truefalse': {
+        var options = q.type === 'truefalse'
+          ? [{ id: 'true', text: 'True' }, { id: 'false', text: 'False' }]
+          : (q.options || []);
+        body = options.map(function (o) {
+          return '<label class="option"><input type="radio" name="' + esc(q.id) + '" value="' +
+            esc(o.id) + '"' + dis + '><span>' + richText(o.text) + '</span></label>';
+        }).join('');
+        break;
+      }
+      case 'multi':
+        body = '<p class="muted small" style="margin-bottom:.5rem">Select all that apply.</p>' +
+          (q.options || []).map(function (o) {
+            return '<label class="option"><input type="checkbox" name="' + esc(q.id) + '" value="' +
+              esc(o.id) + '"' + dis + '><span>' + richText(o.text) + '</span></label>';
+          }).join('');
+        break;
+
+      case 'matching':
+        body = (q.left || []).map(function (l) {
+          return '<div class="match-row"><div class="left">' + richText(l.text) + '</div>' +
+            '<select data-match="' + esc(q.id) + '" data-left="' + esc(l.id) + '"' + dis + '>' +
+            '<option value="">Choose…</option>' +
+            (q.right || []).map(function (r) {
+              return '<option value="' + esc(r.id) + '">' + esc(r.text) + '</option>';
+            }).join('') + '</select></div>';
+        }).join('');
+        break;
+
+      case 'ordering':
+        body = '<p class="muted small" style="margin-bottom:.5rem">Use the arrows to put these in order.</p>' +
+          '<div data-order="' + esc(q.id) + '">' + (q.items || []).map(function (item, i) {
+            return '<div class="order-item" data-item="' + esc(item.id) + '">' +
+              '<span class="handle">' + (i + 1) + '</span>' +
+              '<span class="text">' + richText(item.text) + '</span>' +
+              '<button type="button" class="order-btn" data-move="up"' + dis + '>↑</button>' +
+              '<button type="button" class="order-btn" data-move="down"' + dis + '>↓</button>' +
+              '</div>';
+          }).join('') + '</div>';
+        break;
+
+      case 'numeric':
+        body = '<input type="number" step="any" data-input="' + esc(q.id) + '" ' +
+          'placeholder="' + esc(q.placeholder || 'Your answer') + '"' + dis + '>';
+        break;
+
+      case 'fillBlank':
+        body = '<div class="blanks">' + (q.blanks || []).map(function (label, i) {
+          return '<input type="text" data-blank="' + esc(q.id) + '" data-index="' + i + '" ' +
+            'placeholder="' + esc(label) + '"' + dis + '>';
+        }).join('') + '</div>';
+        break;
+
+      case 'shortText':
+      default:
+        body = (q.stem ? '<p class="stem">' + richText(q.stem) + '</p>' : '') +
+          '<textarea data-input="' + esc(q.id) + '" ' +
+          'placeholder="' + esc(q.placeholder || 'Write your answer…') + '"' +
+          (q.maxLength ? ' maxlength="' + esc(q.maxLength) + '"' : '') + dis + '></textarea>';
+        break;
+    }
+
+    var isOpen = q.autoMarked === false;
+    return '<div class="question' + (isOpen ? ' question--open' : '') + '" data-question="' +
+      esc(q.id) + '" data-type="' + esc(q.type) + '"' + (isOpen ? ' data-open="1"' : '') + '>' +
+      '<div class="q-head"><span class="q-num">' + number + '.</span>' +
+      '<span class="q-prompt">' + richText(q.prompt) + '</span>' +
+      '<span class="q-marks">' +
+        (isOpen ? '<span class="read-pill" title="Your teacher reads this rather than it being ' +
+                  'marked automatically">Teacher reads</span>'
+                : esc(q.marks) + ' mark' + (q.marks === 1 ? '' : 's')) +
+      '</span></div>' +
+      body +
+      (q.hint ? '<p class="muted small" style="margin-top:.5rem">Hint: ' + richText(q.hint) + '</p>' : '') +
+      '</div>';
+  }
+
+  /* ---------------------------------------------------------------------
+   * Worksheet interaction
+   * ------------------------------------------------------------------- */
+
+  function bindWorksheet(data) {
+    var form = document.getElementById('worksheet');
+    if (!form) return;
+
+    // Highlight the chosen option and keep the answer map current.
+    form.addEventListener('change', function (e) {
+      var input = e.target;
+      var question = input.closest('.question');
+      if (question && (input.type === 'radio' || input.type === 'checkbox')) {
+        Array.prototype.forEach.call(question.querySelectorAll('.option'), function (opt) {
+          var box = opt.querySelector('input');
+          opt.classList.toggle('selected', box && box.checked);
+        });
+      }
+      updateAnsweredCount();
+    });
+    form.addEventListener('input', updateAnsweredCount);
+
+    // Ordering controls.
+    form.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-move]');
+      if (!btn) return;
+      var item = btn.closest('.order-item');
+      var list = item.parentNode;
+      if (btn.getAttribute('data-move') === 'up' && item.previousElementSibling) {
+        list.insertBefore(item, item.previousElementSibling);
+      } else if (btn.getAttribute('data-move') === 'down' && item.nextElementSibling) {
+        list.insertBefore(item.nextElementSibling, item);
+      }
+      renumberOrder(list);
+      updateAnsweredCount();
+    });
+
+    Array.prototype.forEach.call(form.querySelectorAll('[data-order]'), renumberOrder);
+    updateAnsweredCount();
+
+    var submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) submitBtn.onclick = function () { submitWorksheet(data); };
+  }
+
+  function renumberOrder(list) {
+    Array.prototype.forEach.call(list.querySelectorAll('.order-item'), function (item, i, all) {
+      item.querySelector('.handle').textContent = i + 1;
+      item.querySelector('[data-move="up"]').disabled = (i === 0);
+      item.querySelector('[data-move="down"]').disabled = (i === all.length - 1);
+    });
+  }
+
+  /** Reads every question's current answer out of the DOM. */
+  function collectAnswers() {
+    var answers = {};
+    Array.prototype.forEach.call(document.querySelectorAll('.question'), function (el) {
+      var id = el.getAttribute('data-question');
+      var type = el.getAttribute('data-type');
+
+      if (type === 'mcq' || type === 'truefalse') {
+        var picked = el.querySelector('input:checked');
+        if (picked) answers[id] = picked.value;
+
+      } else if (type === 'multi') {
+        var boxes = el.querySelectorAll('input:checked');
+        if (boxes.length) {
+          answers[id] = Array.prototype.map.call(boxes, function (b) { return b.value; });
+        }
+
+      } else if (type === 'matching') {
+        var map = {};
+        var any = false;
+        Array.prototype.forEach.call(el.querySelectorAll('select[data-left]'), function (sel) {
+          if (sel.value) { map[sel.getAttribute('data-left')] = sel.value; any = true; }
+        });
+        if (any) answers[id] = map;
+
+      } else if (type === 'ordering') {
+        answers[id] = Array.prototype.map.call(el.querySelectorAll('.order-item'), function (item) {
+          return item.getAttribute('data-item');
+        });
+
+      } else if (type === 'fillBlank') {
+        var values = Array.prototype.map.call(el.querySelectorAll('[data-blank]'), function (input) {
+          return input.value.trim();
+        });
+        if (values.some(function (v) { return v; })) answers[id] = values;
+
+      } else {
+        var field = el.querySelector('[data-input]');
+        if (field && String(field.value).trim()) answers[id] = String(field.value).trim();
+      }
+    });
+    return answers;
+  }
+
+  function updateAnsweredCount() {
+    var counter = document.getElementById('answeredCount');
+    if (!counter) return;
+    var total = document.querySelectorAll('.question').length;
+    var done = Object.keys(collectAnswers()).length;
+    counter.textContent = done + ' of ' + total + ' answered';
+  }
+
+  function submitWorksheet(data) {
+    var answers = collectAnswers();
+    var total = document.querySelectorAll('.question').length;
+    var unanswered = total - Object.keys(answers).length;
+
+    if (unanswered > 0) {
+      var ok = window.confirm(unanswered + ' question' + (unanswered === 1 ? '' : 's') +
+        ' still blank. Unanswered questions score zero. Submit anyway?');
+      if (!ok) return;
+    }
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Marking…';
+
+    call('api_submitWorksheet', state.params.id, answers)
+      .then(function (result) {
+        state.lastResults = result;
+        showResults(result);
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Submit worksheet';
+        toast(err.message, true);
+      });
+  }
+
+  /** Marks each question in place and shows the score panel. */
+  function showResults(result) {
+    var byId = {};
+    result.results.forEach(function (r) { byId[r.questionId] = r; });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.question'), function (el) {
+      var r = byId[el.getAttribute('data-question')];
+      if (!r) return;
+
+      Array.prototype.forEach.call(el.querySelectorAll('input, textarea, select, button'), function (f) {
+        f.disabled = true;
+      });
+
+      var fb = document.createElement('div');
+      fb.className = 'feedback';
+
+      if (r.needsTeacherReview) {
+        // No tick, no cross, no score — nothing here has been judged yet.
+        el.classList.add('is-recorded');
+        fb.innerHTML = '<strong>Recorded</strong> · ' + esc(r.feedback);
+        el.appendChild(fb);
+        return;
+      }
+
+      el.classList.add(r.correct ? 'is-correct' : (r.partial ? 'is-partial' : 'is-wrong'));
+      fb.innerHTML = '<strong>' + r.marksAwarded + '/' + r.marksAvailable + '</strong> · ' +
+        esc(r.feedback) +
+        (!r.correct && r.modelAnswer
+          ? '<div class="model" style="margin-top:.4rem">Answer: ' + esc(r.modelAnswer) + '</div>'
+          : '');
+      el.appendChild(fb);
+    });
+
+    var actions = document.getElementById('submitBtn');
+    if (actions && actions.parentNode) actions.parentNode.remove();
+
+    var panel = document.getElementById('resultsPanel');
+    panel.innerHTML =
+      '<div class="hero" style="margin-top:1.5rem">' +
+        ring(result.worksheetScore) +
+        '<div class="hero-text">' +
+          '<div class="eyebrow">Attempt ' + result.attempt + '</div>' +
+          '<h1 style="font-size:1.5rem">Worksheet handed in</h1>' +
+          '<p style="color:rgba(255,255,255,.8)">' +
+            (result.marksAvailable > 0
+              ? 'You scored <strong>' + result.marksAwarded + ' out of ' +
+                result.marksAvailable + '</strong> on the marked questions. '
+              : '') +
+            (result.openResponses
+              ? 'Your ' + result.openResponses + ' written response' +
+                (result.openResponses === 1 ? ' has' : 's have') +
+                ' been recorded for your teacher to read. '
+              : '') +
+            'Your teacher uses this alongside what you do and explain in lessons.' +
+            (result.attemptsRemaining > 0
+              ? ' You have ' + result.attemptsRemaining + ' attempt' +
+                (result.attemptsRemaining === 1 ? '' : 's') + ' left — your best score counts.'
+              : ' This was your final attempt.') +
+          '</p>' +
+          '<div class="row" style="margin-top:1rem">' +
+            '<button class="btn btn--gold" id="backHome">Back to My Learning</button>' +
+            (result.attemptsRemaining > 0
+              ? '<button class="btn btn--ghost" style="background:rgba(255,255,255,.12);' +
+                'color:#fff;border-color:rgba(255,255,255,.3)" id="retry">Try again</button>'
+              : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    document.getElementById('backHome').onclick = function () { route('home', {}); };
+    var retryBtn = document.getElementById('retry');
+    if (retryBtn) retryBtn.onclick = function () { route('lesson', { id: state.params.id }); };
+
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Attainment rendering shared by the student and teacher views
+   * ------------------------------------------------------------------- */
+
+  /**
+   * A level chip. Emerging is the EXPECTED standard in Term 1, so nothing below
+   * Advanced is styled as a warning — a cohort sitting at Emerging is the
+   * framework working correctly, and the UI must not imply otherwise.
+   */
+  function levelChip(level) {
+    if (!level || !level.level) {
+      return '<span class="level-chip level-chip--none">Not yet judged</span>';
+    }
+    return '<span class="level-chip" style="background:' + esc(level.color || '#555') + '">' +
+      esc(level.label) + '</span>';
+  }
+
+  function levelChipFor(strandRow) {
+    if (!strandRow.judged) return '<span class="level-chip level-chip--none">Not yet judged</span>';
+    return '<span class="level-chip" style="background:' + esc(strandRow.levelColor || '#555') + '">' +
+      esc(strandRow.levelLabel) + '</span>';
+  }
+
+  /** The overall level plus the published rule that produced it. */
+  function overallBlock(profile, expectedTier) {
+    var o = profile.overall;
+    if (!o.level) {
+      return '<div class="card card--tint"><div class="eyebrow">Overall level</div>' +
+        '<p style="font-size:1.2rem;font-weight:700;color:var(--aisa-purple)">Not yet complete</p>' +
+        '<p class="muted small">' +
+        (o.missingStrands && o.missingStrands.length
+          ? 'Still to judge: ' + esc(o.missingStrands.join(', '))
+          : 'No strands judged yet.') +
+        '</p></div>';
+    }
+    return '<div class="card card--tint"><div class="eyebrow">Overall level</div>' +
+      '<div style="margin:.3rem 0 .5rem">' + levelChip(o) + '</div>' +
+      (o.isExpected
+        ? '<p class="small" style="color:var(--aisa-purple)">This is the expected standard for Term 1.</p>'
+        : '') +
+      '<p class="muted small"><strong>Rule:</strong> ' + esc(o.rule) + '</p></div>';
+  }
+
+  /** One strand row: descriptors, level, evidence, note. */
+  function strandRowHtml(s, opts) {
+    opts = opts || {};
+    var d = s.descriptors || {};
+    return '<div class="strand-card' + (s.judged ? '' : ' strand-card--unjudged') + '">' +
+      '<div class="strand-card__head">' +
+        '<div><span class="code">' + esc(s.strand) + '</span> ' +
+          '<strong>' + esc(s.label) + '</strong></div>' +
+        levelChipFor(s) +
+      '</div>' +
+      (opts.showDescriptors !== false
+        ? '<div class="descriptors">' +
+            ['emerging', 'proficient', 'advanced'].map(function (tier) {
+              var t = d[tier];
+              if (!t) return '';
+              var active = s.level === tier;
+              return '<div class="descriptor' + (active ? ' is-active' : '') + '">' +
+                '<span class="descriptor__tier">' + tier.charAt(0).toUpperCase() + tier.slice(1) +
+                '</span><span class="descriptor__text">' + esc(t.descriptor) + '</span>' +
+                '<span class="descriptor__code">' + esc(t.code) + '</span></div>';
+            }).join('') +
+          '</div>'
+        : '') +
+      (s.judged && s.note ? '<p class="small" style="margin-top:.5rem"><strong>Note:</strong> ' +
+        esc(s.note) + '</p>' : '') +
+      (s.judged && s.nextStep ? '<p class="small"><strong>Next step:</strong> ' +
+        esc(s.nextStep) + '</p>' : '') +
+      (s.judged
+        ? '<div class="evidence-row">' +
+            ['products', 'observations', 'conversations'].map(function (src) {
+              var has = s.evidenceSources.indexOf(src) !== -1;
+              return '<span class="evidence-pip' + (has ? ' is-present' : '') + '">' +
+                (has ? '✓ ' : '✗ ') + src + '</span>';
+            }).join('') +
+            (s.singleSource
+              ? '<span class="warn-pip" title="ADEK asks judgements to draw on three sources">' +
+                '⚠ single source</span>'
+              : '') +
+          '</div>'
+        : '') +
+      '</div>';
+  }
+
+  /* ---------------------------------------------------------------------
+   * Student: my progress
+   * ------------------------------------------------------------------- */
+
+  function viewResults() {
+    return call('api_getMyResults').then(function (data) {
+      var p = data.profile;
+
+      var html = '<div class="eyebrow">My progress</div><h1>My AI Fluency profile</h1>' +
+        '<p class="muted" style="margin-bottom:1.5rem">Your teacher judges each of the four ' +
+        'strands against the framework descriptors, using your work, what you do in lessons, ' +
+        'and what you explain. <strong>Emerging is the expected standard this term.</strong></p>';
+
+      html += '<div class="grid-2" style="margin-bottom:1.75rem">' +
+        overallBlock(p, data.expectedTier) +
+        '<div class="card card--tint"><div class="eyebrow">Strands judged</div>' +
+          '<div style="font-size:2.2rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
+          p.judgedCount + '<span style="font-size:1.1rem;color:var(--aisa-muted-gray)">/' +
+          p.strandsTotal + '</span></div>' +
+          '<p class="muted small" style="margin-top:.4rem">Strands your teacher has assessed so far</p>' +
+        '</div></div>';
+
+      html += '<h2 style="margin-bottom:.6rem">The four strands</h2>' +
+        p.byStrand.map(function (s) { return strandRowHtml(s); }).join('');
+
+      html += '<h2 style="margin:2rem 0 .4rem">My worksheets</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">These are your marks on the ' +
+        'auto-marked parts. They are one of the three kinds of evidence your teacher uses — ' +
+        'they are not a level on their own.</p>' +
+        '<div class="table-wrap"><table>' +
+        '<thead><tr><th>#</th><th>Lesson</th><th>Type</th><th>Marks</th><th>Score</th><th>Submitted</th></tr></thead><tbody>' +
+        data.lessons.map(function (l) {
+          return '<tr><td>' + esc(l.number) + '</td><td>' + esc(l.title) + '</td>' +
+            '<td><span class="pill ' + (l.type === 'lab' ? 'pill--lab' : 'pill--lesson') + '">' +
+              (l.type === 'lab' ? 'Lab' : 'Lesson') + '</span></td>' +
+            '<td>' + (l.marksAwarded !== null ? esc(l.marksAwarded) + '/' + esc(l.marksAvailable)
+                                              : '—') + '</td>' +
+            '<td>' + (l.worksheetScore !== null ? Math.round(l.worksheetScore) + '%' : '—') + '</td>' +
+            '<td class="muted small">' + formatDate(l.submittedAt) + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+
+      view.innerHTML = html;
+    });
+  }
+
+  /* ---------------------------------------------------------------------
+   * Teacher: class tracking
+   * ------------------------------------------------------------------- */
+
+  function viewTeacher() {
+    return call('api_getClassOverview', state.params.className || '').then(function (data) {
+      state.levels = data.levels;
+
+      var html = '<div class="row between" style="margin-bottom:1.25rem">' +
+        '<div><div class="eyebrow">Class tracking</div><h1>Grade 6 — AI Fluency</h1>' +
+        '<p class="muted small">Expected standard this term: <strong>' +
+          esc((data.expectedTier || '').charAt(0).toUpperCase() + (data.expectedTier || '').slice(1)) +
+        '</strong></p></div>' +
+        '<div class="row">' +
+          (data.classes.length
+            ? '<select id="classFilter" style="width:auto"><option value="">All classes</option>' +
+              data.classes.map(function (c) {
+                return '<option value="' + esc(c) + '"' +
+                  (state.params.className === c ? ' selected' : '') + '>' + esc(c) + '</option>';
+              }).join('') + '</select>'
+            : '') +
+          '<button class="btn btn--ghost" id="exportBtn">Export record</button>' +
+        '</div></div>';
+
+      if (!data.students.length) {
+        html += '<div class="empty"><h3>No students on the roster yet</h3>' +
+          '<p>An admin needs to import the Grade 6 roster before progress appears here.</p></div>';
+        view.innerHTML = html;
+        bindTeacherControls();
+        return;
+      }
+
+      var strandCodes = ['CU', 'SD', 'CE', 'GE'];
+
+      html += '<div class="table-wrap"><table><thead><tr>' +
+        '<th>Student</th><th>Class</th>' +
+        strandCodes.map(function (c) {
+          var s = data.strands[c];
+          return '<th title="' + esc(s ? s.label : c) + '">' + c + '</th>';
+        }).join('') +
+        '<th>Overall</th><th>Worksheets</th><th>Next step</th>' +
+        '</tr></thead><tbody>' +
+        data.students.map(function (st) {
+          var byStrand = {};
+          st.profile.byStrand.forEach(function (r) { byStrand[r.strand] = r; });
+          var nextSteps = st.profile.byStrand
+            .map(function (r) { return r.nextStep; }).filter(Boolean);
+
+          return '<tr class="clickable" data-student="' + esc(st.email) + '">' +
+            '<td><strong>' + esc(st.displayName) + '</strong><br>' +
+              '<span class="muted small">' + esc(st.email) + '</span></td>' +
+            '<td>' + esc(st.className || '—') + '</td>' +
+            strandCodes.map(function (c) {
+              var r = byStrand[c];
+              if (!r || !r.judged) return '<td class="cell-unjudged" title="Not yet judged">·</td>';
+              return '<td><span class="level-dot" style="background:' + esc(r.levelColor) +
+                '" title="' + esc(r.levelLabel) + '"></span></td>';
+            }).join('') +
+            '<td>' + (st.profile.overall.level
+              ? levelChip(st.profile.overall)
+              : '<span class="muted small">incomplete</span>') + '</td>' +
+            '<td class="muted small">' + st.worksheetsSubmitted + '/' + data.lessonsTotal + '</td>' +
+            '<td class="muted small">' + esc(nextSteps[0] || '—') + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+
+      html += '<p class="muted small" style="margin-top:.5rem">' +
+        data.levels.map(function (l) {
+          return '<span class="level-dot" style="background:' + esc(l.color) + '"></span> ' +
+            esc(l.label);
+        }).join(' &nbsp; ') + ' &nbsp; <span class="cell-unjudged">·</span> not yet judged</p>';
+
+      html += '<h2 style="margin:2rem 0 .5rem">Where the class stands, by strand</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">Counts of students at each level. ' +
+        'Use this to decide what to reteach.</p><div class="card">' +
+        data.classProfile.byStrand.map(function (s) {
+          var total = s.distribution.reduce(function (n, d) { return n + d.count; }, 0) + s.notJudged;
+          return '<div class="standard-row">' +
+            '<span class="code">' + esc(s.strand) + '</span>' +
+            '<span class="desc">' + esc(s.label) + '</span>' +
+            '<span class="meter"><div class="dist">' +
+              s.distribution.map(function (d) {
+                return d.count ? '<i style="width:' + ((d.count / total) * 100) + '%;background:' +
+                  esc(d.color) + '" title="' + esc(d.label) + ': ' + d.count + '"></i>' : '';
+              }).join('') +
+              (s.notJudged ? '<i style="width:' + ((s.notJudged / total) * 100) +
+                '%;background:#E4E4EA" title="Not yet judged: ' + s.notJudged + '"></i>' : '') +
+            '</div><span class="muted small">' +
+              s.distribution.filter(function (d) { return d.count; })
+                .map(function (d) { return d.count + ' ' + d.label.toLowerCase(); }).join(', ') +
+              (s.notJudged ? (s.distribution.some(function (d) { return d.count; }) ? ', ' : '') +
+                s.notJudged + ' not judged' : '') +
+            '</span></span></div>';
+        }).join('') + '</div>';
+
+      view.innerHTML = html;
+      bindTeacherControls();
+    });
+  }
+
+  function bindTeacherControls() {
+    Array.prototype.forEach.call(view.querySelectorAll('[data-student]'), function (row) {
+      row.onclick = function () {
+        route('student-detail', { email: row.getAttribute('data-student') });
+      };
+    });
+
+    var filter = document.getElementById('classFilter');
+    if (filter) filter.onchange = function () { route('teacher', { className: filter.value }); };
+
+    var exportBtn = document.getElementById('exportBtn');
+    if (exportBtn) {
+      exportBtn.onclick = function () {
+        exportBtn.disabled = true;
+        exportBtn.textContent = 'Preparing…';
+        call('api_exportCsv').then(function (res) {
+          downloadCsv(res.csv, 'studytwin-grade6-record.csv');
+          exportBtn.disabled = false;
+          exportBtn.textContent = 'Export record';
+        }).catch(function (err) {
+          exportBtn.disabled = false;
+          exportBtn.textContent = 'Export record';
+          toast(err.message, true);
+        });
+      };
+    }
+  }
+
+  function downloadCsv(csv, filename) {
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  /* ---------------------------------------------------------------------
+   * Teacher: one student — the ADEK observation record, and judging
+   * ------------------------------------------------------------------- */
+
+  function viewStudentDetail() {
+    return call('api_getStudentDetail', state.params.email).then(function (data) {
+      state.detail = data;
+      var p = data.profile;
+
+      var html = '<button class="breadcrumb" id="back">← Back to class tracking</button>' +
+        '<div class="row between" style="margin-bottom:1.25rem">' +
+          '<div><div class="eyebrow">' + esc(data.student.className || 'Grade 6') + '</div>' +
+          '<h1>' + esc(data.student.displayName) + '</h1>' +
+          '<p class="muted small">' + esc(data.student.email) + '</p></div>' +
+          '<div>' + overallBlock(p) + '</div>' +
+        '</div>';
+
+      html += '<h2 style="margin-bottom:.5rem">Observation record</h2>' +
+        '<p class="muted small" style="margin-bottom:.9rem">Judge each strand on its own ' +
+        'evidence. A strong plan in one strand does not lift a weak argument in another.</p>';
+
+      html += p.byStrand.map(function (s) {
+        var ev = data.evidence.filter(function (e) { return e.strand === s.strand; })[0] || {};
+        return '<div class="judge-block">' +
+          strandRowHtml(s) +
+          '<div class="judge-evidence">' +
+            '<div class="eyebrow">Products — one of three sources</div>' +
+            (ev.itemsMarked
+              ? '<p class="small">Auto-marked: <strong>' + ev.marksAwarded + '/' +
+                ev.marksAvailable + '</strong> across ' + ev.itemsMarked + ' item' +
+                (ev.itemsMarked === 1 ? '' : 's') + ' in ' + ev.lessonsCovered + ' lesson' +
+                (ev.lessonsCovered === 1 ? '' : 's') + '.' +
+                (ev.notIndependent
+                  ? ' <span class="warn-pip">⚠ best of ' + ev.highestAttemptUsed +
+                    ' attempts — not evidence of independence</span>'
+                  : '') + '</p>'
+              : '<p class="small muted">No auto-marked work bears on this strand yet.</p>') +
+          '</div>' +
+          '<button class="btn btn--ghost btn--sm" data-judge="' + esc(s.strand) + '">' +
+            (s.judged ? 'Update judgement' : 'Record judgement') + '</button>' +
+          '<div class="judge-form" id="judge-' + esc(s.strand) + '" hidden></div>' +
+        '</div>';
+      }).join('');
+
+      var written = [];
+      data.lessons.forEach(function (l) {
+        (l.results || []).forEach(function (r) {
+          if (r.needsTeacherReview) written.push({ lesson: l, result: r });
+        });
+      });
+
+      if (written.length) {
+        html += '<h2 style="margin:2rem 0 .4rem">Written responses</h2>' +
+          '<p class="muted small" style="margin-bottom:.75rem">' + written.length +
+          ' response' + (written.length === 1 ? '' : 's') + ' this student wrote that no mark ' +
+          'scheme can judge. These are the product evidence for your judgement above.</p>' +
+          written.map(function (w) {
+            var answered = w.result.response !== null && w.result.response !== '';
+            return '<div class="response' + (answered ? '' : ' response--blank') + '">' +
+              '<div class="response__prompt"><span class="muted small">' +
+                esc(w.lesson.title) + '</span><br>' + esc(w.result.prompt || '') + '</div>' +
+              '<div class="response__text">' +
+                (answered ? esc(typeof w.result.response === 'string'
+                                ? w.result.response
+                                : JSON.stringify(w.result.response))
+                          : 'Not answered') + '</div>' +
+              (w.result.lookFor
+                ? '<div class="response__lookfor"><strong>Look for:</strong> ' +
+                  esc(w.result.lookFor) + '</div>'
+                : '') +
+              '</div>';
+          }).join('');
+      }
+
+      if (data.history.length) {
+        html += '<h2 style="margin:2rem 0 .5rem">Judgement history</h2>' +
+          '<div class="table-wrap"><table><thead><tr><th>When</th><th>Strand</th><th>Level</th>' +
+          '<th>Event</th><th>By</th><th>Note</th></tr></thead><tbody>' +
+          data.history.map(function (j) {
+            return '<tr' + (j.supersededBy ? ' class="muted"' : '') + '>' +
+              '<td class="small">' + formatDate(j.judgedAt) + '</td>' +
+              '<td class="small">' + esc(j.strand) + '</td>' +
+              '<td class="small">' + esc(j.level) + (j.supersededBy ? ' (superseded)' : '') + '</td>' +
+              '<td class="small">' + esc(j.assessmentEvent) + '</td>' +
+              '<td class="small">' + esc(j.judgedBy) + '</td>' +
+              '<td class="small muted">' + esc(j.note || '') + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }
+
+      html += '<h2 style="margin:2rem 0 .5rem">Worksheet evidence</h2><div class="table-wrap"><table>' +
+        '<thead><tr><th>#</th><th>Lesson</th><th>Attempts</th><th>Marks</th><th>Score</th>' +
+        '<th>Submitted</th></tr></thead><tbody>' +
+        data.lessons.map(function (l) {
+          return '<tr><td>' + esc(l.number) + '</td><td>' + esc(l.title) + '</td>' +
+            '<td>' + esc(l.attempts) + '</td>' +
+            '<td>' + (l.marksAwarded !== null ? esc(l.marksAwarded) + '/' + esc(l.marksAvailable)
+                                              : '—') + '</td>' +
+            '<td>' + (l.worksheetScore !== null ? Math.round(l.worksheetScore) + '%' : '—') + '</td>' +
+            '<td class="muted small">' + formatDate(l.submittedAt) + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+
+      view.innerHTML = html;
+      document.getElementById('back').onclick = function () { route('teacher', {}); };
+      bindJudging(data);
+    });
+  }
+
+  /** Wires the per-strand judgement forms. */
+  function bindJudging(data) {
+    Array.prototype.forEach.call(view.querySelectorAll('[data-judge]'), function (btn) {
+      btn.onclick = function () {
+        var strand = btn.getAttribute('data-judge');
+        var panel = document.getElementById('judge-' + strand);
+        if (!panel.hidden) { panel.hidden = true; return; }
+
+        var s = data.profile.byStrand.filter(function (r) { return r.strand === strand; })[0];
+        panel.innerHTML = judgeFormHtml(s, data);
+        panel.hidden = false;
+        panel.querySelector('[data-save]').onclick = function () {
+          saveJudgement(strand, panel, data);
+        };
+        panel.querySelector('[data-cancel]').onclick = function () { panel.hidden = true; };
+      };
+    });
+  }
+
+  function judgeFormHtml(s, data) {
+    var d = s.descriptors || {};
+    return '<div class="judge-form__inner">' +
+      '<div class="eyebrow">Level for ' + esc(s.label) + '</div>' +
+      '<div class="level-options">' +
+        data.levels.map(function (l) {
+          var descriptor = d[l.key] ? d[l.key].descriptor : l.note;
+          return '<label class="option' + (s.level === l.key ? ' selected' : '') + '">' +
+            '<input type="radio" name="level-' + esc(s.strand) + '" value="' + esc(l.key) + '"' +
+              (s.level === l.key ? ' checked' : '') + '>' +
+            '<span><strong>' + esc(l.label) + '</strong><br>' +
+            '<span class="small muted">' + esc(descriptor) + '</span></span></label>';
+        }).join('') +
+      '</div>' +
+      '<div class="eyebrow" style="margin-top:1rem">Evidence — all three sources</div>' +
+      data.evidenceSources.map(function (src) {
+        var val = src.key === 'products' ? s.evidenceProducts
+                : src.key === 'observations' ? s.evidenceObservations : s.evidenceConversations;
+        return '<label class="field"><span class="field__label">' + esc(src.label) +
+          ' <span class="muted">— ' + esc(src.hint) + '</span></span>' +
+          '<input type="text" data-evidence="' + esc(src.key) + '" value="' + esc(val || '') +
+          '" placeholder="e.g. ' + esc(src.key === 'products' ? 'Solution plan sheet'
+            : src.key === 'observations' ? 'Card sort in W2 Lab' : 'Part 4 probe') + '"></label>';
+      }).join('') +
+      '<label class="field"><span class="field__label">Note</span>' +
+        '<textarea data-field="note" placeholder="What you saw that decided the level">' +
+        esc(s.note || '') + '</textarea></label>' +
+      '<label class="field"><span class="field__label">Access arrangements used</span>' +
+        '<input type="text" data-field="accessArrangements" value="' +
+        esc(s.accessArrangements || '') + '"></label>' +
+      '<label class="field"><span class="field__label">Next step / bridging</span>' +
+        '<input type="text" data-field="nextStep" value="' + esc(s.nextStep || '') + '"></label>' +
+      '<div class="row" style="margin-top:.85rem">' +
+        '<button class="btn btn--primary btn--sm" data-save>Save judgement</button>' +
+        '<button class="btn btn--ghost btn--sm" data-cancel>Cancel</button>' +
+      '</div></div>';
+  }
+
+  function saveJudgement(strand, panel, data) {
+    var picked = panel.querySelector('input[type="radio"]:checked');
+    if (!picked) { toast('Choose a level first.', true); return; }
+
+    var payload = {
+      email: data.student.email,
+      grade: '6',
+      strand: strand,
+      level: picked.value,
+      assessmentEvent: 'final',
+      note: panel.querySelector('[data-field="note"]').value,
+      accessArrangements: panel.querySelector('[data-field="accessArrangements"]').value,
+      nextStep: panel.querySelector('[data-field="nextStep"]').value
+    };
+    Array.prototype.forEach.call(panel.querySelectorAll('[data-evidence]'), function (input) {
+      var key = input.getAttribute('data-evidence');
+      payload['evidence' + key.charAt(0).toUpperCase() + key.slice(1)] = input.value;
+    });
+
+    var btn = panel.querySelector('[data-save]');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    call('api_recordJudgement', payload).then(function () {
+      toast(strand + ' recorded');
+      route('student-detail', { email: data.student.email });
+    }).catch(function (err) {
+      btn.disabled = false;
+      btn.textContent = 'Save judgement';
+      toast(err.message, true);
+    });
+  }
+
+
+  /* ---------------------------------------------------------------------
+   * Admin
+   * ------------------------------------------------------------------- */
+
+  function viewAdmin() {
+    return call('api_getAdminData').then(function (data) {
+      var html = '<div class="eyebrow">Administration</div><h1>Platform settings</h1>' +
+        '<p class="muted" style="margin-bottom:1.5rem">Only @' +
+        esc((state.user && state.bootstrap && state.bootstrap.app.domain) || 'aisa.sch.ae') +
+        ' accounts can reach this platform. Everyone is a student unless listed as staff below.</p>';
+
+      html += '<div class="card" style="margin-bottom:1.5rem"><h2 style="margin-bottom:.5rem">Import roster</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">One student per line: ' +
+        '<code>email, name, class</code>. Re-importing updates existing students rather than duplicating them.</p>' +
+        '<textarea id="rosterInput" style="min-height:8rem" ' +
+        'placeholder="amina.hassan@aisa.sch.ae, Amina Hassan, 6A&#10;omar.khalid@aisa.sch.ae, Omar Khalid, 6A"></textarea>' +
+        '<div class="row" style="margin-top:.75rem">' +
+        '<button class="btn btn--primary" id="importBtn">Import students</button>' +
+        '<span class="muted small">' + data.roster.length + ' students currently on the roster</span>' +
+        '</div><div id="importResult"></div></div>';
+
+      html += '<div class="card" style="margin-bottom:1.5rem"><h2 style="margin-bottom:.5rem">Staff access</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">Teachers can see all student progress. ' +
+        'Admins can additionally manage the roster and staff list.</p>' +
+        '<div class="row" style="margin-bottom:1rem">' +
+        '<input type="text" id="staffEmail" placeholder="teacher@aisa.sch.ae" style="flex:1;min-width:14rem">' +
+        '<select id="staffRole" style="width:auto"><option value="teacher">Teacher</option>' +
+        '<option value="admin">Admin</option><option value="student">Remove access</option></select>' +
+        '<button class="btn btn--primary" id="staffBtn">Save</button></div>' +
+        (data.staff.length
+          ? '<div class="table-wrap"><table><thead><tr><th>Email</th><th>Role</th><th>Added by</th></tr></thead><tbody>' +
+            data.staff.map(function (s) {
+              return '<tr><td>' + esc(s.email) + '</td><td><span class="pill pill--lesson">' +
+                esc(s.role) + '</span></td><td class="muted small">' + esc(s.addedBy || '—') +
+                '</td></tr>';
+            }).join('') + '</tbody></table></div>'
+          : '<p class="muted small">No staff added yet — you are an admin because you deployed the app.</p>') +
+        '</div>';
+
+      html += '<div class="card card--accent"><h2 style="margin-bottom:.5rem">Data</h2>' +
+        '<p class="small">All student work is stored in a Google Sheet inside AISA’s own Workspace. ' +
+        'Nothing is sent to any third party.</p>' +
+        '<p style="margin-top:.6rem"><a href="' + esc(data.spreadsheetUrl) +
+        '" target="_blank" rel="noopener">Open the datastore spreadsheet ↗</a></p>' +
+        '<p class="muted small" style="margin-top:.5rem">Keep this spreadsheet private. ' +
+        'Students must never be given access to it — it holds every mark.</p></div>';
+
+      if (data.audit.length) {
+        html += '<h2 style="margin:2rem 0 .5rem">Recent activity</h2><div class="table-wrap"><table>' +
+          '<thead><tr><th>When</th><th>Who</th><th>Action</th><th>Detail</th></tr></thead><tbody>' +
+          data.audit.slice(0, 40).map(function (r) {
+            return '<tr><td class="muted small">' + formatDate(r.timestamp) + '</td>' +
+              '<td class="small">' + esc(r.actor) + '</td>' +
+              '<td class="small">' + esc(r.action) + '</td>' +
+              '<td class="muted small">' + esc(r.detail) + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }
+
+      view.innerHTML = html;
+      bindAdmin();
+    });
+  }
+
+  function bindAdmin() {
+    document.getElementById('importBtn').onclick = function () {
+      var btn = this;
+      var text = document.getElementById('rosterInput').value;
+      if (!text.trim()) { toast('Paste at least one student first.', true); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Importing…';
+      call('api_importRoster', text).then(function (res) {
+        var panel = document.getElementById('importResult');
+        panel.innerHTML = '<div class="callout" style="margin-top:1rem">' +
+          '<div class="eyebrow">Import complete</div>' +
+          '<p>' + res.added + ' added, ' + res.updated + ' updated.</p>' +
+          (res.rejected.length
+            ? '<p style="margin-top:.5rem"><strong>Skipped ' + res.rejected.length + ':</strong></p><ul>' +
+              res.rejected.map(function (r) { return '<li class="small">' + esc(r) + '</li>'; }).join('') +
+              '</ul>'
+            : '') + '</div>';
+        btn.disabled = false;
+        btn.textContent = 'Import students';
+        document.getElementById('rosterInput').value = '';
+      }).catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Import students';
+        toast(err.message, true);
+      });
+    };
+
+    document.getElementById('staffBtn').onclick = function () {
+      var email = document.getElementById('staffEmail').value.trim();
+      var role = document.getElementById('staffRole').value;
+      if (!email) { toast('Enter an email address.', true); return; }
+
+      call('api_setStaffRole', email, role).then(function () {
+        toast(email + ' set to ' + role);
+        route('admin', {});
+      }).catch(function (err) { toast(err.message, true); });
+    };
+  }
+
+  /* ---------------------------------------------------------------------
+   * Boot
+   * ------------------------------------------------------------------- */
+
+  route('home', {});
+})();
+</script>

@@ -7,13 +7,69 @@ administrator. Budget about 20 minutes.
 > is automatically the first admin. If that person leaves the school, ownership has to
 > be transferred, so prefer a departmental account over an individual's if you have one.
 
-## 0. Before you start
+## Two ways to deploy
 
-Three things to have in place, because each one blocks the step after it.
+**Option A — paste it in the browser.** No terminal, no Node, no clone. Five copy-pastes.
+This is the right choice if you are deploying this once and are not a developer.
 
-**Node.js 18 or newer**, on whatever machine you are deploying from.
-`node --version` should print something starting `v18`, `v20` or `v22`. If not, install
-it from nodejs.org.
+**Option B — push from a clone with `clasp`.** Better if you will be updating the content
+repeatedly, because an update becomes one command instead of five pastes. Needs Node and a
+terminal.
+
+Both produce exactly the same thing. Start with A unless you know you want B.
+
+---
+
+# Option A — deploy from the browser
+
+## A1. Get the five files
+
+They are in `dist/` in the repository. On GitHub, open each one and use the **copy raw
+contents** button (the icon at the top right of the file view):
+
+| File | What it is |
+|---|---|
+| `dist/Code.gs` | All the server code in one file |
+| `dist/Index.html` | The page shell |
+| `dist/Styles.html` | The stylesheet |
+| `dist/App.html` | The app itself |
+| `dist/appsscript.json` | The manifest — permissions and web app settings |
+
+## A2. Create the Apps Script project
+
+Go to <https://script.google.com> and click **New project**. Sign in with the AISA account
+that will own this.
+
+> **Use a departmental account if you have one.** Whoever creates this owns the datastore
+> permanently and becomes the first admin. If that is an individual's account and they
+> leave the school, ownership has to be transferred or the platform dies with the account.
+
+## A3. Paste the code in
+
+1. The editor opens with a file called `Code.gs` containing a stub `myFunction`.
+   **Select all of it and replace it** with the contents of `dist/Code.gs`. Save (Ctrl/Cmd+S).
+2. Click **+** next to *Files* → **HTML**. Name it exactly `Index` (the editor adds `.html`).
+   Replace its contents with `dist/Index.html`. Save.
+3. Repeat for `Styles` and `App`.
+4. Click **⚙ Project Settings** in the left sidebar and tick
+   **Show "appsscript.json" manifest file in editor**.
+5. Back in the editor, open `appsscript.json` and replace it with `dist/appsscript.json`. Save.
+
+You should end up with exactly five files: `Code.gs`, `Index.html`, `Styles.html`,
+`App.html`, `appsscript.json`.
+
+> **The names matter.** The app loads its own pages by name, so `Index`, `Styles` and `App`
+> must be spelled exactly that way, with that capitalisation.
+
+Now skip to **step 4** below.
+
+---
+
+# Option B — deploy with clasp
+
+## B0. Before you start
+
+**Node.js 18 or newer.** `node --version` should print `v18`, `v20` or `v22`.
 
 **The repository, cloned locally.** It is private, so you will be asked to authenticate:
 
@@ -22,58 +78,47 @@ git clone https://github.com/AISA-AI-web/studytwin.git
 cd studytwin
 ```
 
-**The Apps Script API switched on for your Google account.** This is the single most
-common reason `clasp` fails with a confusing error, and it is not obvious:
+**The Apps Script API switched on for your Google account.** This is the most common reason
+`clasp` fails, and the error message does not point at it:
 
 1. Open <https://script.google.com/home/usersettings>
 2. Turn **Google Apps Script API** to **ON**
 
-It is off by default. Without it, `clasp create` fails with a "User has not enabled the
-Apps Script API" message that reads like a permissions problem with the repository.
-
 > **A Workspace admin can block this domain-wide.** If the toggle will not stay on, or
 > `clasp login` is refused, AISA's Google Workspace administrator has restricted Apps
-> Script. They can allow it in the Admin console under **Apps → Additional Google
-> services → Apps Script**. Worth checking before you spend time on the rest.
+> Script. They can allow it under **Apps → Additional Google services → Apps Script**.
 
-## 1. Install the tooling
+## B1. Install and authenticate
 
 ```bash
 npm install
 npx clasp login
 ```
 
-`clasp` is Google's command-line tool for Apps Script. The login opens a browser and
-should be completed with the same AISA account that will own the platform.
-
-## 2. Create the Apps Script project
+## B2. Create the project and push
 
 ```bash
 npx clasp create --type webapp --title "StudyTwin" --rootDir src
-```
-
-This writes a `.clasp.json` containing the new project's ID. That file is gitignored
-because it is specific to your deployment — the repo ships `.clasp.json.example` for
-reference.
-
-## 3. Push the code
-
-```bash
 npm run push
 ```
 
-This runs the syntax check, validates the curriculum JSON, runs the marking tests,
-compiles the lessons into `src/generated/CurriculumData.gs`, and uploads everything.
-If any check fails the push stops — that is deliberate, so a broken worksheet cannot
-reach students.
+`npm run push` syntax-checks everything, validates the curriculum, runs the tests, compiles
+the content and uploads. If any check fails it stops rather than pushing something broken.
+
+If you created the project in the browser rather than with `clasp create`, make a
+`.clasp.json` in the project root instead, using the Script ID from **⚙ Project Settings**:
+
+```json
+{ "scriptId": "YOUR_SCRIPT_ID", "rootDir": "src" }
+```
+
+Then `npx clasp push -f` once, to replace the default manifest the browser created.
+
+---
 
 ## 4. Create the datastore
 
-```bash
-npx clasp open
-```
-
-In the Apps Script editor, choose the `setup` function from the dropdown and press
+In the Apps Script editor (Option B: `npx clasp open`), choose the `setup` function from the dropdown and press
 **Run**. Google will ask you to authorise the script the first time.
 
 > **You will see a scary-looking warning**, along the lines of *"Google hasn't verified
@@ -127,7 +172,11 @@ Open the web app URL. You will land in the app as an admin.
 
 ## Updating lessons later
 
-Edit the JSON under `curriculum/`, then:
+**Option A (browser):** ask for a fresh `dist/Code.gs`, then paste it over the existing
+`Code.gs` in the editor and save. The other four files only change if the interface
+changes. Then make a new version, below.
+
+**Option B (clasp):** edit the JSON under `curriculum/`, then:
 
 ```bash
 npm run push
