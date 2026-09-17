@@ -114,10 +114,19 @@
 
   function renderChrome() {
     var user = state.user || {};
+    // Show the address Google actually authenticated, not just a display name. With
+    // several Google accounts signed in, the browser can open the app as a different
+    // person, and a name alone makes that impossible to notice.
+    var app = (state.bootstrap && state.bootstrap.app) || {};
     userChip.innerHTML =
       '<div class="avatar">' + esc(initials(user.displayName)) + '</div>' +
       '<div><div class="name">' + esc(user.displayName) + '</div>' +
-      '<div class="role">' + esc(user.role) + '</div></div>';
+      '<div class="account">' + esc(user.email) + '</div></div>' +
+      '<div class="role-tag">' + esc(user.role) + '</div>' +
+      (app.switchAccountUrl
+        ? '<a class="switch" href="' + esc(app.switchAccountUrl) + '" target="_blank" ' +
+          'rel="noopener" title="Open the app as a different Google account">Not you?</a>'
+        : '');
 
     var items = [
       { key: 'home', label: 'My Learning' },

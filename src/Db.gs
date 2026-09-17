@@ -150,7 +150,15 @@ function updateRow_(sheetKey, rowIndex, obj) {
  * burst; beyond that we surface a retryable error rather than risk a lost mark.
  */
 function withLock_(fn) {
-  const lock = LockService.getDocumentLock();
+  // getScriptLock, NOT getDocumentLock. This is a standalone web app with no container
+  // document, so getDocumentLock() yields a lock that cannot be acquired and every write
+  // throws — which surfaced as "Something went wrong" on the first student submission.
+  // A script lock is also the correct scope: it serialises writes across ALL users of the
+  // one shared datastore, which is exactly what we are protecting.
+  const lock = LockService.getScriptLock();
+  if (!lock) {
+    throw new Error('LOCK_UNAVAILABLE');
+  }
   if (!lock.tryLock(20000)) {
     throw new Error('BUSY');
   }

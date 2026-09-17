@@ -34,6 +34,9 @@ function friendlyError_(code) {
       return 'You do not have permission to view that.';
     case 'BUSY':
       return 'The system is handling a lot of submissions right now. Please try again in a moment.';
+    case 'LOCK_UNAVAILABLE':
+      return 'The system could not save safely just now. Please try again; tell your teacher ' +
+             'if it keeps happening.';
     case 'UNKNOWN_LESSON':
       return 'That lesson could not be found.';
     case 'MAX_ATTEMPTS_REACHED':
@@ -84,7 +87,12 @@ function api_getBootstrap() {
 
     return {
       user: user,
-      app: { name: CONFIG.APP_NAME, school: CONFIG.SCHOOL_NAME, domain: CONFIG.ALLOWED_DOMAIN },
+      app: {
+        name: CONFIG.APP_NAME,
+        school: CONFIG.SCHOOL_NAME,
+        domain: CONFIG.ALLOWED_DOMAIN,
+        switchAccountUrl: switchAccountUrl_()
+      },
       course: { key: gradeKey, title: course.meta.title, grade: course.meta.grade },
       units: (course.units || []).map(function (unit) {
         return { id: unit.id, title: unit.title, summary: unit.summary || '',
@@ -574,6 +582,23 @@ function attachTeacherGuidance_(gradeKey, lessonId, results) {
     if (result.needsTeacherReview) enriched.lookFor = question.lookFor || '';
     return enriched;
   });
+}
+
+/**
+ * A link that lets someone re-pick which Google account opens the app.
+ *
+ * Google resolves a web app against whichever account the browser treats as default,
+ * so with several accounts signed in it can serve a different person than expected.
+ * There is no sign-out inside an Apps Script web app, so the honest fix is to show the
+ * address that was authenticated and offer the account chooser.
+ */
+function switchAccountUrl_() {
+  try {
+    const url = ScriptApp.getService().getUrl();
+    return 'https://accounts.google.com/AccountChooser?continue=' + encodeURIComponent(url);
+  } catch (err) {
+    return 'https://accounts.google.com/AccountChooser';
+  }
 }
 
 function normaliseEmail_(value) {
