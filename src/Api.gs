@@ -111,7 +111,7 @@ function api_getBootstrap() {
         title: lesson.title,
         summary: lesson.summary || '',
         duration: lesson.duration || '',
-        strand: lesson.strand || null,
+        context: lessonContext_(gradeKey, lesson),
         marksAvailable: worksheetTotal_(lesson),
         attempts: countAttempts_(user.email, lesson.id),
         maxAttempts: CONFIG.MAX_ATTEMPTS,
@@ -131,10 +131,11 @@ function api_getBootstrap() {
         domain: CONFIG.ALLOWED_DOMAIN,
         switchAccountUrl: switchAccountUrl_()
       },
-      course: { key: gradeKey, title: course.meta.title, grade: course.meta.grade },
+      course: { key: gradeKey, title: course.meta.title, grade: course.meta.grade,
+                tracks: (course.meta || {}).tracks || {} },
       units: (course.units || []).map(function (unit) {
         return { id: unit.id, title: unit.title, summary: unit.summary || '',
-                 track: unit.track || 'main', lessons: unit.lessons };
+                 track: unit.track || 'main', week: unit.week, lessons: unit.lessons };
       }),
       lessons: lessonCards,
       levels: CONFIG.ATTAINMENT_LEVELS,
@@ -155,6 +156,7 @@ function api_getLesson(lessonId) {
 
     return {
       lesson: lesson,
+      context: lessonContext_(gradeKey, lesson),
       attempts: attempts,
       maxAttempts: CONFIG.MAX_ATTEMPTS,
       canAttempt: attempts < CONFIG.MAX_ATTEMPTS,

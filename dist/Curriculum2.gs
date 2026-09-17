@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-17T15:55:22.862Z
+ * Built: 2026-09-17T16:45:17.269Z
  */
 
 /* ==========================================================================
@@ -19,7 +19,7 @@
  * Edit the JSON under curriculum/ and rebuild; changes made here are overwritten.
  *
  * Lesson chunk 2 of 4.
- * Built: 2026-09-17T15:55:22.814Z
+ * Built: 2026-09-17T16:45:17.214Z
  */
 
 function curriculumChunk2_() {

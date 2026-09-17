@@ -196,7 +196,8 @@ const mock = `
         app: { name: 'StudyTwin', school: 'American International School in Abu Dhabi',
                domain: 'aisa.sch.ae',
                switchAccountUrl: 'https://accounts.google.com/AccountChooser' },
-        course: { key: GRADE, title: CURRICULUM[GRADE].meta.title, grade: 6 },
+        course: { key: GRADE, title: CURRICULUM[GRADE].meta.title, grade: 6,
+                  tracks: (CURRICULUM[GRADE].meta || {}).tracks || {} },
         units: CURRICULUM[GRADE].units,
         lessons: lessonsInOrder().map(function (lesson) {
           var s = best[lesson.id];
@@ -204,6 +205,7 @@ const mock = `
             id: lesson.id, number: lesson.number, type: lesson.type,
             track: lesson.track || 'main', title: lesson.title,
             summary: lesson.summary || '', duration: lesson.duration || '',
+            context: lessonContext_(GRADE, lesson),
             marksAvailable: totalMarks(lesson),
             attempts: mine(user.email).filter(function (r) { return r.lessonId === lesson.id; }).length,
             maxAttempts: CONFIG.MAX_ATTEMPTS,
@@ -223,6 +225,7 @@ const mock = `
       var best = bestByLesson(mine(user.email))[lessonId];
       return {
         lesson: getLessonForStudent_(GRADE, lessonId),
+        context: lessonContext_(GRADE, getLessonAuthoritative_(GRADE, lessonId)),
         attempts: attempts, maxAttempts: CONFIG.MAX_ATTEMPTS,
         canAttempt: attempts < CONFIG.MAX_ATTEMPTS,
         best: best ? { worksheetScore: best.percent, marksAwarded: best.marksAwarded,

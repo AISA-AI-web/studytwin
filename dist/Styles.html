@@ -163,6 +163,33 @@
   .btn--ghost:hover { background: var(--aisa-purple-tint); }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
 
+  /* ---------- Lesson context ---------- */
+  .lesson-crumbs { display: flex; gap: .4rem; flex-wrap: wrap; margin: .5rem 0 .6rem; }
+  .crumb {
+    font-size: .72rem; font-weight: 700; letter-spacing: .04em;
+    padding: .2rem .6rem; border-radius: 999px;
+    background: var(--aisa-purple-tint); color: var(--aisa-purple);
+  }
+  .crumb--week { background: var(--aisa-purple); color: var(--aisa-white); }
+  .crumb--arc { background: var(--aisa-gold); color: var(--aisa-purple); }
+  .crumb--plain {
+    background: transparent; color: var(--aisa-muted-gray); font-weight: 400;
+    padding-left: .2rem;
+  }
+  .callout--continues { border-left-color: var(--aisa-purple); }
+
+  .track { margin-bottom: 2.5rem; }
+  .track-head {
+    border-bottom: 2px solid var(--aisa-purple); padding-bottom: .6rem; margin-bottom: 1.1rem;
+  }
+  .track-head h2 { font-size: 1.3rem; }
+  .unit-head h3 { font-size: 1rem; color: var(--aisa-purple); }
+
+  .lesson-num { flex-direction: column; line-height: 1; gap: 1px; }
+  .lesson-num__label {
+    font-size: .48rem; letter-spacing: .06em; opacity: .75; font-weight: 700;
+  }
+
   /* ---------- Lesson content ---------- */
   .lesson-head { margin-bottom: 1.5rem; }
   .section { margin-bottom: 1.5rem; }

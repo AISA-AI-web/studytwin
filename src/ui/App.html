@@ -219,14 +219,32 @@
           '</div>' +
         '</section>';
 
-      html += data.units.map(function (unit) {
-        var cards = (unit.lessons || []).map(function (id) {
-          return byId[id] ? lessonCard(byId[id]) : '';
-        }).join('');
-        return '<section class="unit">' +
-          '<div class="unit-head"><div class="eyebrow">Unit</div><h2>' + esc(unit.title) + '</h2>' +
-          (unit.summary ? '<p class="muted small">' + esc(unit.summary) + '</p>' : '') + '</div>' +
-          '<div class="lesson-grid">' + cards + '</div></section>';
+      // Bridging and the Main Course are separate programmes taught in sequence, so
+      // they are shown as such rather than as one undifferentiated list of weeks.
+      var tracks = [];
+      data.units.forEach(function (unit) {
+        var track = unit.track || 'main';
+        var group = tracks.filter(function (t) { return t.track === track; })[0];
+        if (!group) { group = { track: track, units: [] }; tracks.push(group); }
+        group.units.push(unit);
+      });
+
+      html += tracks.map(function (group) {
+        var meta = (data.course.tracks || {})[group.track] || {};
+        var header = '<div class="track-head">' +
+          '<div class="eyebrow">' + (group.track === 'bridging' ? 'Taught first' : 'Main programme') +
+          '</div><h2>' + esc(meta.title || group.track) + '</h2>' +
+          (meta.summary ? '<p class="muted small">' + esc(meta.summary) + '</p>' : '') +
+          '<p class="muted small">' + group.units.length + ' weeks</p></div>';
+
+        return '<section class="track">' + header + group.units.map(function (unit) {
+          var cards = (unit.lessons || []).map(function (id) {
+            return byId[id] ? lessonCard(byId[id]) : '';
+          }).join('');
+          return '<div class="unit"><div class="unit-head"><h3>' + esc(unit.title) + '</h3>' +
+            (unit.summary ? '<p class="muted small">' + esc(unit.summary) + '</p>' : '') + '</div>' +
+            '<div class="lesson-grid">' + cards + '</div></div>';
+        }).join('') + '</section>';
       }).join('');
 
       view.innerHTML = html;
@@ -237,12 +255,14 @@
   function lessonCard(lesson) {
     var statusLabels = { 'submitted': 'Handed in', 'not-started': 'Not started' };
     var isLab = lesson.type === 'lab';
+    var ctx = lesson.context || { week: lesson.week, phase: '' };
     return '<button class="lesson-card' + (isLab ? ' is-lab' : '') + '" data-lesson="' + esc(lesson.id) + '">' +
       '<div class="top">' +
-        '<div class="lesson-num">' + esc(lesson.number) + '</div>' +
+        '<div class="lesson-num" title="Week ' + esc(ctx.week) + '">' +
+          '<span class="lesson-num__label">WK</span>' + esc(ctx.week) + '</div>' +
         '<span class="pill ' + (isLab ? 'pill--lab' : 'pill--lesson') + '">' +
-          (isLab ? 'Lab' : 'Lesson') + '</span>' +
-        (lesson.duration ? '<span class="muted small">' + esc(lesson.duration) + '</span>' : '') +
+          (isLab ? 'Lab' : 'Core') + '</span>' +
+        (ctx.phase ? '<span class="muted small">' + esc(ctx.phase) + '</span>' : '') +
       '</div>' +
       '<h3>' + esc(lesson.title) + '</h3>' +
       '<p>' + esc(lesson.summary) + '</p>' +
@@ -270,15 +290,33 @@
       state.answers = {};
       state.lastResults = null;
       var lesson = data.lesson;
+      var ctx = data.context || { week: lesson.week, trackTitle: '', weeksTotal: null };
       var isLab = lesson.type === 'lab';
 
       var html = '<button class="breadcrumb" id="back">← Back to My Learning</button>' +
         '<div class="lesson-head">' +
-          '<div class="eyebrow">' + (isLab ? 'Lab' : 'Lesson') + ' ' + esc(lesson.number) +
-            (lesson.duration ? ' · ' + esc(lesson.duration) : '') + '</div>' +
+          '<div class="eyebrow">' + esc(ctx.trackTitle) + '</div>' +
           '<h1>' + esc(lesson.title) + '</h1>' +
+          '<div class="lesson-crumbs">' +
+            '<span class="crumb crumb--week">Week ' + esc(ctx.week) +
+              (ctx.weeksTotal ? ' of ' + esc(ctx.weeksTotal) : '') + '</span>' +
+            '<span class="crumb">' + (isLab ? 'Lab' : 'Core') + '</span>' +
+            (ctx.phase ? '<span class="crumb">' + esc(ctx.phase) + '</span>' : '') +
+            (ctx.arcName
+              ? '<span class="crumb crumb--arc">' + esc(ctx.arcName) + ' ' +
+                esc(ctx.arcPosition) + '/' + esc(ctx.arcTotal) + '</span>'
+              : '') +
+            (lesson.duration ? '<span class="crumb crumb--plain">' + esc(lesson.duration) +
+              '</span>' : '') +
+          '</div>' +
           (lesson.summary ? '<p class="muted">' + esc(lesson.summary) + '</p>' : '') +
-        '</div>';
+        '</div>' +
+        // Weeks 7-10 are one continuous project; a lesson opened out of sequence
+        // otherwise refers to work the student has no record of doing.
+        (ctx.continuesFrom
+          ? '<div class="callout callout--continues"><div class="eyebrow">Carries on from earlier weeks</div>' +
+            '<p>' + esc(ctx.continuesFrom) + '</p></div>'
+          : '');
 
       if (lesson.objectives && lesson.objectives.length) {
         html += '<div class="callout"><div class="eyebrow">Learning objectives</div><ul>' +

@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-17T15:55:22.865Z
+ * Built: 2026-09-17T16:45:17.272Z
  */
 
 /* ==========================================================================
@@ -460,6 +460,61 @@ function getTotalMarksForGrade_(gradeKey) {
     const questions = (lesson.worksheet && lesson.worksheet.questions) || [];
     return sum + questions.reduce(function (s, q) { return s + (Number(q.marks) || 0); }, 0);
   }, 0);
+}
+
+/**
+ * Where a lesson sits in the programme.
+ *
+ * The platform originally showed a running lesson number — "Lesson 17" — which appears
+ * nowhere in the curriculum. ADEK organises everything by WEEK, and so does a teacher
+ * standing in front of a class. Worse, Weeks 7 to 10 of the Main Course are a single
+ * continuous project: Week 9 asks students to judge "your signature solution" against
+ * "the criteria the class agreed", both established in Weeks 7 and 8. Opened on its own
+ * that reads as though something is missing, because something is — the weeks before it.
+ *
+ * This supplies the context a lesson needs to make sense of itself.
+ */
+function lessonContext_(gradeKey, lesson) {
+  const track = lesson.track || 'main';
+  const sequence = getSequence_(gradeKey, track);
+  const course = getCourse_(gradeKey);
+  const trackMeta = ((course.meta || {}).tracks || {})[track] || {};
+
+  const entry = sequence.filter(function (w) { return w.weekNumber === lesson.week; })[0];
+  const phase = entry && entry.phase ? entry.phase.replace(/\s*\d+$/, '').trim() : '';
+
+  // The weeks that form one continuous piece of work, and what each contributes.
+  const ARCS = {
+    main: { name: 'Signature Solution', weeks: [7, 8, 9, 10],
+            steps: { 7: 'planned it', 8: 'built it', 9: 'refined it', 10: 'showcased it' } },
+    bridging: { name: 'Integrated mastery task', weeks: [5, 6],
+                steps: { 5: 'designed and built it', 6: 'evaluated and presented it' } }
+  };
+  const arc = ARCS[track];
+  const inArc = arc && arc.weeks.indexOf(lesson.week) !== -1;
+
+  let continuesFrom = '';
+  if (inArc) {
+    const earlier = arc.weeks.filter(function (w) { return w < lesson.week; });
+    if (earlier.length) {
+      continuesFrom = 'This continues the ' + arc.name + ' you began in Week ' + earlier[0] +
+        '. By now you have ' +
+        earlier.map(function (w) { return arc.steps[w]; }).join(', then ') + '.';
+    }
+  }
+
+  return {
+    track: track,
+    trackTitle: trackMeta.title || (track === 'bridging' ? 'Bridging Program' : 'Main Course'),
+    week: lesson.week,
+    weeksTotal: sequence.length || null,
+    phase: phase,
+    strand: entry ? entry.strand : '',
+    arcName: inArc ? arc.name : '',
+    arcPosition: inArc ? arc.weeks.indexOf(lesson.week) + 1 : null,
+    arcTotal: inArc ? arc.weeks.length : null,
+    continuesFrom: continuesFrom
+  };
 }
 
 /* ==========================================================================
@@ -1251,7 +1306,7 @@ function api_getBootstrap() {
         title: lesson.title,
         summary: lesson.summary || '',
         duration: lesson.duration || '',
-        strand: lesson.strand || null,
+        context: lessonContext_(gradeKey, lesson),
         marksAvailable: worksheetTotal_(lesson),
         attempts: countAttempts_(user.email, lesson.id),
         maxAttempts: CONFIG.MAX_ATTEMPTS,
@@ -1271,10 +1326,11 @@ function api_getBootstrap() {
         domain: CONFIG.ALLOWED_DOMAIN,
         switchAccountUrl: switchAccountUrl_()
       },
-      course: { key: gradeKey, title: course.meta.title, grade: course.meta.grade },
+      course: { key: gradeKey, title: course.meta.title, grade: course.meta.grade,
+                tracks: (course.meta || {}).tracks || {} },
       units: (course.units || []).map(function (unit) {
         return { id: unit.id, title: unit.title, summary: unit.summary || '',
-                 track: unit.track || 'main', lessons: unit.lessons };
+                 track: unit.track || 'main', week: unit.week, lessons: unit.lessons };
       }),
       lessons: lessonCards,
       levels: CONFIG.ATTAINMENT_LEVELS,
@@ -1295,6 +1351,7 @@ function api_getLesson(lessonId) {
 
     return {
       lesson: lesson,
+      context: lessonContext_(gradeKey, lesson),
       attempts: attempts,
       maxAttempts: CONFIG.MAX_ATTEMPTS,
       canAttempt: attempts < CONFIG.MAX_ATTEMPTS,
