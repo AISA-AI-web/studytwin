@@ -31,7 +31,7 @@ vm.createContext(sandbox);
 const api = vm.runInContext(`({
   CONFIG, CURRICULUM,
   markWorksheet_, markQuestion_,
-  getLessonForStudent_
+  getLessonForStudent_, stripAnswerKey_, markWorksheet_
 })`, sandbox);
 
 let passed = 0, failed = 0;
@@ -132,6 +132,44 @@ check('numeric accepts a value inside tolerance', api.markQuestion_(numeric, 85.
 check('numeric rejects a value outside tolerance', api.markQuestion_(numeric, 80).marksAwarded === 0);
 check('numeric rejects text', api.markQuestion_(numeric, 'eighty five').marksAwarded === 0);
 
+console.log('\nOpen responses are captured, never scored');
+
+const openQ = {
+  id: 'open1', type: 'shortText', autoMarked: false, prompt: 'Explain why.',
+  lookFor: 'Links the data cause to the output effect.',
+  frameworkRefs: [{ strand: 'CU', code: 'AIF\u00B7CU\u00B7G6\u00B7E' }]
+};
+const openMarked = api.markQuestion_(openQ, 'The data was noisy so the output was wrong.');
+check('an open response is flagged for teacher review',
+  openMarked.needsTeacherReview === true);
+check('it scores nothing and offers nothing to score',
+  openMarked.marksAwarded === 0 && openMarked.marksAvailable === 0);
+check('it is never marked correct or partial',
+  openMarked.correct === false && openMarked.partial === false);
+check('the response itself is carried through for the teacher to read',
+  openMarked.response === 'The data was noisy so the output was wrong.');
+check('the teacher look-for travels with the result',
+  openMarked.lookFor === 'Links the data cause to the output effect.');
+check('an unanswered open response is recorded as unanswered, not wrong',
+  api.markQuestion_(openQ, '').answered === false);
+
+const mixed = {
+  questions: [
+    { id: 'm1', type: 'mcq', marks: 2, options: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }],
+      answer: 'a' },
+    openQ
+  ]
+};
+const mixedResult = api.markWorksheet_(mixed, { m1: 'a', open1: 'some writing' });
+check('a mixed worksheet scores only its markable part',
+  mixedResult.marksAwarded === 2 && mixedResult.marksAvailable === 2 &&
+  mixedResult.percent === 100,
+  `got ${mixedResult.marksAwarded}/${mixedResult.marksAvailable} = ${mixedResult.percent}%`);
+check('open responses are counted separately so the teacher knows there is reading to do',
+  mixedResult.openResponses === 1);
+check('an all-open worksheet reports 0 available rather than a misleading 0%',
+  api.markWorksheet_({ questions: [openQ] }, { open1: 'x' }).marksAvailable === 0);
+
 console.log('\nAnswer keys never reach the browser');
 const safe = api.getLessonForStudent_('grade6', 'g6-l01');
 const serialised = JSON.stringify(safe);
@@ -146,6 +184,14 @@ check('stripped lesson keeps options students need to answer',
   safe.worksheet.questions.find((q) => q.id === 'l01q1').options.length === 4);
 check('the authoritative copy is untouched by stripping',
   api.CURRICULUM.grade6.lessons['g6-l01'].worksheet.questions[0].answer === 'b');
+
+const safeOpen = api.stripAnswerKey_({
+  worksheet: { questions: [openQ] }
+}).worksheet.questions[0];
+check('a stripped open response keeps its autoMarked flag so the UI can say so',
+  safeOpen.autoMarked === false);
+check('but never carries the teacher look-for to the browser',
+  safeOpen.lookFor === undefined && !/lookFor/.test(JSON.stringify(safeOpen)));
 
 console.log(`\n${passed} passed, ${failed} failed.`);
 process.exit(failed ? 1 : 0);

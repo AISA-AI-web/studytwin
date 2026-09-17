@@ -60,8 +60,12 @@ function stripAnswerKey_(lesson) {
         prompt: q.prompt,
         marks: q.marks,
         standards: q.standards || [],
-        hint: q.hint || ''
+        hint: q.hint || '',
+        // The student needs to know this part is read rather than marked.
+        // `lookFor` is deliberately NOT carried over: it is the teacher's guidance.
+        autoMarked: q.autoMarked !== false
       };
+      if (q.stem) safe.stem = q.stem;
 
       // Presentation data the student legitimately needs in order to answer.
       if (q.options) {

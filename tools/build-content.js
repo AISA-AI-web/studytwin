@@ -76,6 +76,40 @@ for (const grade of grades) {
   console.log(`  ${grade}: ${lessonCount} lesson(s)`);
 }
 
+/**
+ * Ship only the grades this deployment actually needs.
+ *
+ * The full catalogue covers KG to Grade 12 and the sequences cover Grades 1-12. A school
+ * running Grade 6 needs Grade 6 plus the prior grades its Bridging weeks reference - for
+ * Grade 6 that is Grades 4 and 5, since Bridging rebuilds the previous grade's Advanced
+ * bar and Critical Evaluation reaches back to Grade 4.
+ *
+ * Carrying the rest inflated the deployable bundle from roughly 90 KB to 242 KB, which
+ * is the difference between a paste that works and one that silently truncates.
+ */
+function gradesNeeded() {
+  const needed = new Set(Object.keys(curriculum));
+  Object.keys(curriculum).forEach((gradeKey) => {
+    const bridging = (sequences[gradeKey] || {}).bridging || [];
+    bridging.forEach((week) => {
+      (week.frameworkRefs || []).forEach((ref) => {
+        const m = /AIF\u00B7[A-Z]{2}\u00B7G(\d+)\u00B7[EPA]/.exec(ref);
+        if (m) needed.add('grade' + m[1]);
+      });
+    });
+  });
+  return needed;
+}
+
+const keep = gradesNeeded();
+const trimmedFramework = {
+  ...framework,
+  grades: Object.fromEntries(
+    Object.entries(framework.grades).filter(([g]) => keep.has(g)))
+};
+const trimmedSequences = Object.fromEntries(
+  Object.entries(sequences).filter(([g]) => curriculum[g]));
+
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
 fs.writeFileSync(outFile,
 `/**
@@ -87,16 +121,17 @@ fs.writeFileSync(outFile,
  * Built: ${new Date().toISOString()}
  */
 
-const CURRICULUM = ${JSON.stringify(curriculum, null, 2)};
+const CURRICULUM = ${JSON.stringify(curriculum)};
 
 /** Official ADEK framework catalogue — strand descriptors per grade per tier. */
-const FRAMEWORK = ${JSON.stringify(framework, null, 2)};
+const FRAMEWORK = ${JSON.stringify(trimmedFramework)};
 
 /** Published week-by-week Main Course and Bridging sequences. */
-const SEQUENCES = ${JSON.stringify(sequences, null, 2)};
+const SEQUENCES = ${JSON.stringify(trimmedSequences)};
 `);
 
 const kb = (fs.statSync(outFile).size / 1024).toFixed(1);
-console.log(`  framework: ${Object.keys(framework.grades).length} grades, ` +
-  `${Object.values(framework.grades).reduce((n, g) => n + Object.keys(g).length * 3, 0)} descriptors`);
+console.log(`  framework: ${Object.keys(trimmedFramework.grades).length} of ` +
+  `${Object.keys(framework.grades).length} grades shipped ` +
+  `(${[...keep].sort().join(', ')}) — the rest are not needed by this deployment`);
 console.log(`\nWrote ${path.relative(root, outFile)} (${kb} KB)`);

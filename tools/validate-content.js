@@ -33,10 +33,22 @@ function validateQuestion(q, where) {
   if (!TYPES.includes(q.type)) {
     err(at, `unknown type "${q.type}" (expected one of ${TYPES.join(', ')})`);
   }
+  if (!q.prompt) err(at, 'missing "prompt"');
+
+  // An open response is captured as evidence, never scored, so it carries no
+  // marks and no answer key. Everything below this point is about scoring.
+  if (q.autoMarked === false) {
+    if (q.marks) err(at, 'autoMarked:false questions must not carry marks — they are evidence, not score');
+    if (!q.lookFor) warn(at, 'no lookFor — the teacher sees the response with no guidance beside it');
+    if (!['shortText', 'fillBlank'].includes(q.type)) {
+      warn(at, `type "${q.type}" is unusual for an open response; shortText or fillBlank is typical`);
+    }
+    return;
+  }
+
   if (typeof q.marks !== 'number' || q.marks <= 0) {
     err(at, '"marks" must be a positive number');
   }
-  if (!q.prompt) err(at, 'missing "prompt"');
 
   const refs = q.frameworkRefs || [];
   if (!refs.length) {

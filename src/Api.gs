@@ -295,7 +295,7 @@ function api_getStudentDetail(email) {
           marksAwarded: s ? Number(s.marksAwarded) : null,
           submittedAt: s ? s.submittedAt : null,
           attempts: submissions.filter(function (r) { return r.lessonId === lesson.id; }).length,
-          results: s ? safeParse_(s.resultsJson, []) : []
+          results: s ? attachTeacherGuidance_(gradeKey, lesson.id, safeParse_(s.resultsJson, [])) : []
         };
       })
     };
@@ -545,6 +545,36 @@ function api_setStaffRole(email, role) {
 /* ---------------------------------------------------------------------------
  * Internal helpers
  * ------------------------------------------------------------------------- */
+
+/**
+ * Re-attaches the question prompt and the published look-for to marked results,
+ * for staff viewing only.
+ *
+ * Neither is stored on the submission: the prompt would duplicate content that
+ * already lives in the lesson, and the look-for is the teacher's guidance and must
+ * never be served to a student. Both are read back from the authoritative lesson
+ * at the moment a teacher opens the record.
+ */
+function attachTeacherGuidance_(gradeKey, lessonId, results) {
+  let questions;
+  try {
+    questions = (getLessonAuthoritative_(gradeKey, lessonId).worksheet || {}).questions || [];
+  } catch (err) {
+    return results;   // lesson has since been removed; show the marks without guidance
+  }
+  const byId = {};
+  questions.forEach(function (q) { byId[q.id] = q; });
+
+  return results.map(function (result) {
+    const question = byId[result.questionId];
+    if (!question) return result;
+    const enriched = {};
+    Object.keys(result).forEach(function (k) { enriched[k] = result[k]; });
+    enriched.prompt = question.prompt || '';
+    if (result.needsTeacherReview) enriched.lookFor = question.lookFor || '';
+    return enriched;
+  });
+}
 
 function normaliseEmail_(value) {
   return String(value || '').toLowerCase().trim();

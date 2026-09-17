@@ -67,3 +67,66 @@ function setup() {
   console.log('Keep this spreadsheet private — it holds every student mark.');
   return url;
 }
+
+/**
+ * Checks the installation is complete and intact.
+ *
+ * Run this from the editor straight after pasting the files in. A large paste can
+ * truncate silently, and the symptom is a parse error pointing at a line that is
+ * perfectly fine — the parser simply ran out of input. This reports what is actually
+ * missing instead, in plain language.
+ */
+function verifyInstall() {
+  const problems = [];
+  const ok = [];
+
+  function need(label, test) {
+    let present = false;
+    try { present = !!test(); } catch (err) { present = false; }
+    (present ? ok : problems).push(label);
+  }
+
+  need('Config loaded', function () { return CONFIG && CONFIG.ALLOWED_DOMAIN; });
+  need('Attainment levels loaded', function () { return CONFIG.ATTAINMENT_LEVELS.length === 4; });
+  need('Grade decision rules loaded', function () { return CONFIG.GRADE_RULES.grade6; });
+  need('Curriculum data loaded', function () { return CURRICULUM && CURRICULUM.grade6; });
+  need('Framework catalogue loaded', function () { return FRAMEWORK && FRAMEWORK.grades.grade6; });
+  need('Identity code loaded', function () { return typeof getCurrentUser === 'function'; });
+  need('Datastore code loaded', function () { return typeof ensureSchema_ === 'function'; });
+  need('Marking engine loaded', function () { return typeof markWorksheet_ === 'function'; });
+  need('Attainment engine loaded', function () { return typeof overallLevelFrom_ === 'function'; });
+  need('API endpoints loaded', function () { return typeof api_getBootstrap === 'function'; });
+
+  ['Index', 'Styles', 'App'].forEach(function (name) {
+    need('HTML file "' + name + '" present', function () {
+      return HtmlService.createHtmlOutputFromFile(name).getContent().length > 0;
+    });
+  });
+
+  const lines = [];
+  lines.push(problems.length ? '\u2717 INSTALLATION INCOMPLETE' : '\u2713 Installation looks complete');
+  lines.push('');
+
+  if (problems.length) {
+    lines.push('Missing or broken:');
+    problems.forEach(function (p) { lines.push('  \u2717 ' + p); });
+    lines.push('');
+    lines.push('Most likely a paste was cut short, or an HTML file was saved under the');
+    lines.push('wrong name. The three HTML files must be named exactly Index, Styles and App.');
+    lines.push('Re-paste the file covering whatever is listed above, then run this again.');
+  } else {
+    const lessons = Object.keys(CURRICULUM.grade6.lessons).length;
+    const grades = Object.keys(FRAMEWORK.grades).length;
+    lines.push('  Curriculum: ' + lessons + ' lesson(s) for Grade 6');
+    lines.push('  Framework:  ' + grades + ' grade(s) of descriptors');
+    lines.push('  Domain:     ' + CONFIG.ALLOWED_DOMAIN);
+    lines.push('');
+    lines.push('Next: run setup() to create the datastore, then Deploy \u2192 New deployment');
+    lines.push('\u2192 Web app, with Execute as: Me and Who has access: your school.');
+  }
+
+  ok.forEach(function (o) { lines.push('  \u2713 ' + o); });
+  const report = lines.join('\n');
+  console.log(report);
+  return report;
+}

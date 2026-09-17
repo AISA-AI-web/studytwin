@@ -17,6 +17,16 @@
  *   numeric    a value with a tolerance        all or nothing, tolerance-aware
  *   shortText  accepted answers / keywords     normalised comparison
  *   fillBlank  several short answers in a row  partial credit per blank
+ *
+ * A question may also set `autoMarked: false`. Much of the published curriculum is
+ * open sentence stems — "The data problem is ___. So the model learns ___." —
+ * whose quality no mark scheme can judge. Those are captured verbatim, carry no
+ * marks, are excluded from the worksheet score entirely, and are surfaced to the
+ * teacher as product evidence toward their own judgement.
+ *
+ * Keyword-matching them instead would hand out marks for using the right
+ * vocabulary about the wrong thing, and would put a number where the framework
+ * puts a judgement.
  */
 
 /**
@@ -32,10 +42,16 @@ function markWorksheet_(worksheet, answers) {
   let awarded = 0;
   let available = 0;
 
+  let openResponses = 0;
+
   (worksheet.questions || []).forEach(function (question) {
     const response = answers[question.id];
     const result = markQuestion_(question, response);
     results.push(result);
+
+    // Open responses contribute to neither side of the fraction, so a worksheet
+    // that is mostly open does not report a misleadingly small score.
+    if (result.needsTeacherReview) { openResponses++; return; }
     awarded += result.marksAwarded;
     available += result.marksAvailable;
   });
@@ -44,6 +60,7 @@ function markWorksheet_(worksheet, answers) {
     marksAwarded: round2_(awarded),
     marksAvailable: round2_(available),
     percent: available > 0 ? round2_((awarded / available) * 100) : 0,
+    openResponses: openResponses,
     results: results
   };
 }
@@ -55,6 +72,29 @@ function markQuestion_(question, response) {
 
   const answered = response !== undefined && response !== null && response !== '' &&
                    !(Array.isArray(response) && response.length === 0);
+
+  // Captured, never scored. The teacher reads it as evidence.
+  if (question.autoMarked === false) {
+    return {
+      questionId: question.id,
+      type: question.type,
+      answered: answered,
+      correct: false,
+      partial: false,
+      needsTeacherReview: true,
+      marksAwarded: 0,
+      marksAvailable: 0,
+      standards: question.standards || [],
+      frameworkRefs: question.frameworkRefs || [],
+      response: answered ? response : null,
+      // What the published pack tells a teacher to look for, shown beside the response.
+      lookFor: question.lookFor || '',
+      feedback: answered
+        ? 'Your teacher will read this response.'
+        : 'You did not answer this part.',
+      modelAnswer: ''
+    };
+  }
 
   if (answered) {
     switch (question.type) {
@@ -84,6 +124,8 @@ function markQuestion_(question, response) {
     marksAwarded: awarded,
     marksAvailable: marksAvailable,
     standards: question.standards || [],
+    frameworkRefs: question.frameworkRefs || [],
+    needsTeacherReview: false,
     feedback: pickFeedback_(question, fraction, answered),
     // The model answer is released only after marking, so students learn from mistakes.
     modelAnswer: describeAnswer_(question)

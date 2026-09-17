@@ -283,6 +283,25 @@
         ],
         "tierProbed": "advanced",
         "evidenceType": "product"
+      },
+      {
+        "id": "l02q6",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: which single data flaw would you fix first to improve the output the most, and why?",
+        "stem": "The flaw I would fix first is ___ because ___.",
+        "lookFor": "Names one specific flaw from their own investigation log and links it to a change in the output, rather than giving a general statement about data quality.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
       }
     ]
   },
