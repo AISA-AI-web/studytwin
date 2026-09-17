@@ -24,22 +24,18 @@
   ],
   "strandRows": [
     {
-      "code": "CU",
       "row": "Knowing how intelligent systems learn and operate",
       "theme": "How AI works"
     },
     {
-      "code": "SD",
       "row": "Working with data, and designing solutions",
       "theme": "Data & design"
     },
     {
-      "code": "CE",
       "row": "Exercising judgement in the use of AI systems",
       "theme": "Judgement"
     },
     {
-      "code": "GE",
       "row": "Assessing AI systems for ethical use",
       "theme": "Ethics & governance"
     }
@@ -66,22 +62,22 @@
           }
         }
       },
-      "SD": {
-        "code": "SD",
+      "DA": {
+        "code": "DA",
         "label": "Data Awareness",
         "theme": "Data & design",
         "frameworkRow": "Working with data, and designing solutions",
         "tiers": {
           "emerging": {
-            "code": "AIF·SD·KG1·E",
+            "code": "AIF·DA·KG1·E",
             "descriptor": "Recognises that information is needed to complete a task in guided physical examples."
           },
           "proficient": {
-            "code": "AIF·SD·KG1·P",
+            "code": "AIF·DA·KG1·P",
             "descriptor": "Sorts physical objects and explains grouping by one attribute (e.g., colour, shape, size)."
           },
           "advanced": {
-            "code": "AIF·SD·KG1·A",
+            "code": "AIF·DA·KG1·A",
             "descriptor": "Sorts using multiple attributes and explains how grouping supports decision-making."
           }
         }
@@ -148,22 +144,22 @@
           }
         }
       },
-      "SD": {
-        "code": "SD",
+      "DA": {
+        "code": "DA",
         "label": "Data Awareness",
         "theme": "Data & design",
         "frameworkRow": "Working with data, and designing solutions",
         "tiers": {
           "emerging": {
-            "code": "AIF·SD·KG2·E",
+            "code": "AIF·DA·KG2·E",
             "descriptor": "Understands that machines use information to respond."
           },
           "proficient": {
-            "code": "AIF·SD·KG2·P",
+            "code": "AIF·DA·KG2·P",
             "descriptor": "Sorts and groups objects using more than one attribute and explains reasoning."
           },
           "advanced": {
-            "code": "AIF·SD·KG2·A",
+            "code": "AIF·DA·KG2·A",
             "descriptor": "Demonstrates that incomplete or incorrect information leads to incorrect outcomes."
           }
         }
@@ -230,22 +226,22 @@
           }
         }
       },
-      "SD": {
-        "code": "SD",
+      "DA": {
+        "code": "DA",
         "label": "Data Awareness",
         "theme": "Data & design",
         "frameworkRow": "Working with data, and designing solutions",
         "tiers": {
           "emerging": {
-            "code": "AIF·SD·G1·E",
+            "code": "AIF·DA·G1·E",
             "descriptor": "Sorts information into simple groups with guidance."
           },
           "proficient": {
-            "code": "AIF·SD·G1·P",
+            "code": "AIF·DA·G1·P",
             "descriptor": "Sorts information independently using one attribute."
           },
           "advanced": {
-            "code": "AIF·SD·G1·A",
+            "code": "AIF·DA·G1·A",
             "descriptor": "Explains how different information leads to different results."
           }
         }
@@ -312,22 +308,22 @@
           }
         }
       },
-      "SD": {
-        "code": "SD",
+      "DA": {
+        "code": "DA",
         "label": "Data Awareness",
         "theme": "Data & design",
         "frameworkRow": "Working with data, and designing solutions",
         "tiers": {
           "emerging": {
-            "code": "AIF·SD·G2·E",
+            "code": "AIF·DA·G2·E",
             "descriptor": "Sorts information using one attribute."
           },
           "proficient": {
-            "code": "AIF·SD·G2·P",
+            "code": "AIF·DA·G2·P",
             "descriptor": "Sorts using more than one attribute."
           },
           "advanced": {
-            "code": "AIF·SD·G2·A",
+            "code": "AIF·DA·G2·A",
             "descriptor": "Explains how incorrect or missing information affects outcomes."
           }
         }
@@ -394,22 +390,22 @@
           }
         }
       },
-      "SD": {
-        "code": "SD",
+      "DA": {
+        "code": "DA",
         "label": "Data Awareness",
         "theme": "Data & design",
         "frameworkRow": "Working with data, and designing solutions",
         "tiers": {
           "emerging": {
-            "code": "AIF·SD·G3·E",
+            "code": "AIF·DA·G3·E",
             "descriptor": "Recognises that different information affects decisions."
           },
           "proficient": {
-            "code": "AIF·SD·G3·P",
+            "code": "AIF·DA·G3·P",
             "descriptor": "Explains how missing or incorrect information changes outcomes."
           },
           "advanced": {
-            "code": "AIF·SD·G3·A",
+            "code": "AIF·DA·G3·A",
             "descriptor": "Identifies simple errors in information and suggests improvements."
           }
         }
@@ -476,22 +472,22 @@
           }
         }
       },
-      "SD": {
-        "code": "SD",
+      "DA": {
+        "code": "DA",
         "label": "Data Awareness",
         "theme": "Data & design",
         "frameworkRow": "Working with data, and designing solutions",
         "tiers": {
           "emerging": {
-            "code": "AIF·SD·G4·E",
+            "code": "AIF·DA·G4·E",
             "descriptor": "Labels and organises simple data."
           },
           "proficient": {
-            "code": "AIF·SD·G4·P",
+            "code": "AIF·DA·G4·P",
             "descriptor": "Identifies errors or imbalance in data."
           },
           "advanced": {
-            "code": "AIF·SD·G4·A",
+            "code": "AIF·DA·G4·A",
             "descriptor": "Improves data to make it more accurate and balanced."
           }
         }
@@ -558,42 +554,42 @@
           }
         }
       },
-      "SD": {
-        "code": "SD",
+      "DA": {
+        "code": "DA",
         "label": "Data Literacy",
         "theme": "Data & design",
         "frameworkRow": "Working with data, and designing solutions",
         "tiers": {
           "emerging": {
-            "code": "AIF·SD·G5·E",
+            "code": "AIF·DA·G5·E",
             "descriptor": "Recognises that data affects outputs."
           },
           "proficient": {
-            "code": "AIF·SD·G5·P",
+            "code": "AIF·DA·G5·P",
             "descriptor": "Identifies when data is incomplete or biased."
           },
           "advanced": {
-            "code": "AIF·SD·G5·A",
+            "code": "AIF·DA·G5·A",
             "descriptor": "Suggests improvements to make data more reliable."
           }
         }
       },
-      "CE": {
-        "code": "CE",
+      "SD": {
+        "code": "SD",
         "label": "AI Solution Design & Development",
         "theme": "Judgement",
         "frameworkRow": "Exercising judgement in the use of AI systems",
         "tiers": {
           "emerging": {
-            "code": "AIF·CE·G5·E",
+            "code": "AIF·SD·G5·E",
             "descriptor": "Uses AI tools to generate simple outputs with guidance."
           },
           "proficient": {
-            "code": "AIF·CE·G5·P",
+            "code": "AIF·SD·G5·P",
             "descriptor": "Uses structured prompts to generate useful outputs."
           },
           "advanced": {
-            "code": "AIF·CE·G5·A",
+            "code": "AIF·SD·G5·A",
             "descriptor": "Refines prompts to improve output quality and explains why."
           }
         }

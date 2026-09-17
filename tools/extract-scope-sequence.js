@@ -75,15 +75,54 @@ function isBanner(cells) {
  * ------------------------------------------------------------------------ */
 
 const STRAND_ROWS = [
-  { code: 'CU', row: 'Knowing how intelligent systems learn and operate',
-    theme: 'How AI works' },
-  { code: 'SD', row: 'Working with data, and designing solutions',
-    theme: 'Data & design' },
-  { code: 'CE', row: 'Exercising judgement in the use of AI systems',
-    theme: 'Judgement' },
-  { code: 'GE', row: 'Assessing AI systems for ethical use',
-    theme: 'Ethics & governance' }
+  { row: 'Knowing how intelligent systems learn and operate', theme: 'How AI works' },
+  { row: 'Working with data, and designing solutions',        theme: 'Data & design' },
+  { row: 'Exercising judgement in the use of AI systems',     theme: 'Judgement' },
+  { row: 'Assessing AI systems for ethical use',              theme: 'Ethics & governance' }
 ];
+
+/**
+ * Strand label -> framework code.
+ *
+ * The code must come from the strand's NAME, never from its row position in the
+ * vertical progression tables. The framework keeps four thematic rows across all
+ * fourteen year groups, but the strand sitting in a given row changes: at Grade 5
+ * the "Exercising judgement" row holds AI Solution Design & Development, because
+ * Critical Evaluation is not taught at Grade 5 at all.
+ *
+ * Keying on position instead of name resolves AIF-SD-G5-A to "Suggests
+ * improvements to make data more reliable" when ADEK's own Grade 6 Bridging table
+ * prints it against "Refines prompts to improve output quality and explains why".
+ * Grade 6 Bridging Week 2 cites exactly that code, so the error reaches the grade
+ * we are building. checkBridgingResolution_() below now fails the build on it.
+ *
+ * DA is ours, not ADEK's: the framework prints CU for the Data Awareness and Data
+ * Literacy weeks at Grades 4 and 5, which collides with the genuine CU strand in
+ * the same table. A distinct internal code keeps our catalogue unambiguous; the
+ * code ADEK actually printed is preserved alongside it and the collision reported.
+ */
+const LABEL_TO_CODE = {
+  'ai conceptual understanding': 'CU',
+  'ai systems understanding': 'CU',
+  'ai solution design & development': 'SD',
+  'ai solution design and development': 'SD',
+  'data awareness': 'DA',
+  'data literacy': 'DA',
+  'critical evaluation & informed interaction': 'CE',
+  'critical evaluation and informed interaction': 'CE',
+  'ethics & privacy': 'GE',
+  'ethics & responsible use': 'GE',
+  'responsible ai use': 'GE',
+  'ethics & governance': 'GE',
+  'governance & ethics': 'GE',
+  'governance & impact': 'GE',
+  'governance, ethics & societal impact': 'GE'
+};
+
+function codeForLabel_(label) {
+  const key = String(label).toLowerCase().replace(/\s+/g, ' ').trim();
+  return LABEL_TO_CODE[key] || null;
+}
 
 const TIERS = [
   { key: 'emerging',   label: 'Emerging',   letter: 'E', ordinal: 1 },
@@ -154,16 +193,26 @@ function ingestVerticalTables(all) {
         .replace(/^KG[12]\s*/, '')
         .trim();
 
+      const code = codeForLabel_(label);
+      if (!code) {
+        warnings.push(`Unrecognised strand label "${label}" at ${gradeKey} — ` +
+                      `add it to LABEL_TO_CODE`);
+        return;
+      }
       if (!catalogue[gradeKey]) catalogue[gradeKey] = {};
-      catalogue[gradeKey][strand.code] = {
-        code: strand.code,
+      if (catalogue[gradeKey][code]) {
+        warnings.push(`${gradeKey}: two strands both resolve to ${code} ` +
+          `("${catalogue[gradeKey][code].label}" and "${label}")`);
+      }
+      catalogue[gradeKey][code] = {
+        code: code,
         label: label,
         theme: strand.theme,
         frameworkRow: strand.row,
         tiers: {
-          emerging:   { code: standardCode(strand.code, gradeKey, 'E'), descriptor: cells[1] },
-          proficient: { code: standardCode(strand.code, gradeKey, 'P'), descriptor: cells[2] },
-          advanced:   { code: standardCode(strand.code, gradeKey, 'A'), descriptor: cells[3] }
+          emerging:   { code: standardCode(code, gradeKey, 'E'), descriptor: cells[1] },
+          proficient: { code: standardCode(code, gradeKey, 'P'), descriptor: cells[2] },
+          advanced:   { code: standardCode(code, gradeKey, 'A'), descriptor: cells[3] }
         }
       };
     });
@@ -246,8 +295,10 @@ function ingestSequences(all) {
       };
       if (isBridging) {
         entry.rebuildsTo = cells[3];                       // prior-grade Advanced descriptor
+        // Integration weeks print several refs run together with no separator,
+        // e.g. "AIF<mid>CU<mid>G5<mid>AAIF<mid>SD<mid>G5<mid>A" — split on the prefix, not on whitespace.
         entry.frameworkRefs = (cells[4] || '')
-          .split(/\s+(?=AIF)/).map((s) => s.trim()).filter(Boolean);
+          .split(/(?=AIF\u00B7)/).map((s) => s.trim()).filter(Boolean);
       } else {
         entry.secures = cells[3];                          // Emerging descriptor
         entry.stretch = cells[4] || '';                    // Proficient descriptor
@@ -303,6 +354,56 @@ function checkSequenceAlignment() {
   });
 }
 
+/**
+ * Resolves every Bridging citation against the catalogue and checks the descriptor
+ * printed beside it matches.
+ *
+ * This is the strongest validation available, because the Bridging tables are the
+ * one place ADEK prints a code and its descriptor together. It is what catches a
+ * code that resolves to the wrong text — the failure mode that matters, since a
+ * mis-resolved code silently assesses a student against another strand's outcome.
+ */
+function checkBridgingResolution_() {
+  let checked = 0, exact = 0;
+  const collisions = [];
+
+  Object.entries(sequences).forEach(([gradeKey, seq]) => {
+    (seq.bridging || []).forEach((week) => {
+      if (week.frameworkRefs.length !== 1 || !week.rebuildsTo) return;  // skip integration weeks
+      const m = /AIF\u00B7([A-Z]{2})\u00B7G(\d+)\u00B7([EPA])/.exec(week.frameworkRefs[0]);
+      if (!m) return;
+
+      const [, printedCode, priorGrade, tierLetter] = m;
+      const tier = TIERS.find((t) => t.letter === tierLetter).key;
+      const priorKey = 'grade' + priorGrade;
+      const strands = catalogue[priorKey] || {};
+      checked++;
+
+      const viaPrinted = strands[printedCode];
+      if (viaPrinted && viaPrinted.tiers[tier].descriptor === week.rebuildsTo) { exact++; return; }
+
+      // The descriptor is authoritative — find which strand it actually belongs to.
+      const actual = Object.values(strands)
+        .find((st) => st.tiers[tier].descriptor === week.rebuildsTo);
+
+      if (actual) {
+        collisions.push(`${gradeKey} bridging ${week.week} ("${week.strand}"): ADEK prints ` +
+          `${week.frameworkRefs[0]}, but that descriptor is ${actual.code} ` +
+          `(${actual.label}) at ${priorKey}.`);
+      } else {
+        warnings.push(`${gradeKey} bridging ${week.week}: ${week.frameworkRefs[0]} resolves to ` +
+          `no descriptor at ${priorKey} matching the printed text ` +
+          `"${week.rebuildsTo.slice(0, 60)}..."`);
+      }
+    });
+  });
+
+  notes.push(`Resolved ${checked} Bridging citations against the catalogue: ${exact} matched ` +
+             `the descriptor printed beside them, ${collisions.length} hit a code collision in ` +
+             `ADEK's own document.`);
+  return collisions;
+}
+
 /** Reports where a bridging week's stated strand disagrees with its code. */
 function checkStrandCodeConsistency() {
   const seen = {};
@@ -330,6 +431,7 @@ ingestVerticalTables(all);
 crossCheckExpectations(all);
 ingestSequences(all);
 checkSequenceAlignment();
+const codeCollisions = checkBridgingResolution_();
 const strandCodeMap = checkStrandCodeConsistency();
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -366,6 +468,12 @@ Object.entries(strandCodeMap).sort().forEach(([k, v]) => {
 });
 
 notes.forEach((n) => console.log('\n' + n));
+
+if (codeCollisions.length) {
+  console.log('\nCode collisions in ADEK\u2019s published document (ours resolve correctly by' +
+              ' strand name; raise these with ADEK):\n');
+  codeCollisions.forEach((c) => console.log('  - ' + c));
+}
 
 if (warnings.length) {
   console.log(`\n${warnings.length} item(s) needing attention:\n`);
