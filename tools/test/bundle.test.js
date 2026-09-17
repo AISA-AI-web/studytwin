@@ -119,15 +119,60 @@ check('answer keys are still stripped for students',
 
 console.log('\nUI include paths are flattened for the editor');
 
-check('no "ui/" include survives in the bundle',
-  !/include\('ui\//.test(bundle), 'the editor cannot create a file with "/" in its name');
+// The earlier version of this test matched only include('ui/...'), the same blind spot
+// the bundler had — so it passed while doGet still called createTemplateFromFile('ui/Index'),
+// and the app deployed fine then failed on its first page load. Match ANY 'ui/' reference.
+check('no "ui/" reference of any kind survives in the bundle',
+  !/['"]ui\//.test(bundle),
+  (bundle.split('\n').filter((l) => /['"]ui\//.test(l))[0] || '').trim());
+
+check('doGet loads the flattened Index template',
+  /createTemplateFromFile\('Index'\)/.test(bundle),
+  'doGet must reference Index, not ui/Index');
+
+/*
+ * Every HtmlService file reference must name a file that actually ships.
+ *
+ * These are resolved by NAME at runtime, so a wrong one deploys cleanly and then
+ * throws on the first page load — which is exactly how 'ui/Index' reached a live
+ * deployment. The bundle is evaluated in Node here, where HtmlService does not
+ * exist, so doGet is never executed and nothing catches it dynamically. This
+ * checks the references statically instead.
+ */
+const htmlFiles = new Set(fs.readdirSync(path.join(root, 'dist'))
+  .filter((f) => f.endsWith('.html'))
+  .map((f) => f.replace(/\.html$/, '')));
+
+const referenced = [...bundle.matchAll(
+  /(?:createTemplateFromFile|createHtmlOutputFromFile|include)\(\s*'([^']+)'/g)]
+  .map((m) => m[1]);
+
+check('the bundle references at least one HTML file',
+  referenced.length > 0, 'the regex found nothing — has the call style changed?');
+
+const missing = [...new Set(referenced)].filter((name) => !htmlFiles.has(name));
+check('every HTML file the code loads by name is actually shipped',
+  missing.length === 0,
+  missing.length ? `referenced but not in dist/: ${missing.join(', ')} ` +
+    `(shipped: ${[...htmlFiles].join(', ')})` : '');
+
+// The HTML files load each other the same way, so check their references too.
+const htmlRefs = [];
+htmlFiles.forEach((name) => {
+  const text = fs.readFileSync(path.join(root, 'dist', `${name}.html`), 'utf8');
+  [...text.matchAll(/include\(\s*'([^']+)'/g)].forEach((m) => htmlRefs.push(m[1]));
+});
+const htmlMissing = [...new Set(htmlRefs)].filter((name) => !htmlFiles.has(name));
+check('every HTML file included from another HTML file is shipped',
+  htmlMissing.length === 0,
+  htmlMissing.length ? `referenced but not in dist/: ${htmlMissing.join(', ')}` : '');
 
 ['Index', 'Styles', 'App'].forEach((name) => {
   const p = path.join(root, 'dist', `${name}.html`);
   check(`dist/${name}.html exists`, fs.existsSync(p));
   if (fs.existsSync(p)) {
-    check(`dist/${name}.html has no "ui/" include`,
-      !/include\('ui\//.test(fs.readFileSync(p, 'utf8')));
+    check(`dist/${name}.html has no "ui/" reference`,
+      !/['"]ui\//.test(fs.readFileSync(p, 'utf8')));
   }
 });
 

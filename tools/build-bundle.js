@@ -70,8 +70,13 @@ BUNDLES.forEach((bundle) => {
   });
 
   // The editor will not accept "/" in a filename, so the UI files flatten to Index,
-  // Styles and App, and the include() calls are rewritten to match.
-  code = code.replace(/include\('ui\/(\w+)'\)/g, "include('$1')");
+  // Styles and App, and every reference to them is rewritten to match.
+  //
+  // This rewrites ANY 'ui/Name' string, not just include() calls. An earlier version
+  // matched only include(), which left doGet's createTemplateFromFile('ui/Index')
+  // pointing at a file that cannot exist in the editor — so the deploy succeeded and
+  // then failed at the first page load with "No HTML file named ui/Index was found".
+  code = code.replace(/'ui\/(\w+)'/g, "'$1'");
 
   // A marker on the last line, so a truncated paste is visible at a glance.
   code += `\n// --- END OF ${bundle.out} --- if you cannot see this line, the paste was cut short.\n`;
@@ -80,11 +85,27 @@ BUNDLES.forEach((bundle) => {
 
 ['Index', 'Styles', 'App'].forEach((name) => {
   let html = fs.readFileSync(path.join(src, 'ui', `${name}.html`), 'utf8');
-  html = html.replace(/include\('ui\/(\w+)'\)/g, "include('$1')");
+  html = html.replace(/'ui\/(\w+)'/g, "'$1'");
   fs.writeFileSync(path.join(dist, `${name}.html`), html);
 });
 
 fs.copyFileSync(path.join(src, 'appsscript.json'), path.join(dist, 'appsscript.json'));
+
+// Nothing referencing the old nested paths may survive, in any form.
+const leaks = [];
+fs.readdirSync(dist).forEach((f) => {
+  const text = fs.readFileSync(path.join(dist, f), 'utf8');
+  text.split('\n').forEach((line, i) => {
+    if (/['"]ui\//.test(line)) leaks.push(`${f}:${i + 1}  ${line.trim().slice(0, 90)}`);
+  });
+});
+if (leaks.length) {
+  console.error('\nBUNDLE IS BROKEN — references to "ui/" survived the rewrite:\n');
+  leaks.forEach((l) => console.error('  ' + l));
+  console.error('\nThe editor cannot hold a file with "/" in its name, so these would fail\n' +
+                'at runtime, not at deploy time. Fix the rewrite in tools/build-bundle.js.\n');
+  process.exit(1);
+}
 
 const files = fs.readdirSync(dist).sort();
 console.log('Wrote dist/ — paste these into the Apps Script editor:\n');

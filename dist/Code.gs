@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-17T14:12:17.692Z
+ * Built: 2026-09-17T14:47:08.799Z
  */
 
 /* ==========================================================================
@@ -1858,7 +1858,7 @@ function doGet() {
 
   ensureSchema_();
 
-  const template = HtmlService.createTemplateFromFile('ui/Index');
+  const template = HtmlService.createTemplateFromFile('Index');
   template.bootstrapUser = JSON.stringify(user);
   template.appName = CONFIG.APP_NAME;
 
