@@ -40,43 +40,49 @@ const mock = `
 <script>
 /**
  * In-memory stand-in for Api.gs. Mirrors the same envelopes and shapes, backed
- * by the real marking and attainment code inlined above.
+ * by the real marking, content and attainment code inlined above — including the
+ * real per-grade decision rule, so the overall levels shown here are computed the
+ * same way they will be in production.
  */
 (function () {
+  var GRADE = 'grade6';
   var DEMO_CLASSES = ['6A', '6B'];
+
+  // Demo cohort. \`levels\` are teacher judgements, exactly as they would be
+  // recorded in the real system — nothing here is derived from marks.
   var DEMO_STUDENTS = [
-    { email: 'amina.hassan@aisa.sch.ae',  displayName: 'Amina Hassan',  className: '6A', skill: 0.95 },
-    { email: 'omar.khalid@aisa.sch.ae',   displayName: 'Omar Khalid',   className: '6A', skill: 0.78 },
-    { email: 'layla.ahmed@aisa.sch.ae',   displayName: 'Layla Ahmed',   className: '6A', skill: 0.62 },
-    { email: 'yusuf.rahman@aisa.sch.ae',  displayName: 'Yusuf Rahman',  className: '6A', skill: 0.44 },
-    { email: 'sara.mansoori@aisa.sch.ae', displayName: 'Sara Al Mansoori', className: '6B', skill: 0.88 },
-    { email: 'khalid.saeed@aisa.sch.ae',  displayName: 'Khalid Saeed',  className: '6B', skill: 0.71 },
-    { email: 'noor.jassim@aisa.sch.ae',   displayName: 'Noor Al Jassim', className: '6B', skill: 0.55 },
-    { email: 'hamad.zaabi@aisa.sch.ae',   displayName: 'Hamad Al Zaabi', className: '6B', skill: 0.30 }
+    { email: 'amina.hassan@aisa.sch.ae',  displayName: 'Amina Hassan',     className: '6A', skill: 0.95,
+      levels: { CU: 'advanced',   SD: 'proficient', CE: 'proficient', GE: 'advanced' } },
+    { email: 'omar.khalid@aisa.sch.ae',   displayName: 'Omar Khalid',      className: '6A', skill: 0.80,
+      levels: { CU: 'proficient', SD: 'proficient', CE: 'proficient', GE: 'emerging' } },
+    { email: 'layla.ahmed@aisa.sch.ae',   displayName: 'Layla Ahmed',      className: '6A', skill: 0.70,
+      levels: { CU: 'emerging',   SD: 'emerging',   CE: 'proficient', GE: 'emerging' } },
+    { email: 'yusuf.rahman@aisa.sch.ae',  displayName: 'Yusuf Rahman',     className: '6A', skill: 0.40,
+      levels: { CU: 'emerging',   SD: 'working_towards', CE: 'emerging', GE: 'emerging' } },
+    { email: 'sara.mansoori@aisa.sch.ae', displayName: 'Sara Al Mansoori', className: '6B', skill: 0.92,
+      levels: { CU: 'advanced',   SD: 'advanced',   CE: 'advanced',   GE: 'proficient' } },
+    { email: 'khalid.saeed@aisa.sch.ae',  displayName: 'Khalid Saeed',     className: '6B', skill: 0.75,
+      levels: { CU: 'proficient', SD: 'emerging',   CE: 'emerging',   GE: 'emerging' } },
+    // Part-judged: shows the "incomplete" state rather than a defaulted level.
+    { email: 'noor.jassim@aisa.sch.ae',   displayName: 'Noor Al Jassim',   className: '6B', skill: 0.55,
+      levels: { CU: 'emerging', SD: 'emerging' } },
+    // Not judged at all.
+    { email: 'hamad.zaabi@aisa.sch.ae',   displayName: 'Hamad Al Zaabi',   className: '6B', skill: 0.30,
+      levels: {} }
   ];
 
-  var GRADE = 'grade6';
-  var submissions = [];   // { email, lessonId, attempt, percent, marksAwarded, marksAvailable, resultsJson, submittedAt }
+  var submissions = [];
+  var judgements = [];
   var auditLog = [];
+  var uid = 0;
 
+  function seeded(seed) { var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
   function lessonsInOrder() { return listLessons_(GRADE); }
 
-  /** Deterministic pseudo-random so the demo looks the same on every reload. */
-  function seeded(seed) {
-    var x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-  }
-
-  /**
-   * Generates a plausible attempt for a demo student by answering each question
-   * correctly with probability = their skill, then marking it for real.
-   */
   function simulate(student, lesson, seedBase) {
     var answers = {};
     (lesson.worksheet.questions || []).forEach(function (q, qi) {
-      var roll = seeded(seedBase + qi * 7.13);
-      if (roll > student.skill) return;  // leaves it blank or wrong
-
+      if (seeded(seedBase + qi * 7.13) > student.skill) return;
       switch (q.type) {
         case 'mcq': case 'truefalse': answers[q.id] = q.answer; break;
         case 'multi': answers[q.id] = q.answer.slice(); break;
@@ -84,33 +90,43 @@ const mock = `
         case 'ordering': answers[q.id] = q.answer.slice(); break;
         case 'numeric': answers[q.id] = q.answer; break;
         case 'fillBlank':
-          answers[q.id] = q.answer.map(function (a) { return Array.isArray(a) ? a[0] : a; });
-          break;
+          answers[q.id] = q.answer.map(function (a) { return Array.isArray(a) ? a[0] : a; }); break;
         case 'shortText': answers[q.id] = q.modelAnswer; break;
       }
     });
     return markWorksheet_(lesson.worksheet, answers);
   }
 
-  // Seed the cohort so the teacher view has something real to show.
   DEMO_STUDENTS.forEach(function (student, si) {
     lessonsInOrder().forEach(function (lesson, li) {
-      // Weaker students have not reached the later lessons yet.
-      if (seeded(si * 3.7 + li * 11.9) > student.skill + 0.25) return;
+      if (seeded(si * 3.7 + li * 11.9) > student.skill + 0.3) return;
       var marked = simulate(student, lesson, si * 100 + li * 17);
       submissions.push({
-        email: student.email, lessonId: lesson.id, attempt: 1,
+        email: student.email, lessonId: lesson.id, track: 'main', attempt: 1,
         percent: marked.percent, marksAwarded: marked.marksAwarded,
         marksAvailable: marked.marksAvailable,
         resultsJson: JSON.stringify(marked.results),
-        submittedAt: new Date(Date.now() - (si + li) * 86400000 * 1.5)
+        submittedAt: new Date(2026, 8, 1 + si + li * 2)
+      });
+    });
+    Object.keys(student.levels).forEach(function (strand, i) {
+      judgements.push({
+        id: 'j' + (++uid), email: student.email, grade: '6', track: 'main',
+        strand: strand, level: student.levels[strand], scale: 'summative_tier',
+        assessmentEvent: 'final',
+        evidenceProducts: 'Worksheet + solution plan',
+        evidenceObservations: i % 3 === 2 ? '' : 'Card sort, W2 Lab',
+        evidenceConversations: i % 2 === 0 ? 'Part 4 probe' : '',
+        note: '', accessArrangements: '',
+        nextStep: student.levels[strand] === 'working_towards'
+          ? 'Bridging primer, then re-check' : '',
+        judgedBy: 'f.mansour@aisa.sch.ae', judgedAt: new Date(2026, 8, 12), supersededBy: ''
       });
     });
   });
 
-  function mine(email) {
-    return submissions.filter(function (s) { return s.email === email; });
-  }
+  function mine(email) { return submissions.filter(function (s) { return s.email === email; }); }
+  function judgedFor(email) { return judgements.filter(function (j) { return j.email === email; }); }
   function bestByLesson(rows) {
     var best = {};
     rows.forEach(function (r) {
@@ -119,8 +135,8 @@ const mock = `
     return best;
   }
   function values(o) { return Object.keys(o).map(function (k) { return o[k]; }); }
-  function totalMarks(lesson) {
-    return ((lesson.worksheet && lesson.worksheet.questions) || [])
+  function totalMarks(l) {
+    return ((l.worksheet && l.worksheet.questions) || [])
       .reduce(function (s, q) { return s + (q.marks || 0); }, 0);
   }
 
@@ -137,18 +153,19 @@ const mock = `
         lessons: lessonsInOrder().map(function (lesson) {
           var s = best[lesson.id];
           return {
-            id: lesson.id, number: lesson.number, type: lesson.type, title: lesson.title,
+            id: lesson.id, number: lesson.number, type: lesson.type,
+            track: lesson.track || 'main', title: lesson.title,
             summary: lesson.summary || '', duration: lesson.duration || '',
-            standards: lesson.standards || [], marksAvailable: totalMarks(lesson),
+            marksAvailable: totalMarks(lesson),
             attempts: mine(user.email).filter(function (r) { return r.lessonId === lesson.id; }).length,
             maxAttempts: CONFIG.MAX_ATTEMPTS,
-            status: s ? (s.percent >= CONFIG.PASS_PERCENT ? 'complete' : 'attempted') : 'not-started',
-            percent: s ? s.percent : null,
+            status: s ? 'submitted' : 'not-started',
+            worksheetScore: s ? s.percent : null,
             marksAwarded: s ? s.marksAwarded : null
           };
         }),
-        bands: CONFIG.ATTAINMENT_BANDS,
-        attainment: computeAttainment_(GRADE, values(best))
+        levels: CONFIG.ATTAINMENT_LEVELS,
+        profile: buildStrandProfile_(GRADE, judgedFor(user.email))
       };
     },
 
@@ -158,14 +175,11 @@ const mock = `
       var best = bestByLesson(mine(user.email))[lessonId];
       return {
         lesson: getLessonForStudent_(GRADE, lessonId),
-        attempts: attempts,
-        maxAttempts: CONFIG.MAX_ATTEMPTS,
+        attempts: attempts, maxAttempts: CONFIG.MAX_ATTEMPTS,
         canAttempt: attempts < CONFIG.MAX_ATTEMPTS,
-        best: best ? {
-          percent: best.percent, marksAwarded: best.marksAwarded,
-          marksAvailable: best.marksAvailable, submittedAt: best.submittedAt,
-          results: JSON.parse(best.resultsJson), answers: {}
-        } : null
+        best: best ? { worksheetScore: best.percent, marksAwarded: best.marksAwarded,
+                       marksAvailable: best.marksAvailable, submittedAt: best.submittedAt,
+                       results: JSON.parse(best.resultsJson), answers: {} } : null
       };
     },
 
@@ -174,22 +188,18 @@ const mock = `
       var lesson = getLessonAuthoritative_(GRADE, lessonId);
       var attempts = mine(user.email).filter(function (r) { return r.lessonId === lessonId; }).length;
       var marked = markWorksheet_(lesson.worksheet, answers || {});
-
       submissions.push({
-        email: user.email, lessonId: lessonId, attempt: attempts + 1,
+        email: user.email, lessonId: lessonId, track: 'main', attempt: attempts + 1,
         percent: marked.percent, marksAwarded: marked.marksAwarded,
         marksAvailable: marked.marksAvailable,
-        resultsJson: JSON.stringify(marked.results), submittedAt: new Date()
+        resultsJson: JSON.stringify(marked.results), submittedAt: new Date(2026, 8, 17)
       });
-      auditLog.push({ timestamp: new Date(), actor: user.email, action: 'SUBMIT',
+      auditLog.push({ timestamp: new Date(2026, 8, 17), actor: user.email, action: 'SUBMIT',
                       detail: lessonId + ' scored ' + marked.percent + '%' });
-
       return {
-        percent: marked.percent, marksAwarded: marked.marksAwarded,
-        marksAvailable: marked.marksAvailable,
-        passed: marked.percent >= CONFIG.PASS_PERCENT,
-        results: marked.results, attempt: attempts + 1,
-        attemptsRemaining: CONFIG.MAX_ATTEMPTS - (attempts + 1)
+        worksheetScore: marked.percent, marksAwarded: marked.marksAwarded,
+        marksAvailable: marked.marksAvailable, results: marked.results,
+        attempt: attempts + 1, attemptsRemaining: CONFIG.MAX_ATTEMPTS - (attempts + 1)
       };
     },
 
@@ -197,12 +207,15 @@ const mock = `
       var user = window.CURRENT_USER;
       var best = bestByLesson(mine(user.email));
       return {
-        attainment: computeAttainment_(GRADE, values(best)),
+        profile: buildStrandProfile_(GRADE, judgedFor(user.email)),
+        evidence: worksheetEvidenceByStrand_(GRADE, values(best)),
+        levels: CONFIG.ATTAINMENT_LEVELS,
         lessons: lessonsInOrder().map(function (lesson) {
           var s = best[lesson.id];
           return {
-            id: lesson.id, number: lesson.number, title: lesson.title, type: lesson.type,
-            percent: s ? s.percent : null, marksAwarded: s ? s.marksAwarded : null,
+            id: lesson.id, number: lesson.number, title: lesson.title,
+            type: lesson.type, track: lesson.track || 'main',
+            worksheetScore: s ? s.percent : null, marksAwarded: s ? s.marksAwarded : null,
             marksAvailable: totalMarks(lesson), submittedAt: s ? s.submittedAt : null
           };
         })
@@ -210,36 +223,27 @@ const mock = `
     },
 
     api_getClassOverview: function (className) {
-      var lessons = lessonsInOrder();
       var roster = DEMO_STUDENTS.filter(function (s) {
         return !className || s.className === className;
       });
       var students = roster.map(function (entry) {
-        var best = bestByLesson(mine(entry.email));
-        var attainment = computeAttainment_(GRADE, values(best));
-        var completed = lessons.filter(function (l) {
-          return best[l.id] && best[l.id].percent >= CONFIG.PASS_PERCENT;
-        }).length;
-        var dates = mine(entry.email).map(function (r) { return r.submittedAt; }).sort();
+        var rows = mine(entry.email);
         return {
           email: entry.email, displayName: entry.displayName, className: entry.className,
-          lessonsCompleted: completed, lessonsTotal: lessons.length,
-          percentComplete: lessons.length ? Math.round((completed / lessons.length) * 100) : 0,
-          overallPercent: attainment.overall.percent,
-          band: attainment.overall.band, bandLabel: attainment.overall.bandLabel,
-          bandColor: attainment.overall.bandColor,
-          lastActive: dates.length ? dates[dates.length - 1] : null,
-          attainment: attainment
+          bridgingStrands: [],
+          profile: buildStrandProfile_(GRADE, judgedFor(entry.email)),
+          worksheetsSubmitted: Object.keys(bestByLesson(rows)).length,
+          lastActive: rows.length ? rows[rows.length - 1].submittedAt : null
         };
       });
       return {
         students: students,
-        classAttainment: computeClassAttainment_(GRADE, students),
-        lessons: lessons.map(function (l) {
-          return { id: l.id, number: l.number, title: l.title, type: l.type };
-        }),
-        classes: DEMO_CLASSES,
-        bands: CONFIG.ATTAINMENT_BANDS
+        classProfile: computeClassProfile_(GRADE, students),
+        levels: CONFIG.ATTAINMENT_LEVELS,
+        strands: getStandardsIndex_(GRADE),
+        expectedTier: CONFIG.GRADE_RULES[GRADE].expectedTier,
+        lessonsTotal: lessonsInOrder().length,
+        classes: DEMO_CLASSES
       };
     },
 
@@ -249,14 +253,21 @@ const mock = `
       var rows = mine(email);
       var best = bestByLesson(rows);
       return {
-        student: { email: entry.email, displayName: entry.displayName, className: entry.className },
-        attainment: computeAttainment_(GRADE, values(best)),
+        student: { email: entry.email, displayName: entry.displayName,
+                   className: entry.className, bridgingStrands: [] },
+        profile: buildStrandProfile_(GRADE, judgedFor(email)),
+        evidence: worksheetEvidenceByStrand_(GRADE, values(best)),
+        levels: CONFIG.ATTAINMENT_LEVELS,
+        evidenceSources: CONFIG.EVIDENCE_SOURCES,
+        history: judgedFor(email).slice().reverse(),
+        readiness: [],
         lessons: lessonsInOrder().map(function (lesson) {
           var s = best[lesson.id];
           return {
-            id: lesson.id, number: lesson.number, title: lesson.title, type: lesson.type,
+            id: lesson.id, number: lesson.number, title: lesson.title,
+            type: lesson.type, track: lesson.track || 'main',
             marksAvailable: totalMarks(lesson),
-            percent: s ? s.percent : null, marksAwarded: s ? s.marksAwarded : null,
+            worksheetScore: s ? s.percent : null, marksAwarded: s ? s.marksAwarded : null,
             submittedAt: s ? s.submittedAt : null,
             attempts: rows.filter(function (r) { return r.lessonId === lesson.id; }).length,
             results: s ? JSON.parse(s.resultsJson) : []
@@ -265,11 +276,30 @@ const mock = `
       };
     },
 
+    api_recordJudgement: function (payload) {
+      judgements.filter(function (j) {
+        return j.email === payload.email && j.strand === payload.strand && !j.supersededBy;
+      }).forEach(function (j) { j.supersededBy = 'superseded'; });
+
+      judgements.push({
+        id: 'j' + (++uid), email: payload.email, grade: '6', track: 'main',
+        strand: payload.strand, level: payload.level, scale: 'summative_tier',
+        assessmentEvent: payload.assessmentEvent || 'final',
+        evidenceProducts: payload.evidenceProducts || '',
+        evidenceObservations: payload.evidenceObservations || '',
+        evidenceConversations: payload.evidenceConversations || '',
+        note: payload.note || '', accessArrangements: payload.accessArrangements || '',
+        nextStep: payload.nextStep || '',
+        judgedBy: window.CURRENT_USER.email, judgedAt: new Date(2026, 8, 17), supersededBy: ''
+      });
+      return buildStrandProfile_(GRADE, judgedFor(payload.email));
+    },
+
     api_getAdminData: function () {
       return {
         roster: DEMO_STUDENTS.map(function (s) {
           return { email: s.email, displayName: s.displayName, grade: '6',
-                   className: s.className, active: true };
+                   className: s.className, active: true, bridgingStrands: '' };
         }),
         staff: [
           { email: 'b.abaki@aisa.sch.ae', role: 'admin', addedBy: 'deployment' },
@@ -283,23 +313,28 @@ const mock = `
     api_importRoster: function (text) {
       var lines = String(text || '').split(/\\r?\\n/).filter(function (l) { return l.trim(); });
       var rejected = lines.filter(function (l) { return l.indexOf('@aisa.sch.ae') === -1; })
-        .map(function (l) { return l + '  — not an @aisa.sch.ae address'; });
+        .map(function (l) { return l + '  \u2014 not an @aisa.sch.ae address'; });
       return { added: lines.length - rejected.length, updated: 0, rejected: rejected };
     },
 
     api_setStaffRole: function (email, role) { return { email: email, role: role }; },
 
     api_exportCsv: function () {
-      var lessons = lessonsInOrder();
-      var header = ['Email', 'Name', 'Class']
-        .concat(lessons.map(function (l) { return 'L' + l.number + ' %'; }))
-        .concat(['Overall %', 'Band']);
-      var rows = DEMO_STUDENTS.map(function (s) {
-        var best = bestByLesson(mine(s.email));
-        var a = computeAttainment_(GRADE, values(best));
-        return [s.email, s.displayName, s.className]
-          .concat(lessons.map(function (l) { return best[l.id] ? best[l.id].percent : ''; }))
-          .concat([a.overall.percent, a.overall.bandLabel]);
+      var strands = getStandardsIndex_(GRADE);
+      var header = ['Email', 'Name', 'Class'];
+      CONFIG.STRANDS.forEach(function (s) {
+        header.push(strands[s] ? strands[s].label : s, s + ' note');
+      });
+      header.push('Overall level', 'Decision rule');
+      var rows = DEMO_STUDENTS.map(function (st) {
+        var p = buildStrandProfile_(GRADE, judgedFor(st.email));
+        var row = [st.email, st.displayName, st.className];
+        CONFIG.STRANDS.forEach(function (code) {
+          var r = p.byStrand.filter(function (x) { return x.strand === code; })[0];
+          row.push(r && r.judged ? r.levelLabel : '', r ? r.note : '');
+        });
+        row.push(p.overall.level ? p.overall.label : 'Not yet complete', p.overall.rule || '');
+        return row;
       });
       return { csv: [header].concat(rows).map(function (r) { return r.join(','); }).join('\\n') };
     }
@@ -315,14 +350,10 @@ const mock = `
     Object.keys(API).forEach(function (name) {
       runner[name] = function () {
         var args = arguments;
-        setTimeout(function () {      // mimic the network hop
-          try {
-            onSuccess({ ok: true, data: API[name].apply(null, args) });
-          } catch (err) {
-            console.error(err);
-            if (onFailure) onFailure(err);
-          }
-        }, 140);
+        setTimeout(function () {
+          try { onSuccess({ ok: true, data: API[name].apply(null, args) }); }
+          catch (err) { console.error(err); if (onFailure) onFailure(err); }
+        }, 120);
       };
     });
     return runner;

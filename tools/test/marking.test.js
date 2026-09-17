@@ -31,7 +31,7 @@ vm.createContext(sandbox);
 const api = vm.runInContext(`({
   CONFIG, CURRICULUM,
   markWorksheet_, markQuestion_,
-  getLessonForStudent_, computeAttainment_
+  getLessonForStudent_
 })`, sandbox);
 
 let passed = 0, failed = 0;
@@ -146,81 +146,6 @@ check('stripped lesson keeps options students need to answer',
   safe.worksheet.questions.find((q) => q.id === 'l01q1').options.length === 4);
 check('the authoritative copy is untouched by stripping',
   api.CURRICULUM.grade6.lessons['g6-l01'].worksheet.questions[0].answer === 'b');
-
-console.log('\nAttainment rollup');
-const perfect = ['g6-l01', 'g6-l02'].map((id) => {
-  const lesson = api.CURRICULUM.grade6.lessons[id];
-  const marked = api.markWorksheet_(lesson.worksheet, perfectAnswers(lesson.worksheet));
-  return { lessonId: id, resultsJson: JSON.stringify(marked.results) };
-});
-const attainment = api.computeAttainment_('grade6', perfect);
-check('a perfect student is 100% overall', attainment.overall.percent === 100);
-check('a perfect student bands as Mastery', attainment.overall.band === 'mastery');
-// 8, not 10: AI.6.3.2 and AI.6.4.2 are defined in standards.json but no question
-// in either worksheet assesses them yet. validate-content.js reports that gap.
-check('every standard tagged in the worksheets is evidenced',
-  attainment.byStandard.length === 8,
-  `evidenced ${attainment.byStandard.length} standards: ` +
-  attainment.byStandard.map((s) => s.code).join(', '));
-
-// Regression: the overall figure must count each question once, not once per
-// standard tag. Summing the per-standard rows reported a student who scored
-// 46.67% on every paper as 52.5% overall — above the 50% pass mark.
-const partialSubs = ['g6-l01', 'g6-l02'].map((id) => {
-  const lesson = api.CURRICULUM.grade6.lessons[id];
-  const answers = perfectAnswers(lesson.worksheet);
-  // Drop the multi-standard questions so double-counting would show up.
-  lesson.worksheet.questions.forEach((q) => {
-    if ((q.standards || []).length > 1) delete answers[q.id];
-  });
-  const marked = api.markWorksheet_(lesson.worksheet, answers);
-  return { lessonId: id, resultsJson: JSON.stringify(marked.results), marked: marked };
-});
-const partialAttainment = api.computeAttainment_('grade6', partialSubs);
-const rawAwarded = partialSubs.reduce((n, s) => n + s.marked.marksAwarded, 0);
-const rawAvailable = partialSubs.reduce((n, s) => n + s.marked.marksAvailable, 0);
-const rawPercent = Math.round((rawAwarded / rawAvailable) * 100 * 100) / 100;
-
-check('overall marks equal the sum of the worksheet marks',
-  partialAttainment.overall.marksAwarded === rawAwarded &&
-  partialAttainment.overall.marksAvailable === rawAvailable,
-  `attainment says ${partialAttainment.overall.marksAwarded}/${partialAttainment.overall.marksAvailable}, ` +
-  `worksheets say ${rawAwarded}/${rawAvailable}`);
-check('overall percent equals the true average worksheet mark',
-  Math.abs(partialAttainment.overall.percent - rawPercent) < 0.01,
-  `attainment ${partialAttainment.overall.percent}% vs worksheets ${rawPercent}%`);
-check('per-standard totals still exceed the raw total (full credit per tag)',
-  partialAttainment.byStandard.reduce((n, r) => n + r.marksAvailable, 0) > rawAvailable,
-  'multi-tagged questions should still count toward every standard they evidence');
-
-// A student below the pass mark on every paper must not report above it.
-const failing = ['g6-l01'].map((id) => {
-  const lesson = api.CURRICULUM.grade6.lessons[id];
-  const answers = perfectAnswers(lesson.worksheet);
-  let dropped = 0;
-  lesson.worksheet.questions.forEach((q) => {
-    if (dropped < 3) { delete answers[q.id]; dropped++; }
-  });
-  const marked = api.markWorksheet_(lesson.worksheet, answers);
-  return { lessonId: id, resultsJson: JSON.stringify(marked.results), percent: marked.percent };
-});
-check('a student scoring below the pass mark reports below it overall',
-  (failing[0].percent < api.CONFIG.PASS_PERCENT) ===
-  (api.computeAttainment_('grade6', failing).overall.percent < api.CONFIG.PASS_PERCENT),
-  `worksheet ${failing[0].percent}% vs overall ` +
-  `${api.computeAttainment_('grade6', failing).overall.percent}%`);
-
-const empty = api.computeAttainment_('grade6', []);
-check('a student with no work is 0% and evidences nothing',
-  empty.overall.percent === 0 && empty.byStandard.length === 0);
-
-const half = ['g6-l01'].map((id) => {
-  const lesson = api.CURRICULUM.grade6.lessons[id];
-  const marked = api.markWorksheet_(lesson.worksheet, {});
-  return { lessonId: id, resultsJson: JSON.stringify(marked.results) };
-});
-check('a zero-scoring submission still bands as Emerging, not undefined',
-  api.computeAttainment_('grade6', half).overall.band === 'emerging');
 
 console.log(`\n${passed} passed, ${failed} failed.`);
 process.exit(failed ? 1 : 0);

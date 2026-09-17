@@ -38,6 +38,10 @@ function friendlyError_(code) {
       return 'That lesson could not be found.';
     case 'MAX_ATTEMPTS_REACHED':
       return 'You have used all your attempts at this worksheet.';
+    case 'INVALID_STRAND':
+      return 'That is not one of the four framework strands.';
+    case 'INVALID_LEVEL':
+      return 'That is not a valid attainment level.';
     default:
       return 'Something went wrong. Please tell your teacher if this keeps happening.';
   }
@@ -61,17 +65,19 @@ function api_getBootstrap() {
         id: lesson.id,
         number: lesson.number,
         type: lesson.type,
+        track: lesson.track || 'main',
+        week: lesson.week || null,
         title: lesson.title,
         summary: lesson.summary || '',
         duration: lesson.duration || '',
-        standards: lesson.standards || [],
+        strand: lesson.strand || null,
         marksAvailable: worksheetTotal_(lesson),
         attempts: countAttempts_(user.email, lesson.id),
         maxAttempts: CONFIG.MAX_ATTEMPTS,
-        status: submission
-          ? (Number(submission.percent) >= CONFIG.PASS_PERCENT ? 'complete' : 'attempted')
-          : 'not-started',
-        percent: submission ? Number(submission.percent) : null,
+        // Status reflects what the student DID, not whether an outcome was secured.
+        // Only a teacher can judge the latter, so nothing here implies a pass.
+        status: submission ? 'submitted' : 'not-started',
+        worksheetScore: submission ? Number(submission.percent) : null,
         marksAwarded: submission ? Number(submission.marksAwarded) : null
       };
     });
@@ -81,11 +87,12 @@ function api_getBootstrap() {
       app: { name: CONFIG.APP_NAME, school: CONFIG.SCHOOL_NAME, domain: CONFIG.ALLOWED_DOMAIN },
       course: { key: gradeKey, title: course.meta.title, grade: course.meta.grade },
       units: (course.units || []).map(function (unit) {
-        return { id: unit.id, title: unit.title, summary: unit.summary || '', lessons: unit.lessons };
+        return { id: unit.id, title: unit.title, summary: unit.summary || '',
+                 track: unit.track || 'main', lessons: unit.lessons };
       }),
       lessons: lessonCards,
-      bands: CONFIG.ATTAINMENT_BANDS,
-      attainment: computeAttainment_(gradeKey, valuesOf_(best))
+      levels: CONFIG.ATTAINMENT_LEVELS,
+      profile: buildStrandProfile_(gradeKey, judgementsFor_(user.email))
     };
   });
 }
@@ -98,7 +105,7 @@ function api_getLesson(lessonId) {
     const attempts = countAttempts_(user.email, lesson.id);
     const best = bestSubmissionsByLesson_(user.email)[lesson.id] || null;
 
-    markLessonStarted_(user.email, lesson.id);
+    markLessonStarted_(user.email, lesson);
 
     return {
       lesson: lesson,
@@ -106,7 +113,7 @@ function api_getLesson(lessonId) {
       maxAttempts: CONFIG.MAX_ATTEMPTS,
       canAttempt: attempts < CONFIG.MAX_ATTEMPTS,
       best: best ? {
-        percent: Number(best.percent),
+        worksheetScore: Number(best.percent),
         marksAwarded: Number(best.marksAwarded),
         marksAvailable: Number(best.marksAvailable),
         submittedAt: best.submittedAt,
@@ -122,6 +129,10 @@ function api_getLesson(lessonId) {
  *
  * The client sends only its answers. Scoring happens here against the
  * authoritative content, so the marks stored are ones this server computed.
+ *
+ * Deliberately returns no pass/fail: the marks are product evidence toward a
+ * judgement a teacher will make, and telling a student they "passed" would
+ * assert an outcome nobody has yet assessed.
  */
 function api_submitWorksheet(lessonId, answers) {
   return handle_(function (user) {
@@ -138,6 +149,7 @@ function api_submitWorksheet(lessonId, answers) {
       appendRow_('SUBMISSIONS', {
         email: user.email,
         lessonId: lesson.id,
+        track: lesson.track || 'main',
         attempt: attempts + 1,
         submittedAt: now,
         marksAwarded: marked.marksAwarded,
@@ -147,16 +159,14 @@ function api_submitWorksheet(lessonId, answers) {
         resultsJson: JSON.stringify(marked.results)
       });
 
-      const passed = marked.percent >= CONFIG.PASS_PERCENT;
-      recordProgress_(user.email, lesson.id, passed ? 'complete' : 'attempted', passed ? now : null);
+      recordProgress_(user.email, lesson, 'submitted', now);
       logAudit_(user.email, 'SUBMIT', lesson.id + ' attempt ' + (attempts + 1) +
                 ' scored ' + marked.percent + '%');
 
       return {
-        percent: marked.percent,
+        worksheetScore: marked.percent,
         marksAwarded: marked.marksAwarded,
         marksAvailable: marked.marksAvailable,
-        passed: passed,
         results: marked.results,
         attempt: attempts + 1,
         attemptsRemaining: CONFIG.MAX_ATTEMPTS - (attempts + 1)
@@ -165,18 +175,21 @@ function api_submitWorksheet(lessonId, answers) {
   });
 }
 
-/** The student's own results and attainment. */
+/** The student's own strand profile and worksheet history. */
 function api_getMyResults() {
   return handle_(function (user) {
     const gradeKey = gradeKeyFor_(user);
     const best = bestSubmissionsByLesson_(user.email);
     return {
-      attainment: computeAttainment_(gradeKey, valuesOf_(best)),
+      profile: buildStrandProfile_(gradeKey, judgementsFor_(user.email)),
+      evidence: worksheetEvidenceByStrand_(gradeKey, valuesOf_(best)),
+      levels: CONFIG.ATTAINMENT_LEVELS,
       lessons: listLessons_(gradeKey).map(function (lesson) {
         const s = best[lesson.id];
         return {
-          id: lesson.id, number: lesson.number, title: lesson.title, type: lesson.type,
-          percent: s ? Number(s.percent) : null,
+          id: lesson.id, number: lesson.number, title: lesson.title,
+          type: lesson.type, track: lesson.track || 'main',
+          worksheetScore: s ? Number(s.percent) : null,
           marksAwarded: s ? Number(s.marksAwarded) : null,
           marksAvailable: worksheetTotal_(lesson),
           submittedAt: s ? s.submittedAt : null
@@ -187,74 +200,69 @@ function api_getMyResults() {
 }
 
 /* ---------------------------------------------------------------------------
- * Teacher and admin endpoints
+ * Teacher endpoints
  * ------------------------------------------------------------------------- */
 
-/** Cohort overview: one row per student with progress and attainment. */
+/** Cohort overview: one strand profile per student. No averages, no bands. */
 function api_getClassOverview(className) {
   return handle_(function (user) {
     requireStaff_(user);
     const gradeKey = 'grade6';
-    const lessons = listLessons_(gradeKey);
     const roster = readSheetObjects_(SHEETS.ROSTER, true).filter(function (r) {
       if (String(r.active).toLowerCase() === 'false') return false;
       return !className || String(r.className) === String(className);
     });
 
-    const allSubmissions = readSheetObjects_(SHEETS.SUBMISSIONS);
-    const byEmail = groupBy_(allSubmissions, function (row) {
+    const judgementsByEmail = groupBy_(readSheetObjects_(SHEETS.JUDGEMENTS), function (row) {
+      return String(row.email || '').toLowerCase().trim();
+    });
+    const submissionsByEmail = groupBy_(readSheetObjects_(SHEETS.SUBMISSIONS), function (row) {
       return String(row.email || '').toLowerCase().trim();
     });
 
     const students = roster.map(function (entry) {
       const email = String(entry.email || '').toLowerCase().trim();
-      const best = bestByLesson_(byEmail[email] || []);
-      const attainment = computeAttainment_(gradeKey, valuesOf_(best));
-      const completed = lessons.filter(function (l) {
-        return best[l.id] && Number(best[l.id].percent) >= CONFIG.PASS_PERCENT;
-      }).length;
-
+      const rows = submissionsByEmail[email] || [];
       return {
         email: email,
         displayName: entry.displayName || deriveNameFromEmail_(email),
         className: entry.className || '',
-        lessonsCompleted: completed,
-        lessonsTotal: lessons.length,
-        percentComplete: lessons.length ? Math.round((completed / lessons.length) * 100) : 0,
-        overallPercent: attainment.overall.percent,
-        band: attainment.overall.band,
-        bandLabel: attainment.overall.bandLabel,
-        bandColor: attainment.overall.bandColor,
-        lastActive: latestDate_(byEmail[email] || []),
-        attainment: attainment
+        bridgingStrands: parseStrandList_(entry.bridgingStrands),
+        profile: buildStrandProfile_(gradeKey, judgementsByEmail[email] || []),
+        worksheetsSubmitted: distinct_(rows.map(function (r) { return r.lessonId; })).length,
+        lastActive: latestDate_(rows)
       };
     });
 
     return {
       students: students,
-      classAttainment: computeClassAttainment_(gradeKey, students),
-      lessons: lessons.map(function (l) {
-        return { id: l.id, number: l.number, title: l.title, type: l.type };
-      }),
+      classProfile: computeClassProfile_(gradeKey, students),
+      levels: CONFIG.ATTAINMENT_LEVELS,
+      strands: getStandardsIndex_(gradeKey),
+      expectedTier: (CONFIG.GRADE_RULES[gradeKey] || {}).expectedTier || null,
+      lessonsTotal: listLessons_(gradeKey).length,
       classes: distinct_(readSheetObjects_(SHEETS.ROSTER, true).map(function (r) {
         return r.className;
-      })).filter(Boolean),
-      bands: CONFIG.ATTAINMENT_BANDS
+      })).filter(Boolean)
     };
   });
 }
 
-/** One student in full, including per-lesson breakdown. Staff only. */
+/**
+ * Everything a teacher needs to judge one student: the ADEK descriptors verbatim,
+ * the current judgement if any, and the evidence gathered so far, each labelled
+ * with which of the three sources it is.
+ */
 function api_getStudentDetail(email) {
   return handle_(function (user) {
     requireStaff_(user);
-    const target = String(email || '').toLowerCase().trim();
-    if (!isAllowedDomain_(target)) throw new Error('DOMAIN_NOT_ALLOWED');
-
+    const target = normaliseEmail_(email);
     const gradeKey = 'grade6';
+
     const submissions = readSheetObjects_(SHEETS.SUBMISSIONS).filter(function (row) {
-      return String(row.email || '').toLowerCase().trim() === target;
+      return normaliseEmail_(row.email) === target;
     });
+    const judgements = judgementsFor_(target);
     const best = bestByLesson_(submissions);
     const rosterEntry = findRosterEntry_(target);
     logAudit_(user.email, 'VIEW_STUDENT', target);
@@ -263,15 +271,27 @@ function api_getStudentDetail(email) {
       student: {
         email: target,
         displayName: (rosterEntry && rosterEntry.displayName) || deriveNameFromEmail_(target),
-        className: (rosterEntry && rosterEntry.className) || ''
+        className: (rosterEntry && rosterEntry.className) || '',
+        bridgingStrands: parseStrandList_(rosterEntry && rosterEntry.bridgingStrands)
       },
-      attainment: computeAttainment_(gradeKey, valuesOf_(best)),
+      profile: buildStrandProfile_(gradeKey, judgements),
+      evidence: worksheetEvidenceByStrand_(gradeKey, valuesOf_(best)),
+      levels: CONFIG.ATTAINMENT_LEVELS,
+      evidenceSources: CONFIG.EVIDENCE_SOURCES,
+      history: judgements
+        .filter(function (j) { return String(j.scale) === 'summative_tier'; })
+        .map(stripRowMeta_)
+        .sort(function (a, b) { return new Date(b.judgedAt) - new Date(a.judgedAt); }),
+      readiness: readSheetObjects_(SHEETS.READINESS)
+        .filter(function (r) { return normaliseEmail_(r.email) === target; })
+        .map(stripRowMeta_),
       lessons: listLessons_(gradeKey).map(function (lesson) {
         const s = best[lesson.id];
         return {
-          id: lesson.id, number: lesson.number, title: lesson.title, type: lesson.type,
+          id: lesson.id, number: lesson.number, title: lesson.title,
+          type: lesson.type, track: lesson.track || 'main', strand: lesson.strand || null,
           marksAvailable: worksheetTotal_(lesson),
-          percent: s ? Number(s.percent) : null,
+          worksheetScore: s ? Number(s.percent) : null,
           marksAwarded: s ? Number(s.marksAwarded) : null,
           submittedAt: s ? s.submittedAt : null,
           attempts: submissions.filter(function (r) { return r.lessonId === lesson.id; }).length,
@@ -282,7 +302,159 @@ function api_getStudentDetail(email) {
   });
 }
 
-/** Roster and staff management. Admin only. */
+/**
+ * Records a teacher's judgement of one strand.
+ *
+ * Append-only: a re-check after bridging supersedes the earlier row rather than
+ * overwriting it, so the record shows the change. Nothing here derives a level —
+ * the level arrives from the teacher.
+ */
+function api_recordJudgement(payload) {
+  return handle_(function (user) {
+    requireStaff_(user);
+    payload = payload || {};
+
+    const target = normaliseEmail_(payload.email);
+    if (!isAllowedDomain_(target)) throw new Error('DOMAIN_NOT_ALLOWED');
+
+    const strand = String(payload.strand || '').toUpperCase();
+    if (CONFIG.STRANDS.indexOf(strand) === -1) throw new Error('INVALID_STRAND');
+
+    const level = String(payload.level || '');
+    if (CONFIG.SCALES.summative_tier.indexOf(level) === -1) throw new Error('INVALID_LEVEL');
+
+    const gradeKey = 'grade' + (String(payload.grade || '6').replace(/[^0-9]/g, '') || '6');
+    const track = payload.track === 'bridging' ? 'bridging' : 'main';
+    const strandDef = getStrand_(gradeKey, strand);
+
+    return withLock_(function () {
+      // Supersede whatever currently stands for this strand and event.
+      const id = Utilities.getUuid();
+      const existing = judgementsFor_(target).filter(function (j) {
+        return String(j.strand).toUpperCase() === strand &&
+               String(j.scale) === 'summative_tier' &&
+               String(j.assessmentEvent) === String(payload.assessmentEvent || 'final') &&
+               !j.supersededBy;
+      });
+      existing.forEach(function (row) {
+        const updated = stripRowMeta_(row);
+        updated.supersededBy = id;
+        updateRow_('JUDGEMENTS', row._rowIndex, updated);
+      });
+
+      appendRow_('JUDGEMENTS', {
+        id: id,
+        email: target,
+        grade: gradeKey.replace('grade', ''),
+        track: track,
+        strand: strand,
+        level: level,
+        scale: 'summative_tier',
+        assessmentEvent: String(payload.assessmentEvent || 'final'),
+        frameworkRefs: strandDef ? strandDef.tiers[level === 'working_towards' ? 'emerging' : level].code : '',
+        evidenceProducts: String(payload.evidenceProducts || ''),
+        evidenceObservations: String(payload.evidenceObservations || ''),
+        evidenceConversations: String(payload.evidenceConversations || ''),
+        note: String(payload.note || ''),
+        accessArrangements: String(payload.accessArrangements || ''),
+        nextStep: String(payload.nextStep || ''),
+        bridgingRef: String(payload.bridgingRef || ''),
+        judgedBy: user.email,
+        judgedAt: new Date(),
+        supersededBy: ''
+      });
+
+      logAudit_(user.email, 'JUDGE', target + ' ' + strand + ' -> ' + level);
+      return buildStrandProfile_(gradeKey, judgementsFor_(target));
+    });
+  });
+}
+
+/** Records a start-of-year diagnostic result for one strand. */
+function api_recordReadiness(payload) {
+  return handle_(function (user) {
+    requireStaff_(user);
+    payload = payload || {};
+    const target = normaliseEmail_(payload.email);
+    if (!isAllowedDomain_(target)) throw new Error('DOMAIN_NOT_ALLOWED');
+
+    const strand = String(payload.strand || '').toUpperCase();
+    if (CONFIG.STRANDS.indexOf(strand) === -1) throw new Error('INVALID_STRAND');
+
+    const result = String(payload.result || '');
+    if (CONFIG.SCALES.bridging_readiness.indexOf(result) === -1) throw new Error('INVALID_LEVEL');
+
+    withLock_(function () {
+      appendRow_('READINESS', {
+        email: target,
+        grade: String(payload.grade || '6'),
+        strand: strand,
+        probeCode: String(payload.probeCode || ''),
+        result: result,
+        action: String(payload.action || ''),
+        recheckAfterWeek: String(payload.recheckAfterWeek || ''),
+        recordedBy: user.email,
+        recordedAt: new Date()
+      });
+    });
+
+    logAudit_(user.email, 'READINESS', target + ' ' + strand + ' = ' + result);
+    return { email: target, strand: strand, result: result };
+  });
+}
+
+/**
+ * The cohort as ADEK's observation record, field for field.
+ *
+ * This is the artefact that leaves the building, so it carries levels and notes
+ * rather than scores, and names the decision rule that produced each overall.
+ */
+function api_exportCsv() {
+  return handle_(function (user) {
+    requireStaff_(user);
+    const gradeKey = 'grade6';
+    const roster = readSheetObjects_(SHEETS.ROSTER, true);
+    const judgementsByEmail = groupBy_(readSheetObjects_(SHEETS.JUDGEMENTS), function (r) {
+      return normaliseEmail_(r.email);
+    });
+    const strands = getStandardsIndex_(gradeKey);
+
+    const header = ['Email', 'Name', 'Class'];
+    CONFIG.STRANDS.forEach(function (s) {
+      header.push((strands[s] ? strands[s].label : s), s + ' note');
+    });
+    header.push('Overall level', 'Decision rule', 'Access arrangements', 'Next step',
+                'Judged by', 'Judged at');
+
+    const rows = roster.map(function (entry) {
+      const email = normaliseEmail_(entry.email);
+      const profile = buildStrandProfile_(gradeKey, judgementsByEmail[email] || []);
+      const row = [email, entry.displayName || '', entry.className || ''];
+
+      CONFIG.STRANDS.forEach(function (code) {
+        const s = profile.byStrand.filter(function (r) { return r.strand === code; })[0];
+        row.push(s && s.judged ? s.levelLabel : '', s ? s.note : '');
+      });
+
+      const judged = profile.byStrand.filter(function (s) { return s.judged; });
+      row.push(profile.overall.level ? profile.overall.label : 'Not yet complete');
+      row.push(profile.overall.rule || '');
+      row.push(judged.map(function (s) { return s.accessArrangements; }).filter(Boolean)[0] || '');
+      row.push(judged.map(function (s) { return s.nextStep; }).filter(Boolean).join('; '));
+      row.push(judged.map(function (s) { return s.judgedBy; }).filter(Boolean)[0] || '');
+      row.push(judged.map(function (s) { return s.judgedAt; }).filter(Boolean)[0] || '');
+      return row;
+    });
+
+    logAudit_(user.email, 'EXPORT_CSV', rows.length + ' students');
+    return { csv: [header].concat(rows).map(toCsvLine_).join('\n') };
+  });
+}
+
+/* ---------------------------------------------------------------------------
+ * Admin endpoints
+ * ------------------------------------------------------------------------- */
+
 function api_getAdminData() {
   return handle_(function (user) {
     requireAdmin_(user);
@@ -305,9 +477,7 @@ function api_importRoster(text) {
 
     const existing = readSheetObjects_(SHEETS.ROSTER);
     const indexByEmail = {};
-    existing.forEach(function (r) {
-      indexByEmail[String(r.email || '').toLowerCase().trim()] = r;
-    });
+    existing.forEach(function (r) { indexByEmail[normaliseEmail_(r.email)] = r; });
 
     let added = 0, updated = 0;
     const rejected = [];
@@ -315,27 +485,25 @@ function api_importRoster(text) {
     withLock_(function () {
       lines.forEach(function (line) {
         const parts = line.split(/\s*,\s*/);
-        const email = String(parts[0] || '').toLowerCase().trim();
+        const email = normaliseEmail_(parts[0]);
 
         if (!email || !isAllowedDomain_(email)) {
           rejected.push(line + '  — not an @' + CONFIG.ALLOWED_DOMAIN + ' address');
           return;
         }
+        const previous = indexByEmail[email];
         const row = {
           email: email,
           displayName: parts[1] || deriveNameFromEmail_(email),
           grade: parts[3] || '6',
           className: parts[2] || '',
-          active: true
+          active: true,
+          // Preserve per-strand bridging routing across a re-import.
+          bridgingStrands: previous ? (previous.bridgingStrands || '') : ''
         };
 
-        if (indexByEmail[email]) {
-          updateRow_('ROSTER', indexByEmail[email]._rowIndex, row);
-          updated++;
-        } else {
-          appendRow_('ROSTER', row);
-          added++;
-        }
+        if (previous) { updateRow_('ROSTER', previous._rowIndex, row); updated++; }
+        else { appendRow_('ROSTER', row); added++; }
       });
     });
 
@@ -348,7 +516,7 @@ function api_importRoster(text) {
 function api_setStaffRole(email, role) {
   return handle_(function (user) {
     requireAdmin_(user);
-    const target = String(email || '').toLowerCase().trim();
+    const target = normaliseEmail_(email);
     if (!isAllowedDomain_(target)) throw new Error('DOMAIN_NOT_ALLOWED');
 
     const valid = [ROLES.STUDENT, ROLES.TEACHER, ROLES.ADMIN];
@@ -356,17 +524,13 @@ function api_setStaffRole(email, role) {
     if (valid.indexOf(newRole) === -1) throw new Error('INVALID_ROLE');
 
     withLock_(function () {
-      const staff = readSheetObjects_(SHEETS.STAFF);
-      const match = staff.filter(function (r) {
-        return String(r.email || '').toLowerCase().trim() === target;
+      const match = readSheetObjects_(SHEETS.STAFF).filter(function (r) {
+        return normaliseEmail_(r.email) === target;
       })[0];
 
       const row = {
-        email: target,
-        role: newRole,
-        displayName: deriveNameFromEmail_(target),
-        addedAt: new Date(),
-        addedBy: user.email
+        email: target, role: newRole, displayName: deriveNameFromEmail_(target),
+        addedAt: new Date(), addedBy: user.email
       };
       if (match) updateRow_('STAFF', match._rowIndex, row);
       else appendRow_('STAFF', row);
@@ -378,40 +542,13 @@ function api_setStaffRole(email, role) {
   });
 }
 
-/** Cohort marks as CSV, for reporting or upload elsewhere. Staff only. */
-function api_exportCsv() {
-  return handle_(function (user) {
-    requireStaff_(user);
-    const gradeKey = 'grade6';
-    const lessons = listLessons_(gradeKey);
-    const roster = readSheetObjects_(SHEETS.ROSTER, true);
-    const byEmail = groupBy_(readSheetObjects_(SHEETS.SUBMISSIONS), function (r) {
-      return String(r.email || '').toLowerCase().trim();
-    });
-
-    const header = ['Email', 'Name', 'Class']
-      .concat(lessons.map(function (l) { return 'L' + l.number + ' %'; }))
-      .concat(['Overall %', 'Band']);
-
-    const rows = roster.map(function (entry) {
-      const email = String(entry.email || '').toLowerCase().trim();
-      const best = bestByLesson_(byEmail[email] || []);
-      const attainment = computeAttainment_(gradeKey, valuesOf_(best));
-      return [email, entry.displayName || '', entry.className || '']
-        .concat(lessons.map(function (l) {
-          return best[l.id] ? Number(best[l.id].percent) : '';
-        }))
-        .concat([attainment.overall.percent, attainment.overall.bandLabel]);
-    });
-
-    logAudit_(user.email, 'EXPORT_CSV', rows.length + ' students');
-    return { csv: [header].concat(rows).map(toCsvLine_).join('\n') };
-  });
-}
-
 /* ---------------------------------------------------------------------------
  * Internal helpers
  * ------------------------------------------------------------------------- */
+
+function normaliseEmail_(value) {
+  return String(value || '').toLowerCase().trim();
+}
 
 function gradeKeyFor_(user) {
   const grade = String(user.grade || '6').replace(/[^0-9]/g, '') || '6';
@@ -419,17 +556,30 @@ function gradeKeyFor_(user) {
   return CURRICULUM[key] ? key : 'grade6';
 }
 
+function judgementsFor_(email) {
+  const target = normaliseEmail_(email);
+  return readSheetObjects_(SHEETS.JUDGEMENTS).filter(function (r) {
+    return normaliseEmail_(r.email) === target;
+  });
+}
+
+/** "CE,GE" -> ['CE','GE'] */
+function parseStrandList_(value) {
+  return String(value || '').split(/[,;\s]+/)
+    .map(function (s) { return s.toUpperCase().trim(); })
+    .filter(function (s) { return CONFIG.STRANDS.indexOf(s) !== -1; });
+}
+
 function worksheetTotal_(lesson) {
   const questions = (lesson.worksheet && lesson.worksheet.questions) || [];
   return questions.reduce(function (s, q) { return s + (Number(q.marks) || 0); }, 0);
 }
 
-/** All submissions for one student, reduced to their best attempt per lesson. */
 function bestSubmissionsByLesson_(email) {
-  const rows = readSheetObjects_(SHEETS.SUBMISSIONS).filter(function (r) {
-    return String(r.email || '').toLowerCase().trim() === email;
-  });
-  return bestByLesson_(rows);
+  const target = normaliseEmail_(email);
+  return bestByLesson_(readSheetObjects_(SHEETS.SUBMISSIONS).filter(function (r) {
+    return normaliseEmail_(r.email) === target;
+  }));
 }
 
 function bestByLesson_(rows) {
@@ -442,37 +592,41 @@ function bestByLesson_(rows) {
 }
 
 function countAttempts_(email, lessonId) {
+  const target = normaliseEmail_(email);
   return readSheetObjects_(SHEETS.SUBMISSIONS).filter(function (r) {
-    return String(r.email || '').toLowerCase().trim() === email && r.lessonId === lessonId;
+    return normaliseEmail_(r.email) === target && r.lessonId === lessonId;
   }).length;
 }
 
-function markLessonStarted_(email, lessonId) {
-  const rows = readSheetObjects_(SHEETS.PROGRESS);
-  const match = rows.filter(function (r) {
-    return String(r.email || '').toLowerCase().trim() === email && r.lessonId === lessonId;
-  })[0];
+function markLessonStarted_(email, lesson) {
+  const match = findProgressRow_(email, lesson.id);
   if (match) return; // already tracked; don't reset the start time
   appendRow_('PROGRESS', {
-    email: email, lessonId: lessonId, status: 'in-progress',
-    startedAt: new Date(), updatedAt: new Date(), completedAt: ''
+    email: normaliseEmail_(email), lessonId: lesson.id,
+    track: lesson.track || 'main', weekNumber: lesson.week || '',
+    status: 'in-progress', startedAt: new Date(), updatedAt: new Date(), submittedAt: ''
   });
 }
 
-function recordProgress_(email, lessonId, status, completedAt) {
-  const rows = readSheetObjects_(SHEETS.PROGRESS);
-  const match = rows.filter(function (r) {
-    return String(r.email || '').toLowerCase().trim() === email && r.lessonId === lessonId;
-  })[0];
-
+function recordProgress_(email, lesson, status, submittedAt) {
+  const match = findProgressRow_(email, lesson.id);
   const row = {
-    email: email, lessonId: lessonId, status: status,
+    email: normaliseEmail_(email), lessonId: lesson.id,
+    track: lesson.track || 'main', weekNumber: lesson.week || '',
+    status: status,
     startedAt: match ? match.startedAt : new Date(),
     updatedAt: new Date(),
-    completedAt: completedAt || (match ? match.completedAt : '')
+    submittedAt: submittedAt || (match ? match.submittedAt : '')
   };
   if (match) updateRow_('PROGRESS', match._rowIndex, row);
   else appendRow_('PROGRESS', row);
+}
+
+function findProgressRow_(email, lessonId) {
+  const target = normaliseEmail_(email);
+  return readSheetObjects_(SHEETS.PROGRESS).filter(function (r) {
+    return normaliseEmail_(r.email) === target && r.lessonId === lessonId;
+  })[0] || null;
 }
 
 function groupBy_(rows, keyFn) {

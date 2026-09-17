@@ -1,0 +1,3076 @@
+{
+  "grade1": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Rules, Inputs & Outputs (Unit Launch)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 1 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Machines Follow Rules"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Recognises that machines follow simple rules to respond.",
+        "stretch": "Describes inputs and outputs using everyday examples."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Sort the Information"
+          }
+        ],
+        "strand": "Data Awareness",
+        "secures": "Sorts information into simple groups with guidance.",
+        "stretch": "Sorts information independently using one attribute."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Follow the Steps"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Follows simple step-by-step instructions with support.",
+        "stretch": "Creates simple step sequences to complete a task."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Safe & Private"
+          }
+        ],
+        "strand": "Responsible AI Use",
+        "secures": "Identifies personal information and safe sharing.",
+        "stretch": "Follows rules for safe and respectful use."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Rules, Information & Steps Together"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 1 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Plan Our Rule Machine (Signature Project – Planning)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 1 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Build Our Rule Machine (Signature Project – Building)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Test & Improve Our Rule Machine (Signature Project – Refining)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Show What We Know (Showcase & Assessment)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ]
+  },
+  "grade2": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Rules & Choices (Unit Launch)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 2 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "IF → THEN: Rules Make Choices"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Recognises that systems follow rules and make simple choices.",
+        "stretch": "Explains simple decision logic (if/then)."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Sort by One Thing"
+          }
+        ],
+        "strand": "Data Awareness",
+        "secures": "Sorts information using one attribute.",
+        "stretch": "Sorts using more than one attribute."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Step by Step"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Uses simple step-by-step instructions.",
+        "stretch": "Creates multi-step instructions to solve a task."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Safe or Unsafe? Fair or Unfair?"
+          }
+        ],
+        "strand": "Responsible AI Use",
+        "secures": "Identifies safe vs unsafe sharing.",
+        "stretch": "Explains fairness in simple examples."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Rules, Choices & Steps Together"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 2 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Plan Our Rule Robot (Signature Project – Planning)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 2 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Build & Test Our Rule Robot (Signature Project – Building)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Test & Fix Our Rule Robot (Signature Project – Refining)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Show What We Know (Showcase & Assessment)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ]
+  },
+  "grade3": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Combining Rules (Unit Launch)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 3 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Two Rules at Once (IF this AND that)"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Recognises that multiple rules can be combined.",
+        "stretch": "Explains how combining rules affects outcomes."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Different Information, Different Decision"
+          }
+        ],
+        "strand": "Data Awareness",
+        "secures": "Recognises that different information affects decisions.",
+        "stretch": "Explains how missing or incorrect information changes outcomes."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Clear Multi-Step Instructions"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Creates multi-step instructions with support.",
+        "stretch": "Creates structured instructions combining steps and conditions."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Is the Rule Fair for Everyone?"
+          }
+        ],
+        "strand": "Responsible AI Use",
+        "secures": "Recognises when results may not be fair.",
+        "stretch": "Explains how rules can create unfair outcomes."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Rules, Information & Steps Together"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 3 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Plan Our Rule Robot (Signature Project – Planning)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 3 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Build Our Rule Robot (Signature Project – Building)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Test & Fix Our Rule Robot (Signature Project – Refining)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Show What We Know (Showcase & Assessment)"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ]
+  },
+  "grade4": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Data All Around Us"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 4 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Concepts: Input and Decision"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Recognises that systems use data to make decisions.",
+        "stretch": "Explains how data is represented and used."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Working with Information"
+          }
+        ],
+        "strand": "Data Awareness",
+        "secures": "Labels and organises simple data.",
+        "stretch": "Identifies errors or imbalance in data."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Simulating Decisions"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Uses block-based tools to simulate decisions.",
+        "stretch": "Creates simple solutions using data and logic."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Data and Fairness"
+          }
+        ],
+        "strand": "Responsible AI Use",
+        "secures": "Recognises that data can affect fairness.",
+        "stretch": "Explains how biased data leads to unfair outcomes."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Bringing the Strands Together"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 4 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Signature Activity: Planning"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 4 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Signature Activity: Building"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Signature Activity: Refining & Finishing"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Showcase, Assessment & Reflection"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Rules and What Happens Next: Predicting Outcomes"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "rebuildsTo": "Predicts outcomes when rules are changed.",
+        "frameworkRefs": [
+          "AIF·CU·G3·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Spot the Mistake: Checking Information"
+          }
+        ],
+        "strand": "Data Awareness",
+        "rebuildsTo": "Identifies simple errors in information and suggests improvements.",
+        "frameworkRefs": [
+          "AIF·CU·G3·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Make It Better: Improving Instructions"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Refines instructions independently to improve outcomes.",
+        "frameworkRefs": [
+          "AIF·CE·G3·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Fair for Everyone: Making Outcomes Fairer"
+          }
+        ],
+        "strand": "Responsible AI Use",
+        "rebuildsTo": "Suggests simple ways to make outcomes fairer.",
+        "frameworkRefs": [
+          "AIF·GE·G3·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "The Fair Decision Machine: Design & Build (Part 1)"
+          }
+        ],
+        "strand": "Integration – three strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies three rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G3·A",
+          "AIF·CE·G3·A",
+          "AIF·GE·G3·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "The Fair Decision Machine: Refine, Present & Reflect (Part 2)"
+          }
+        ],
+        "strand": "Integration – three strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G3·A",
+          "AIF·CE·G3·A",
+          "AIF·GE·G3·A"
+        ]
+      }
+    ]
+  },
+  "grade5": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Working with AI: Data, Prompts & Outputs"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 5 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "How AI Makes Outputs"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Recognises that AI systems generate outputs using data.",
+        "stretch": "Explains how AI uses data to generate responses."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Does the Data Affect the Output?"
+          }
+        ],
+        "strand": "Data Literacy",
+        "secures": "Recognises that data affects outputs.",
+        "stretch": "Identifies when data is incomplete or biased."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Prompting for an Output"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Uses AI tools to generate simple outputs with guidance.",
+        "stretch": "Uses structured prompts to generate useful outputs."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "When Outputs May Be Wrong"
+          }
+        ],
+        "strand": "Ethics & Responsible Use",
+        "secures": "Recognises when outputs may be incorrect.",
+        "stretch": "Evaluates outputs for accuracy and fairness."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Bringing the Strands Together"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 5 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Signature Activity: Planning"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 5 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Signature Activity: Building a First Draft with AI"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Signature Activity: Refining & Finishing Your Piece"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Showcase, Assessment & Reflection"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Patterns in Data: Reading What the Data Says"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "rebuildsTo": "Explains how patterns in data influence outcomes.",
+        "frameworkRefs": [
+          "AIF·CU·G4·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Improving Data: Making Information Accurate and Balanced"
+          }
+        ],
+        "strand": "Data Literacy",
+        "rebuildsTo": "Improves data to make it more accurate and balanced.",
+        "frameworkRefs": [
+          "AIF·CU·G4·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Meet the AI: Giving an Instruction, Reading an Output"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Foundations of AI Solution Design & Development: using an AI tool, with guidance, to generate a simple output. (New strand this grade – no prior grade; delivered fresh.)",
+        "frameworkRefs": [
+          "AIF·SD·G4·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Is It Fair? Judging Outcomes from the Data"
+          }
+        ],
+        "strand": "Ethics & Responsible Use",
+        "rebuildsTo": "Evaluates fairness based on input data.",
+        "frameworkRefs": [
+          "AIF·GE·G4·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Reliable Recommendation: Read, Improve & Design (Part 1)"
+          }
+        ],
+        "strand": "Integration – three strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies three rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G4·A",
+          "AIF·SD·G4·A",
+          "AIF·GE·G4·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Reliable Recommendation: Generate, Judge & Reflect (Part 2)"
+          }
+        ],
+        "strand": "Integration – three strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G4·A",
+          "AIF·SD·G4·A",
+          "AIF·GE·G4·A"
+        ]
+      }
+    ]
+  },
+  "grade6": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Rule-Based vs Learning Systems"
+          },
+          {
+            "kind": "lab",
+            "title": "Rule vs Learning: Hands-On Exploration"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 6 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Rules vs Learning: How Each System Works"
+          },
+          {
+            "kind": "lab",
+            "title": "Train a Simple Model"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Recognises the difference between rule-based and learning systems.",
+        "stretch": "Explains how AI systems learn from data to generate outputs."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Structured Prompts to Complete a Task"
+          },
+          {
+            "kind": "lab",
+            "title": "Prompt-to-Task Workshop"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Uses AI tools with structured prompts to complete tasks.",
+        "stretch": "Applies simple structured processes (input to output) to generate results."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Judging Outputs: Correct, Incorrect, Unclear"
+          },
+          {
+            "kind": "lab",
+            "title": "Output Triage Clinic"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Identifies when outputs are incorrect or unclear.",
+        "stretch": "Evaluates outputs for accuracy and relevance."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Risks and Responsible Use"
+          },
+          {
+            "kind": "lab",
+            "title": "Class AI Risk Audit"
+          }
+        ],
+        "strand": "Ethics & Governance",
+        "secures": "Recognises basic risks (e.g. incorrect outputs, unsafe use).",
+        "stretch": "Explains bias, privacy, and the need for responsible use."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Bringing the Strands Together"
+          },
+          {
+            "kind": "lab",
+            "title": "Integrated Build-and-Check"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 6 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Signature Solution: Planning"
+          },
+          {
+            "kind": "lab",
+            "title": "Prototype and Pressure-Test the Plan"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 6 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Signature Solution: Building"
+          },
+          {
+            "kind": "lab",
+            "title": "Extended Build and Evaluation"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Signature Solution: Refining & Finishing"
+          },
+          {
+            "kind": "lab",
+            "title": "Final Iteration and Risk Review"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Showcase, Assessment & Reflection"
+          },
+          {
+            "kind": "lab",
+            "title": "Showcase Carousel and Reflection"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Data Quality and AI Outputs"
+          },
+          {
+            "kind": "lab",
+            "title": "Data Quality Investigation"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "rebuildsTo": "Explains how data quality affects AI outputs.",
+        "frameworkRefs": [
+          "AIF·CU·G5·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refining Prompts for Better Outputs"
+          },
+          {
+            "kind": "lab",
+            "title": "Prompt Refinement Workshop"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Refines prompts to improve output quality and explains why.",
+        "frameworkRefs": [
+          "AIF·SD·G5·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "How Data Shapes a Solution’s Outcome"
+          },
+          {
+            "kind": "lab",
+            "title": "Trace-the-Data Investigation"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Explains how data influences the outcome of a solution.",
+        "frameworkRefs": [
+          "AIF·CE·G4·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Misinformation Risks and Verification"
+          },
+          {
+            "kind": "lab",
+            "title": "Verify and De-risk Workshop"
+          }
+        ],
+        "strand": "Ethics & Governance",
+        "rebuildsTo": "Explains misinformation risks and proposes verification strategies.",
+        "frameworkRefs": [
+          "AIF·GE·G5·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Trustworthy AI Helper: Design & Test the Data (Part 1)"
+          },
+          {
+            "kind": "lab",
+            "title": "Trustworthy AI Helper: Build & Refine the Prompt (Part 1)"
+          }
+        ],
+        "strand": "Integration – all four strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies four rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G5·A",
+          "AIF·SD·G5·A",
+          "AIF·CE·G4·A",
+          "AIF·GE·G5·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Trustworthy AI Helper: Trace the Data & Plan Checks (Part 2)"
+          },
+          {
+            "kind": "lab",
+            "title": "Trustworthy AI Helper: Verify, De-risk & Showcase (Part 2)"
+          }
+        ],
+        "strand": "Integration – all four strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G5·A",
+          "AIF·SD·G5·A",
+          "AIF·CE·G4·A",
+          "AIF·GE·G5·A"
+        ]
+      }
+    ]
+  },
+  "grade7": {
+    "main": [
+      {
+        "week": "Pre-1 Foundation",
+        "weekNumber": null,
+        "phase": "Pre-1 Foundation",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Foundation How Models Learn"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Describes how AI systems follow a sequence of steps (input to process to output).",
+        "stretch": "Explains how workflows structure AI systems."
+      },
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "AI as a Workflow"
+          },
+          {
+            "kind": "lab",
+            "title": "Compare and Log the Difference"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 7 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "The Three-Stage Shape"
+          },
+          {
+            "kind": "lab",
+            "title": "Build, Trace and Test a Workflow"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Describes how AI systems follow a sequence of steps (input to process to output).",
+        "stretch": "Explains how workflows structure AI systems."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Building a Workflow"
+          },
+          {
+            "kind": "lab",
+            "title": "Test, Fix and Chain"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Builds simple AI solutions using guided steps.",
+        "stretch": "Designs multi-step AI workflows to complete tasks."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Judging Outputs"
+          },
+          {
+            "kind": "lab",
+            "title": "The Evaluation Clinic"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Identifies issues in outputs or workflow steps.",
+        "stretch": "Evaluates outputs using criteria such as accuracy and usefulness."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Spotting the Risks"
+          },
+          {
+            "kind": "lab",
+            "title": "The Risk Audit"
+          }
+        ],
+        "strand": "Ethics & Governance",
+        "secures": "Identifies risks in AI-generated outputs.",
+        "stretch": "Explains bias, misuse, and limitations in workflows."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Four Strands, One Task"
+          },
+          {
+            "kind": "lab",
+            "title": "The Full Run"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 7 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Architect First, Build Second"
+          },
+          {
+            "kind": "lab",
+            "title": "Run It, Break It, Make It Safer"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 7 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Build, Evaluate, Improve"
+          },
+          {
+            "kind": "lab",
+            "title": "Finish It, Then Prove It"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refining & Finishing"
+          },
+          {
+            "kind": "lab",
+            "title": "Lock It & Rehearse"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Showcase & Reflection"
+          },
+          {
+            "kind": "lab",
+            "title": "Peer Review & Stress-Test"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "The Data Behind the Answer"
+          },
+          {
+            "kind": "lab",
+            "title": "Run the Fair Test"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "rebuildsTo": "Explains how training data affects output quality and performance.",
+        "frameworkRefs": [
+          "AIF·CU·G6·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Build a Structured Solution"
+          },
+          {
+            "kind": "lab",
+            "title": "Test, Find, Refine"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Builds structured AI-assisted solutions using guided inputs and data.",
+        "frameworkRefs": [
+          "AIF·SD·G6·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "A Better Input, A Better Output"
+          },
+          {
+            "kind": "lab",
+            "title": "Rank, Then Iterate"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Explains how changes to inputs or data improve outputs.",
+        "frameworkRefs": [
+          "AIF·CE·G6·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "The Fairness Checker"
+          },
+          {
+            "kind": "lab",
+            "title": "One Workflow, Several Concerns"
+          }
+        ],
+        "strand": "Ethics & Governance",
+        "rebuildsTo": "Identifies biased outputs and suggests simple ways to improve fairness and safety.",
+        "frameworkRefs": [
+          "AIF·GE·G6·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Build a Sorting Helper"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies four rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G6·A",
+          "AIF·SD·G6·A",
+          "AIF·CE·G6·A",
+          "AIF·GE·G6·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Prove It and Guard It"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G6·A",
+          "AIF·SD·G6·A",
+          "AIF·CE·G6·A",
+          "AIF·GE·G6·A"
+        ]
+      }
+    ]
+  },
+  "grade8": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "From ‘It Works’ to ‘How Well’"
+          },
+          {
+            "kind": "lab",
+            "title": "Two Outputs, One Verdict"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 8 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Inside the Pipeline"
+          },
+          {
+            "kind": "lab",
+            "title": "Change One Factor"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "secures": "Describes how AI systems process inputs and generate outputs.",
+        "stretch": "Explains how different factors (data, inputs, design) affect performance."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Design the Workflow"
+          },
+          {
+            "kind": "lab",
+            "title": "Build, Test, Improve"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Develops AI-powered solutions for specific tasks.",
+        "stretch": "Designs structured workflows combining multiple steps or tools."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Judge with Criteria"
+          },
+          {
+            "kind": "lab",
+            "title": "The Evaluation Clinic"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Identifies limitations in outputs.",
+        "stretch": "Evaluates solutions using criteria such as accuracy, bias, and reliability."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Accurate Is Not Ethical"
+          },
+          {
+            "kind": "lab",
+            "title": "The Ethics Audit"
+          }
+        ],
+        "strand": "Ethics & Governance",
+        "secures": "Identifies ethical concerns in AI use.",
+        "stretch": "Conducts structured evaluation of risks (bias, privacy, misuse)."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "One Model, Four Strands"
+          },
+          {
+            "kind": "lab",
+            "title": "Run It End to End"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 8 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Architect the Plan"
+          },
+          {
+            "kind": "lab",
+            "title": "Prototype and Pressure-Test"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 8 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "The Build Loop"
+          },
+          {
+            "kind": "lab",
+            "title": "The Evaluation Log"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refining and Finishing"
+          },
+          {
+            "kind": "lab",
+            "title": "Lock It and Show It"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Showcase and Reflect"
+          },
+          {
+            "kind": "lab",
+            "title": "Review, Measure, Aim"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "The Design Behind the Outcome"
+          },
+          {
+            "kind": "lab",
+            "title": "Run the Fair Test"
+          }
+        ],
+        "strand": "AI Conceptual Understanding",
+        "rebuildsTo": "Explains how different workflow designs affect outcomes.",
+        "frameworkRefs": [
+          "AIF·CU·G7·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Three Levers to Refine a Workflow"
+          },
+          {
+            "kind": "lab",
+            "title": "One Alert, Two Audiences"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Refines workflows by improving structure, sequencing, and tool selection.",
+        "frameworkRefs": [
+          "AIF·SD·G7·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Change, Judge, Improve"
+          },
+          {
+            "kind": "lab",
+            "title": "Score, Iterate, Justify"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Improves workflows through iteration and explains the impact of changes.",
+        "frameworkRefs": [
+          "AIF·CE·G7·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Spot the Risk, Fix It"
+          },
+          {
+            "kind": "lab",
+            "title": "Rank Risks, Build a Plan"
+          }
+        ],
+        "strand": "Ethics & Governance",
+        "rebuildsTo": "Proposes ways to reduce risks and improve responsible use of AI systems.",
+        "frameworkRefs": [
+          "AIF·GE·G7·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Design, Build, Test"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies four rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G7·A",
+          "AIF·SD·G7·A",
+          "AIF·CE·G7·A",
+          "AIF·GE·G7·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Evaluate and Prove It"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G7·A",
+          "AIF·SD·G7·A",
+          "AIF·CE·G7·A",
+          "AIF·GE·G7·A"
+        ]
+      }
+    ]
+  },
+  "grade9": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Open the Black Box"
+          },
+          {
+            "kind": "lab",
+            "title": "Change One Thing"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 9 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Understanding the System Extra How AI Learns"
+          },
+          {
+            "kind": "lab",
+            "title": "Test the System"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "secures": "Describes how AI systems use inputs to generate outputs.",
+        "stretch": "Explains how data, tools, and prompts interact within a solution."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Designing a Solution"
+          },
+          {
+            "kind": "lab",
+            "title": "Build, Test, Chain"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Uses AI tools to complete structured tasks.",
+        "stretch": "Designs structured AI workflows to solve defined problems."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Judging Outputs"
+          },
+          {
+            "kind": "lab",
+            "title": "The Evaluation Clinic"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Identifies when outputs are incorrect or unclear.",
+        "stretch": "Evaluates outputs for accuracy, bias, and usefulness."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Risk Is a System Property"
+          },
+          {
+            "kind": "lab",
+            "title": "Auditing the Risks"
+          }
+        ],
+        "strand": "Ethics & Responsible Use",
+        "secures": "Identifies risks in AI-generated content.",
+        "stretch": "Explains bias, misinformation, and misuse."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Four Strands, One Workflow"
+          },
+          {
+            "kind": "lab",
+            "title": "Running It End-to-End"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 9 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Designing the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Prototype and Pressure-Test"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 9 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Assemble, Evaluate, Refine"
+          },
+          {
+            "kind": "lab",
+            "title": "Test, Log, Iterate"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refining & Finishing the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Lock It & Rehearse the Demo"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Showcase, Assess & Reflect"
+          },
+          {
+            "kind": "lab",
+            "title": "Peer Review & Aim Higher"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Comparing Approaches"
+          },
+          {
+            "kind": "lab",
+            "title": "The Fair Test"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "rebuildsTo": "Compares approaches and explains why some solutions perform better.",
+        "frameworkRefs": [
+          "AIF·CU·G8·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Parts That Work Together"
+          },
+          {
+            "kind": "lab",
+            "title": "Growing the Workflow"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Designs and refines solutions considering how components interact.",
+        "frameworkRefs": [
+          "AIF·SD·G8·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refine Like an Engineer"
+          },
+          {
+            "kind": "lab",
+            "title": "Run the Whole Cycle"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Refines solutions systematically and justifies improvements using evidence.",
+        "frameworkRefs": [
+          "AIF·CE·G8·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Risk Lives Between the Parts"
+          },
+          {
+            "kind": "lab",
+            "title": "Break the Risk Chain"
+          }
+        ],
+        "strand": "Ethics & Responsible Use",
+        "rebuildsTo": "Proposes mitigation strategies and explains their impact.",
+        "frameworkRefs": [
+          "AIF·GE·G8·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Build the Assistant"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies four rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G8·A",
+          "AIF·SD·G8·A",
+          "AIF·CE·G8·A",
+          "AIF·GE·G8·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Prove It Works"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G8·A",
+          "AIF·SD·G8·A",
+          "AIF·CE·G8·A",
+          "AIF·GE·G8·A"
+        ]
+      }
+    ]
+  },
+  "grade10": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "See the Whole System"
+          },
+          {
+            "kind": "lab",
+            "title": "Compare, Map, and Stress-Test"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 10 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Understanding the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Trace, Change, Compare"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "secures": "Describes how different AI tools can be used together.",
+        "stretch": "Explains how components interact as a system."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Designing a Solution"
+          },
+          {
+            "kind": "lab",
+            "title": "Build, Test, Improve"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Designs simple AI workflows for specific tasks.",
+        "stretch": "Designs multi-step solutions combining tools and data."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Judging & Improving Outputs"
+          },
+          {
+            "kind": "lab",
+            "title": "The Evaluation Clinic"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Identifies strengths and weaknesses of outputs.",
+        "stretch": "Evaluates solutions using criteria (accuracy, fairness, usefulness)."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Locate the Risk in the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Measure the Risk and Govern It"
+          }
+        ],
+        "strand": "Governance & Ethics",
+        "secures": "Identifies ethical concerns in AI use.",
+        "stretch": "Conducts structured evaluation of risks (bias, privacy, misuse)."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Bringing the Strands Together"
+          },
+          {
+            "kind": "lab",
+            "title": "Run It End-to-End"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 10 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Architect Your Signature Solution"
+          },
+          {
+            "kind": "lab",
+            "title": "Prototype and Pressure-Test"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 10 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Build, Evaluate, Improve"
+          },
+          {
+            "kind": "lab",
+            "title": "Finish It, Then Prove It"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refining & Finishing the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Lock It and Rehearse the Demo"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Showcase & Reflection"
+          },
+          {
+            "kind": "lab",
+            "title": "Peer Review & Aim Higher"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Design Choices Shape the Output"
+          },
+          {
+            "kind": "lab",
+            "title": "Run the Fair Test"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "rebuildsTo": "Explains how design choices affect output quality and reliability.",
+        "frameworkRefs": [
+          "AIF·CU·G9·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refine the Weakest Stage"
+          },
+          {
+            "kind": "lab",
+            "title": "Measure, Don’t Guess"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Refines workflows to improve outputs and usability.",
+        "frameworkRefs": [
+          "AIF·SD·G9·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Explain Limitations, Target the Fix"
+          },
+          {
+            "kind": "lab",
+            "title": "Trace, Prioritise, Justify"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Explains limitations and suggests targeted improvements.",
+        "frameworkRefs": [
+          "AIF·CE·G9·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Propose Responsible-Use Actions"
+          },
+          {
+            "kind": "lab",
+            "title": "Build a Responsible-Use Plan"
+          }
+        ],
+        "strand": "Governance & Ethics",
+        "rebuildsTo": "Proposes actions to ensure responsible and safe use.",
+        "frameworkRefs": [
+          "AIF·GE·G9·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Design & Build an AI Solution"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies four rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G9·A",
+          "AIF·SD·G9·A",
+          "AIF·CE·G9·A",
+          "AIF·GE·G9·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Evaluate, Justify & Showcase"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G9·A",
+          "AIF·SD·G9·A",
+          "AIF·CE·G9·A",
+          "AIF·GE·G9·A"
+        ]
+      }
+    ]
+  },
+  "grade11": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "See the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Compare and Read the Trade-off"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 11 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Understanding the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Trace, Change, Compare"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "secures": "Describes how AI solutions operate within broader systems.",
+        "stretch": "Explains interactions between data, tools, and users."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Designing a Solution"
+          },
+          {
+            "kind": "lab",
+            "title": "Build, Test, Improve"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Designs AI-powered solutions for real-world tasks.",
+        "stretch": "Designs structured multi-step solutions addressing user needs."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Judging Outputs"
+          },
+          {
+            "kind": "lab",
+            "title": "Rank and Defend"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Identifies limitations in solutions.",
+        "stretch": "Evaluates solutions using multiple criteria and evidence."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Risks, Ethics & Responsible Use"
+          },
+          {
+            "kind": "lab",
+            "title": "Audit, Rate, Mitigate"
+          }
+        ],
+        "strand": "Governance & Impact",
+        "secures": "Identifies potential impacts of AI solutions.",
+        "stretch": "Conducts structured analysis of ethical and societal implications."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Bringing the Strands Together"
+          },
+          {
+            "kind": "lab",
+            "title": "Run It End-to-End"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 11 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Architect Your Signature Solution"
+          },
+          {
+            "kind": "lab",
+            "title": "Prototype and Pressure-Test"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 11 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Build, Evaluate, Improve"
+          },
+          {
+            "kind": "lab",
+            "title": "Finish It, Then Prove It"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refining and Finishing"
+          },
+          {
+            "kind": "lab",
+            "title": "Lock It and Rehearse"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Showcase and Reflection"
+          },
+          {
+            "kind": "lab",
+            "title": "Peer Review and Aim Higher"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Design Shapes Performance"
+          },
+          {
+            "kind": "lab",
+            "title": "Investigating Trade-offs"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "rebuildsTo": "Evaluates how system design affects performance and reliability.",
+        "frameworkRefs": [
+          "AIF·CU·G10·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Right Tool, Right Stage"
+          },
+          {
+            "kind": "lab",
+            "title": "Optimising a Multi-Tool Workflow"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Selects and structures tools strategically to improve performance.",
+        "frameworkRefs": [
+          "AIF·SD·G10·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refine and Explain the Impact"
+          },
+          {
+            "kind": "lab",
+            "title": "Run the Optimisation Cycle"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Refines solutions and explains the impact of improvements.",
+        "frameworkRefs": [
+          "AIF·CE·G10·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Propose Mitigations"
+          },
+          {
+            "kind": "lab",
+            "title": "Design a Mitigation Plan"
+          }
+        ],
+        "strand": "Governance & Impact",
+        "rebuildsTo": "Proposes mitigation strategies and explains their effectiveness.",
+        "frameworkRefs": [
+          "AIF·GE·G10·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Design and Build"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies four rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G10·A",
+          "AIF·SD·G10·A",
+          "AIF·CE·G10·A",
+          "AIF·GE·G10·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Evaluate and Showcase"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G10·A",
+          "AIF·SD·G10·A",
+          "AIF·CE·G10·A",
+          "AIF·GE·G10·A"
+        ]
+      }
+    ]
+  },
+  "grade12": {
+    "main": [
+      {
+        "week": "1 Launch",
+        "weekNumber": 1,
+        "phase": "Launch",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "See the Whole System"
+          },
+          {
+            "kind": "lab",
+            "title": "Compare and Map the System"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Unit launch. Students meet the unit’s big idea through a concrete comparison and establish the safe-use charter, drawing on all four Grade 12 strands in a first guided task.",
+        "stretch": "Students state the big idea in their own words and predict which strand each part of the task will need."
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Understanding the System"
+          },
+          {
+            "kind": "lab",
+            "title": "Trace the Divergence"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "secures": "Explains how AI solutions function in real-world contexts.",
+        "stretch": "Analyses how system components interact and influence outcomes."
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Designing a Solution"
+          },
+          {
+            "kind": "lab",
+            "title": "Refine Toward Complexity"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "secures": "Designs AI-powered solutions for defined problems.",
+        "stretch": "Designs and refines solutions addressing complex challenges."
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Judging Outputs"
+          },
+          {
+            "kind": "lab",
+            "title": "Rank and Defend"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "secures": "Identifies areas for improvement.",
+        "stretch": "Evaluates solutions using evidence and defined criteria."
+      },
+      {
+        "week": "5",
+        "weekNumber": 5,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Risks, Ethics & Societal Impact"
+          },
+          {
+            "kind": "lab",
+            "title": "Measure Fairness and Govern"
+          }
+        ],
+        "strand": "Governance, Ethics & Societal Impact",
+        "secures": "Identifies ethical and societal risks.",
+        "stretch": "Conducts structured impact analysis (bias, privacy, societal implications)."
+      },
+      {
+        "week": "6 Integrate",
+        "weekNumber": 6,
+        "phase": "Integrate",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Bringing the Strands Together"
+          },
+          {
+            "kind": "lab",
+            "title": "Run End-to-End and Measure"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Applies all four Grade 12 strands to one task, so the strands become a single practice rather than four separate lessons.",
+        "stretch": "Students sequence the four strands independently and justify why each step is needed."
+      },
+      {
+        "week": "7 Plan",
+        "weekNumber": 7,
+        "phase": "Plan",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Architect Your Signature System"
+          },
+          {
+            "kind": "lab",
+            "title": "Prototype and Pressure-Test"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – planning. Students design a solution of their own that will require all four Grade 12 strands, and set the criteria it must meet.",
+        "stretch": "Students justify design choices against their criteria before any building begins."
+      },
+      {
+        "week": "8 Build",
+        "weekNumber": 8,
+        "phase": "Build",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Build to Your Plan"
+          },
+          {
+            "kind": "lab",
+            "title": "Finish It and Handle Edge Cases"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – building. Students construct their planned solution, testing as they go and recording what changes and why.",
+        "stretch": "Students diagnose what is not working from evidence rather than by trial and error."
+      },
+      {
+        "week": "9 Refine",
+        "weekNumber": 9,
+        "phase": "Refine",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Refining and Explainability"
+          },
+          {
+            "kind": "lab",
+            "title": "Lock the Architecture and Rehearse"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Signature activity – refining and finishing. Students improve the solution against the criteria and prepare to defend the decisions behind it.",
+        "stretch": "Students explain the impact of each refinement using the evidence they gathered."
+      },
+      {
+        "week": "10 Showcase",
+        "weekNumber": 10,
+        "phase": "Showcase",
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Showcase and Reflection"
+          },
+          {
+            "kind": "lab",
+            "title": "Peer Review and Aim Higher"
+          }
+        ],
+        "strand": "All four strands",
+        "secures": "Showcase, assessment and reflection. Students present the work, peer-review it against the criteria, and are assessed across all four strands.",
+        "stretch": "Students identify their own next target from the strand profile the rubric produces."
+      }
+    ],
+    "bridging": [
+      {
+        "week": "1",
+        "weekNumber": 1,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Four Qualities and Trade-offs"
+          },
+          {
+            "kind": "lab",
+            "title": "Weighted Evaluation"
+          }
+        ],
+        "strand": "AI Systems Understanding",
+        "rebuildsTo": "Evaluates trade-offs (accuracy, efficiency, usability, reliability).",
+        "frameworkRefs": [
+          "AIF·CU·G11·A"
+        ]
+      },
+      {
+        "week": "2",
+        "weekNumber": 2,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Optimise the Limiting Stage"
+          },
+          {
+            "kind": "lab",
+            "title": "Optimise Across Competing Demands"
+          }
+        ],
+        "strand": "AI Solution Design & Development",
+        "rebuildsTo": "Optimises solutions to improve efficiency, usability, and performance.",
+        "frameworkRefs": [
+          "AIF·SD·G11·A"
+        ]
+      },
+      {
+        "week": "3",
+        "weekNumber": 3,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Justify with Data"
+          },
+          {
+            "kind": "lab",
+            "title": "Defend with a Connected Argument"
+          }
+        ],
+        "strand": "Critical Evaluation & Informed Interaction",
+        "rebuildsTo": "Justifies improvements using data and structured reasoning.",
+        "frameworkRefs": [
+          "AIF·CE·G11·A"
+        ]
+      },
+      {
+        "week": "4",
+        "weekNumber": 4,
+        "phase": null,
+        "lessons": [
+          {
+            "kind": "core",
+            "title": "Responsible-Use Approaches"
+          },
+          {
+            "kind": "lab",
+            "title": "Responsible Use for an Integrated System"
+          }
+        ],
+        "strand": "Governance, Ethics & Societal Impact",
+        "rebuildsTo": "Proposes responsible-use approaches considering broader impact.",
+        "frameworkRefs": [
+          "AIF·GE·G11·A"
+        ]
+      },
+      {
+        "week": "5 Integrate 1",
+        "weekNumber": 5,
+        "phase": "Integrate 1",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Design, Build, Evaluate, Justify"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 1. Students design and build a small solution that applies four rebuilt prior-grade strands at once.",
+        "frameworkRefs": [
+          "AIF·CU·G11·A",
+          "AIF·SD·G11·A",
+          "AIF·CE·G11·A",
+          "AIF·GE·G11·A"
+        ]
+      },
+      {
+        "week": "6 Integrate 2",
+        "weekNumber": 6,
+        "phase": "Integrate 2",
+        "lessons": [
+          {
+            "kind": "lesson",
+            "title": "Integrated: Evaluate, Justify, Showcase"
+          }
+        ],
+        "strand": "Integration – all four prior-grade strands",
+        "rebuildsTo": "Integration, part 2. Students evaluate the solution against their criteria, justify each change with evidence and present it – meeting the prior-grade Advanced bar independently within the integrated task.",
+        "frameworkRefs": [
+          "AIF·CU·G11·A",
+          "AIF·SD·G11·A",
+          "AIF·CE·G11·A",
+          "AIF·GE·G11·A"
+        ]
+      }
+    ]
+  }
+}

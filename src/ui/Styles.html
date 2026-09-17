@@ -135,8 +135,7 @@
   }
   .pill--lesson { background: var(--aisa-purple-tint); color: var(--aisa-purple); }
   .pill--lab { background: #FBF3DF; color: #7A6124; }
-  .pill--complete { background: #E6F4EA; color: #1B6E3C; }
-  .pill--attempted { background: #FDF1DC; color: #8A5A00; }
+  .pill--submitted { background: #E6F4EA; color: #1B6E3C; }
   .pill--not-started { background: #F1F1F4; color: var(--aisa-muted-gray); }
 
   .progress-bar { height: 6px; background: var(--aisa-purple-tint); border-radius: 999px; overflow: hidden; }
@@ -243,10 +242,81 @@
   .feedback .model { color: var(--aisa-purple); font-weight: 500; }
 
   /* ---------- Attainment ---------- */
-  .band-chip {
-    display: inline-block; padding: .2rem .6rem; border-radius: 999px;
+  /* Emerging is the EXPECTED standard in Term 1, so no level below Advanced is
+     styled as a warning. A cohort at Emerging is the framework working. */
+  .level-chip {
+    display: inline-block; padding: .2rem .65rem; border-radius: 999px;
     font-size: .72rem; font-weight: 700; color: var(--aisa-white); white-space: nowrap;
   }
+  .level-chip--none {
+    background: transparent; color: var(--aisa-muted-gray);
+    border: 1px dashed var(--aisa-purple-border); font-weight: 500;
+  }
+  .level-dot {
+    display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+    vertical-align: middle;
+  }
+  .cell-unjudged { color: var(--aisa-purple-border); font-size: 1.3rem; text-align: center; }
+
+  .strand-card {
+    border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
+    padding: 1rem 1.15rem; margin-bottom: .85rem; background: var(--aisa-white);
+  }
+  .strand-card--unjudged { background: #FCFCFD; border-style: dashed; }
+  .strand-card__head {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: .75rem; flex-wrap: wrap; margin-bottom: .6rem;
+  }
+  .strand-card__head .code {
+    font-weight: 700; color: var(--aisa-gold); font-size: .78rem; letter-spacing: .06em;
+  }
+
+  .descriptors { display: grid; gap: .3rem; }
+  .descriptor {
+    display: grid; grid-template-columns: 6rem 1fr auto; gap: .6rem; align-items: baseline;
+    padding: .4rem .6rem; border-radius: 5px; font-size: .84rem;
+    border-left: 3px solid transparent;
+  }
+  .descriptor.is-active {
+    background: var(--aisa-purple-tint); border-left-color: var(--aisa-gold); font-weight: 500;
+  }
+  .descriptor__tier {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--aisa-muted-gray); font-weight: 700;
+  }
+  .descriptor__code {
+    font-size: .68rem; color: var(--aisa-muted-gray); white-space: nowrap; font-variant: tabular-nums;
+  }
+
+  .evidence-row { display: flex; gap: .45rem; flex-wrap: wrap; margin-top: .6rem; }
+  .evidence-pip {
+    font-size: .7rem; padding: .15rem .5rem; border-radius: 999px;
+    background: #F1F1F4; color: var(--aisa-muted-gray);
+  }
+  .evidence-pip.is-present { background: #E6F4EA; color: #1B6E3C; }
+  .warn-pip {
+    font-size: .7rem; padding: .15rem .5rem; border-radius: 999px;
+    background: #FDF1DC; color: #8A5A00; font-weight: 600;
+  }
+
+  /* ---------- Judging ---------- */
+  .judge-block { margin-bottom: 1.4rem; }
+  .judge-evidence {
+    background: var(--aisa-purple-tint); border-radius: 0 0 var(--aisa-radius) var(--aisa-radius);
+    padding: .7rem 1.15rem; margin-top: -.6rem; margin-bottom: .6rem;
+  }
+  .judge-form__inner {
+    border: 1px solid var(--aisa-purple); border-radius: var(--aisa-radius);
+    padding: 1.1rem; margin-top: .6rem; background: var(--aisa-white);
+  }
+  .level-options { display: grid; gap: .4rem; }
+  .level-options .option { align-items: flex-start; }
+  .field { display: block; margin-top: .75rem; }
+  .field__label {
+    display: block; font-size: .78rem; font-weight: 700; color: var(--aisa-purple);
+    margin-bottom: .25rem;
+  }
+  .btn--sm { padding: .4rem .8rem; font-size: .8rem; }
   table { width: 100%; border-collapse: collapse; font-size: .9rem; }
   th, td { text-align: left; padding: .6rem .7rem; border-bottom: 1px solid var(--aisa-purple-border); }
   th {
@@ -259,10 +329,11 @@
 
   .standard-row { display: flex; align-items: center; gap: .9rem; padding: .7rem 0; border-bottom: 1px solid var(--aisa-purple-tint); }
   .standard-row .code { font-weight: 700; color: var(--aisa-purple); font-size: .8rem; min-width: 5.5rem; flex: none; }
-  .standard-row .desc { flex: 1; font-size: .87rem; min-width: 12rem; }
-  .standard-row .meter { width: 8rem; flex: none; }
+  .standard-row .desc { flex: 1; font-size: .87rem; min-width: 10rem; }
+  .standard-row .meter { width: 15rem; flex: none; }
+  .standard-row .meter .muted { display: block; margin-top: .25rem; line-height: 1.4; }
 
-  .dist { display: flex; height: 8px; border-radius: 999px; overflow: hidden; width: 8rem; }
+  .dist { display: flex; height: 9px; border-radius: 999px; overflow: hidden; width: 100%; }
   .dist > i { display: block; height: 100%; }
 
   /* ---------- Utility ---------- */

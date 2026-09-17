@@ -95,12 +95,27 @@ function shuffle_(array) {
   return out;
 }
 
-/** Flat map of standard code -> standard definition, for labelling attainment. */
+/**
+ * The four strand definitions for a grade, keyed by strand code, each carrying
+ * the official Emerging / Proficient / Advanced descriptors.
+ *
+ * This reads the framework catalogue extracted from ADEK's Scope & Sequence, not
+ * anything authored locally — the descriptors a teacher judges against must be
+ * ADEK's own wording, verbatim.
+ */
 function getStandardsIndex_(gradeKey) {
-  const course = getCourse_(gradeKey);
-  const index = {};
-  (course.standards || []).forEach(function (s) { index[s.code] = s; });
-  return index;
+  return (FRAMEWORK.grades && FRAMEWORK.grades[gradeKey]) || {};
+}
+
+/** One strand's definition, or null. */
+function getStrand_(gradeKey, strandCode) {
+  return getStandardsIndex_(gradeKey)[String(strandCode).toUpperCase()] || null;
+}
+
+/** The published week-by-week sequence for a grade and track ('main'|'bridging'). */
+function getSequence_(gradeKey, track) {
+  const seq = (typeof SEQUENCES !== 'undefined' && SEQUENCES[gradeKey]) || {};
+  return seq[track] || [];
 }
 
 /** Total marks available across a whole grade — the denominator for overall progress. */

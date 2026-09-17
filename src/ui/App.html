@@ -108,11 +108,6 @@
       '</svg><div class="ring-label">' + Math.round(percent) + '%</div></div>';
   }
 
-  function bandChip(label, color) {
-    return '<span class="band-chip" style="background:' + esc(color || '#555') + '">' +
-      esc(label) + '</span>';
-  }
-
   /* ---------------------------------------------------------------------
    * Chrome: nav + user chip
    * ------------------------------------------------------------------- */
@@ -181,8 +176,8 @@
       renderChrome();
 
       var lessons = data.lessons;
-      var completed = lessons.filter(function (l) { return l.status === 'complete'; }).length;
-      var pct = lessons.length ? (completed / lessons.length) * 100 : 0;
+      var submitted = lessons.filter(function (l) { return l.status === 'submitted'; }).length;
+      var pct = lessons.length ? (submitted / lessons.length) * 100 : 0;
       var byId = {};
       lessons.forEach(function (l) { byId[l.id] = l; });
 
@@ -193,16 +188,17 @@
             '<div class="eyebrow">' + esc(data.course.title) + '</div>' +
             '<h1>Hello, ' + esc((data.user.displayName || '').split(' ')[0]) + '</h1>' +
             '<p style="color:rgba(255,255,255,.8)">' +
-              (completed === 0
-                ? 'Start with Lesson 1 below. Work through each lesson, then complete its worksheet to record your marks.'
-                : 'You have completed ' + completed + ' of ' + lessons.length + ' lessons. Keep going.') +
+              (submitted === 0
+                ? 'Start with Lesson 1 below. Work through each lesson, then complete its worksheet.'
+                : 'You have handed in ' + submitted + ' of ' + lessons.length + ' worksheets. Keep going.') +
             '</p>' +
           '</div>' +
           '<div class="hero-stats">' +
-            '<div class="stat"><div class="value">' + completed + '/' + lessons.length + '</div>' +
-              '<div class="label">Lessons done</div></div>' +
-            '<div class="stat"><div class="value">' + Math.round(data.attainment.overall.percent) + '%</div>' +
-              '<div class="label">Average mark</div></div>' +
+            '<div class="stat"><div class="value">' + submitted + '/' + lessons.length + '</div>' +
+              '<div class="label">Worksheets in</div></div>' +
+            '<div class="stat"><div class="value">' + data.profile.judgedCount + '/' +
+              data.profile.strandsTotal + '</div>' +
+              '<div class="label">Strands judged</div></div>' +
           '</div>' +
         '</section>';
 
@@ -222,7 +218,7 @@
   }
 
   function lessonCard(lesson) {
-    var statusLabels = { 'complete': 'Complete', 'attempted': 'Attempted', 'not-started': 'Not started' };
+    var statusLabels = { 'submitted': 'Handed in', 'not-started': 'Not started' };
     var isLab = lesson.type === 'lab';
     return '<button class="lesson-card' + (isLab ? ' is-lab' : '') + '" data-lesson="' + esc(lesson.id) + '">' +
       '<div class="top">' +
@@ -235,9 +231,9 @@
       '<p>' + esc(lesson.summary) + '</p>' +
       '<div class="lesson-meta">' +
         '<span class="pill pill--' + esc(lesson.status) + '">' + esc(statusLabels[lesson.status]) + '</span>' +
-        (lesson.percent !== null
-          ? '<span class="muted small">' + Math.round(lesson.percent) + '% · ' +
-            esc(lesson.marksAwarded) + '/' + esc(lesson.marksAvailable) + ' marks</span>'
+        (lesson.worksheetScore !== null
+          ? '<span class="muted small">' + esc(lesson.marksAwarded) + '/' +
+            esc(lesson.marksAvailable) + ' marks</span>'
           : '<span class="muted small">' + esc(lesson.marksAvailable) + ' marks available</span>') +
       '</div></button>';
   }
@@ -612,12 +608,13 @@
     var panel = document.getElementById('resultsPanel');
     panel.innerHTML =
       '<div class="hero" style="margin-top:1.5rem">' +
-        ring(result.percent) +
+        ring(result.worksheetScore) +
         '<div class="hero-text">' +
           '<div class="eyebrow">Attempt ' + result.attempt + '</div>' +
-          '<h1 style="font-size:1.5rem">' + (result.passed ? 'Lesson complete' : 'Keep practising') + '</h1>' +
+          '<h1 style="font-size:1.5rem">Worksheet handed in</h1>' +
           '<p style="color:rgba(255,255,255,.8)">You scored <strong>' + result.marksAwarded +
-            ' out of ' + result.marksAvailable + '</strong> marks.' +
+            ' out of ' + result.marksAvailable + '</strong> on the auto-marked questions. ' +
+            'Your teacher uses this alongside what you do and explain in lessons.' +
             (result.attemptsRemaining > 0
               ? ' You have ' + result.attemptsRemaining + ' attempt' +
                 (result.attemptsRemaining === 1 ? '' : 's') + ' left — your best score counts.'
@@ -641,50 +638,121 @@
   }
 
   /* ---------------------------------------------------------------------
-   * Student: progress and attainment
+   * Attainment rendering shared by the student and teacher views
+   * ------------------------------------------------------------------- */
+
+  /**
+   * A level chip. Emerging is the EXPECTED standard in Term 1, so nothing below
+   * Advanced is styled as a warning — a cohort sitting at Emerging is the
+   * framework working correctly, and the UI must not imply otherwise.
+   */
+  function levelChip(level) {
+    if (!level || !level.level) {
+      return '<span class="level-chip level-chip--none">Not yet judged</span>';
+    }
+    return '<span class="level-chip" style="background:' + esc(level.color || '#555') + '">' +
+      esc(level.label) + '</span>';
+  }
+
+  function levelChipFor(strandRow) {
+    if (!strandRow.judged) return '<span class="level-chip level-chip--none">Not yet judged</span>';
+    return '<span class="level-chip" style="background:' + esc(strandRow.levelColor || '#555') + '">' +
+      esc(strandRow.levelLabel) + '</span>';
+  }
+
+  /** The overall level plus the published rule that produced it. */
+  function overallBlock(profile, expectedTier) {
+    var o = profile.overall;
+    if (!o.level) {
+      return '<div class="card card--tint"><div class="eyebrow">Overall level</div>' +
+        '<p style="font-size:1.2rem;font-weight:700;color:var(--aisa-purple)">Not yet complete</p>' +
+        '<p class="muted small">' +
+        (o.missingStrands && o.missingStrands.length
+          ? 'Still to judge: ' + esc(o.missingStrands.join(', '))
+          : 'No strands judged yet.') +
+        '</p></div>';
+    }
+    return '<div class="card card--tint"><div class="eyebrow">Overall level</div>' +
+      '<div style="margin:.3rem 0 .5rem">' + levelChip(o) + '</div>' +
+      (o.isExpected
+        ? '<p class="small" style="color:var(--aisa-purple)">This is the expected standard for Term 1.</p>'
+        : '') +
+      '<p class="muted small"><strong>Rule:</strong> ' + esc(o.rule) + '</p></div>';
+  }
+
+  /** One strand row: descriptors, level, evidence, note. */
+  function strandRowHtml(s, opts) {
+    opts = opts || {};
+    var d = s.descriptors || {};
+    return '<div class="strand-card' + (s.judged ? '' : ' strand-card--unjudged') + '">' +
+      '<div class="strand-card__head">' +
+        '<div><span class="code">' + esc(s.strand) + '</span> ' +
+          '<strong>' + esc(s.label) + '</strong></div>' +
+        levelChipFor(s) +
+      '</div>' +
+      (opts.showDescriptors !== false
+        ? '<div class="descriptors">' +
+            ['emerging', 'proficient', 'advanced'].map(function (tier) {
+              var t = d[tier];
+              if (!t) return '';
+              var active = s.level === tier;
+              return '<div class="descriptor' + (active ? ' is-active' : '') + '">' +
+                '<span class="descriptor__tier">' + tier.charAt(0).toUpperCase() + tier.slice(1) +
+                '</span><span class="descriptor__text">' + esc(t.descriptor) + '</span>' +
+                '<span class="descriptor__code">' + esc(t.code) + '</span></div>';
+            }).join('') +
+          '</div>'
+        : '') +
+      (s.judged && s.note ? '<p class="small" style="margin-top:.5rem"><strong>Note:</strong> ' +
+        esc(s.note) + '</p>' : '') +
+      (s.judged && s.nextStep ? '<p class="small"><strong>Next step:</strong> ' +
+        esc(s.nextStep) + '</p>' : '') +
+      (s.judged
+        ? '<div class="evidence-row">' +
+            ['products', 'observations', 'conversations'].map(function (src) {
+              var has = s.evidenceSources.indexOf(src) !== -1;
+              return '<span class="evidence-pip' + (has ? ' is-present' : '') + '">' +
+                (has ? '✓ ' : '✗ ') + src + '</span>';
+            }).join('') +
+            (s.singleSource
+              ? '<span class="warn-pip" title="ADEK asks judgements to draw on three sources">' +
+                '⚠ single source</span>'
+              : '') +
+          '</div>'
+        : '') +
+      '</div>';
+  }
+
+  /* ---------------------------------------------------------------------
+   * Student: my progress
    * ------------------------------------------------------------------- */
 
   function viewResults() {
     return call('api_getMyResults').then(function (data) {
-      var a = data.attainment;
+      var p = data.profile;
 
-      var html = '<div class="eyebrow">My progress</div><h1>Attainment in the AI Standards</h1>' +
-        '<p class="muted" style="margin-bottom:1.5rem">Your attainment is worked out from the ' +
-        'worksheet questions linked to each standard, using your best attempt at every lesson.</p>';
+      var html = '<div class="eyebrow">My progress</div><h1>My AI Fluency profile</h1>' +
+        '<p class="muted" style="margin-bottom:1.5rem">Your teacher judges each of the four ' +
+        'strands against the framework descriptors, using your work, what you do in lessons, ' +
+        'and what you explain. <strong>Emerging is the expected standard this term.</strong></p>';
 
-      html += '<div class="grid-2" style="margin-bottom:2rem">' +
-        '<div class="card card--tint"><div class="eyebrow">Overall</div>' +
-          '<div style="font-size:2.4rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
-          Math.round(a.overall.percent) + '%</div>' +
-          '<div style="margin-top:.4rem">' + bandChip(a.overall.bandLabel, a.overall.bandColor) + '</div>' +
-          '<p class="muted small" style="margin-top:.5rem">' + a.overall.marksAwarded + ' of ' +
-          a.overall.marksAvailable + ' marks</p></div>' +
-        '<div class="card card--tint"><div class="eyebrow">Standards evidenced</div>' +
-          '<div style="font-size:2.4rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
-          a.overall.standardsEvidenced + '<span style="font-size:1.2rem;color:var(--aisa-muted-gray)">/' +
-          a.overall.standardsTotal + '</span></div>' +
-          '<p class="muted small" style="margin-top:.5rem">Standards you have produced work against</p></div>' +
-        '</div>';
+      html += '<div class="grid-2" style="margin-bottom:1.75rem">' +
+        overallBlock(p, data.expectedTier) +
+        '<div class="card card--tint"><div class="eyebrow">Strands judged</div>' +
+          '<div style="font-size:2.2rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
+          p.judgedCount + '<span style="font-size:1.1rem;color:var(--aisa-muted-gray)">/' +
+          p.strandsTotal + '</span></div>' +
+          '<p class="muted small" style="margin-top:.4rem">Strands your teacher has assessed so far</p>' +
+        '</div></div>';
 
-      if (a.byStandard.length) {
-        html += '<h2 style="margin-bottom:.5rem">By standard</h2><div class="card">' +
-          a.byStandard.map(function (s) {
-            return '<div class="standard-row">' +
-              '<span class="code">' + esc(s.code) + '</span>' +
-              '<span class="desc">' + esc(s.descriptor) +
-                (s.strand ? '<br><span class="muted small">' + esc(s.strand) + '</span>' : '') + '</span>' +
-              '<span class="meter"><div class="progress-bar"><i style="width:' + s.percent +
-                '%;background:' + esc(s.bandColor) + '"></i></div>' +
-                '<span class="muted small">' + Math.round(s.percent) + '% · ' +
-                s.marksAwarded + '/' + s.marksAvailable + '</span></span>' +
-              bandChip(s.bandLabel, s.bandColor) + '</div>';
-          }).join('') + '</div>';
-      } else {
-        html += '<div class="empty"><h3>No results yet</h3>' +
-          '<p>Complete a worksheet and your attainment will appear here.</p></div>';
-      }
+      html += '<h2 style="margin-bottom:.6rem">The four strands</h2>' +
+        p.byStrand.map(function (s) { return strandRowHtml(s); }).join('');
 
-      html += '<h2 style="margin:2rem 0 .5rem">Lesson by lesson</h2><div class="table-wrap"><table>' +
+      html += '<h2 style="margin:2rem 0 .4rem">My worksheets</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">These are your marks on the ' +
+        'auto-marked parts. They are one of the three kinds of evidence your teacher uses — ' +
+        'they are not a level on their own.</p>' +
+        '<div class="table-wrap"><table>' +
         '<thead><tr><th>#</th><th>Lesson</th><th>Type</th><th>Marks</th><th>Score</th><th>Submitted</th></tr></thead><tbody>' +
         data.lessons.map(function (l) {
           return '<tr><td>' + esc(l.number) + '</td><td>' + esc(l.title) + '</td>' +
@@ -692,7 +760,7 @@
               (l.type === 'lab' ? 'Lab' : 'Lesson') + '</span></td>' +
             '<td>' + (l.marksAwarded !== null ? esc(l.marksAwarded) + '/' + esc(l.marksAvailable)
                                               : '—') + '</td>' +
-            '<td>' + (l.percent !== null ? Math.round(l.percent) + '%' : '—') + '</td>' +
+            '<td>' + (l.worksheetScore !== null ? Math.round(l.worksheetScore) + '%' : '—') + '</td>' +
             '<td class="muted small">' + formatDate(l.submittedAt) + '</td></tr>';
         }).join('') + '</tbody></table></div>';
 
@@ -706,8 +774,13 @@
 
   function viewTeacher() {
     return call('api_getClassOverview', state.params.className || '').then(function (data) {
+      state.levels = data.levels;
+
       var html = '<div class="row between" style="margin-bottom:1.25rem">' +
-        '<div><div class="eyebrow">Class tracking</div><h1>Grade 6 — AI Curriculum</h1></div>' +
+        '<div><div class="eyebrow">Class tracking</div><h1>Grade 6 — AI Fluency</h1>' +
+        '<p class="muted small">Expected standard this term: <strong>' +
+          esc((data.expectedTier || '').charAt(0).toUpperCase() + (data.expectedTier || '').slice(1)) +
+        '</strong></p></div>' +
         '<div class="row">' +
           (data.classes.length
             ? '<select id="classFilter" style="width:auto"><option value="">All classes</option>' +
@@ -716,7 +789,7 @@
                   (state.params.className === c ? ' selected' : '') + '>' + esc(c) + '</option>';
               }).join('') + '</select>'
             : '') +
-          '<button class="btn btn--ghost" id="exportBtn">Export CSV</button>' +
+          '<button class="btn btn--ghost" id="exportBtn">Export record</button>' +
         '</div></div>';
 
       if (!data.students.length) {
@@ -727,61 +800,71 @@
         return;
       }
 
-      var avg = data.students.reduce(function (s, st) { return s + st.overallPercent; }, 0) /
-                data.students.length;
-      var done = data.students.reduce(function (s, st) { return s + st.lessonsCompleted; }, 0);
+      var strandCodes = ['CU', 'SD', 'CE', 'GE'];
 
-      html += '<div class="grid-2" style="margin-bottom:1.75rem">' +
-        statCard('Students', data.students.length, 'on the roster') +
-        statCard('Class average', Math.round(avg) + '%', 'across all marked work') +
-        statCard('Lessons completed', done, 'total across the cohort') +
-        '</div>';
-
-      html += '<h2 style="margin-bottom:.6rem">Students</h2>' +
-        '<div class="table-wrap"><table><thead><tr>' +
-        '<th>Student</th><th>Class</th><th>Progress</th><th>Lessons</th><th>Average</th><th>Band</th><th>Last active</th>' +
+      html += '<div class="table-wrap"><table><thead><tr>' +
+        '<th>Student</th><th>Class</th>' +
+        strandCodes.map(function (c) {
+          var s = data.strands[c];
+          return '<th title="' + esc(s ? s.label : c) + '">' + c + '</th>';
+        }).join('') +
+        '<th>Overall</th><th>Worksheets</th><th>Next step</th>' +
         '</tr></thead><tbody>' +
-        data.students.map(function (s) {
-          return '<tr class="clickable" data-student="' + esc(s.email) + '">' +
-            '<td><strong>' + esc(s.displayName) + '</strong><br>' +
-              '<span class="muted small">' + esc(s.email) + '</span></td>' +
-            '<td>' + esc(s.className || '—') + '</td>' +
-            '<td style="min-width:7rem"><div class="progress-bar"><i style="width:' +
-              s.percentComplete + '%"></i></div>' +
-              '<span class="muted small">' + s.percentComplete + '%</span></td>' +
-            '<td>' + s.lessonsCompleted + '/' + s.lessonsTotal + '</td>' +
-            '<td>' + Math.round(s.overallPercent) + '%</td>' +
-            '<td>' + bandChip(s.bandLabel, s.bandColor) + '</td>' +
-            '<td class="muted small">' + formatDate(s.lastActive) + '</td></tr>';
+        data.students.map(function (st) {
+          var byStrand = {};
+          st.profile.byStrand.forEach(function (r) { byStrand[r.strand] = r; });
+          var nextSteps = st.profile.byStrand
+            .map(function (r) { return r.nextStep; }).filter(Boolean);
+
+          return '<tr class="clickable" data-student="' + esc(st.email) + '">' +
+            '<td><strong>' + esc(st.displayName) + '</strong><br>' +
+              '<span class="muted small">' + esc(st.email) + '</span></td>' +
+            '<td>' + esc(st.className || '—') + '</td>' +
+            strandCodes.map(function (c) {
+              var r = byStrand[c];
+              if (!r || !r.judged) return '<td class="cell-unjudged" title="Not yet judged">·</td>';
+              return '<td><span class="level-dot" style="background:' + esc(r.levelColor) +
+                '" title="' + esc(r.levelLabel) + '"></span></td>';
+            }).join('') +
+            '<td>' + (st.profile.overall.level
+              ? levelChip(st.profile.overall)
+              : '<span class="muted small">incomplete</span>') + '</td>' +
+            '<td class="muted small">' + st.worksheetsSubmitted + '/' + data.lessonsTotal + '</td>' +
+            '<td class="muted small">' + esc(nextSteps[0] || '—') + '</td></tr>';
         }).join('') + '</tbody></table></div>';
 
-      if (data.classAttainment.length) {
-        html += '<h2 style="margin:2rem 0 .5rem">Attainment by standard</h2>' +
-          '<p class="muted small" style="margin-bottom:.75rem">Weakest standards first — ' +
-          'use this to decide what to reteach.</p><div class="card">' +
-          data.classAttainment.map(function (s) {
-            var total = s.distribution.reduce(function (n, d) { return n + d.count; }, 0) || 1;
-            return '<div class="standard-row">' +
-              '<span class="code">' + esc(s.code) + '</span>' +
-              '<span class="desc">' + esc(s.descriptor) + '</span>' +
-              '<span class="meter"><div class="dist">' + s.distribution.map(function (d) {
-                return '<i style="width:' + ((d.count / total) * 100) + '%;background:' +
-                  esc(d.color) + '" title="' + esc(d.label) + ': ' + d.count + '"></i>';
-              }).join('') + '</div><span class="muted small">avg ' +
-              Math.round(s.averagePercent) + '% · n=' + s.studentsAssessed + '</span></span>' +
-              bandChip(s.bandLabel, s.bandColor) + '</div>';
-          }).join('') + '</div>';
-      }
+      html += '<p class="muted small" style="margin-top:.5rem">' +
+        data.levels.map(function (l) {
+          return '<span class="level-dot" style="background:' + esc(l.color) + '"></span> ' +
+            esc(l.label);
+        }).join(' &nbsp; ') + ' &nbsp; <span class="cell-unjudged">·</span> not yet judged</p>';
+
+      html += '<h2 style="margin:2rem 0 .5rem">Where the class stands, by strand</h2>' +
+        '<p class="muted small" style="margin-bottom:.75rem">Counts of students at each level. ' +
+        'Use this to decide what to reteach.</p><div class="card">' +
+        data.classProfile.byStrand.map(function (s) {
+          var total = s.distribution.reduce(function (n, d) { return n + d.count; }, 0) + s.notJudged;
+          return '<div class="standard-row">' +
+            '<span class="code">' + esc(s.strand) + '</span>' +
+            '<span class="desc">' + esc(s.label) + '</span>' +
+            '<span class="meter"><div class="dist">' +
+              s.distribution.map(function (d) {
+                return d.count ? '<i style="width:' + ((d.count / total) * 100) + '%;background:' +
+                  esc(d.color) + '" title="' + esc(d.label) + ': ' + d.count + '"></i>' : '';
+              }).join('') +
+              (s.notJudged ? '<i style="width:' + ((s.notJudged / total) * 100) +
+                '%;background:#E4E4EA" title="Not yet judged: ' + s.notJudged + '"></i>' : '') +
+            '</div><span class="muted small">' +
+              s.distribution.filter(function (d) { return d.count; })
+                .map(function (d) { return d.count + ' ' + d.label.toLowerCase(); }).join(', ') +
+              (s.notJudged ? (s.distribution.some(function (d) { return d.count; }) ? ', ' : '') +
+                s.notJudged + ' not judged' : '') +
+            '</span></span></div>';
+        }).join('') + '</div>';
 
       view.innerHTML = html;
       bindTeacherControls();
     });
-  }
-
-  function statCard(label, value, sub) {
-    return '<div class="card card--tint"><div class="eyebrow">' + esc(label) + '</div>' +
-      '<div style="font-size:2.2rem;font-weight:700;color:var(--aisa-purple);line-height:1.1">' +
-      esc(value) + '</div><p class="muted small" style="margin-top:.3rem">' + esc(sub) + '</p></div>';
   }
 
   function bindTeacherControls() {
@@ -792,9 +875,7 @@
     });
 
     var filter = document.getElementById('classFilter');
-    if (filter) {
-      filter.onchange = function () { route('teacher', { className: filter.value }); };
-    }
+    if (filter) filter.onchange = function () { route('teacher', { className: filter.value }); };
 
     var exportBtn = document.getElementById('exportBtn');
     if (exportBtn) {
@@ -802,12 +883,12 @@
         exportBtn.disabled = true;
         exportBtn.textContent = 'Preparing…';
         call('api_exportCsv').then(function (res) {
-          downloadCsv(res.csv, 'studytwin-grade6-' + new Date().toISOString().slice(0, 10) + '.csv');
+          downloadCsv(res.csv, 'studytwin-grade6-record.csv');
           exportBtn.disabled = false;
-          exportBtn.textContent = 'Export CSV';
+          exportBtn.textContent = 'Export record';
         }).catch(function (err) {
           exportBtn.disabled = false;
-          exportBtn.textContent = 'Export CSV';
+          exportBtn.textContent = 'Export record';
           toast(err.message, true);
         });
       };
@@ -825,53 +906,172 @@
   }
 
   /* ---------------------------------------------------------------------
-   * Teacher: one student in detail
+   * Teacher: one student — the ADEK observation record, and judging
    * ------------------------------------------------------------------- */
 
   function viewStudentDetail() {
     return call('api_getStudentDetail', state.params.email).then(function (data) {
-      var a = data.attainment;
+      state.detail = data;
+      var p = data.profile;
+
       var html = '<button class="breadcrumb" id="back">← Back to class tracking</button>' +
         '<div class="row between" style="margin-bottom:1.25rem">' +
           '<div><div class="eyebrow">' + esc(data.student.className || 'Grade 6') + '</div>' +
           '<h1>' + esc(data.student.displayName) + '</h1>' +
           '<p class="muted small">' + esc(data.student.email) + '</p></div>' +
-          '<div class="center"><div style="font-size:2.2rem;font-weight:700;color:var(--aisa-purple)">' +
-          Math.round(a.overall.percent) + '%</div>' +
-          bandChip(a.overall.bandLabel, a.overall.bandColor) + '</div>' +
+          '<div>' + overallBlock(p) + '</div>' +
         '</div>';
 
-      html += '<h2 style="margin-bottom:.5rem">Lesson results</h2><div class="table-wrap"><table>' +
-        '<thead><tr><th>#</th><th>Lesson</th><th>Type</th><th>Attempts</th><th>Marks</th>' +
-        '<th>Score</th><th>Submitted</th></tr></thead><tbody>' +
+      html += '<h2 style="margin-bottom:.5rem">Observation record</h2>' +
+        '<p class="muted small" style="margin-bottom:.9rem">Judge each strand on its own ' +
+        'evidence. A strong plan in one strand does not lift a weak argument in another.</p>';
+
+      html += p.byStrand.map(function (s) {
+        var ev = data.evidence.filter(function (e) { return e.strand === s.strand; })[0] || {};
+        return '<div class="judge-block">' +
+          strandRowHtml(s) +
+          '<div class="judge-evidence">' +
+            '<div class="eyebrow">Products — one of three sources</div>' +
+            (ev.itemsMarked
+              ? '<p class="small">Auto-marked: <strong>' + ev.marksAwarded + '/' +
+                ev.marksAvailable + '</strong> across ' + ev.itemsMarked + ' item' +
+                (ev.itemsMarked === 1 ? '' : 's') + ' in ' + ev.lessonsCovered + ' lesson' +
+                (ev.lessonsCovered === 1 ? '' : 's') + '.' +
+                (ev.notIndependent
+                  ? ' <span class="warn-pip">⚠ best of ' + ev.highestAttemptUsed +
+                    ' attempts — not evidence of independence</span>'
+                  : '') + '</p>'
+              : '<p class="small muted">No auto-marked work bears on this strand yet.</p>') +
+          '</div>' +
+          '<button class="btn btn--ghost btn--sm" data-judge="' + esc(s.strand) + '">' +
+            (s.judged ? 'Update judgement' : 'Record judgement') + '</button>' +
+          '<div class="judge-form" id="judge-' + esc(s.strand) + '" hidden></div>' +
+        '</div>';
+      }).join('');
+
+      if (data.history.length) {
+        html += '<h2 style="margin:2rem 0 .5rem">Judgement history</h2>' +
+          '<div class="table-wrap"><table><thead><tr><th>When</th><th>Strand</th><th>Level</th>' +
+          '<th>Event</th><th>By</th><th>Note</th></tr></thead><tbody>' +
+          data.history.map(function (j) {
+            return '<tr' + (j.supersededBy ? ' class="muted"' : '') + '>' +
+              '<td class="small">' + formatDate(j.judgedAt) + '</td>' +
+              '<td class="small">' + esc(j.strand) + '</td>' +
+              '<td class="small">' + esc(j.level) + (j.supersededBy ? ' (superseded)' : '') + '</td>' +
+              '<td class="small">' + esc(j.assessmentEvent) + '</td>' +
+              '<td class="small">' + esc(j.judgedBy) + '</td>' +
+              '<td class="small muted">' + esc(j.note || '') + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }
+
+      html += '<h2 style="margin:2rem 0 .5rem">Worksheet evidence</h2><div class="table-wrap"><table>' +
+        '<thead><tr><th>#</th><th>Lesson</th><th>Attempts</th><th>Marks</th><th>Score</th>' +
+        '<th>Submitted</th></tr></thead><tbody>' +
         data.lessons.map(function (l) {
           return '<tr><td>' + esc(l.number) + '</td><td>' + esc(l.title) + '</td>' +
-            '<td><span class="pill ' + (l.type === 'lab' ? 'pill--lab' : 'pill--lesson') + '">' +
-              (l.type === 'lab' ? 'Lab' : 'Lesson') + '</span></td>' +
             '<td>' + esc(l.attempts) + '</td>' +
             '<td>' + (l.marksAwarded !== null ? esc(l.marksAwarded) + '/' + esc(l.marksAvailable)
                                               : '—') + '</td>' +
-            '<td>' + (l.percent !== null ? Math.round(l.percent) + '%' : '—') + '</td>' +
+            '<td>' + (l.worksheetScore !== null ? Math.round(l.worksheetScore) + '%' : '—') + '</td>' +
             '<td class="muted small">' + formatDate(l.submittedAt) + '</td></tr>';
         }).join('') + '</tbody></table></div>';
 
-      if (a.byStandard.length) {
-        html += '<h2 style="margin:2rem 0 .5rem">Attainment by standard</h2><div class="card">' +
-          a.byStandard.map(function (s) {
-            return '<div class="standard-row">' +
-              '<span class="code">' + esc(s.code) + '</span>' +
-              '<span class="desc">' + esc(s.descriptor) + '</span>' +
-              '<span class="meter"><div class="progress-bar"><i style="width:' + s.percent +
-                '%;background:' + esc(s.bandColor) + '"></i></div>' +
-                '<span class="muted small">' + s.marksAwarded + '/' + s.marksAvailable + ' marks</span></span>' +
-              bandChip(s.bandLabel, s.bandColor) + '</div>';
-          }).join('') + '</div>';
-      }
-
       view.innerHTML = html;
       document.getElementById('back').onclick = function () { route('teacher', {}); };
+      bindJudging(data);
     });
   }
+
+  /** Wires the per-strand judgement forms. */
+  function bindJudging(data) {
+    Array.prototype.forEach.call(view.querySelectorAll('[data-judge]'), function (btn) {
+      btn.onclick = function () {
+        var strand = btn.getAttribute('data-judge');
+        var panel = document.getElementById('judge-' + strand);
+        if (!panel.hidden) { panel.hidden = true; return; }
+
+        var s = data.profile.byStrand.filter(function (r) { return r.strand === strand; })[0];
+        panel.innerHTML = judgeFormHtml(s, data);
+        panel.hidden = false;
+        panel.querySelector('[data-save]').onclick = function () {
+          saveJudgement(strand, panel, data);
+        };
+        panel.querySelector('[data-cancel]').onclick = function () { panel.hidden = true; };
+      };
+    });
+  }
+
+  function judgeFormHtml(s, data) {
+    var d = s.descriptors || {};
+    return '<div class="judge-form__inner">' +
+      '<div class="eyebrow">Level for ' + esc(s.label) + '</div>' +
+      '<div class="level-options">' +
+        data.levels.map(function (l) {
+          var descriptor = d[l.key] ? d[l.key].descriptor : l.note;
+          return '<label class="option' + (s.level === l.key ? ' selected' : '') + '">' +
+            '<input type="radio" name="level-' + esc(s.strand) + '" value="' + esc(l.key) + '"' +
+              (s.level === l.key ? ' checked' : '') + '>' +
+            '<span><strong>' + esc(l.label) + '</strong><br>' +
+            '<span class="small muted">' + esc(descriptor) + '</span></span></label>';
+        }).join('') +
+      '</div>' +
+      '<div class="eyebrow" style="margin-top:1rem">Evidence — all three sources</div>' +
+      data.evidenceSources.map(function (src) {
+        var val = src.key === 'products' ? s.evidenceProducts
+                : src.key === 'observations' ? s.evidenceObservations : s.evidenceConversations;
+        return '<label class="field"><span class="field__label">' + esc(src.label) +
+          ' <span class="muted">— ' + esc(src.hint) + '</span></span>' +
+          '<input type="text" data-evidence="' + esc(src.key) + '" value="' + esc(val || '') +
+          '" placeholder="e.g. ' + esc(src.key === 'products' ? 'Solution plan sheet'
+            : src.key === 'observations' ? 'Card sort in W2 Lab' : 'Part 4 probe') + '"></label>';
+      }).join('') +
+      '<label class="field"><span class="field__label">Note</span>' +
+        '<textarea data-field="note" placeholder="What you saw that decided the level">' +
+        esc(s.note || '') + '</textarea></label>' +
+      '<label class="field"><span class="field__label">Access arrangements used</span>' +
+        '<input type="text" data-field="accessArrangements" value="' +
+        esc(s.accessArrangements || '') + '"></label>' +
+      '<label class="field"><span class="field__label">Next step / bridging</span>' +
+        '<input type="text" data-field="nextStep" value="' + esc(s.nextStep || '') + '"></label>' +
+      '<div class="row" style="margin-top:.85rem">' +
+        '<button class="btn btn--primary btn--sm" data-save>Save judgement</button>' +
+        '<button class="btn btn--ghost btn--sm" data-cancel>Cancel</button>' +
+      '</div></div>';
+  }
+
+  function saveJudgement(strand, panel, data) {
+    var picked = panel.querySelector('input[type="radio"]:checked');
+    if (!picked) { toast('Choose a level first.', true); return; }
+
+    var payload = {
+      email: data.student.email,
+      grade: '6',
+      strand: strand,
+      level: picked.value,
+      assessmentEvent: 'final',
+      note: panel.querySelector('[data-field="note"]').value,
+      accessArrangements: panel.querySelector('[data-field="accessArrangements"]').value,
+      nextStep: panel.querySelector('[data-field="nextStep"]').value
+    };
+    Array.prototype.forEach.call(panel.querySelectorAll('[data-evidence]'), function (input) {
+      var key = input.getAttribute('data-evidence');
+      payload['evidence' + key.charAt(0).toUpperCase() + key.slice(1)] = input.value;
+    });
+
+    var btn = panel.querySelector('[data-save]');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    call('api_recordJudgement', payload).then(function () {
+      toast(strand + ' recorded');
+      route('student-detail', { email: data.student.email });
+    }).catch(function (err) {
+      btn.disabled = false;
+      btn.textContent = 'Save judgement';
+      toast(err.message, true);
+    });
+  }
+
 
   /* ---------------------------------------------------------------------
    * Admin
