@@ -22,6 +22,45 @@ if (!fs.existsSync(generated)) {
   process.exit(1);
 }
 
+/**
+ * GUARD: the preview must never carry real ADEK curriculum.
+ *
+ * The preview runs the marking engine client-side, which means it has to inline the
+ * authoritative lessons — answer keys, model answers and the teacher-only `lookFor`
+ * guidance included. That is acceptable for placeholder content written for the demo.
+ * It is not acceptable for the published packs, which are licensed to the school and
+ * carry "For teacher use in ADEK schools. Not for distribution to students."
+ *
+ * Publishing such a preview would put every answer key and mark scheme on a URL.
+ * So the build refuses unless every lesson is explicitly marked provisional.
+ */
+const curriculumJson = fs.readFileSync(generated, 'utf8');
+const realLessons = [];
+Object.entries(JSON.parse(
+  curriculumJson.slice(curriculumJson.indexOf('const CURRICULUM = ') + 19,
+                       curriculumJson.indexOf(';\n\n/** Official ADEK framework'))
+)).forEach(([gradeKey, course]) => {
+  Object.values(course.lessons || {}).forEach((lesson) => {
+    if (lesson.provisional !== true) realLessons.push(`${gradeKey}/${lesson.id}`);
+  });
+});
+
+if (realLessons.length) {
+  console.error(
+    '\nREFUSING TO BUILD THE PREVIEW.\n\n' +
+    `${realLessons.length} lesson(s) are not marked "provisional": true, so they are\n` +
+    'presumed to be real ADEK curriculum:\n\n' +
+    realLessons.slice(0, 8).map((l) => '  - ' + l).join('\n') +
+    (realLessons.length > 8 ? `\n  ... and ${realLessons.length - 8} more` : '') +
+    '\n\nThe preview inlines the authoritative lessons so it can mark client-side, which\n' +
+    'means it would publish every answer key, model answer and teacher look-for.\n' +
+    'The published packs are licensed to the school and marked "Not for distribution\n' +
+    'to students".\n\n' +
+    'To demo real content, deploy the app (docs/deployment.md) — there the answer keys\n' +
+    'are stripped server-side and never reach a browser.\n');
+  process.exit(1);
+}
+
 // Server modules that are pure logic (no Apps Script services) and so run as-is.
 const serverLogic = [
   'src/Config.gs',

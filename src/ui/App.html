@@ -340,15 +340,22 @@
 
   function renderWorksheet(worksheet, data) {
     var total = worksheet.questions.reduce(function (s, q) { return s + (q.marks || 0); }, 0);
+    var openCount = worksheet.questions.filter(function (q) { return q.autoMarked === false; }).length;
+    var markedCount = worksheet.questions.length - openCount;
     var locked = !data.canAttempt;
 
     var head = '<section class="section" style="margin-top:2.5rem;padding-top:1.5rem;' +
       'border-top:2px solid var(--aisa-purple-tint)">' +
       '<div class="eyebrow">Worksheet</div>' +
       '<h2>' + esc(worksheet.title || 'Check your understanding') + '</h2>' +
-      '<p class="muted small">' + total + ' marks · attempt ' +
-        Math.min(data.attempts + 1, data.maxAttempts) + ' of ' + data.maxAttempts +
-        ' · your best attempt is the one that counts</p>';
+      '<p class="muted small">' +
+        (markedCount ? markedCount + ' marked question' + (markedCount === 1 ? '' : 's') +
+          ' worth ' + total + ' mark' + (total === 1 ? '' : 's') : '') +
+        (markedCount && openCount ? ' · ' : '') +
+        (openCount ? openCount + ' written response' + (openCount === 1 ? '' : 's') +
+          ' your teacher reads' : '') +
+        ' · attempt ' + Math.min(data.attempts + 1, data.maxAttempts) + ' of ' +
+        data.maxAttempts + '</p>';
 
     if (locked) {
       head += '<div class="callout" style="margin-top:1rem"><div class="eyebrow">Attempts used</div>' +
@@ -432,16 +439,23 @@
 
       case 'shortText':
       default:
-        body = '<textarea data-input="' + esc(q.id) + '" ' +
+        body = (q.stem ? '<p class="stem">' + richText(q.stem) + '</p>' : '') +
+          '<textarea data-input="' + esc(q.id) + '" ' +
           'placeholder="' + esc(q.placeholder || 'Write your answer…') + '"' +
           (q.maxLength ? ' maxlength="' + esc(q.maxLength) + '"' : '') + dis + '></textarea>';
         break;
     }
 
-    return '<div class="question" data-question="' + esc(q.id) + '" data-type="' + esc(q.type) + '">' +
+    var isOpen = q.autoMarked === false;
+    return '<div class="question' + (isOpen ? ' question--open' : '') + '" data-question="' +
+      esc(q.id) + '" data-type="' + esc(q.type) + '"' + (isOpen ? ' data-open="1"' : '') + '>' +
       '<div class="q-head"><span class="q-num">' + number + '.</span>' +
       '<span class="q-prompt">' + richText(q.prompt) + '</span>' +
-      '<span class="q-marks">' + esc(q.marks) + ' mark' + (q.marks === 1 ? '' : 's') + '</span></div>' +
+      '<span class="q-marks">' +
+        (isOpen ? '<span class="read-pill" title="Your teacher reads this rather than it being ' +
+                  'marked automatically">Teacher reads</span>'
+                : esc(q.marks) + ' mark' + (q.marks === 1 ? '' : 's')) +
+      '</span></div>' +
       body +
       (q.hint ? '<p class="muted small" style="margin-top:.5rem">Hint: ' + richText(q.hint) + '</p>' : '') +
       '</div>';
@@ -587,13 +601,22 @@
       var r = byId[el.getAttribute('data-question')];
       if (!r) return;
 
-      el.classList.add(r.correct ? 'is-correct' : (r.partial ? 'is-partial' : 'is-wrong'));
       Array.prototype.forEach.call(el.querySelectorAll('input, textarea, select, button'), function (f) {
         f.disabled = true;
       });
 
       var fb = document.createElement('div');
       fb.className = 'feedback';
+
+      if (r.needsTeacherReview) {
+        // No tick, no cross, no score — nothing here has been judged yet.
+        el.classList.add('is-recorded');
+        fb.innerHTML = '<strong>Recorded</strong> · ' + esc(r.feedback);
+        el.appendChild(fb);
+        return;
+      }
+
+      el.classList.add(r.correct ? 'is-correct' : (r.partial ? 'is-partial' : 'is-wrong'));
       fb.innerHTML = '<strong>' + r.marksAwarded + '/' + r.marksAvailable + '</strong> · ' +
         esc(r.feedback) +
         (!r.correct && r.modelAnswer
@@ -612,8 +635,16 @@
         '<div class="hero-text">' +
           '<div class="eyebrow">Attempt ' + result.attempt + '</div>' +
           '<h1 style="font-size:1.5rem">Worksheet handed in</h1>' +
-          '<p style="color:rgba(255,255,255,.8)">You scored <strong>' + result.marksAwarded +
-            ' out of ' + result.marksAvailable + '</strong> on the auto-marked questions. ' +
+          '<p style="color:rgba(255,255,255,.8)">' +
+            (result.marksAvailable > 0
+              ? 'You scored <strong>' + result.marksAwarded + ' out of ' +
+                result.marksAvailable + '</strong> on the marked questions. '
+              : '') +
+            (result.openResponses
+              ? 'Your ' + result.openResponses + ' written response' +
+                (result.openResponses === 1 ? ' has' : 's have') +
+                ' been recorded for your teacher to read. '
+              : '') +
             'Your teacher uses this alongside what you do and explain in lessons.' +
             (result.attemptsRemaining > 0
               ? ' You have ' + result.attemptsRemaining + ' attempt' +
@@ -948,6 +979,36 @@
           '<div class="judge-form" id="judge-' + esc(s.strand) + '" hidden></div>' +
         '</div>';
       }).join('');
+
+      var written = [];
+      data.lessons.forEach(function (l) {
+        (l.results || []).forEach(function (r) {
+          if (r.needsTeacherReview) written.push({ lesson: l, result: r });
+        });
+      });
+
+      if (written.length) {
+        html += '<h2 style="margin:2rem 0 .4rem">Written responses</h2>' +
+          '<p class="muted small" style="margin-bottom:.75rem">' + written.length +
+          ' response' + (written.length === 1 ? '' : 's') + ' this student wrote that no mark ' +
+          'scheme can judge. These are the product evidence for your judgement above.</p>' +
+          written.map(function (w) {
+            var answered = w.result.response !== null && w.result.response !== '';
+            return '<div class="response' + (answered ? '' : ' response--blank') + '">' +
+              '<div class="response__prompt"><span class="muted small">' +
+                esc(w.lesson.title) + '</span><br>' + esc(w.result.prompt || '') + '</div>' +
+              '<div class="response__text">' +
+                (answered ? esc(typeof w.result.response === 'string'
+                                ? w.result.response
+                                : JSON.stringify(w.result.response))
+                          : 'Not answered') + '</div>' +
+              (w.result.lookFor
+                ? '<div class="response__lookfor"><strong>Look for:</strong> ' +
+                  esc(w.result.lookFor) + '</div>'
+                : '') +
+              '</div>';
+          }).join('');
+      }
 
       if (data.history.length) {
         html += '<h2 style="margin:2rem 0 .5rem">Judgement history</h2>' +

@@ -2,7 +2,6 @@
   "id": "g6-l01",
   "number": 1,
   "type": "core",
-  "provisional": true,
   "title": "What is Artificial Intelligence?",
   "summary": "Meet the difference between a machine that follows rules and a machine that learns.",
   "duration": "45 minutes",
@@ -360,5 +359,6 @@
   "strands": [
     "CU"
   ],
-  "track": "main"
+  "track": "main",
+  "provisional": true
 }

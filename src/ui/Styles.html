@@ -187,6 +187,36 @@
     border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
     padding: 1.15rem; margin-bottom: 1rem;
   }
+  /* An open task is read by a teacher, not marked. It gets no tick, no cross and
+     no score, so it is styled as recorded rather than as right or wrong. */
+  .question--open { border-left: 3px solid var(--aisa-purple-border); }
+  .question.is-recorded { border-left: 4px solid var(--aisa-purple-mid); background: #FAF9FE; }
+  .read-pill {
+    font-size: .68rem; font-weight: 700; letter-spacing: .04em; white-space: nowrap;
+    padding: .15rem .5rem; border-radius: 999px;
+    background: var(--aisa-purple-tint); color: var(--aisa-purple);
+  }
+  .stem {
+    background: var(--aisa-purple-tint); border-radius: 6px; padding: .6rem .8rem;
+    margin-bottom: .6rem; font-size: .92rem; color: var(--aisa-purple);
+  }
+
+  /* Teacher-side reading of captured responses */
+  .response {
+    border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
+    padding: .85rem 1rem; margin-bottom: .7rem; background: var(--aisa-white);
+  }
+  .response__prompt { font-size: .85rem; font-weight: 500; margin-bottom: .45rem; }
+  .response__text {
+    background: #FAFAFC; border-left: 3px solid var(--aisa-purple-mid);
+    padding: .55rem .75rem; border-radius: 4px; font-size: .9rem; white-space: pre-wrap;
+  }
+  .response__lookfor {
+    margin-top: .5rem; font-size: .8rem; color: var(--aisa-muted-gray);
+  }
+  .response__lookfor strong { color: var(--aisa-purple); }
+  .response--blank .response__text { color: var(--aisa-muted-gray); font-style: italic; }
+
   .question.is-correct { border-left: 4px solid #1B6E3C; background: #F7FCF8; }
   .question.is-partial { border-left: 4px solid var(--aisa-gold); background: #FFFDF7; }
   .question.is-wrong   { border-left: 4px solid #B3261E; background: #FFF8F8; }
