@@ -24,7 +24,6 @@ function readJson(file) {
 
 function buildGrade(gradeDir) {
   const course = readJson(path.join(gradeDir, 'course.json'));
-  const standards = readJson(path.join(gradeDir, 'standards.json'));
 
   const lessonsDir = path.join(gradeDir, 'lessons');
   const lessons = {};
@@ -39,8 +38,26 @@ function buildGrade(gradeDir) {
       });
   }
 
-  return { meta: course.meta, units: course.units || [], standards, lessons };
+  return { meta: course.meta, units: course.units || [], lessons };
 }
+
+/**
+ * The official framework catalogue, extracted from ADEK's published Scope &
+ * Sequence by tools/extract-scope-sequence.js. It is compiled in alongside the
+ * lessons so the app can show a teacher the exact Emerging/Proficient/Advanced
+ * descriptors at the point of judgement — which is what the packs say makes two
+ * teachers reach the same level.
+ */
+const frameworkFile = path.join(curriculumDir, 'framework', 'standards.json');
+if (!fs.existsSync(frameworkFile)) {
+  console.error('curriculum/framework/standards.json is missing. Run:\n' +
+                '  node tools/extract-scope-sequence.js');
+  process.exit(1);
+}
+const framework = readJson(frameworkFile);
+
+const sequencesFile = path.join(curriculumDir, 'framework', 'sequences.json');
+const sequences = fs.existsSync(sequencesFile) ? readJson(sequencesFile) : {};
 
 const curriculum = {};
 const grades = fs.readdirSync(curriculumDir, { withFileTypes: true })
@@ -56,8 +73,7 @@ if (grades.length === 0) {
 for (const grade of grades) {
   curriculum[grade] = buildGrade(path.join(curriculumDir, grade));
   const lessonCount = Object.keys(curriculum[grade].lessons).length;
-  const standardCount = curriculum[grade].standards.length;
-  console.log(`  ${grade}: ${lessonCount} lesson(s), ${standardCount} standard(s)`);
+  console.log(`  ${grade}: ${lessonCount} lesson(s)`);
 }
 
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
@@ -72,7 +88,15 @@ fs.writeFileSync(outFile,
  */
 
 const CURRICULUM = ${JSON.stringify(curriculum, null, 2)};
+
+/** Official ADEK framework catalogue — strand descriptors per grade per tier. */
+const FRAMEWORK = ${JSON.stringify(framework, null, 2)};
+
+/** Published week-by-week Main Course and Bridging sequences. */
+const SEQUENCES = ${JSON.stringify(sequences, null, 2)};
 `);
 
 const kb = (fs.statSync(outFile).size / 1024).toFixed(1);
+console.log(`  framework: ${Object.keys(framework.grades).length} grades, ` +
+  `${Object.values(framework.grades).reduce((n, g) => n + Object.keys(g).length * 3, 0)} descriptors`);
 console.log(`\nWrote ${path.relative(root, outFile)} (${kb} KB)`);

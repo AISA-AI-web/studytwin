@@ -14,13 +14,19 @@ const root = path.join(__dirname, '..');
 const curriculumDir = path.join(root, 'curriculum');
 
 const TYPES = ['mcq', 'truefalse', 'multi', 'matching', 'ordering', 'numeric', 'shortText', 'fillBlank'];
+const STRANDS = ['CU', 'SD', 'CE', 'GE'];
+const TIER_LETTERS = { E: 'emerging', P: 'proficient', A: 'advanced' };
+
+/** The official catalogue. Every question's frameworkRef is checked against it. */
+const framework = JSON.parse(
+  fs.readFileSync(path.join(curriculumDir, 'framework', 'standards.json'), 'utf8'));
 const errors = [];
 const warnings = [];
 
 function err(where, message) { errors.push(`${where}: ${message}`); }
 function warn(where, message) { warnings.push(`${where}: ${message}`); }
 
-function validateQuestion(q, where, standardCodes) {
+function validateQuestion(q, where) {
   if (!q.id) return err(where, 'question has no "id"');
   const at = `${where} → ${q.id}`;
 
@@ -32,11 +38,33 @@ function validateQuestion(q, where, standardCodes) {
   }
   if (!q.prompt) err(at, 'missing "prompt"');
 
-  (q.standards || []).forEach((code) => {
-    if (!standardCodes.has(code)) err(at, `references unknown standard "${code}"`);
+  const refs = q.frameworkRefs || [];
+  if (!refs.length) {
+    warn(at, 'no frameworkRefs — this item evidences no strand and a teacher will not see it ' +
+             'when judging');
+  }
+  refs.forEach((ref) => {
+    if (STRANDS.indexOf(ref.strand) === -1) {
+      return err(at, `strand "${ref.strand}" is not one of ${STRANDS.join(', ')}`);
+    }
+    const tier = TIER_LETTERS[ref.tier];
+    if (!tier) return err(at, `tier "${ref.tier}" is not E, P or A`);
+
+    const gradeEntry = framework.grades['grade' + ref.grade];
+    if (!gradeEntry) return err(at, `no framework entry for grade ${ref.grade}`);
+    const strandEntry = gradeEntry[ref.strand];
+    if (!strandEntry) {
+      return err(at, `the framework defines no ${ref.strand} strand at grade ${ref.grade}`);
+    }
+    const expected = strandEntry.tiers[tier].code;
+    if (ref.code !== expected) {
+      err(at, `code "${ref.code}" does not match the framework, which has "${expected}"`);
+    }
   });
-  if (!q.standards || q.standards.length === 0) {
-    warn(at, 'not tagged with any standard — it will not count toward attainment');
+
+  // An item may only ever probe toward a tier; it can never award one.
+  if (q.tierProbed && !['emerging', 'proficient', 'advanced'].includes(q.tierProbed)) {
+    err(at, `tierProbed "${q.tierProbed}" is not a framework tier`);
   }
 
   const optionIds = new Set((q.options || []).map((o) => String(o.id)));
@@ -115,16 +143,12 @@ function validateQuestion(q, where, standardCodes) {
 function validateGrade(gradeName) {
   const gradeDir = path.join(curriculumDir, gradeName);
   const course = JSON.parse(fs.readFileSync(path.join(gradeDir, 'course.json'), 'utf8'));
-  const standards = JSON.parse(fs.readFileSync(path.join(gradeDir, 'standards.json'), 'utf8'));
-  const standardCodes = new Set(standards.map((s) => s.code));
-
-  const seenCodes = new Set();
-  standards.forEach((s) => {
-    if (!s.code) err(gradeName, 'a standard has no "code"');
-    if (seenCodes.has(s.code)) err(gradeName, `duplicate standard code "${s.code}"`);
-    seenCodes.add(s.code);
-    if (!s.descriptor) warn(`${gradeName} → ${s.code}`, 'no descriptor');
-  });
+  const gradeStrands = framework.grades[gradeName];
+  if (!gradeStrands) {
+    err(gradeName, 'the framework catalogue has no entry for this grade');
+    return;
+  }
+  const standardCodes = new Set();
 
   const lessonsDir = path.join(gradeDir, 'lessons');
   const lessons = {};
@@ -146,7 +170,7 @@ function validateGrade(gradeName) {
       ((lesson.worksheet && lesson.worksheet.questions) || []).forEach((q) => {
         if (seenQ.has(q.id)) err(where, `duplicate question id "${q.id}"`);
         seenQ.add(q.id);
-        validateQuestion(q, where, standardCodes);
+        validateQuestion(q, where);
       });
 
       if (!lesson.worksheet || !(lesson.worksheet.questions || []).length) {
@@ -157,19 +181,19 @@ function validateGrade(gradeName) {
 
   // Standards coverage. A standard with no question assessing it can never be
   // reported on, which is the whole point of the platform — so surface it loudly.
-  const assessed = new Set();
+  const touched = new Set();
   Object.values(lessons).forEach((lesson) => {
     ((lesson.worksheet && lesson.worksheet.questions) || []).forEach((q) => {
-      (q.standards || []).forEach((code) => assessed.add(code));
+      (q.frameworkRefs || []).forEach((ref) => touched.add(ref.strand));
     });
   });
-  const uncovered = [...standardCodes].filter((code) => !assessed.has(code));
-  if (uncovered.length) {
+  const untouched = STRANDS.filter((s) => !touched.has(s));
+  if (untouched.length) {
     warn(gradeName,
-      `${uncovered.length} standard(s) have no worksheet question and cannot be ` +
-      `reported on: ${uncovered.join(', ')}`);
+      `no auto-marked item bears on ${untouched.join(', ')} — a teacher judging ` +
+      `${untouched.length === 1 ? 'that strand' : 'those strands'} will see no product evidence`);
   }
-  console.log(`  ${gradeName}: ${assessed.size}/${standardCodes.size} standards assessed ` +
+  console.log(`  ${gradeName}: product evidence for ${touched.size}/${STRANDS.length} strands ` +
     `across ${Object.keys(lessons).length} lesson(s)`);
 
   // Every lesson referenced by a unit must exist, and vice versa.
