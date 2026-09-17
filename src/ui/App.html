@@ -32,11 +32,19 @@
     return new Promise(function (resolve, reject) {
       var runner = google.script.run
         .withSuccessHandler(function (res) {
-          if (res && res.ok) resolve(res.data);
-          else reject(new Error((res && res.message) || 'Request failed.'));
+          if (res && res.ok) { resolve(res.data); return; }
+          if (res && (res.message || res.error)) {
+            reject(new Error(res.message || res.error));
+            return;
+          }
+          // Nothing came back at all. The server ran but its reply did not survive the
+          // boundary, so there is no error to report — say which call, so it is findable.
+          reject(new Error('The server did not return anything for "' + name + '". ' +
+            'Ask your administrator to run diagnose() in the Apps Script editor.'));
         })
         .withFailureHandler(function (err) {
-          reject(new Error((err && err.message) || 'Could not reach the server.'));
+          reject(new Error((err && err.message) ||
+            'Could not reach the server (' + name + ').'));
         });
       runner[name].apply(runner, args);
     });

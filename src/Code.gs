@@ -95,7 +95,27 @@ function verifyInstall() {
   need('Datastore code loaded', function () { return typeof ensureSchema_ === 'function'; });
   need('Marking engine loaded', function () { return typeof markWorksheet_ === 'function'; });
   need('Attainment engine loaded', function () { return typeof overallLevelFrom_ === 'function'; });
-  need('API endpoints loaded', function () { return typeof api_getBootstrap === 'function'; });
+  // Check EVERY endpoint, not just one. A paste cut short leaves the early functions
+  // present and the later ones missing, so the page renders and then individual
+  // features fail — which is far harder to diagnose than a file that will not parse.
+  [
+    'api_getBootstrap', 'api_getLesson', 'api_submitWorksheet', 'api_getMyResults',
+    'api_getClassOverview', 'api_getStudentDetail', 'api_recordJudgement',
+    'api_recordReadiness', 'api_exportCsv', 'api_getAdminData', 'api_importRoster',
+    'api_setStaffRole'
+  ].forEach(function (name) {
+    need('Endpoint ' + name, function () { return typeof globalThis[name] === 'function'; });
+  });
+
+  // The helpers those endpoints depend on, in the order the bundle concatenates them.
+  [
+    'requireStaff_', 'requireAdmin_', 'withLock_', 'appendRow_', 'updateRow_',
+    'readSheetObjects_', 'buildStrandProfile_', 'computeClassProfile_',
+    'overallLevelFrom_', 'worksheetEvidenceByStrand_', 'getStandardsIndex_',
+    'markWorksheet_', 'stripAnswerKey_'
+  ].forEach(function (name) {
+    need('Helper ' + name, function () { return typeof globalThis[name] === 'function'; });
+  });
 
   ['Index', 'Styles', 'App'].forEach(function (name) {
     need('HTML file "' + name + '" present', function () {
@@ -129,4 +149,87 @@ function verifyInstall() {
   const report = lines.join('\n');
   console.log(report);
   return report;
+}
+
+/**
+ * Calls every endpoint server-side and reports what each one returns.
+ *
+ * "Request failed." in the browser means google.script.run handed the page nothing,
+ * which happens when a return value cannot be serialised across the boundary — the
+ * server code ran fine, so nothing appears in the normal error log. Running the same
+ * endpoints here, where exceptions and sizes are visible, is the only way to see it.
+ *
+ * Run this from the editor and paste the log.
+ */
+function diagnose() {
+  const lines = [];
+  const user = (function () {
+    try { return getCurrentUser(); } catch (err) { return null; }
+  })();
+
+  lines.push('Signed in as: ' + (user ? user.email + ' (' + user.role + ')' : 'UNRESOLVED'));
+  lines.push('');
+
+  const endpoints = [
+    ['api_getBootstrap', function () { return api_getBootstrap(); }],
+    ['api_getMyResults', function () { return api_getMyResults(); }],
+    ['api_getClassOverview', function () { return api_getClassOverview(''); }],
+    ['api_getAdminData', function () { return api_getAdminData(); }],
+    ['api_exportCsv', function () { return api_exportCsv(); }]
+  ];
+
+  endpoints.forEach(function (pair) {
+    const name = pair[0];
+    let result;
+    try {
+      result = pair[1]();
+    } catch (err) {
+      lines.push('\u2717 ' + name + ' THREW: ' + err.message);
+      if (err.stack) lines.push('    ' + String(err.stack).split('\n').slice(0, 3).join('\n    '));
+      return;
+    }
+
+    if (!result) { lines.push('\u2717 ' + name + ' returned nothing'); return; }
+    if (!result.ok) { lines.push('\u2717 ' + name + ' returned error: ' + result.error); return; }
+
+    // The payload has to survive JSON, and has to fit. Both fail silently at the boundary.
+    let json;
+    try {
+      json = JSON.stringify(result);
+    } catch (err) {
+      lines.push('\u2717 ' + name + ' CANNOT BE SERIALISED: ' + err.message);
+      return;
+    }
+    const kb = Math.round(json.length / 1024);
+    lines.push('\u2713 ' + name + '  ' + kb + ' KB' + (kb > 900 ? '  \u26A0 LARGE' : ''));
+
+    // Undefined values are dropped by JSON but can break the transport; find them.
+    const undef = findUndefined_(result.data, name, []);
+    undef.slice(0, 5).forEach(function (pathStr) {
+      lines.push('    \u26A0 undefined at ' + pathStr);
+    });
+  });
+
+  const report = lines.join('\n');
+  console.log(report);
+  return report;
+}
+
+/** Walks a value looking for undefined, which does not survive the client boundary. */
+function findUndefined_(value, label, found) {
+  if (found.length > 20) return found;
+  if (value === undefined) { found.push(label); return found; }
+  if (value === null || typeof value !== 'object') return found;
+  if (value instanceof Date) return found;
+
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length && found.length <= 20; i++) {
+      findUndefined_(value[i], label + '[' + i + ']', found);
+    }
+    return found;
+  }
+  Object.keys(value).forEach(function (k) {
+    findUndefined_(value[k], label + '.' + k, found);
+  });
+  return found;
 }
