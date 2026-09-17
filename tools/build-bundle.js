@@ -34,11 +34,21 @@ if (!fs.existsSync(generated)) {
  * the generated curriculum is referenced by Content.gs. Both come first so the bundle
  * evaluates cleanly top to bottom.
  */
+/*
+ * Bundle layout.
+ *
+ * Each paste must stay well under the size where a browser silently truncates it, so the
+ * curriculum ships as the chunks tools/build-content.js produced rather than one blob.
+ * getCurriculum_() reassembles them at runtime, so the order they are pasted in does not
+ * matter.
+ */
+const chunkFiles = fs.readdirSync(path.join(src, 'generated'))
+  .filter((f) => /^CurriculumChunk\d+\.gs$/.test(f))
+  .sort((a, b) => parseInt(a.match(/\d+/)[0], 10) - parseInt(b.match(/\d+/)[0], 10));
+
 const BUNDLES = [
-  // The curriculum is split out so neither paste is enormous. A large paste can
-  // truncate silently in the browser, and the resulting parse error points at a
-  // line that is perfectly fine, which sends you looking in the wrong place.
   { out: 'Data.gs', files: ['Config.gs', 'generated/CurriculumData.gs'] },
+  ...chunkFiles.map((f, i) => ({ out: `Curriculum${i + 1}.gs`, files: [`generated/${f}`] })),
   { out: 'Code.gs', files: ['Auth.gs', 'Db.gs', 'Content.gs', 'Marking.gs',
                             'Attainment.gs', 'Api.gs', 'Code.gs'] }
 ];

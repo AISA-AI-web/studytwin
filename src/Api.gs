@@ -646,7 +646,7 @@ function normaliseEmail_(value) {
 function gradeKeyFor_(user) {
   const grade = String(user.grade || '6').replace(/[^0-9]/g, '') || '6';
   const key = 'grade' + grade;
-  return CURRICULUM[key] ? key : 'grade6';
+  return getCurriculum_()[key] ? key : 'grade6';
 }
 
 function judgementsFor_(email) {

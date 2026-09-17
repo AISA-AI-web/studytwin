@@ -35,15 +35,14 @@ if (!fs.existsSync(generated)) {
  * So the build refuses unless every lesson is explicitly marked provisional.
  */
 const curriculumJson = fs.readFileSync(generated, 'utf8');
-const realLessons = [];
-Object.entries(JSON.parse(
-  curriculumJson.slice(curriculumJson.indexOf('const CURRICULUM = ') + 19,
-                       curriculumJson.indexOf(';\n\n/** Official ADEK framework'))
-)).forEach(([gradeKey, course]) => {
-  Object.values(course.lessons || {}).forEach((lesson) => {
-    if (lesson.provisional !== true) realLessons.push(`${gradeKey}/${lesson.id}`);
-  });
-});
+const manifestMatch = /const CURRICULUM_MANIFEST = (\[.*?\]);/s.exec(curriculumJson);
+if (!manifestMatch) {
+  console.error('Could not read CURRICULUM_MANIFEST from the generated data. Run `npm run build`.');
+  process.exit(1);
+}
+const realLessons = JSON.parse(manifestMatch[1])
+  .filter((l) => !l.provisional)
+  .map((l) => `${l.grade}/${l.id}`);
 
 if (realLessons.length) {
   console.error(
@@ -62,13 +61,19 @@ if (realLessons.length) {
 }
 
 // Server modules that are pure logic (no Apps Script services) and so run as-is.
+const generatedFiles = fs.readdirSync(path.join(root, 'src/generated'))
+  .filter((f) => f.endsWith('.gs'))
+  .map((f) => `src/generated/${f}`);
+
 const serverLogic = [
   'src/Config.gs',
-  'src/generated/CurriculumData.gs',
+  ...generatedFiles,
   'src/Marking.gs',
   'src/Content.gs',
   'src/Attainment.gs'
-].map(read).join('\n\n');
+].map(read).join('\n\n') +
+// The mock reads CURRICULUM directly; getCurriculum_ assembles it from the chunks.
+'\n\nconst CURRICULUM = getCurriculum_();\n';
 
 const styles = read('src/ui/Styles.html');
 

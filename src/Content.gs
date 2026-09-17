@@ -10,7 +10,7 @@
 
 /** Returns the course shell for a grade: units, lesson titles, standards. No answers. */
 function getCourse_(gradeKey) {
-  const course = CURRICULUM[gradeKey];
+  const course = getCurriculum_()[gradeKey];
   if (!course) throw new Error('UNKNOWN_GRADE');
   return course;
 }

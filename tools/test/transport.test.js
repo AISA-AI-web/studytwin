@@ -16,9 +16,10 @@ const path = require('path');
 const vm = require('vm');
 
 const root = path.join(__dirname, '..', '..');
-const sandbox = { console, JSON, Math, Number, String, Object, Array, isNaN, isFinite, Date };
+const sandbox = { console, JSON, Math, Number, String, Object, Array, isNaN, isFinite, Date, Error };
+sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-['src/Config.gs', 'src/generated/CurriculumData.gs', 'src/Marking.gs',
+['src/Config.gs', ...fs.readdirSync(path.join(root, 'src/generated')).filter((f) => f.endsWith('.gs')).map((f) => `src/generated/${f}`), 'src/Marking.gs',
  'src/Content.gs', 'src/Attainment.gs', 'src/Api.gs'].forEach((f) => {
   vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), sandbox, { filename: f });
 });

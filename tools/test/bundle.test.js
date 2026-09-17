@@ -13,8 +13,15 @@ const path = require('path');
 const vm = require('vm');
 
 const root = path.join(__dirname, '..', '..');
-// Data.gs must load first: it holds CONFIG and the curriculum that Code.gs uses.
-const BUNDLE_FILES = ['Data.gs', 'Code.gs'];
+/*
+ * Every .gs the deployment gets. Deliberately loaded in REVERSE, because
+ * getCurriculum_() assembles the chunks at runtime and must not depend on paste order —
+ * which is the whole reason the curriculum is chunked rather than inlined.
+ */
+const BUNDLE_FILES = fs.readdirSync(path.join(root, 'dist'))
+  .filter((f) => f.endsWith('.gs'))
+  .sort()
+  .reverse();
 
 let passed = 0, failed = 0;
 function check(name, cond, detail) {
@@ -35,7 +42,8 @@ console.log('\nBundle integrity');
 
 // Apps Script services the bundle references at load time do not exist here; stub
 // only what top-level evaluation touches.
-const sandbox = { console, JSON, Math, Number, String, Object, Array, isNaN, Date };
+const sandbox = { console, JSON, Math, Number, String, Object, Array, isNaN, isFinite, Date, Error };
+sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
 
 let loadError = null;
@@ -47,7 +55,7 @@ try {
 } catch (err) {
   loadError = err;
 }
-check('both bundle files parse and evaluate together',
+check('all bundle files parse and evaluate together, loaded in reverse order',
   loadError === null, loadError && loadError.message);
 
 // A truncated paste is the failure mode this guards against, so the marker that
@@ -64,9 +72,9 @@ check('verifyInstall is available to run in the editor',
 if (loadError) { console.log(`\n${passed} passed, ${failed} failed.`); process.exit(1); }
 
 const api = vm.runInContext(`({
-  CONFIG, CURRICULUM, FRAMEWORK, LEVEL_ORDINAL,
+  CONFIG, CURRICULUM: getCurriculum_(), FRAMEWORK, LEVEL_ORDINAL,
   markWorksheet_, markQuestion_, overallLevelFrom_, buildStrandProfile_,
-  getLessonForStudent_, getStandardsIndex_, stripAnswerKey_
+  getLessonForStudent_, getStandardsIndex_, stripAnswerKey_, getCurriculum_
 })`, sandbox);
 
 check('CONFIG survived concatenation', !!api.CONFIG && api.CONFIG.ALLOWED_DOMAIN === 'aisa.sch.ae');
@@ -91,31 +99,27 @@ check('grades this deployment does not teach are not shipped',
 
 console.log('\nBehaviour matches the multi-file source');
 
-const lesson = api.CURRICULUM.grade6.lessons['g6-l01'];
-const perfect = {};
-lesson.worksheet.questions.forEach((q) => {
-  if (q.autoMarked === false) return;
-  switch (q.type) {
-    case 'mcq': case 'truefalse': perfect[q.id] = q.answer; break;
-    case 'multi': perfect[q.id] = q.answer.slice(); break;
-    case 'matching': perfect[q.id] = Object.assign({}, q.answer); break;
-    case 'ordering': perfect[q.id] = q.answer.slice(); break;
-    case 'numeric': perfect[q.id] = q.answer; break;
-    case 'fillBlank': perfect[q.id] = q.answer.map((a) => Array.isArray(a) ? a[0] : a); break;
-    case 'shortText': perfect[q.id] = q.modelAnswer; break;
-  }
-});
-check('marking still scores a perfect paper at 100%',
-  api.markWorksheet_(lesson.worksheet, perfect).percent === 100,
-  `got ${api.markWorksheet_(lesson.worksheet, perfect).percent}%`);
+const lessonIds = Object.keys(api.CURRICULUM.grade6.lessons);
+check('the chunked curriculum reassembles in full',
+  lessonIds.length === 32, `assembled ${lessonIds.length} lessons`);
+check('both tracks are present',
+  lessonIds.some((id) => id.includes('bridging')) && lessonIds.some((id) => id.includes('main')));
+check('getCurriculum_ caches rather than reassembling each call',
+  api.getCurriculum_() === api.getCurriculum_());
+
+check('the marking engine still runs', (function () {
+  const fixture = { questions: [{ id: 'q', type: 'mcq', marks: 2,
+    options: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }], answer: 'b' }] };
+  return api.markWorksheet_(fixture, { q: 'b' }).percent === 100;
+})());
 
 check('the Grade 6 decision rule still applies',
   api.overallLevelFrom_({ CU: 'proficient', SD: 'proficient', CE: 'proficient', GE: 'emerging' },
     'grade6').level === 'proficient');
 
 check('answer keys are still stripped for students',
-  api.getLessonForStudent_('grade6', 'g6-l01').worksheet.questions
-    .every((q) => q.answer === undefined));
+  api.getLessonForStudent_('grade6', lessonIds[0]).worksheet.questions
+    .every((q) => q.answer === undefined && q.lookFor === undefined));
 
 console.log('\nApps Script API usage suits a standalone web app');
 

@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-17T15:52:36.028Z
+ * Built: 2026-09-17T15:55:22.865Z
  */
 
 /* ==========================================================================
@@ -342,7 +342,7 @@ function logAudit_(actor, action, detail) {
 
 /** Returns the course shell for a grade: units, lesson titles, standards. No answers. */
 function getCourse_(gradeKey) {
-  const course = CURRICULUM[gradeKey];
+  const course = getCurriculum_()[gradeKey];
   if (!course) throw new Error('UNKNOWN_GRADE');
   return course;
 }
@@ -1786,7 +1786,7 @@ function normaliseEmail_(value) {
 function gradeKeyFor_(user) {
   const grade = String(user.grade || '6').replace(/[^0-9]/g, '') || '6';
   const key = 'grade' + grade;
-  return CURRICULUM[key] ? key : 'grade6';
+  return getCurriculum_()[key] ? key : 'grade6';
 }
 
 function judgementsFor_(email) {
@@ -2001,7 +2001,18 @@ function verifyInstall() {
   need('Config loaded', function () { return CONFIG && CONFIG.ALLOWED_DOMAIN; });
   need('Attainment levels loaded', function () { return CONFIG.ATTAINMENT_LEVELS.length === 4; });
   need('Grade decision rules loaded', function () { return CONFIG.GRADE_RULES.grade6; });
-  need('Curriculum data loaded', function () { return CURRICULUM && CURRICULUM.grade6; });
+  // The curriculum ships in chunks so no single paste is large enough to truncate.
+  // Check each one arrived: a missing chunk means lessons silently absent, not an error.
+  need('Curriculum index loaded', function () { return CURRICULUM_CHUNKS > 0; });
+  for (let i = 1; i <= (typeof CURRICULUM_CHUNKS === 'number' ? CURRICULUM_CHUNKS : 0); i++) {
+    need('Curriculum chunk ' + i + ' of ' + CURRICULUM_CHUNKS, (function (n) {
+      return function () { return typeof globalThis['curriculumChunk' + n + '_'] === 'function'; };
+    })(i));
+  }
+  need('Curriculum assembles', function () { return getCurriculum_().grade6; });
+  need('All lessons present', function () {
+    return Object.keys(getCurriculum_().grade6.lessons).length === CURRICULUM_MANIFEST.length;
+  });
   need('Framework catalogue loaded', function () { return FRAMEWORK && FRAMEWORK.grades.grade6; });
   need('Identity code loaded', function () { return typeof getCurrentUser === 'function'; });
   need('Datastore code loaded', function () { return typeof ensureSchema_ === 'function'; });
@@ -2047,9 +2058,10 @@ function verifyInstall() {
     lines.push('wrong name. The three HTML files must be named exactly Index, Styles and App.');
     lines.push('Re-paste the file covering whatever is listed above, then run this again.');
   } else {
-    const lessons = Object.keys(CURRICULUM.grade6.lessons).length;
+    const lessons = Object.keys(getCurriculum_().grade6.lessons).length;
+    const expected = CURRICULUM_MANIFEST.length;
     const grades = Object.keys(FRAMEWORK.grades).length;
-    lines.push('  Curriculum: ' + lessons + ' lesson(s) for Grade 6');
+    lines.push('  Curriculum: ' + lessons + ' of ' + expected + ' lesson(s) for Grade 6');
     lines.push('  Framework:  ' + grades + ' grade(s) of descriptors');
     lines.push('  Domain:     ' + CONFIG.ALLOWED_DOMAIN);
     lines.push('');

@@ -29,12 +29,21 @@ contents** button (the icon at the top right of the file view):
 
 | File | Paste as | What it is |
 |---|---|---|
-| `dist/Data.gs` | Script, named `Data` | Settings and the curriculum |
+| `dist/Data.gs` | Script, named `Data` | Settings, the framework and the lesson index |
+| `dist/Curriculum1.gs` | Script, named `Curriculum1` | Lessons, part 1 |
+| `dist/Curriculum2.gs` | Script, named `Curriculum2` | Lessons, part 2 |
+| `dist/Curriculum3.gs` | Script, named `Curriculum3` | Lessons, part 3 |
+| `dist/Curriculum4.gs` | Script, named `Curriculum4` | Lessons, part 4 |
 | `dist/Code.gs` | Script, replacing the stub `Code` | The server code |
 | `dist/Index.html` | HTML, named `Index` | The page shell |
 | `dist/Styles.html` | HTML, named `Styles` | The stylesheet |
 | `dist/App.html` | HTML, named `App` | The app itself |
 | `dist/appsscript.json` | The manifest | Permissions and web app settings |
+
+The curriculum arrives in four parts because the whole Grade 6 pack is around 240 KB, well
+past the size where a browser paste silently truncates. They are reassembled at runtime, so
+**the order you paste them in does not matter** — and `verifyInstall` checks each part
+arrived.
 
 > **Each `.gs` file ends with a line reading `--- END OF … ---`.** After pasting, scroll to
 > the bottom and check you can see it. If you cannot, the paste was cut short — that is by
@@ -57,14 +66,15 @@ that will own this.
    **Select all of it and replace it** with the contents of `dist/Code.gs`. Save (Ctrl/Cmd+S).
 2. Click **+** next to *Files* → **Script**. Name it exactly `Data`. Replace its contents
    with `dist/Data.gs`. Save.
-3. Click **+** → **HTML**. Name it exactly `Index`. Paste `dist/Index.html`. Save.
-4. Repeat for `Styles` and `App`.
+3. Repeat for `Curriculum1`, `Curriculum2`, `Curriculum3` and `Curriculum4`.
+4. Click **+** → **HTML**. Name it exactly `Index`. Paste `dist/Index.html`. Save.
+   Repeat for `Styles` and `App`.
 5. Click **⚙ Project Settings** in the left sidebar and tick
    **Show "appsscript.json" manifest file in editor**.
 6. Back in the editor, open `appsscript.json` and replace it with `dist/appsscript.json`. Save.
 
-You should end up with six files: `Code.gs`, `Data.gs`, `Index.html`, `Styles.html`,
-`App.html`, `appsscript.json`.
+You should end up with ten files: `Code`, `Data`, `Curriculum1`–`Curriculum4`, `Index`,
+`Styles`, `App`, and `appsscript.json`.
 
 > **The names matter.** The app loads its own pages by name, so `Index`, `Styles` and `App`
 > must be spelled exactly that way, with that capitalisation.
@@ -188,9 +198,10 @@ Open the web app URL. You will land in the app as an admin.
 
 ## Updating lessons later
 
-**Option A (browser):** a content change only touches `dist/Data.gs` — paste it over the
-existing `Data` file and save. `Code.gs` and the HTML files only change when the
-application itself changes. Then make a new version, below.
+**Option A (browser):** a content change only touches the `Curriculum*.gs` files (and
+`Data.gs` if lessons were added or removed). `Code.gs` and the HTML files change only when
+the application itself changes. Ask which files changed rather than re-pasting all ten.
+Then make a new version, below.
 
 **Option B (clasp):** edit the JSON under `curriculum/`, then:
 

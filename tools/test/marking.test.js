@@ -15,11 +15,12 @@ const vm = require('vm');
 const root = path.join(__dirname, '..', '..');
 const load = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 
-const sandbox = { console, JSON, Math, Number, String, Object, Array, isNaN, Date };
+const sandbox = { console, JSON, Math, Number, String, Object, Array, isNaN, isFinite, Date, Error };
+sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
 [
   'src/Config.gs',
-  'src/generated/CurriculumData.gs',
+  ...fs.readdirSync(path.join(root, 'src/generated')).filter((f) => f.endsWith('.gs')).map((f) => `src/generated/${f}`),
   'src/Marking.gs',
   'src/Content.gs',
   'src/Attainment.gs'
@@ -29,7 +30,7 @@ vm.createContext(sandbox);
 // so CONFIG and CURRICULUM have to be pulled out by evaluating an expression
 // inside the context rather than read off `sandbox` directly.
 const api = vm.runInContext(`({
-  CONFIG, CURRICULUM,
+  CONFIG, CURRICULUM: getCurriculum_(),
   markWorksheet_, markQuestion_,
   getLessonForStudent_, stripAnswerKey_, markWorksheet_
 })`, sandbox);
