@@ -1,0 +1,317 @@
+{
+  "id": "g6-main-w1-lab",
+  "number": 2,
+  "week": 1,
+  "track": "main",
+  "type": "lab",
+  "title": "Rule vs Learning - Hands-On Exploration (Lab)",
+  "summary": "Working unplugged at two stations, students run a fixed rule-card machine and a learn-from-examples card game, log the differences and design a test that would reveal which kind an unknown system is.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Explore a rule-based demo and a simple learning demo and log the differences you observe.",
+    "Devise a test that could tell whether a system follows rules or learns.",
+    "Predict what would break each system and check your prediction."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Today you get your hands on two machines - one that never changes and one that learns from examples. Watch closely: their differences will jump out."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can run the rule-card machine and the learn-from-examples game and record what each does.",
+        "I can log at least three differences I observed between them.",
+        "I can design a fair test that would reveal whether a system follows rules or learns."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "rule-card machine",
+          "definition": "A fixed stack of if-then cards that always behaves the same way."
+        },
+        {
+          "term": "example card",
+          "definition": "A labelled card the group learns a pattern from."
+        },
+        {
+          "term": "pattern",
+          "definition": "The rule-of-thumb your group builds from the example cards."
+        },
+        {
+          "term": "test input",
+          "definition": "A new input you give a system to see how it behaves."
+        },
+        {
+          "term": "predictable",
+          "definition": "Behaves the same way every time for the same input."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Two stations, two behaviours",
+      "body": [
+        "At Station A the [[rule-card machine]] never changes. Feed the same input twice and you get the same output twice. That is a rule-based system.",
+        "At Station B nobody gives you rules. You study [[example card]]s, build a [[pattern]], then classify new cards. That is a learning system in miniature."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Design a fair test",
+      "body": [
+        "To tell the two apart, give each a brand-new, unusual input. A rule-based machine reacts the same as always or breaks. A learning system tries to match the pattern it built.",
+        "The best detectives write down exactly what they will try and what each result would mean."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Run both stations, log the differences, then design a test that would reveal which kind an unknown machine is."
+      ],
+      "items": [
+        "Take a role: feeder, recorder or tester.",
+        "Run Station A with five inputs, including one strange one.",
+        "Run Station B: study examples, then sort five new cards.",
+        "Log at least three differences.",
+        "Write one test that would separate rules from learning."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which station was more predictable, and how did you know?",
+        "What made the learning game guess wrongly?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the clearest difference you saw today.",
+        "Write what you would test first on a mystery machine."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 1 - Lab - Worksheet | Rule vs Learning - Hands-On Exploration (Lab)",
+    "questions": [
+      {
+        "id": "g6-main-w1-lab-m-w1-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "title": "Station comparison",
+        "prompt": "Log what each station did for the same kind of input.",
+        "stem": "Station A always ___\nStation B changed when ___",
+        "lookFor": "Records behaviour actually observed, e.g. 'Station A always gave the same output; Station B's guesses changed as we saw more example cards.' Any accurate observed difference is valid.",
+        "evidenceType": "product",
+        "tierProbed": "emerging",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w1-lab-m-w1-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "title": "Design a test",
+        "prompt": "Write a test that would tell whether a system follows rules or learns, and what each result would mean.",
+        "lookFor": "Designs a test that would truly separate rules from learning: give the system a brand-new, unusual input; if it always reacts the same way it is rule-based, if it adapts using patterns it likely learned. Accept any test using a novel input to reveal adaptation; if the test does not separate the two, model one strong test and have the group revise.",
+        "evidenceType": "product",
+        "tierProbed": "emerging",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w1-lab-m-w1-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "title": "Difference log",
+        "prompt": "Record the differences you observed between the two stations. For each row record: What we tried | Station A did | Station B did.",
+        "lookFor": "Logs at least three accurate differences with detail rather than one repeated observation. Look for the unusual input at Station A being noted: it had no rule for it, so it stopped or gave a wrong answer.",
+        "evidenceType": "product",
+        "tierProbed": "emerging",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w1-lab-m-w1-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "title": "Exit ticket",
+        "prompt": "What one input would you give a mystery machine to find out if it learns? Why?",
+        "lookFor": "Chooses a brand-new or unusual input and says what each outcome would mean - the same reaction every time points to fixed rules, while an attempt to match a pattern points to learning. A named input with a reason beats a general statement about testing.",
+        "evidenceType": "product",
+        "tierProbed": "emerging",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w1-lab-m-w1-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "title": "Challenge (stretch)",
+        "prompt": "Add an unfair set of example cards to Station B and explain how it changed the pattern the group learned.",
+        "lookFor": "Adds a deliberately unfair set of example cards and explains how it changed the learned pattern. Strong responses reach the idea that quality and fairness of examples matter, not just how many there are - a few odd or wrong cards can make the guesses worse.",
+        "evidenceType": "product",
+        "tierProbed": "emerging",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "id": "g6-bridging-w6-lab",
+  "number": 12,
+  "week": 6,
+  "track": "bridging",
+  "type": "lab",
+  "title": "Trustworthy AI Helper - Verify, De-risk & Showcase (Part 2 Lab)",
+  "summary": "Students carry out their verification and risk check, refine and re-verify if a check fails, then argue with evidence that their helper can be trusted and reflect across the four skills.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Carry out the verification and risk check, refine the helper if a check fails, and confirm it can be trusted.",
+    "Present the Trustworthy AI Helper and reflect on the thinking used across all four skills."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Time to prove it. Today you verify your helper, reduce a risk, and show that it can be trusted then present it and reflect on everything you have learned."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can verify my helper's output and reduce a risk, refining if needed.",
+        "I can present my helper and reflect on my thinking."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Mitigation",
+          "definition": "A change that reduces a risk."
+        },
+        {
+          "term": "Trustworthy",
+          "definition": "Something you can rely on because you have checked it."
+        },
+        {
+          "term": "Evidence",
+          "definition": "The proof you give for a claim or a judgement."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Verify, then de-risk",
+      "body": [
+        "Verify a claim in your output against a trusted source. If it fails, refine and re-verify.",
+        "Run your risk check and apply a [[mitigation]] - then re-check that it worked."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "Verify, de-risk, then showcase and reflect."
+      ],
+      "items": [
+        "Verify your claim against a trusted source.",
+        "If it fails, refine and re-verify.",
+        "Run your risk check; apply one mitigation.",
+        "Confirm your helper can be trusted, with evidence.",
+        "Prepare a one-minute showcase.",
+        "Present and reflect."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "What did your verification find?",
+        "What risk did you reduce, and how?",
+        "Which of the four skills was hardest?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "My helper is trustworthy because ...",
+        "The check that mattered most was ...",
+        "The skill I found hardest was ... and I worked through it by ..."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 6 - Lab - Worksheet | Trustworthy AI Helper - Verify, De-risk & Showcase (Part 2 Lab)",
+    "questions": [
+      {
+        "id": "g6-bridging-w6-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Verify & de-risk: record your verification and your risk mitigation.",
+        "stem": "Claim verified: ... | source: ... | result: ...\nRisk reduced: ... | how: ... | re-check: ...",
+        "lookFor": "A trusted source, not a re-ask of the tool, and a mitigation that was actually applied and then re-checked (model: 'adventure is the most-picked genre' verified against the survey totals and it held; a duplicate entry was removed and the helper re-run, making the suggestion fairer). If a check failed, look for a refinement and a re-verify.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Trust argument: argue, with evidence, why your helper can be trusted.",
+        "stem": "My helper can be trusted because ...",
+        "lookFor": "Argues trust from the checks actually carried out and cites that evidence, rather than asserting trust on its own.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Trustworthy AI Helper Log - Part 2 Lab (verify, de-risk, reflect): record your checks and reflect across the four skills.",
+        "stem": "Skill used | What I did / found | How trustworthy? (evidence)",
+        "lookFor": "Completed verification and risk mitigation on the Log, with evidence, plus reflection across the four skills - data quality, prompt refinement, data influence, and verification/risk. Mastery reflection also names a next step; partial reflects on some skills only.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: state whether your helper can be trusted and give two reasons (one verification, one risk mitigation).",
+        "lookFor": "States a judgement on whether the helper can be trusted and gives two reasons, one verification and one risk mitigation.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): your helper is safe for one use but risky for another. Explain the difference and propose a rule for when it should and should not be used.",
+        "lookFor": "Weighs a fairness/safety trade-off: distinguishes the safe use from the risky one and proposes a workable rule for when the helper should and should not be used.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      }
+    ]
+  }
+}

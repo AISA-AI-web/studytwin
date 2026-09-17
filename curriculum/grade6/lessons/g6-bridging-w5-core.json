@@ -1,0 +1,298 @@
+{
+  "id": "g6-bridging-w5-core",
+  "number": 9,
+  "week": 5,
+  "track": "bridging",
+  "type": "core",
+  "title": "Trustworthy AI Helper - Design & Test the Data (Part 1 Core)",
+  "summary": "Students design a small AI helper from three parts - a task, a structured prompt and data - then run a clean-versus-noisy data test and explain how data quality changed the output.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Design a small prompt-driven AI helper: state the task, the structured prompt, and the data it will use.",
+    "Test how the quality of the data changes the helper's output, and explain the effect."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Over four lessons (two weeks, Core and Lab) you will build a **Trustworthy AI Helper** and prove it can be trusted.",
+        "Today you design it and test how the data quality changes its output."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can design a helper with a clear task, a structured prompt, and a data set.",
+        "I can test how data quality changes the output and explain why."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Helper",
+          "definition": "A small AI solution that completes a task using a prompt and data."
+        },
+        {
+          "term": "Structured prompt",
+          "definition": "A precise instruction: goal, details, and the form of the answer."
+        },
+        {
+          "term": "Data quality",
+          "definition": "How accurate, balanced, and complete the data is."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "A helper has three parts",
+      "body": [
+        "A [[helper]] is a small solution: a task, a structured prompt, and data.",
+        "Its output comes from the data and the prompt, so if the data is poor, the output is poor - even with a good prompt."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Test the data quality",
+      "body": [
+        "Feed your helper clean data, then noisy data, and compare the outputs.",
+        "This shows how much the [[data quality]] matters. Poorer data usually gives a poorer, less fair output."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "Design your helper, then test clean vs noisy data."
+      ],
+      "items": [
+        "Write the task.",
+        "Write a structured prompt.",
+        "Prepare the data.",
+        "Run on clean data; note the output.",
+        "Run on noisy data; note the output.",
+        "Explain the difference."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Why is a good prompt not enough on its own?",
+        "How did the noisy data change your output?",
+        "What will you build in the Lab?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "My helper's task is ...",
+        "Data quality mattered because ...",
+        "In the Lab I will build ..."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 5 - Core - Worksheet | Trustworthy AI Helper - Design & Test the Data (Part 1 Core)",
+    "instructions": "Name: __________________________________  Class: ________________  Date: ________________",
+    "questions": [
+      {
+        "id": "g6-bridging-w5-core-q1",
+        "type": "shortText",
+        "stem": "Task: ...\nStructured prompt (goal | details | form): ...\nData: ...",
+        "autoMarked": false,
+        "lookFor": "All three parts present and clear: a single clear task (e.g. 'recommend one library book'), a structured prompt that names the goal, the details and the form of the answer (e.g. 'Using the class survey, suggest one book most pupils would enjoy, in one sentence with a reason'), and named data (e.g. the balanced reading survey). Accept any clear task + structured prompt + named data. Mastery = clear task, structured prompt and named data; partial = two of three, or one unclear.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Write the task, a structured prompt, and the data."
+      },
+      {
+        "id": "g6-bridging-w5-core-q2",
+        "type": "shortText",
+        "stem": "Clean-data output: ...\nNoisy-data output: ...\nThe difference is because ...",
+        "autoMarked": false,
+        "lookFor": "A genuine clean-vs-noisy comparison with a stated data-quality-to-output effect, e.g. 'on clean data it suggested a popular adventure book; on noisy data (a duplicated entry) it over-suggested one title - poorer data gave a less fair output'. Look for the causal link back to the data, not just two different outputs. Watch for the misconception that a good prompt fixes bad data.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Record the output on clean data and on noisy data, and explain the difference."
+      },
+      {
+        "id": "g6-bridging-w5-core-q3",
+        "type": "shortText",
+        "stem": "Columns: Helper part | My design | Data-quality finding",
+        "autoMarked": false,
+        "lookFor": "A completed log covering each helper part (task, structured prompt, data) with a matching data-quality finding. This is the evidence for the formative check: designs a helper with a clear task, structured prompt and data, and explains how data quality changed the output. Record CU and SD as mastery/partial/not-yet.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Record your design and your data-quality test."
+      },
+      {
+        "id": "g6-bridging-w5-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "lookFor": "One sentence saying the output is produced from the data and the prompt, so poor data gives a poor output even when the prompt is good - the helper does not 'know' the answer. Reject answers implying a strong prompt can fix bad data.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Write one sentence: why does your helper need good data as well as a good prompt?"
+      },
+      {
+        "id": "g6-bridging-w5-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "lookFor": "A reasoned threshold (a proportion or a number of bad entries) tied to the helper's own data and task, with reasoning about when the pattern the helper relies on would be swamped or skewed - e.g. one duplicated entry in a small survey already tips the recommendation. Reasoning matters more than the number.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Predict how much noise your data can take before the output becomes untrustworthy, and explain your reasoning."
+      }
+    ]
+  }
+}

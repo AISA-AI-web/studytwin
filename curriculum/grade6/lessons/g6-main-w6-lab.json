@@ -1,0 +1,306 @@
+{
+  "id": "g6-main-w6-lab",
+  "number": 12,
+  "week": 6,
+  "track": "main",
+  "type": "lab",
+  "title": "Integrated Build-and-Check (Lab)",
+  "summary": "Students run a full build-and-check task across four stations, record accuracy and risk verdicts, decide whether to use the output, and diagnose their weakest strand.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Run a small integrated build-and-check task end-to-end and record the checks made.",
+    "Identify which strand most needs work before the signature solution.",
+    "Evaluate the final output for accuracy and risk before deciding to use it."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "This is your dress rehearsal. You will run a real task from start to finish - build it with a system and a prompt, then check it for accuracy and risk before deciding whether to use it. By the end you will know exactly which strand to sharpen before the signature solution."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can run a build-and-check task through all four strands end-to-end.",
+        "I can record the accuracy and risk checks I made.",
+        "I can name which strand I most need to improve."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Build-and-check",
+          "definition": "Producing an AI solution and then testing it before use."
+        },
+        {
+          "term": "Accuracy verdict",
+          "definition": "Whether the output is correct, incorrect, or unclear."
+        },
+        {
+          "term": "Risk verdict",
+          "definition": "How risky the output is and what would reduce it."
+        },
+        {
+          "term": "Mitigation",
+          "definition": "An action that reduces a risk."
+        },
+        {
+          "term": "Weakest link",
+          "definition": "The strand most likely to fail under pressure."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Build, then check",
+      "body": [
+        "Building means choosing a suitable system and designing a clear [[prompt]] to reach a useful output.",
+        "Checking means triaging that output for accuracy and running a risk assessment before you decide to use it. Building without checking just produces confident mistakes."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Decide and diagnose",
+      "body": [
+        "Your final call is **use**, **do not use**, or **use-with-changes** - and you must justify it with your two verdicts.",
+        "Then diagnose your [[weakest link]]: the strand where your evidence was thinnest. That is your focus before the signature solution."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Run the four stations end-to-end. Build with a system and prompt, check for accuracy and risk, decide whether to use the output, and diagnose your weakest strand."
+      ],
+      "items": [
+        "Name the system type and why it suits the task.",
+        "Design a clear, specific prompt.",
+        "Triage the curated output for accuracy.",
+        "Run a risk assessment and choose a mitigation.",
+        "Decide use / do not use / use-with-changes and diagnose your weakest strand."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Did your accuracy verdict or your risk verdict decide your use decision?",
+        "Which strand was your weakest link, and how will you strengthen it?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write your focus strand and one action to improve it before the signature solution.",
+        "Explain why building without checking is risky."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 6 - Lab - Worksheet | Integrated Build-and-Check (Lab)",
+    "questions": [
+      {
+        "id": "g6-main-w6-lab-q1",
+        "type": "shortText",
+        "prompt": "Record your evidence at each of the four stations.",
+        "stem": "System type + why:\nPrompt:\nAccuracy verdict + reason:\nRisk verdict + mitigation:",
+        "lookFor": "System choice justified by the task (e.g. a learning system that finds language patterns, suited because summarising needs pattern recognition rather than fixed rules), a specific prompt, an accuracy verdict with a reason that can be checked against the source, and a risk verdict whose mitigation matches the risk (e.g. main risk is using an unverified detail; mitigation is verify before use).",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-lab-q2",
+        "type": "shortText",
+        "prompt": "Make your use decision and name your weakest strand with a reason.",
+        "stem": "Decision: use / do not use / use-with-changes because ...\nWeakest strand:\nAction to improve:",
+        "lookFor": "A justified decision that treats use-with-changes as a real third option rather than a yes/no, plus an honest and specific weakest-strand diagnosis justified by where the evidence was thinnest, with one concrete improvement action.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-lab-q3",
+        "type": "shortText",
+        "prompt": "Complete one row per station and finish with your decision.",
+        "stem": "Station / strand | Evidence produced | Verdict | Note for signature solution",
+        "lookFor": "All four stations completed with recorded evidence and a verdict for each, finishing with the use decision. Emerging completes all four strands with recorded evidence; approaching completes most stations with some evidence.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-lab-q4",
+        "type": "shortText",
+        "prompt": "State your use decision with a reason, and name the strand you most need to improve before the signature solution.",
+        "stem": "",
+        "lookFor": "The decision is tied back to the accuracy and risk verdicts rather than to how the output looks, and the named strand is specific enough to act on before the signature solution.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-lab-q5",
+        "type": "shortText",
+        "prompt": "Rewrite your prompt so the output would earn a lower risk verdict, and predict how the use decision would change.",
+        "stem": "",
+        "lookFor": "Rewritten prompt visibly reduces the risk named at station 4 and the prediction explains the shift in the use decision (e.g. from use-with-changes to use) - the stretch expectation, which may also include a written justification of the use-with-changes option.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

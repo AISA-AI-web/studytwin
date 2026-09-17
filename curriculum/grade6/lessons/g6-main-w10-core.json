@@ -1,0 +1,308 @@
+{
+  "id": "g6-main-w10-core",
+  "number": 19,
+  "week": 10,
+  "track": "main",
+  "type": "core",
+  "title": "Showcase, Assessment & Reflection",
+  "summary": "Learners present their finished solution with two justified choices, complete a short Term-1 assessment sampling all four strands, and set a goal for next term.",
+  "duration": "1 x 45-minute period",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Present the finished solution and explain at least two design/evaluation choices.",
+    "Demonstrate the term's key outcomes in a short assessment task.",
+    "State one thing learned and set one goal for next term."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "This is your moment to show what you built and what you learned. You will present your finished solution, explain the choices behind it, complete a short assessment, and set a goal to grow even more next term."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can present my finished solution and explain at least two design or evaluation choices.",
+        "I can show the term's key outcomes in a short assessment task.",
+        "I can state one thing I learned and set one goal for next term."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Pitch",
+          "definition": "A short, clear explanation of your solution and its value."
+        },
+        {
+          "term": "Justify",
+          "definition": "To give the reason and evidence behind a choice."
+        },
+        {
+          "term": "Assessment",
+          "definition": "A task that shows what you have learned across the strands."
+        },
+        {
+          "term": "Reflection",
+          "definition": "Thinking about what worked and what you would do next."
+        },
+        {
+          "term": "Goal",
+          "definition": "A clear target for your next step of learning."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "A pitch that tells the truth",
+      "body": [
+        "A strong [[pitch]] names your user, the problem, how your solution works, and the evidence that it is accurate, useful and safe.",
+        "Explain two choices by giving reasons, not just descriptions. Be honest about one limit. Honesty makes your work more trustworthy, not weaker."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Show the whole term, then look ahead",
+      "body": [
+        "The short [[assessment]] lets you show all four strands: understanding, building, evaluating and using responsibly, and wider effects.",
+        "Finish by naming one thing you learned and setting a [[goal]] for next term, aiming toward the Proficient tier."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Complete the short assessment, then present your solution and justify two choices before setting your next-term goal."
+      ],
+      "items": [
+        "Set out your evidence from the term.",
+        "Complete the short assessment task on your own.",
+        "Prepare a 60-second pitch with two justified choices.",
+        "Present to your group and answer one 'why' question.",
+        "Write one thing learned and one Term-2 goal."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which of your two choices are you proudest of, and why?",
+        "What limit of your solution is important to be honest about?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write one thing you learned this term.",
+        "Set one goal for Term 2 that moves you toward Proficient."
+      ]
+    }
+  ],
+  "worksheet": {
+    "questions": [
+      {
+        "id": "g6-main-w10-core-q1",
+        "type": "shortText",
+        "prompt": "Write two design or evaluation choices and give a reason and evidence for each.",
+        "title": "My two justified choices",
+        "stem": "Choice 1: ... because ... evidence ...\nChoice 2: ... because ... evidence ...",
+        "autoMarked": false,
+        "lookFor": "Explains two design/evaluation choices with reasons and evidence. For a design choice, look for a reason, not just a description (model: 'I used a rule-based check because recycling categories have fixed correct answers'). For an evaluation choice, it should link to accuracy or fairness (model: 'I tested with six known-answer cases because one lucky example is not enough evidence').",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-core-q2",
+        "type": "shortText",
+        "prompt": "Answer the four short prompts, one for each strand, at Emerging level.",
+        "title": "Term-1 assessment task",
+        "stem": "Concepts: ...\nDesign & build: ...\nEvaluate & use: ...\nWider effects: ...",
+        "autoMarked": false,
+        "lookFor": "Shows each strand at Emerging in the task. Approaching shows most strands at Emerging; not yet means several strands are not yet shown.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-core-q3",
+        "type": "shortText",
+        "prompt": "For each strand, note your evidence and your confidence.",
+        "title": "Strand evidence tracker",
+        "stem": "Strand | My evidence | Confidence | Next step",
+        "autoMarked": false,
+        "lookFor": "Evidence is the assessed task plus the reflection, with results reported per strand. Feedback flags each student's next tier target (to Proficient) for Term 2.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-core-q4",
+        "type": "shortText",
+        "prompt": "One thing I learned this term is ... and my goal for next term is ...",
+        "title": "Exit ticket",
+        "autoMarked": false,
+        "lookFor": "States one learning and one clear next-term goal. Goal should aim toward Proficient (model: 'I learned to re-test after changes; my goal is to build a solution with balanced data next term').",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-core-q5",
+        "type": "shortText",
+        "prompt": "Explain a trade-off you made between two choices and why it was worth it.",
+        "title": "Challenge (stretch)",
+        "autoMarked": false,
+        "lookFor": "Stretch / next tier: learners explain a trade-off between two choices, reaching Extended abstract thinking.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

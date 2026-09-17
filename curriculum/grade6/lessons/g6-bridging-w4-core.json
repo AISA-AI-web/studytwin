@@ -1,0 +1,196 @@
+{
+  "id": "g6-bridging-w4-core",
+  "number": 7,
+  "week": 4,
+  "track": "bridging",
+  "type": "core",
+  "title": "Misinformation Risks and Verification",
+  "summary": "Students learn why fluent AI text is not the same as true text, then name the exact claim at risk in a curated output and pair it with a concrete check against a trusted source.",
+  "duration": "45 minutes",
+  "strands": [
+    "GE"
+  ],
+  "objectives": [
+    "Explain how an AI output could spread misinformation.",
+    "Propose at least one concrete verification strategy and explain why it helps."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Misinformation Risks and Verification",
+      "body": [
+        "An AI can write an answer that sounds completely sure and is completely wrong. It is built to sound right, not to be right. Today you learn to spot the exact risk in an output and pair it with a check that makes it trustworthy before you ever share it."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can explain a specific way an AI output could be wrong and spread misinformation.",
+        "I can propose a concrete verification step and say why it makes the claim more trustworthy.",
+        "I can move from 'it might be wrong' to naming the exact risk and the exact check."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "misinformation",
+          "definition": "False information that spreads, whether or not anyone meant to deceive."
+        },
+        {
+          "term": "claim",
+          "definition": "A specific statement that could be true or false, like a number or a date."
+        },
+        {
+          "term": "verify",
+          "definition": "To confirm a claim against a trusted, independent source."
+        },
+        {
+          "term": "trusted source",
+          "definition": "A source kept accurate by people who check facts, like an official website."
+        },
+        {
+          "term": "layered check",
+          "definition": "Verifying with more than one independent source for extra reliability."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Why fluent is not the same as true",
+      "body": [
+        "An AI language system predicts the next likely word, over and over, to build fluent text. It is optimised to sound plausible, not to check facts, so it can state a wrong number as confidently as a right one.",
+        "That is what makes AI output a [[misinformation]] risk. The output gives no signal for which parts are reliable, so a made-up statistic can look exactly like a real one and spread when people repeat it."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Name the risk, then check it",
+      "body": [
+        "Good evaluation is specific. Instead of 'this might be wrong', say exactly what is at risk: the number, the name, the date, or the source.",
+        "Then pair that risk with a concrete check against a [[trusted source]] that is independent of the AI. If you can, layer two sources - one source can be wrong too."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "You will study three curated AI outputs. For each, name the exact risk and propose a concrete check. Your teacher will verify one live against a trusted source."
+      ],
+      "items": [
+        "Read each output and underline the exact claim you doubt.",
+        "Name the risk type: number, date, name, or source.",
+        "Choose a trusted source that could settle it.",
+        "Write the check and why it helps.",
+        "Watch one live verification and record the verdict."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which output was the hardest to spot a risk in, and why?",
+        "Why is verifying before sharing part of using AI responsibly?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the strongest risk-and-verify pair you made today.",
+        "Note one habit you will use before sharing any AI answer."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Misinformation Risks and Verification",
+    "questions": [
+      {
+        "id": "g6-bridging-w4-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "For each curated output, underline the doubtful claim and name the risk type and why it is risky.",
+        "stem": "The risky claim is ___\nThe risk type is ___\nIt is risky because ___",
+        "lookFor": "Names the exact claim at risk and a risk type - number, date, name or source - with a reason. Model response: the height figure for the landmark could be invented, because the AI predicts plausible numbers and may not have the real one. Reward a named risky element, not a general 'it might be wrong'.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "For one output, write a concrete verification strategy naming a trusted source and explaining why it reduces the risk.",
+        "stem": "I would check it by ___\nusing the trusted source ___\nThis helps because ___",
+        "lookFor": "The check must target the specific claim and name a trusted source. Model response: check the height on the landmark's official website or a reputable encyclopaedia, because those are maintained by people who verify facts. Look for the independence and reliability reasoning - an official source is independent of the AI and is kept accurate, so agreement makes the claim far more trustworthy.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-core-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Record the risk and matching check for each output you evaluated.",
+        "stem": "Columns: Output | Risk (specific claim) | Verification step | Trusted source | Why it helps",
+        "lookFor": "Mastery: each row pairs the exact claim at risk with a concrete check against a named trusted source and a clear reason it reduces the risk. Partial: a risk is identified but stays general, or the source is vague and the reason thin. Not yet: no workable check, or a check that would not address the risk.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Name one misinformation risk in an AI output and propose one concrete verification strategy, with a reason it helps.",
+        "lookFor": "Explains a plausible misinformation risk and proposes a workable verification strategy with a reason. Feedback move: push 'it could be wrong' toward a specific risk plus a specific check; extend confident students to layered verification.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Design a layered verification strategy using two independent trusted sources for one claim, and explain why two sources are more reliable than one.",
+        "lookFor": "Stretch target from the pack: designs a layered check using two independent trusted sources and explains why two beats one - a single source can also be wrong or out of date, and two genuinely independent sources rarely share the same error.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      }
+    ]
+  }
+}

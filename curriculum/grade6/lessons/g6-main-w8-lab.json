@@ -1,0 +1,313 @@
+{
+  "id": "g6-main-w8-lab",
+  "number": 16,
+  "week": 8,
+  "track": "main",
+  "type": "lab",
+  "title": "Extended Build and Evaluation (Lab)",
+  "summary": "Students complete their solution, run it across a six-input curated test set to report an accuracy count, handle a failure gracefully with their fallback, and finish with a three-question risk check.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Complete a working solution and evaluate its outputs across several test inputs.",
+    "Handle an incorrect output gracefully and document the fix.",
+    "Run a basic risk check and confirm no personal data is used."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "This is the finish line for your signature solution - but finishing is not just getting one right answer. Today you prove it works by running it across several test inputs and counting how many it gets right. When one fails, your fallback catches it gracefully and you document the fix. Finally you run a basic risk check: is it accurate, is it clear, and is any prompt free of personal data? A solution you can measure and defend is one people can trust."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can complete a working solution that follows my plan.",
+        "I can evaluate its outputs across several test inputs and measure accuracy.",
+        "I can handle an incorrect output gracefully using my fallback.",
+        "I can run a basic risk check and document the fix I made."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Test set",
+          "definition": "A small, curated group of inputs, including edge cases, used to measure how a solution performs."
+        },
+        {
+          "term": "Accuracy count",
+          "definition": "The number of correct outputs out of the total tested, such as 5 out of 6."
+        },
+        {
+          "term": "Graceful handling",
+          "definition": "Using the fallback so an incorrect output is caught safely, not presented as final."
+        },
+        {
+          "term": "Documented fix",
+          "definition": "A written record of the change made to correct a failure and its effect."
+        },
+        {
+          "term": "Risk check",
+          "definition": "A quick review of accuracy, clarity, and data safety before a solution is trusted."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Prove it across several inputs",
+      "body": [
+        "One correct answer is not proof. Run your finished solution across a **test set** of several curated inputs and count how many outputs are correct.",
+        "Report accuracy as a simple count, like 5 out of 6, so your claim is honest and checkable."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Handle failures and check the risks",
+      "body": [
+        "When an output is wrong, let your fallback catch it and keep a person in the loop, then document the fix and its effect.",
+        "Finish with a basic risk check: accurate enough? clear enough? any personal data used? The data answer must always be no, because we use only curated inputs."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "You will complete your solution, evaluate it across six curated inputs, handle any failure with your fallback, document the fix, and run a basic risk check. The teacher runs the AI on the board; you do not log in."
+      ],
+      "items": [
+        "Confirm your build follows the plan and the fallback is wired in.",
+        "Define what counts as a correct output.",
+        "Run all six curated inputs and record each result.",
+        "Compute accuracy and handle any failure with your fallback, documenting the fix.",
+        "Complete the three-question risk check and note the biggest remaining risk."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Why is an accuracy count across several inputs fairer than judging one output?",
+        "What is the biggest remaining risk in your solution, and who should check it?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write your accuracy result and the fix you documented.",
+        "Write one thing your risk check made you notice."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 8 - Lab - Worksheet | Extended Build and Evaluation (Lab)",
+    "questions": [
+      {
+        "id": "g6-main-w8-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Run and count: record the result of each of the six curated test inputs, mark correct or not, and compute your accuracy count.",
+        "stem": "Input ___ output ___ is ___ (correct / not).\nMy accuracy is ___ out of 6.",
+        "lookFor": "Accuracy is stated as a count across the whole test set (for example 5 out of 6), judged against a definition of a correct output agreed before testing - not a claim based on one lucky case.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Document the fix and risk check: record how your fallback handled a failure, the fix you made, and your three-question risk check.",
+        "stem": "The fallback handled ___ by ___.\nMy fix was ___ and the result was ___.\nRisk check - accurate? ___ clear? ___ personal data used? no.",
+        "lookFor": "Graceful handling means the fallback caught the failure and kept a person in the loop rather than the wrong output being deleted or presented as final; the fix is traceable with its effect recorded; all three risk questions are answered and the personal-data answer is no because every input is curated.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Test-set evaluation and risk record: fill one row per test input with its result, then complete the risk-check summary below. Use the columns Input (curated), Output, Correct? (Y/N), Note / fix.",
+        "lookFor": "A completed solution that follows the plan with the fallback wired in, evaluated across all six inputs with an accuracy count, and a risk-check summary covering accuracy, clarity and data safety.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: write your accuracy count and confirm your risk check found no personal data.",
+        "lookFor": "States accuracy as correct out of total and confirms explicitly that no personal or identifying data was used, linking that to the inputs being curated.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): add a seventh harder edge case, predict the result, test it, and say whether your solution generalised and why.",
+        "lookFor": "Makes a prediction before testing, compares it with the actual result, and reasons about whether the solution handles inputs it has not seen - naming rare unseen edge cases as a remaining risk.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      }
+    ]
+  }
+}

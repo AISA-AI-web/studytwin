@@ -1,0 +1,306 @@
+{
+  "id": "g6-main-w9-core",
+  "number": 17,
+  "week": 9,
+  "track": "main",
+  "type": "core",
+  "title": "Signature Solution - Refining & Finishing",
+  "summary": "Students judge their signature solution against accuracy, usefulness and risk, then make one improvement and prove with re-testing that it helped.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Finish the solution so it meets the agreed success criteria.",
+    "Evaluate it for accuracy, usefulness and risk.",
+    "Explain one change that improved it."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Overview",
+      "body": [
+        "You are almost there. This week you become the judge of your own work, checking it for accuracy, usefulness and risk, then making one smart change that you can prove made it better."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can finish my solution so it meets the success criteria our class agreed on.",
+        "I can judge my solution for accuracy, usefulness and risk using the rubric.",
+        "I can explain one change I made and say why it made the solution better."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Refine",
+          "definition": "To improve something on purpose by comparing it to your goals."
+        },
+        {
+          "term": "Accuracy",
+          "definition": "How often the system gives the right or sensible answer."
+        },
+        {
+          "term": "Usefulness",
+          "definition": "How much the solution really helps the user do their task."
+        },
+        {
+          "term": "Risk",
+          "definition": "What could go wrong or who could be harmed, including privacy."
+        },
+        {
+          "term": "Evidence",
+          "definition": "Proof from testing, not just an opinion."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Judging your solution three ways",
+      "body": [
+        "A good builder does not just ask 'do I like it?'. You measure your work against the criteria the class agreed.",
+        "**Accuracy**: test with examples where you know the right answer. **Usefulness**: check it helps your real user. **Risk**: ask what could go wrong and whether any private data is exposed."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "One change, proven",
+      "body": [
+        "You do not need many changes. Choose the one improvement that matters most to your user.",
+        "Make the change, then re-test. If accuracy went up and nothing else broke, you have evidence it worked. Write it in your refinement note."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Work with your partner. Judge your solution against the rubric, choose one improvement, make it, and prove it helped."
+      ],
+      "items": [
+        "Read the three lenses on the criteria card.",
+        "Run one accuracy test with known answers and record the score.",
+        "Check usefulness against your real user's task.",
+        "Do a basic risk check for harm, fairness and privacy.",
+        "Pick one improvement, make it, and re-test.",
+        "Swap for 'two stars and a wish' feedback."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which lens was hardest to judge, and why?",
+        "How did re-testing change your confidence in your solution?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the one change you made and the evidence it helped.",
+        "Name one risk you are now sure your solution avoids."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 9 - Core - Worksheet | Signature Solution - Refining & Finishing",
+    "questions": [
+      {
+        "id": "g6-main-w9-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Three-lens evaluation: judge your solution on each lens. Give a score or a yes/no and the evidence behind it.",
+        "stem": "Accuracy: I tested ___ and got ___\nUsefulness: it helps my user because ___\nRisk: I checked ___ so ___",
+        "lookFor": "Judges all three lenses with evidence from testing: known-answer test cases rather than opinion for accuracy, a usefulness judgement linked to the real user's task, and a harm, fairness or privacy risk that was actually checked.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "One improvement, proven: describe the single change you made and show before and after evidence.",
+        "stem": "The change I made was ___\nBefore: ___ After: ___\nNothing else broke because ___",
+        "lookFor": "One targeted change (a fixed or added rule, or cleaner example data) with before/after evidence, and a re-test confirming it helped without breaking another case.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-core-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Refinement log: record each check, your judgement and the evidence.",
+        "stem": "Lens | Judgement | Evidence | Action taken",
+        "lookFor": "All three lenses logged, each with a judgement, the evidence it came from, and the action taken; evidence traces back to testing rather than opinion.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: what one change improved your solution most, and how do you know?",
+        "lookFor": "Meets the Emerging criteria: names an accuracy, usefulness or risk judgement and one improvement.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): compare two possible improvements and justify, with evidence, why you chose one over the other.",
+        "lookFor": "Justifies why the chosen improvement beats a second candidate improvement, using evidence.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

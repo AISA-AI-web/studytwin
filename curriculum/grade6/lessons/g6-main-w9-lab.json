@@ -1,0 +1,306 @@
+{
+  "id": "g6-main-w9-lab",
+  "number": 18,
+  "week": 9,
+  "track": "main",
+  "type": "lab",
+  "title": "Final Iteration and Risk Review (Lab)",
+  "summary": "Students make their final improvement, sort risks on a likelihood-by-seriousness matrix, confirm the solution is safe and fair, and freeze the evaluated version for showcase.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Run a final evaluation across accuracy, usefulness and risk, and act on one improvement.",
+    "Complete a risk review and confirm the solution is safe and fair to use.",
+    "Document the final iteration with before-and-after evidence."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Overview",
+      "body": [
+        "Time for the final polish. In this Lab you make your last improvement, then act like a safety checker, running a full risk review so you can promise your solution is safe and fair before showcase."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can run a final evaluation across accuracy, usefulness and risk and act on one improvement.",
+        "I can complete a risk review and confirm my solution is safe and fair.",
+        "I can record my final iteration with clear before-and-after evidence."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Iteration",
+          "definition": "One more round of improving and re-testing."
+        },
+        {
+          "term": "Likelihood",
+          "definition": "How likely a risk is to actually happen."
+        },
+        {
+          "term": "Seriousness",
+          "definition": "How much harm a risk would cause if it happened."
+        },
+        {
+          "term": "Risk matrix",
+          "definition": "A grid that sorts risks by likelihood and seriousness."
+        },
+        {
+          "term": "Freeze",
+          "definition": "To stop changing the version you have evaluated."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Sorting risks the smart way",
+      "body": [
+        "Not every risk is equal. A risk that is both likely and serious needs action now. A rare but very serious risk still needs a plan.",
+        "Place each risk on the [[risk matrix]], then decide: fix it now, or watch it. Always confirm no personal data is anywhere in your solution."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Finish, then freeze",
+      "body": [
+        "Make your final planned change and re-test with known answers. Record before and after so others can trust your evidence.",
+        "Then **freeze** the version. The solution you show at the carousel must be the exact one you tested and judged safe."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "With your partner, make the final change, re-test, run the full risk review, and freeze your solution ready for showcase."
+      ],
+      "items": [
+        "Set your Lab goal from the refinement log.",
+        "Make the final planned improvement.",
+        "Re-test with at least five known-answer cases and record before and after.",
+        "List risks and place each on the matrix.",
+        "Decide actions and confirm no personal data is used.",
+        "Write a safe-and-fair statement and freeze the version."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which risk surprised you most when you placed it on the matrix?",
+        "How did freezing change how carefully you tested?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write your safe-and-fair statement in one sentence.",
+        "Name the risk you are most confident you have managed."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 9 - Lab - Worksheet | Final Iteration and Risk Review (Lab)",
+    "questions": [
+      {
+        "id": "g6-main-w9-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Risk matrix: list three risks and place each by likelihood and seriousness, then decide an action.",
+        "stem": "Risk 1: ___ likelihood ___ seriousness ___ action ___\nRisk 2: ___\nRisk 3: ___",
+        "lookFor": "Places risks by likelihood and seriousness and decides actions; look for both likelihood and seriousness reasoning, and note that a rare risk can still be serious enough to need a plan.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Final iteration evidence: record your last change and the before-and-after test results.",
+        "stem": "Final change: ___\nBefore: ___ After: ___\nSafe-and-fair statement: ___",
+        "lookFor": "The final change is shown with before/after numbers from re-testing, and the safe-and-fair statement covers both privacy and fairness.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Final iteration log: log each risk, its matrix position, the action, and confirm privacy.",
+        "stem": "Risk | Likelihood | Seriousness | Action / privacy check",
+        "lookFor": "Each risk carries a matrix position and an action, and the log confirms no personal data is used anywhere in the solution.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: write your safe-and-fair statement and one risk you managed with evidence.",
+        "lookFor": "Meets the Emerging criteria: confirms no personal data is used and that the solution is fair, and names one risk acted on with evidence.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w9-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): redesign one part of your solution so a high risk moves to a lower box on the matrix, and justify the change.",
+        "lookFor": "Proposes a design change that would move a risk to a lower box on the matrix, and justifies it.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

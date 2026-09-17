@@ -1,0 +1,200 @@
+{
+  "id": "g6-main-w2-core",
+  "number": 3,
+  "week": 2,
+  "track": "main",
+  "type": "core",
+  "title": "Rules vs Learning - How Each System Works",
+  "summary": "Two features - where the logic comes from and how a system handles something new - let you classify any everyday system as rule-based or learning.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU"
+  ],
+  "objectives": [
+    "Distinguish a rule-based system from a learning system using two clear features.",
+    "Give one everyday example of each and explain the difference.",
+    "Use the terms rule-based, learning, data and model accurately."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Two machines can do the same job in totally different ways. Today you learn the two features that reveal which is which - and you will never be fooled by a shiny screen again."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "rule-based system",
+          "definition": "Logic written by a person as fixed steps."
+        },
+        {
+          "term": "learning system",
+          "definition": "A system that builds a model from data instead of fixed rules."
+        },
+        {
+          "term": "data",
+          "definition": "The labelled examples a learning system is shown."
+        },
+        {
+          "term": "model",
+          "definition": "The pattern a learning system builds from its data."
+        },
+        {
+          "term": "feature",
+          "definition": "A true characteristic you use to classify a system, not a surface look."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Two features that decide it",
+      "body": [
+        "**Feature one** - where does the logic come from? In a [[rule-based system]] a person writes it. In a [[learning system]] it comes from data.",
+        "**Feature two** - what happens with something new? A rule-based system only handles cases its rules cover. A learning system can handle new cases that look like its examples."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Data is not the model",
+      "body": [
+        "Be careful with words. The [[data]] is the examples. The [[model]] is the pattern built from them. Change the data and you can change the model.",
+        "A learning system does not understand meaning - it matches patterns. Always check its answers."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "Build the feature chart, then use it to classify everyday systems you meet in the UAE."
+      ],
+      "items": [
+        "Copy the two-column feature chart.",
+        "Add an example to each row.",
+        "Classify two everyday systems.",
+        "Underline the feature that decided each answer.",
+        "Write two sentences using data and model correctly."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which feature is the strongest proof of a learning system?",
+        "Why is 'it looks modern' not a good reason?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the two features you now use to classify systems.",
+        "Write one system you are still unsure about and why."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 2 Core worksheet - Rules vs Learning - How Each System Works",
+    "questions": [
+      {
+        "id": "g6-main-w2-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Feature chart. Complete the chart with a feature and an example for each system type.",
+        "stem": "Rule-based: logic comes from ___\nLearning: logic comes from ___",
+        "lookFor": "Both rows name a non-surface feature - that in a rule-based system a person writes the logic, and in a learning system the logic comes from data - and each row carries an example. Watch for surface traits such as 'it looks modern' standing in for a feature.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Classify and justify. Classify two systems and underline the deciding feature.",
+        "stem": "This is a ___ system because ___",
+        "lookFor": "Classifies both examples correctly with a feature reason: a metro ticket gate is rule-based because a person set fixed rules, and a voice assistant that improves with use is learning because it builds a model from data and handles new phrases. Approaching: one classified correctly, or a surface trait mixed in.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-core-q3",
+        "type": "fillBlank",
+        "autoMarked": false,
+        "prompt": "Classification record. Record each system, your classification, and the deciding feature.",
+        "blanks": [
+          "System",
+          "Rule-based or learning",
+          "Deciding feature"
+        ],
+        "lookFor": "Each row pairs a classification with a deciding feature rather than a surface look. The deciding-feature column should say where the logic comes from or how the system handles a new case.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket. Classify two systems your teacher names and give the feature that separates them.",
+        "lookFor": "Secure: classifies both correctly and names a distinguishing feature that is not a surface trait. Sort exit slips secure / partial / not-yet; if under 70 percent distinguish correctly, re-teach with the two-column feature chart.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch). Find a system that is genuinely hard to classify and argue both sides using features.",
+        "lookFor": "Argues both sides using the two features - where the logic comes from, and how the system handles a new case - rather than surface traits. This is the stretch task for students who already classify securely.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "proficient",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

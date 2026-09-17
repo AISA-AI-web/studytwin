@@ -1,0 +1,314 @@
+{
+  "id": "g6-main-w8-core",
+  "number": 15,
+  "week": 8,
+  "track": "main",
+  "type": "core",
+  "title": "Signature Solution - Building",
+  "summary": "Students build their signature solution by following their approved plan, evaluate and flag every output, and log one evidence-based improvement as evaluate -> change -> result.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Build the solution by following the plan and prompt structure.",
+    "Evaluate outputs for accuracy and flag any that are incorrect or unclear.",
+    "Make at least one improvement based on an output check.",
+    "Keep personal and identifying data out of every prompt and keep a person in the loop for anything flagged."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Today you build for real. You will follow your approved plan, run your inputs, and look hard at every output - not just the ones that look right. When you find an answer that is wrong or unclear, you flag it, change one thing, and watch what happens. This is how real systems get better: one careful change, one honest result. Keep every prompt free of personal data, and keep a person in the loop for anything you flag."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can build my solution by following my approved plan.",
+        "I can evaluate outputs and flag ones that are wrong or unclear.",
+        "I can make one improvement and explain what changed and why.",
+        "I can keep personal data out of every prompt."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Build",
+          "definition": "Turning your approved plan into a working solution by following it step by step."
+        },
+        {
+          "term": "Evaluate",
+          "definition": "Judging an output against your check to decide if it is correct and clear."
+        },
+        {
+          "term": "Flag",
+          "definition": "Marking an output that is wrong or unclear so it gets attention and a fix."
+        },
+        {
+          "term": "Improvement",
+          "definition": "One deliberate change made in response to an evaluation."
+        },
+        {
+          "term": "Iteration loop",
+          "definition": "The evaluate -> change -> result cycle that makes a solution better over time."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Follow the plan, do not improvise",
+      "body": [
+        "Building means running your approved prompt structure on defined inputs, not inventing new prompts on the spot.",
+        "Record each output before you change anything. That way you can see what your solution really does."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Evaluate, flag, improve",
+      "body": [
+        "Evaluate each output against your check: correct, unclear, or wrong. Flag anything that fails.",
+        "Then make one improvement and re-run. Record it as **evaluate -> change -> result** so the cause of the improvement is clear."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "You will build your solution from your approved plan, evaluate the outputs, flag errors, and log one improvement. The teacher runs the AI on the board; you do not log in."
+      ],
+      "items": [
+        "Restate your goal and check on your log.",
+        "Run your prompt structure on defined curated inputs and record each output.",
+        "Evaluate each output and flag the wrong or unclear ones.",
+        "Make one improvement in response to a flag and re-run it.",
+        "Log the loop as evaluate -> change -> result."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "How did you tell a subtly wrong output from a correct one?",
+        "Why is one change at a time better than many at once?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the one improvement you made and why.",
+        "Write what you would evaluate more carefully next time."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 8 - Core - Worksheet | Signature Solution - Building",
+    "questions": [
+      {
+        "id": "g6-main-w8-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Flag the errors: read the five curated outputs provided. Mark each correct, unclear, or wrong and flag the ones that fail the check.",
+        "stem": "Output ___ is ___ (correct / unclear / wrong) because ___.",
+        "lookFor": "Judges each output against the known-correct reference rather than a hunch, catches both seeded errors among the correct-looking rows, and gives a reason tied to the check (for example, 'other' for a tablet charger is wrong because it should be 'devices').",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Log one improvement: choose one flagged output and record your improvement using the loop frame.",
+        "stem": "Evaluate: ___.\nChange: ___.\nResult: ___.",
+        "lookFor": "One change only, made in response to a specific flag, with the observed result recorded - for example 'Evaluate: charger mislabelled. Change: added a devices examples rule. Result: charger now devices, accuracy up.' Cause and effect should be visible in the loop.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-core-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Build and improvement log: record each output, your judgement, whether you flagged it, and the improvement you made. Use the columns Input (curated), Output, Judgement, Improvement made.",
+        "lookFor": "The build follows the approved plan and prompt structure with defined, curated inputs rather than improvised prompts; every row is evaluated and flagged rather than only the obvious ones; all inputs are free of personal or identifying data.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: write your one improvement as evaluate -> change -> result.",
+        "lookFor": "All three parts of the loop are present and connected, showing the change was driven by an evaluation and that the result was actually observed, not assumed.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w8-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): make a second improvement and use your log to say which change raised accuracy more, with evidence.",
+        "lookFor": "Compares the two changes using evidence from the log rather than impression, and recognises that one change at a time is what makes the comparison possible.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      }
+    ]
+  }
+}

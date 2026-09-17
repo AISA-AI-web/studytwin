@@ -1,0 +1,197 @@
+{
+  "id": "g6-main-w5-lab",
+  "number": 10,
+  "week": 5,
+  "track": "main",
+  "type": "lab",
+  "title": "Class AI Risk Audit (Lab)",
+  "summary": "Groups act as a class safety board, auditing an anonymised AI use-log against the rules, ranking the gaps on a likelihood-impact matrix, and proposing one rule to fix the top-priority risk.",
+  "duration": "45 minutes",
+  "strands": [
+    "GE"
+  ],
+  "objectives": [
+    "Audit the class's own AI use against a responsible-use rule set and propose one improvement.",
+    "Rank risks by likelihood and impact on a simple risk matrix and choose which to mitigate first.",
+    "Write one responsible-use rule to close a gap found in the audit."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Class AI Risk Audit (Lab)",
+      "body": [
+        "Today your group becomes a class safety board. You will audit how AI has actually been used, rank the risks you find, and decide which one to fix first - then write the rule that fixes it."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can audit our AI use against a rule set and find a gap.",
+        "I can place risks on a matrix by likelihood and impact.",
+        "I can propose one rule to reduce the highest-priority risk."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Audit",
+          "definition": "Checking real practice against a set of rules to find gaps."
+        },
+        {
+          "term": "Likelihood",
+          "definition": "How often a risk could happen."
+        },
+        {
+          "term": "Impact",
+          "definition": "How much harm a risk would cause."
+        },
+        {
+          "term": "Mitigate",
+          "definition": "To reduce a risk, often by adding a rule."
+        },
+        {
+          "term": "Gap",
+          "definition": "A place where practice does not meet the rule."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Audit against the rules",
+      "body": [
+        "An [[audit]] compares what actually happened with what should happen. You read the anonymised class use-log and flag any entry that breaks or stretches a responsible-use rule.",
+        "The log is anonymised on purpose: you fix systems and habits, *never* blame a person."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Rank, then rule",
+      "body": [
+        "Place each flagged risk on the matrix by its [[likelihood]] and [[impact]], then pick the highest-priority one.",
+        "Finally, write one realistic responsible-use rule that would close that gap - and be ready to pitch it for the class charter."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Audit the anonymised use-log, flag the gaps, plot the risks on the matrix, and propose one rule to fix the top-priority risk."
+      ],
+      "items": [
+        "Read each log entry against the rule set.",
+        "Flag gaps and name the risk and who it affects.",
+        "Plot risks on the likelihood-impact matrix.",
+        "Circle the highest-priority risk.",
+        "Write and pitch one mitigation rule."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which risk surprised you as higher priority than expected?",
+        "How do you make a rule strong but still realistic?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write one change you will make to your own AI use after this audit.",
+        "Explain why anonymising the log matters."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 5 - Lab - Worksheet | Class AI Risk Audit (Lab)",
+    "questions": [
+      {
+        "id": "g6-main-w5-lab-g6-m-w5-lab-q1",
+        "type": "shortText",
+        "prompt": "For each log entry, note whether it meets the rules and flag any gap.",
+        "stem": "Meets rules? Yes / No\nGap found:\nRisk and who:",
+        "autoMarked": false,
+        "lookFor": "Finds a genuine gap - e.g. a demo prompt that included a student's name - and names both the risk (privacy exposure) and the who (that student). Watch for blame-focused answers: the log is anonymised, and audits fix systems, not people.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-lab-g6-m-w5-lab-q2",
+        "type": "shortText",
+        "prompt": "Explain why your top risk is highest priority and write a rule to fix it.",
+        "stem": "Top risk because ...\nMitigation rule:",
+        "autoMarked": false,
+        "lookFor": "Priority justified by matrix position - the high-likelihood, high-impact risk (usually privacy) comes first, rather than 'fix everything at once'. The rule must be realistic and actually reduce the named risk, e.g. replace any real name with 'a student' before using a prompt.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-lab-g6-m-w5-lab-q3",
+        "type": "shortText",
+        "prompt": "Record each flagged risk with its matrix placement and priority. Complete the table columns: Log entry | Gap / risk | Likelihood | Impact | Priority.",
+        "stem": "Log entry | Gap / risk | Likelihood | Impact | Priority",
+        "autoMarked": false,
+        "lookFor": "Risks placed sensibly on likelihood and impact with a justified priority order, each row tied back to a real log entry. Approaching: risks placed but priority weakly justified.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-lab-g6-m-w5-lab-q4",
+        "type": "shortText",
+        "prompt": "State the highest-priority risk your group found and the one rule you would add to reduce it.",
+        "autoMarked": false,
+        "lookFor": "Names one genuine top-priority risk consistent with the group's matrix, plus one workable rule that reduces it. Emerging: a realistic rule that reduces the top risk.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-lab-g6-m-w5-lab-q5",
+        "type": "shortText",
+        "prompt": "Design a one-page class responsible-use charter that closes every gap your audit found, ordered by priority.",
+        "autoMarked": false,
+        "lookFor": "Every flagged gap is covered by a rule, and the order follows the matrix. Stretch: justifies a near-tie placement and explains how a rule would move a risk down the matrix.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

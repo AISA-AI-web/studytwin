@@ -1,0 +1,206 @@
+{
+  "id": "g6-bridging-w3-lab",
+  "number": 6,
+  "week": 3,
+  "track": "bridging",
+  "type": "lab",
+  "title": "Trace-the-Data Investigation (Lab)",
+  "summary": "Students run three controlled single data swaps on the ripeness sorter, log the before-and-after outcomes, and use that evidence to identify and verify the most influential change.",
+  "duration": "45 minutes",
+  "strands": [
+    "CE"
+  ],
+  "objectives": [
+    "Change the data in a worked solution and observe and record the effect on the outcome.",
+    "Identify which single data change most alters the outcome, and explain why."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "In the Core lesson you predicted how a data change would move the outcome. A prediction is only a guess until you test it. Today you run a fair test: change one thing, watch the outcome, and let the evidence tell you which data matters most."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can run a controlled data change and record the outcome before and after.",
+        "I can compare data changes and identify which one moved the outcome the most.",
+        "I can explain, using my recorded evidence, why that change had the biggest effect."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "controlled change",
+          "definition": "Changing one thing at a time so you know what caused the result."
+        },
+        {
+          "term": "before/after",
+          "definition": "The outcome measured just before and just after a single change."
+        },
+        {
+          "term": "shift",
+          "definition": "How far the outcome moved because of a change."
+        },
+        {
+          "term": "influential",
+          "definition": "Having a large effect on the outcome."
+        },
+        {
+          "term": "verify",
+          "definition": "To re-test and confirm an effect is real, not a one-off."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Change one thing at a time",
+      "body": [
+        "To find out how much a data batch matters, you must isolate it. Measure the outcome **before**, change only that one batch, and measure again. The difference is the influence of that batch.",
+        "If you change two batches at once and the outcome moves, you cannot tell which batch did it. A fair test changes one variable at a time - the same rule scientists use in any experiment."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Evidence beats opinion",
+      "body": [
+        "Your log is your evidence. Without a written before-and-after, you are relying on memory, and memory blurs across many swaps.",
+        "Once you have run several swaps, the most [[influential]] batch is the one with the biggest [[shift]]. [[Verify]] it by re-running on a fresh fruit - if the effect repeats, you have proof, not a coincidence."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Work in threes with roles: swapper, recorder, checker. You will run three single data swaps, log each outcome, and find the most influential change."
+      ],
+      "items": [
+        "Write your Core prediction at the top of the log.",
+        "Record the BEFORE outcome for your test fruit.",
+        "Swap in one data batch and record the AFTER outcome.",
+        "Note the shift: none, a little, or a lot.",
+        "Repeat for two more single swaps.",
+        "Rank the swaps and star the most influential.",
+        "Verify the winner on a fresh fruit and write your conclusion."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Did the evidence match your prediction? Where did it surprise you?",
+        "Why might a small batch beat a large one for influence?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write your evidence-based conclusion about the most influential data change.",
+        "Note one thing a fair test taught you that a guess could not."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 3 - Lab - Worksheet | Trace-the-Data Investigation (Lab)",
+    "questions": [
+      {
+        "id": "g6-bridging-w3-lab-g6-bw3l-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Run three single swaps: for each swap, record the before outcome, the after outcome, and the size of the shift. Change only one batch at a time.",
+        "stem": "Before: ___\nAfter: ___\nShift: ___",
+        "lookFor": "One batch changed at a time with a clean before value recorded before the swap, not filled in afterwards. Changing several batches at once means the outcome cannot be attributed and the swap should be redone.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "process"
+      },
+      {
+        "id": "g6-bridging-w3-lab-g6-bw3l-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Name and verify the winner: state which swap was most influential, justify it from your log, and describe how you verified it on a fresh fruit.",
+        "stem": "The most influential swap was ___\nMy log shows ___\nI verified it by ___",
+        "lookFor": "The winner is the batch that filled the biggest data gap - typically the green-date batch - justified from the logged before/after shifts rather than opinion, and confirmed by a re-test on a fresh fruit that shows the effect repeats.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w3-lab-g6-bw3l-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Investigation log: log every single swap and its effect so you can rank them fairly. Use the columns Swap (one batch) | Before outcome | After outcome | Shift size | Rank.",
+        "lookFor": "Every row records one batch only, with both before and after outcomes filled in and a shift size (none / a little / a lot). A missing before value or a muddled swap makes the ranking unreliable.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "process"
+      },
+      {
+        "id": "g6-bridging-w3-lab-g6-bw3l-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: state the most influential data change you found and give the recorded evidence that proves it.",
+        "lookFor": "Evidence, not opinion: the named swap is backed by the before/after shift written in the log, and ideally by the repeat result from the verification run.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w3-lab-g6-bw3l-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): design a data swap you predict will produce zero outcome change, then test it. Explain why some data has no influence on this solution.",
+        "lookFor": "A swap that only adds more of what the sorter already has plenty of - for example another brown-date batch - with the explanation that it repeats a pattern the model already learned, so it fills no gap and moves nothing.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

@@ -1,0 +1,306 @@
+{
+  "id": "g6-main-w6-core",
+  "number": 11,
+  "week": 6,
+  "track": "main",
+  "type": "core",
+  "title": "Bringing the Strands Together",
+  "summary": "Students run one guided challenge through all four strands and explain how each link in the chain shaped the next.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Complete a guided challenge combining the concept, a prompted solution, an output check and a risk check.",
+    "Explain how the system type and prompt shaped the output.",
+    "Identify one responsible-use choice made."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "This term you learned four skills one at a time. Today you discover they were never separate - they form one chain, from understanding the system to writing a prompt, checking the output, and using it responsibly. Put all four hats on at once."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can complete a guided challenge that uses all four strands.",
+        "I can explain how the system type and prompt shaped the output.",
+        "I can name one responsible-use choice I made."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Integration",
+          "definition": "Connecting separate skills into one process."
+        },
+        {
+          "term": "System type",
+          "definition": "Whether a system is rule-based or learning-based."
+        },
+        {
+          "term": "Prompt",
+          "definition": "The instruction you give an AI tool to guide its output."
+        },
+        {
+          "term": "Triage",
+          "definition": "Judging an output as correct, incorrect, or unclear."
+        },
+        {
+          "term": "Risk check",
+          "definition": "Asking what could go wrong and choosing a responsible action."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "One connected chain",
+      "body": [
+        "The [[system type]] shapes what you can expect. The [[prompt]] shapes the output. The output needs a [[triage]]. And the whole process needs a [[risk check]].",
+        "Each strand feeds the next - miss one link and the chain weakens."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Explain the links",
+      "body": [
+        "It is not enough to complete each step; you should be able to explain how one shaped the next.",
+        "For example: because the prompt was specific, the output stayed on task, which made triage easier and the risk lower."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Run one guided challenge through all four strands, then explain how the system and prompt shaped the output and name one responsible-use choice you made."
+      ],
+      "items": [
+        "Name the system type behind the task.",
+        "Write or choose a clear prompt.",
+        "Triage the curated output.",
+        "Run a basic risk check and note a responsible-use choice.",
+        "Explain how the system and prompt shaped the output."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which strand was strongest in your work, and which needs practice?",
+        "How would a weaker prompt have changed the whole chain?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write which strand you will focus on before the signature solution.",
+        "Explain one link in the chain in your own words."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 6 - Core - Worksheet | Bringing the Strands Together",
+    "questions": [
+      {
+        "id": "g6-main-w6-core-q1",
+        "type": "shortText",
+        "prompt": "Complete each of the four steps for the guided challenge.",
+        "stem": "System type:\nMy prompt:\nTriage verdict and reason:\nRisk check and choice:",
+        "lookFor": "All four steps recorded: a named system type (e.g. a learning system for a text summariser, contrasted with rule-based), a specific prompt, a triage verdict of correct / incorrect / unclear with a checkable reason, and a genuine risk-reduction choice such as keeping personal data out of the prompt.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-core-q2",
+        "type": "shortText",
+        "prompt": "Write two sentences linking system, prompt, and output.",
+        "stem": "Because the system was ...\nThe prompt made the output ... which means ...",
+        "lookFor": "Both stems completed so that system and prompt are clearly linked to the output - e.g. a specific prompt gave a focused, on-task summary while a vague one would drift. Approaching links only two strands; not yet treats the strands as separate.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-core-q3",
+        "type": "shortText",
+        "prompt": "Record your result for each strand.",
+        "stem": "Strand | What I did | Result | Link to next strand",
+        "lookFor": "One row per strand with the action taken, a result, and a link showing how each strand fed the next: system type shapes the prompt, the prompt shapes the output, the output demands a triage, and the whole process demands a responsible-use choice.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-core-q4",
+        "type": "shortText",
+        "prompt": "Explain how the system type and prompt shaped your output, and name one responsible-use choice you made.",
+        "stem": "",
+        "lookFor": "Connects system plus prompt to the output quality and names a genuine risk-reduction choice that was made during the task (e.g. no personal data in the prompt), not added afterwards.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w6-core-q5",
+        "type": "shortText",
+        "prompt": "Redesign the prompt to lower the risk further, and predict how the output and triage would change.",
+        "stem": "",
+        "lookFor": "Redesigned prompt targets the risk that was identified (e.g. removes personal data, asks for checkable statements) and the prediction explains how both the output and the risk would change - the stretch expectation for this lesson.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "id": "g6-bridging-w2-core",
+  "number": 3,
+  "week": 2,
+  "track": "bridging",
+  "type": "core",
+  "title": "Refining Prompts for Better Outputs",
+  "summary": "Students learn a refinement loop - set the goal, judge the output, name one weakness, make a single targeted change, and re-judge - so they can say exactly why a prompt change improved the result.",
+  "duration": "45 minutes",
+  "strands": [
+    "SD"
+  ],
+  "objectives": [
+    "Improve a weak prompt so the output better meets the goal.",
+    "Explain which change improved the output and why it worked."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "You ask an AI to 'write about Al Ain' and get a dull, general paragraph. Was the AI wrong - or was the prompt?",
+        "Today you become a prompt engineer who sets a clear goal, judges the output against it, and makes one smart change at a time. Best of all, you will be able to say exactly why your change worked."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can turn a weak prompt into a stronger one that better meets the goal.",
+        "I can name the exact change I made and explain why it improved the output.",
+        "I can judge an output against the goal instead of just accepting it."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "prompt",
+          "definition": "The instruction and context you give an AI to guide its output."
+        },
+        {
+          "term": "goal",
+          "definition": "What you want the output to achieve, stated clearly."
+        },
+        {
+          "term": "constraint",
+          "definition": "A limit you set, such as length, tone, or format."
+        },
+        {
+          "term": "ambiguous",
+          "definition": "Unclear or open to more than one meaning."
+        },
+        {
+          "term": "refinement loop",
+          "definition": "Goal, judge, name the weakness, change, re-judge - repeated."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Judge before you change",
+      "body": [
+        "You cannot improve an output until you judge it honestly against the [[goal]]. Ask: what is missing, and what is off-target?",
+        "Common weaknesses in a prompt are a missing audience, missing format, missing [[constraint]], or an [[ambiguous]] task. Naming the weakness tells you exactly what to fix."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Change one thing, and know why",
+      "body": [
+        "Strong refiners change **one thing at a time** and predict why it should help before they test it. That way, when the output improves, they know which change did it.",
+        "Specificity comes from the task, the audience, and the format - never from personal or private information. A precise [[prompt]] is not a personal one."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "You will take a weak prompt with a clear goal, name one weakness, write a targeted v2, predict its effect, and check against the revealed output."
+      ],
+      "items": [
+        "Read the weak prompt and its goal.",
+        "Judge the v1 output and name one weakness.",
+        "Write a v2 that targets only that weakness.",
+        "Predict how the output should change and why.",
+        "Compare with the revealed v2 output and log it."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Why is changing one thing at a time smarter than changing many?",
+        "How can you make a prompt specific without adding any private information?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the one change that most improved your output and why it worked.",
+        "Describe a time a clearer instruction would have helped you get a better result in real life."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 2 - Core - Worksheet | Refining Prompts for Better Outputs",
+    "questions": [
+      {
+        "id": "g6-bridging-w2-core-q1",
+        "type": "shortText",
+        "prompt": "For the weak prompt given, name one weakness and write a v2 that targets only that weakness.",
+        "stem": "The weakness is ___.\nMy v2 prompt is ___.",
+        "lookFor": "Names a weakness that genuinely matches the output problem (ambiguous task, or missing audience, format, or constraint), and a v2 that directly targets that one named weakness rather than bundling several edits or simply lengthening the prompt.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-core-q2",
+        "type": "shortText",
+        "prompt": "After the reveal, explain the causal reason your change improved the output.",
+        "stem": "My change was ___.\nIt improved the output because ___.",
+        "lookFor": "A causal explanation linking the specific change to the improvement (e.g. naming the audience and length removed the model's need to guess, so the output became focused and age-appropriate). Reward causal reasoning, not 'it is better'.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-core-q3",
+        "type": "shortText",
+        "prompt": "Record your v1, the weakness, your v2 change, the predicted effect, and the observed effect.",
+        "stem": "v1 prompt | Weakness named | v2 change | Predicted vs observed effect",
+        "lookFor": "A usable log in which one change is recorded per row with a stated reason, so the improvement can be attributed to a cause; predicted and observed effects are both recorded and compared, not just asserted.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-core-q4",
+        "type": "shortText",
+        "prompt": "Explain in one or two sentences which prompt change improved your output and the reason it worked.",
+        "stem": "",
+        "lookFor": "Names one specific change and gives a clear causal reason for the improvement. Partial: a general reason with a weak causal link. Not yet: states it is better with no reason.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-core-q5",
+        "type": "shortText",
+        "prompt": "Write a v3 that improves the output on a second goal (for example, making it both clearer and more accurate) without losing the first improvement.",
+        "stem": "",
+        "lookFor": "A v3 that adds a gain on a second dimension while preserving the first gain, with reasoning that shows awareness that the two goals must both be met rather than traded away.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      }
+    ]
+  }
+}

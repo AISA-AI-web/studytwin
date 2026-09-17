@@ -1,0 +1,197 @@
+{
+  "id": "g6-main-w5-core",
+  "number": 9,
+  "week": 5,
+  "track": "main",
+  "type": "core",
+  "title": "Risks and Responsible Use",
+  "summary": "Students meet the two basic risk families of AI use - accuracy and safety/privacy - name who each risk could affect, and agree responsible-use rules that reduce them.",
+  "duration": "45 minutes",
+  "strands": [
+    "GE"
+  ],
+  "objectives": [
+    "Identify at least two basic risks of using AI tools (e.g., incorrect output, unsafe or private data use).",
+    "Explain why each risk matters and who it could affect.",
+    "State one responsible-use rule that reduces a risk."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Risks and Responsible Use",
+      "body": [
+        "An AI answer can look helpful and still put someone at risk - through a mistake you did not check, or through personal data you should never have shared.",
+        "Today you learn to spot those risks and to name the rule that keeps people safe."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can name two genuine risks of using an AI tool.",
+        "I can explain who each risk could affect.",
+        "I can state a responsible-use rule that reduces a risk."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Risk",
+          "definition": "Something that could go wrong when using a tool."
+        },
+        {
+          "term": "Accuracy risk",
+          "definition": "The danger of acting on an incorrect output."
+        },
+        {
+          "term": "Privacy",
+          "definition": "Keeping personal or identifying information safe and unshared."
+        },
+        {
+          "term": "Personal data",
+          "definition": "Information that identifies a person, like a name, address, or photo."
+        },
+        {
+          "term": "Responsible-use rule",
+          "definition": "An agreed habit that reduces a risk."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Two risk families",
+      "body": [
+        "**Accuracy risk** is the danger of using a confident but incorrect output without checking it. The mistake can spread into your work and anyone who trusts it.",
+        "**Safety and privacy risk** is the danger of entering [[personal data]] or identifying data, which may be stored or used to train future systems and could expose you or someone else."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Every risk has a who",
+      "body": [
+        "A real risk always names who could be harmed - you, a classmate, or your family.",
+        "[[Responsible-use rule]]s are simple habits, agreed together, that reduce a risk: verify before you use, never enter personal data, and tell an adult if you are unsure."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Sort each scenario into a risk family, name who is affected, and choose a responsible-use rule that would reduce the risk."
+      ],
+      "items": [
+        "Read the scenario card.",
+        "Decide: accuracy risk or safety/privacy risk.",
+        "Name who could be affected.",
+        "Attach a responsible-use rule that reduces the risk."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which risk do you think is easiest to forget about, and why?",
+        "Is a rule useful if it is too hard to follow?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write one responsible-use rule you will follow from now on.",
+        "Describe a situation where you would refuse to enter data into a tool."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 5 - Core - Worksheet | Risks and Responsible Use",
+    "questions": [
+      {
+        "id": "g6-main-w5-core-g6-m-w5-core-q1",
+        "type": "shortText",
+        "prompt": "For two scenarios, complete the chain: risk, who is affected, responsible-use rule.",
+        "stem": "The risk is ...\nIt could affect ...\nA rule that reduces it is ...",
+        "autoMarked": false,
+        "lookFor": "A genuine, specific risk (not 'it is bad'), a named who - a specific person or group such as the student using the output, a classmate, or their family - and a rule that clearly reduces that named risk. The chain should hold together across both scenarios.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-core-g6-m-w5-core-q2",
+        "type": "shortText",
+        "prompt": "Underline any personal data in a sample prompt and rewrite it safely.",
+        "stem": "Personal data found:\nSafe rewrite:",
+        "autoMarked": false,
+        "lookFor": "Identifies identifying details (name, address, photo, ID number) as personal data, and rewrites the prompt with the real name replaced by something like 'a student'. Watch for the misconception that typing in someone's details is fine as long as it helps - personal data may be stored or used to train systems.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-core-g6-m-w5-core-q3",
+        "type": "shortText",
+        "prompt": "Record each risk you find with its who and rule. Complete the table columns: Scenario | Risk family | Who is affected | Responsible-use rule.",
+        "stem": "Scenario | Risk family | Who is affected | Responsible-use rule",
+        "autoMarked": false,
+        "lookFor": "Each row sorts the scenario into accuracy or safety/privacy, names a specific who for every risk, and states a matching rule. Emerging: two different, genuine risks with a specific who each and a rule that clearly reduces the named risk.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-core-g6-m-w5-core-q4",
+        "type": "shortText",
+        "prompt": "Name two genuine risks of using AI tools and one responsible-use rule that reduces one of them.",
+        "autoMarked": false,
+        "lookFor": "Two genuinely different risks - e.g. incorrect output used as-is (accuracy) and entering personal data (safety/privacy) - plus one rule that matches one of them, such as 'never enter personal or identifying data into an AI tool'. Redirect vague 'it is bad' answers to a specific risk plus who it affects.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w5-core-g6-m-w5-core-q5",
+        "type": "shortText",
+        "prompt": "Write a class responsible-use charter of three rules, each matched to a specific risk it reduces.",
+        "autoMarked": false,
+        "lookFor": "Three realistic rules, each explicitly paired with the risk it reduces rather than listed as general advice. Stretch: a scenario that involves both risk families at once, with the overlap explained.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

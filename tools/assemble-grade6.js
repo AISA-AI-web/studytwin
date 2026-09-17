@@ -14,10 +14,14 @@ const root = path.join(__dirname, '..');
 const SP = '/tmp/claude-0/-home-user-studytwin/1e6d0d27-d31e-505c-8298-fa6c0b87f20b/scratchpad';
 const outDir = path.join(root, 'curriculum/grade6/lessons');
 
-const pass1 = JSON.parse(fs.readFileSync(`${SP}/extraction.json`, 'utf8'));
-const pass2 = JSON.parse(fs.readFileSync(`${SP}/repair.json`, 'utf8'));
+/*
+ * Both inputs come from the STRICT extraction rules. The original pass is deliberately
+ * not used: one of the weeks it marked clean turned out to have twelve fabricated
+ * questions where the published worksheet has five, so its verdicts cannot be relied on.
+ */
+const repaired = JSON.parse(fs.readFileSync(`${SP}/repair.json`, 'utf8'));   // 9 weeks
+const strict = JSON.parse(fs.readFileSync(`${SP}/strict.json`, 'utf8'));     // the other 7
 
-const flaggedInPass1 = new Set(pass1.flagged.map((f) => f.week));
 const problems = [];
 
 /** Strand labels vary by grade; the two-letter code is the stable identity. */
@@ -57,6 +61,63 @@ const PROMPT_FIXES = [
     cut: /\s*,\s*following the branch template.*?(?=$)/s },
 ];
 
+/**
+ * Reconciles the field names the extraction used with the ones the platform reads.
+ *
+ * Some weeks wrote `instruction` rather than `prompt`, and some numbered questions bare
+ * (`q1`) rather than scoped to their lesson. Neither changes meaning, but the platform
+ * reads `prompt`, and an id that is unique only within its file is miserable to debug
+ * once marks are sitting in a spreadsheet referring to it.
+ */
+function normaliseFields(question, lessonId) {
+  if (!question.prompt && question.instruction) {
+    question.prompt = question.instruction;
+  }
+  delete question.instruction;
+
+  // A stem that merely repeats the prompt adds nothing on screen.
+  if (question.stem) {
+    const [firstLine, ...rest] = String(question.stem).split('\n');
+    if (firstLine.trim() === String(question.prompt || '').trim()) {
+      question.stem = rest.join('\n').trim();
+      if (!question.stem) delete question.stem;
+    }
+  }
+
+  if (!String(question.id).startsWith(lessonId)) {
+    question.id = `${lessonId}-${question.id}`;
+  }
+}
+
+/**
+ * Collapses the many names the extraction used for an open task onto the one type the
+ * platform has.
+ *
+ * Agents produced ten variants — open-response, short-answer, longText, table and so on —
+ * all meaning the same thing: free text captured for a teacher to read. The platform has
+ * one such type, shortText, and the distinction between a short and a long answer is
+ * presentation, not behaviour.
+ *
+ * fillBlank is kept only where the question actually carries the blanks to render;
+ * without them it is just free text wearing a different name.
+ */
+const OPEN_TYPES = new Set(['shorttext', 'short-answer', 'shortanswer', 'open-response',
+  'openresponse', 'open', 'short', 'longtext', 'long-answer', 'longanswer', 'long',
+  'table', 'log', 'text']);
+
+function normaliseType(question, where) {
+  if (question.autoMarked !== false) return;
+
+  const type = String(question.type || '').toLowerCase();
+  if (type === 'fillblank') {
+    if ((question.blanks || []).length) return;   // genuinely a row of blanks
+    question.type = 'shortText';
+    return;
+  }
+  if (OPEN_TYPES.has(type)) { question.type = 'shortText'; return; }
+  problems.push(`${where}: open question has unrecognised type "${question.type}"`);
+}
+
 function cleanPrompt(question) {
   const fix = PROMPT_FIXES.find((f) => f.id === question.id);
   if (!fix) return false;
@@ -68,10 +129,18 @@ function cleanPrompt(question) {
 /* ------------------------------------------------------------------ */
 
 const weeks = [];
-pass2.extraction.forEach((w) => weeks.push({ key: w.key, lessons: w.lessons, source: 'repaired' }));
-pass1.extraction.forEach((w) => {
-  const key = `${w.track} W${w.week}`;
-  if (!flaggedInPass1.has(key)) weeks.push({ key, lessons: w.lessons, source: 'clean first pass' });
+repaired.extraction.forEach((w) => weeks.push({ key: w.key, lessons: w.lessons }));
+strict.extraction.forEach((w) => weeks.push({ key: w.key, lessons: w.lessons }));
+
+const expected = 16;
+if (weeks.length !== expected) {
+  problems.push(`expected ${expected} weeks, got ${weeks.length} — ` +
+    `have both extraction passes completed?`);
+}
+const seen = new Set();
+weeks.forEach((w) => {
+  if (seen.has(w.key)) problems.push(`week ${w.key} appears twice`);
+  seen.add(w.key);
 });
 
 const TRACK_ORDER = { bridging: 0, main: 1 };
@@ -103,7 +172,9 @@ weeks.forEach((week) => {
     if (!strands.length) problems.push(`${where}: no strands resolved`);
 
     (worksheet.questions || []).forEach((q) => {
+      normaliseFields(q, raw.id);
       if (cleanPrompt(q)) promptsCleaned++;
+      normaliseType(q, `${where} ${q.id}`);
 
       // An open task must carry no marks; a scored one must carry a readable answer.
       if (q.autoMarked === false) {
@@ -191,6 +262,13 @@ console.log(`Weeks assembled : ${weeks.length}`);
 console.log(`Lessons written : ${byTrack.bridging.length + byTrack.main.length} ` +
             `(${byTrack.bridging.length} bridging, ${byTrack.main.length} main)`);
 console.log(`Questions       : ${openCount} open (teacher-read), ${scoredCount} auto-marked`);
+const typeCounts = {};
+fs.readdirSync(outDir).forEach((f) => {
+  JSON.parse(fs.readFileSync(path.join(outDir, f), 'utf8')).worksheet.questions
+    .forEach((q) => { typeCounts[q.type] = (typeCounts[q.type] || 0) + 1; });
+});
+console.log(`Types           : ${Object.entries(typeCounts)
+  .sort((a, b) => b[1] - a[1]).map(([t, n]) => `${n} ${t}`).join(', ')}`);
 console.log(`Prompts cleaned : ${promptsCleaned} (figure-spec text removed)`);
 
 if (problems.length) {

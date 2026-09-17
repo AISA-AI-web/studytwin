@@ -1,0 +1,202 @@
+{
+  "id": "g6-main-w2-lab",
+  "number": 4,
+  "week": 2,
+  "track": "main",
+  "type": "lab",
+  "title": "Train a Simple Model (Lab)",
+  "summary": "Groups build a training set of safe, non-personal examples, train a classifier, test it on held-back examples, and check how their choices shaped the model.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU"
+  ],
+  "objectives": [
+    "Train a simple classifier on non-personal examples (objects/drawings/sounds) and test it on new examples.",
+    "Explain how the training examples shaped what the model learned.",
+    "Run a basic risk and data-safety check on the training set."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Today you become a model trainer. You choose the examples, and the examples decide what your model learns - so choose wisely and keep them safe."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "training data",
+          "definition": "The examples the model learns from."
+        },
+        {
+          "term": "testing data",
+          "definition": "New examples, held back, used to check the model."
+        },
+        {
+          "term": "model",
+          "definition": "The pattern the system builds from the training data."
+        },
+        {
+          "term": "classifier",
+          "definition": "A model that sorts examples into categories."
+        },
+        {
+          "term": "data-safety rule",
+          "definition": "Use only non-personal examples - never faces, voices or names."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Train, then test",
+      "body": [
+        "First you show the model many labelled [[training data]] examples. It finds the pattern and builds a [[model]].",
+        "Then you test it on new examples it has never seen. If it still gets them right, it really learned. If not, it only memorised."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Your examples shape the model",
+      "body": [
+        "If all your apple pictures are red, the model learns 'red', not 'apple', and fails on a green one. Variety and fairness matter, not just how many.",
+        "**Golden rule:** only non-personal examples. No faces, no voices, no names ever go into a training set."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "Build a training set of safe, non-personal examples, train a model, then test it on new examples and check your data is safe."
+      ],
+      "items": [
+        "Pick two categories of non-personal items.",
+        "Collect and label 8-10 training examples each.",
+        "Hide 3 testing examples per category.",
+        "Train using training examples only.",
+        "Test the held-back examples and log the results.",
+        "Complete the data-safety and risk check."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which testing example fooled the model, and why?",
+        "How did your choice of examples change what it learned?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write how your training examples shaped the model.",
+        "Write one data-safety rule you followed today."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 2 Lab worksheet - Train a Simple Model",
+    "questions": [
+      {
+        "id": "g6-main-w2-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Build and test log. Record your categories, then predict and test each held-back example.",
+        "stem": "I predict this will be classified as ___\nThe model actually classified it as ___",
+        "lookFor": "Secure: the two categories are named, the prediction is written before the example is tested, and the tested examples are ones held back from training. Approaching: trains and tests but blurs the two sets.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Data-safety and risk check. Tick the safety checks and write one risk and one improvement.",
+        "stem": "My data was safe because ___\nOne risk was ___\nOne improvement is ___",
+        "lookFor": "The safety line must confirm non-personal data - all examples were objects or drawings, no faces, voices or names. A secure improvement links quality and variety to accuracy, for example adding varied examples in different sizes, colours or angles so the model learns the real category.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-lab-q3",
+        "type": "fillBlank",
+        "autoMarked": false,
+        "prompt": "Training and testing record. Log each testing example, your prediction, the result, and whether it was correct.",
+        "blanks": [
+          "Testing example",
+          "Predicted",
+          "Model result",
+          "Correct?"
+        ],
+        "lookFor": "Every logged example is one the model never saw in training, and prediction and result are recorded separately so a wrong prediction is still evidence. If a group has logged training examples here, re-model the split and have them re-run on held-back data.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket. How did your training examples change what the model learned? Give one example.",
+        "lookFor": "Reward any accurate cause-and-effect from data to model, for example 'all our circles were large, so the model missed a small circle - it learned large as well as round'. Partial: an explanation with no named example.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w2-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch). Design a 'trick' testing example, predict whether the model will fail, then test it and explain the result.",
+        "lookFor": "Predicts whether the model will fail and why before testing, then explains the result against that prediction - the stretch task for groups whose training and testing log is already secure.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "tierProbed": "proficient",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

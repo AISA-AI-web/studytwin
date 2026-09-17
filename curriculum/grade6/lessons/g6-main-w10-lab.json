@@ -1,0 +1,309 @@
+{
+  "id": "g6-main-w10-lab",
+  "number": 20,
+  "week": 10,
+  "track": "main",
+  "type": "lab",
+  "title": "Showcase Carousel and Reflection (Lab)",
+  "summary": "Learners run a showcase carousel, give and collect strand-tagged peer feedback, and consolidate the term into a four-strand Emerging summary with one Term-2 goal.",
+  "duration": "1 x 45-minute period",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Present the solution in a showcase carousel and give structured peer feedback.",
+    "Consolidate reflections into a Term-2 goal across the four strands.",
+    "Confirm the responsible-use message for every solution on display."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Welcome to the showcase. Today your class becomes a gallery of AI-supported solutions. You will present, learn from each other with honest feedback, and pull your whole term together into one clear goal for next time."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can present my solution in a showcase carousel and give structured peer feedback.",
+        "I can consolidate my reflections into a Term-2 goal across the four strands.",
+        "I can confirm my solution is responsible to use and honest about its limits."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Carousel",
+          "definition": "A rotation where you present at your station and visit others."
+        },
+        {
+          "term": "Two stars and a wish",
+          "definition": "Two things done well and one thing to improve."
+        },
+        {
+          "term": "Consolidate",
+          "definition": "To gather many notes into one clear summary."
+        },
+        {
+          "term": "Responsible use",
+          "definition": "No personal data, honest about limits, fair to users."
+        },
+        {
+          "term": "Proficient",
+          "definition": "The next tier of skill you aim for in Term 2."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Feedback that helps",
+      "body": [
+        "In the [[carousel]] you present in 60 seconds and then visit other stations. Leave '[[two stars and a wish]]', and tag each comment to a strand.",
+        "Good feedback is specific, kind and tied to evidence. A helpful wish is a gift, not a criticism."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Your term in one picture",
+      "body": [
+        "Gather your feedback and notes into the four-strand summary: what you can now do in concepts, design and build, evaluate and use, and wider effects.",
+        "Then set one specific Term-2 goal toward [[Proficient]], and confirm every solution is responsible to use."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Set up your station, present in the carousel, give and collect feedback, then consolidate your term into a four-strand summary and one goal."
+      ],
+      "items": [
+        "Set up your station with your frozen solution, evidence and responsible-use message.",
+        "Present in 60 seconds with two justified choices.",
+        "Rotate to at least two stations and leave strand-tagged feedback.",
+        "Collect the feedback left at your station.",
+        "Complete the four-strand Emerging summary.",
+        "Set one Term-2 goal and confirm responsible use."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "What is the most useful wish someone gave you, and why?",
+        "How will you keep your future solutions responsible and fair?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write your four-strand summary, one line per strand.",
+        "Set one specific Term-2 goal that moves you toward Proficient."
+      ]
+    }
+  ],
+  "worksheet": {
+    "questions": [
+      {
+        "id": "g6-main-w10-lab-q1",
+        "type": "shortText",
+        "prompt": "For two peers, write two stars and a wish, each tagged to a strand.",
+        "title": "Carousel feedback slips",
+        "stem": "Star (strand): ...\nStar (strand): ...\nWish (strand): ...",
+        "autoMarked": false,
+        "lookFor": "Gives specific 'two stars and a wish' tagged to strands. A star must name a strand and evidence (model: 'Star (Evaluate & use): you tested with six known-answer cases, which is strong evidence'). A wish should be specific and kind (model: 'Wish (Wider effects): explain who might be treated unfairly and how you would prevent it').",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-lab-q2",
+        "type": "shortText",
+        "prompt": "Write one Emerging statement per strand, then set one Term-2 goal.",
+        "title": "Four-strand Emerging summary and goal",
+        "stem": "Concepts: I can ...\nDesign & build: I can ...\nEvaluate & use: I can ...\nWider effects: I can ...\nTerm-2 goal: ...",
+        "autoMarked": false,
+        "lookFor": "Summarises all four strands at Emerging with evidence - one clause per strand at Emerging (model: 'I can explain rule-based vs learning, build a solution, evaluate it for risk, and consider wider effects'). The goal should be specific and tied to a strand toward Proficient (model: 'Next term I will use balanced data so my solution is fairer to all users').",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-lab-q3",
+        "type": "shortText",
+        "prompt": "For each strand, record your Emerging evidence and next-term focus.",
+        "title": "End-of-term reflection tracker",
+        "stem": "Strand | Emerging evidence | Feedback received | Term-2 focus",
+        "autoMarked": false,
+        "lookFor": "Evidence is the feedback slips plus the completed four-strand Emerging summary with goal. Teacher flags each learner's next-tier target for Term 2.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-lab-q4",
+        "type": "shortText",
+        "prompt": "My proudest strand this term is ... and my Term-2 goal toward Proficient is ...",
+        "title": "Exit ticket",
+        "autoMarked": false,
+        "lookFor": "Sets a specific goal and confirms responsible use; setting a goal or confirming responsible use but not both is only Approaching.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w10-lab-q5",
+        "type": "shortText",
+        "prompt": "Combine feedback from several peers into one improved design idea to try in Term 2, and explain your choice.",
+        "title": "Challenge (stretch)",
+        "autoMarked": false,
+        "lookFor": "Stretch / next tier: learners synthesise feedback from several peers into one improved design idea for Term 2.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

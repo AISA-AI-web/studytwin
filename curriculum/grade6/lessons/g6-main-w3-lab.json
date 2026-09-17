@@ -1,0 +1,204 @@
+{
+  "id": "g6-main-w3-lab",
+  "number": 6,
+  "week": 3,
+  "track": "main",
+  "type": "lab",
+  "title": "Prompt-to-Task Workshop (Lab)",
+  "summary": "Students tackle a richer multi-requirement task with two different prompt structures, compare them on completion and accuracy, and turn the stronger one into a reusable template with a verification step and risk check built in.",
+  "duration": "1 x 45-minute period",
+  "strands": [
+    "SD"
+  ],
+  "objectives": [
+    "Complete a second, richer task and compare which prompt structure worked better.",
+    "Design a reusable prompt structure for a class of tasks.",
+    "Evaluate the outputs for accuracy and run a basic risk check."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Prompt-to-Task Workshop (Lab)",
+      "body": [
+        "You can structure one prompt - now build something reusable. Today you compare prompt structures on a richer task and design a template you and your class can use again and again."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can complete a richer task with a structured prompt and compare two structures.",
+        "I can design a reusable prompt template for similar tasks.",
+        "I can check an output for accuracy and complete a risk check."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "richer task",
+          "definition": "A task with several requirements to complete."
+        },
+        {
+          "term": "prompt structure",
+          "definition": "The order and parts of a prompt, such as Goal-Context-Format."
+        },
+        {
+          "term": "reusable template",
+          "definition": "A prompt skeleton with slots that works for many similar tasks."
+        },
+        {
+          "term": "verification",
+          "definition": "Checking an output against a reliable source."
+        },
+        {
+          "term": "risk check",
+          "definition": "A quick check for personal data and possible errors."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Compare, then reuse",
+      "body": [
+        "A [[richer task]] has several requirements, so a weak prompt structure leaves parts unfinished. Run two structures on the same task and compare which completes it and which is more accurate.",
+        "Then turn the winner into a [[reusable template]] - a prompt with labelled slots you can fill in for any similar task."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Build in the checks",
+      "body": [
+        "Every good template forces two checks: verify the output against a reliable source, and run a [[risk check]] for personal data and errors.",
+        "This is how real AI solutions are designed - and it is the foundation for your signature activity in the coming weeks."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Complete a richer task with two structures, compare them, then design a reusable template with checks built in."
+      ],
+      "items": [
+        "List the three requirements of the task.",
+        "Draft two structured prompts with different orders.",
+        "Compare which output completed the task and check accuracy.",
+        "Turn the stronger structure into a reusable template.",
+        "Add a verification step and a risk check."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which structure completed more of the task, and how do you know?",
+        "Where should the verify step sit in your template?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the biggest difference between your two structures.",
+        "Write how your template forces an accuracy check."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 3 - Lab - Worksheet | Prompt-to-Task Workshop (Lab)",
+    "questions": [
+      {
+        "id": "g6-main-w3-lab-q1",
+        "type": "shortText",
+        "prompt": "Compare two structures",
+        "stem": "Structure A met ___ of 3\nStructure B met ___ of 3\nThe stronger structure was ___ because ___",
+        "autoMarked": false,
+        "lookFor": "The comparison must be on completion or accuracy, not length - for example 'Structure A met all three requirements; Structure B missed the tone, so A was stronger.' Emerging (expected): compares two structures on completion and accuracy with evidence. Watch for the misconception that the longest answer is the best.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w3-lab-q2",
+        "type": "shortText",
+        "prompt": "Design a reusable template",
+        "stem": "Goal: ___\nContext (no personal data): ___\nFormat: ___\nVerify: ___",
+        "autoMarked": false,
+        "lookFor": "Model template: 'Goal: [task]; Context: [details, no personal data]; Format: [exact format]; then Verify: check facts against a source.' The template must include a verify/risk step and use labelled slots rather than one fixed task. Emerging (expected): a clear reusable template with labelled slots.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w3-lab-q3",
+        "type": "shortText",
+        "prompt": "Structure comparison record",
+        "columns": [
+          "Structure",
+          "Requirements met",
+          "Accurate?",
+          "Stronger?"
+        ],
+        "autoMarked": false,
+        "lookFor": "Evidence for the comparison: both structures recorded, requirements met marked per structure, an accuracy check against a reliable source, and a stated winner. A record that marks completion but never checks accuracy is only approaching - sounding right is not being right.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w3-lab-q4",
+        "type": "shortText",
+        "prompt": "Exit ticket",
+        "stem": "Write your reusable template in one line and say how it checks accuracy.",
+        "autoMarked": false,
+        "lookFor": "A one-line template with labelled slots (Goal / Context / Format) plus a named verification step - checking the output against a reliable source before use. Privacy (no personal data requested) is a bonus here; both privacy and accuracy must appear in the risk check overall.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ]
+      },
+      {
+        "id": "g6-main-w3-lab-q5",
+        "type": "shortText",
+        "prompt": "Challenge (stretch)",
+        "stem": "Test your template on a genuinely different task and note where it needed changing.",
+        "autoMarked": false,
+        "lookFor": "Stretch task: groups test the template on a genuinely different task type and report where it needed changing. Look for the insight that a template is a strong starting point, not a guarantee - each new task still needs its output verified.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ]
+      }
+    ]
+  }
+}

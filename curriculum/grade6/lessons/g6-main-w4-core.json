@@ -1,0 +1,208 @@
+{
+  "id": "g6-main-w4-core",
+  "number": 7,
+  "week": 4,
+  "track": "main",
+  "type": "core",
+  "title": "Judging Outputs - Correct, Incorrect, Unclear",
+  "summary": "Students learn to give every AI output one of three verdicts - correct, incorrect or unclear - and to back each judgement with a reason they can check.",
+  "duration": "45 minutes",
+  "strands": [
+    "CE"
+  ],
+  "objectives": [
+    "Identify, in a set of outputs, which are incorrect or unclear and say why.",
+    "Explain one signal that an output cannot be trusted as-is.",
+    "Recommend one action to take when an output is unclear."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Judging Outputs - Correct, Incorrect, Unclear",
+      "body": [
+        "An answer can sound perfectly sure of itself and still be wrong. Today you become the judge who decides whether an output is correct, incorrect, or simply unclear - and you learn to back up every judgement with a reason."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can sort outputs into correct, incorrect, and unclear.",
+        "I can give a reason for each judgement I make.",
+        "I can name one action to take when an output cannot be trusted."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Output",
+          "definition": "The text or answer an AI tool produces after you give it a prompt."
+        },
+        {
+          "term": "Verdict",
+          "definition": "The judgement you give an output: correct, incorrect, or unclear."
+        },
+        {
+          "term": "Source",
+          "definition": "A trusted place, like a textbook or official website, you check an answer against."
+        },
+        {
+          "term": "Hallucination",
+          "definition": "When an AI tool states something made up as if it were a fact."
+        },
+        {
+          "term": "Verify",
+          "definition": "To check whether something is true using a reliable source."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Sounds right is not the same as is right",
+      "body": [
+        "A language model writes by predicting which words usually come next. That makes its answers smooth and confident, but confidence is a writing style, not proof.",
+        "Your job is to separate 'sounds right' from 'is right' by checking the output against the task you set and a source you trust."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Three verdicts",
+      "body": [
+        "**Correct** means the output matches the task and agrees with a trusted source.",
+        "**Incorrect** means it clashes with something you can check now - a fact, a number, or your instruction.",
+        "**Unclear** means it is vague, incomplete, or you cannot [[verify]] it yet, so it needs more checking before use."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "You will triage three short outputs. For each, give a verdict and a six-word reason. Remember: a reason must point to a check, not a feeling."
+      ],
+      "items": [
+        "Read the task the output was meant to answer.",
+        "Read the output carefully.",
+        "Check it against the task and any source given.",
+        "Write your verdict: correct, incorrect, or unclear.",
+        "Add a short reason and, if needed, one action."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which signal most often warned you an output was not trustworthy?",
+        "When an output is unclear, is it safer to pause or to proceed?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write one thing you will now check before trusting an AI answer.",
+        "Describe a time a confident answer turned out to be wrong."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 4 - Core - Worksheet | Judging Outputs - Correct, Incorrect, Unclear",
+    "questions": [
+      {
+        "id": "g6-main-w4-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Triage three outputs. For each output, circle a verdict and write a checkable reason.",
+        "stem": "This output is ... because when I checked it against ...\nI cannot verify this because ...",
+        "lookFor": "Triages at least 2 of the 3 outputs correctly, and every verdict carries a reason tied to the task or to a source rather than to a feeling.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w4-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Signal and action. Name one signal that an output cannot be trusted, and the action you would take.",
+        "stem": "A warning signal is ...\nMy action would be ...",
+        "lookFor": "Any one checkable signal is acceptable - it contradicts the task, has no source, or contains a detail we cannot check - paired with a sensible action such as re-check, re-prompt, or ask a person.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w4-core-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Output-triage record. Record your verdict, reason, and action for each output.",
+        "stem": "Output | Verdict | Reason (checkable) | Action",
+        "lookFor": "Each row pairs a verdict with a reason tied to task or source, and names a sensible action for any output judged unclear or incorrect.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w4-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: flag these three outputs correct / incorrect / unclear and give a reason for each.",
+        "lookFor": "Correctly triages at least 2 of 3 outputs and gives a valid reason for each judgement. Push any 'it just feels wrong' towards a checkable reason.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      },
+      {
+        "id": "g6-main-w4-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): find the single detail in a 'correct-looking' output that actually makes it incorrect, and explain how you spotted it.",
+        "lookFor": "Isolates the one subtle detail that flips the output from correct to incorrect, and explains the check that exposed it rather than describing a general impression.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "emerging"
+      }
+    ]
+  }
+}

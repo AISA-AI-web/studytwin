@@ -1,0 +1,305 @@
+{
+  "id": "g6-bridging-w6-core",
+  "number": 11,
+  "week": 6,
+  "track": "bridging",
+  "type": "core",
+  "title": "Trustworthy AI Helper - Trace the Data & Plan Checks (Part 2 Core)",
+  "summary": "Students trace how the data driving their helper shapes its outcome, then plan a trusted-source verification and a risk check before trusting it.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Explain how the data used influences the helper's outcome, and predict a data change's effect.",
+    "Plan how you will verify the output and check for basic risks before trusting it."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Your helper works - now make sure it can be trusted. Today you trace how the data shapes its outcome and plan how you will verify it and check its risks."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can explain how the data shapes my helper's outcome and predict a change.",
+        "I can plan a verification and a risk check for my helper."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Trace",
+          "definition": "To follow how the data leads to the outcome."
+        },
+        {
+          "term": "Verify",
+          "definition": "To check a claim against a trusted, independent source."
+        },
+        {
+          "term": "Risk",
+          "definition": "A way the output could be wrong, unsafe, biased, or a privacy problem."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "The data drives the outcome",
+      "body": [
+        "Change the data and the outcome changes. So you can [[trace]] which data drives which part of the output.",
+        "Knowing this helps you trust - or fix - your helper."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Plan your checks",
+      "body": [
+        "Verification checks a claim against a trusted source - not by asking the AI again.",
+        "A [[risk]] check asks: could this be wrong, unsafe, biased, or a privacy problem, and how would I reduce it?"
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "Trace the data's influence, then plan your verification and risk check."
+      ],
+      "items": [
+        "Name the data that drives one part of your output.",
+        "Predict how a data change would alter the outcome.",
+        "Choose a claim to verify against a trusted source.",
+        "Name one risk and a way to reduce it.",
+        "Write your check plan."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "How does your data shape your outcome?",
+        "What is the most trustworthy way to verify a claim?",
+        "What is your helper's biggest risk?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "The data that most shapes my outcome is ...",
+        "I will verify ... against ...",
+        "My top risk is ... and I will reduce it by ..."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 6 - Core - Worksheet | Trustworthy AI Helper - Trace the Data & Plan Checks (Part 2 Core)",
+    "questions": [
+      {
+        "id": "g6-bridging-w6-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Trace the data: explain how the data influences your outcome and predict a change.",
+        "stem": "The data ... drives the outcome because ...\nIf the data changed to ..., the outcome would ...",
+        "lookFor": "A specific data-to-outcome link plus a prediction - names which data drives which part of the output and says how the outcome would change if that data changed (model: the survey's most-picked genre drove the book suggestion; swapping in a class that prefers science would change the suggestion to a science book).",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Plan your checks: plan a verification and a risk check.",
+        "stem": "Claim to verify: ... | trusted source: ...\nRisk: ... | how I will reduce it: ...",
+        "lookFor": "The verification must use a trusted, independent source rather than the same tool, and the named risk must come with a mitigation (model: verify 'most pupils prefer adventure' against the survey totals; risk of a duplicate biasing the suggestion, reduced by de-duplicating the data).",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-core-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Trustworthy AI Helper Log - Part 2 (trace + check plan): record your data trace and your verification and risk plan.",
+        "stem": "Data -> outcome link | Verification plan | Risk + mitigation",
+        "lookFor": "The Core section of the Log is the assessment evidence. Mastery: explains the data's influence on the outcome, predicts a data change, and plans a trusted-source verification and a risk check with a mitigation. Partial: explanation or only one check planned.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: explain how your data shapes your outcome, and name one claim you will verify and one risk you will reduce.",
+        "lookFor": "Links the data to the outcome, names one claim to be verified against a trusted source, and names one risk together with how it will be reduced.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      },
+      {
+        "id": "g6-bridging-w6-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): find the single data change that would most alter your helper's outcome, and explain why it matters most.",
+        "lookFor": "Identifies the single data change with the largest effect and justifies it.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product",
+        "tierProbed": "advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "id": "g6-bridging-w4-lab",
+  "number": 8,
+  "week": 4,
+  "track": "bridging",
+  "type": "lab",
+  "title": "Verify and De-risk Workshop (Lab)",
+  "summary": "Groups apply a fixed four-step verification routine to a batch of suspect outputs, record an evidence-backed verdict for each, then compare single-source and two-source checking to judge which is more reliable.",
+  "duration": "45 minutes",
+  "strands": [
+    "GE"
+  ],
+  "objectives": [
+    "Apply a verification routine to a set of suspect outputs and record the verdict for each.",
+    "Compare two verification strategies and judge which is more reliable."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Verify and De-risk Workshop (Lab)",
+      "body": [
+        "One suspect output is easy to check. Ten is where you need a system. Today you run a verification routine on a whole batch, reach an evidence-backed verdict on each, and then judge which checking strategy you would actually trust."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can run a verification routine on several suspect outputs and record a clear verdict for each.",
+        "I can compare two verification strategies and judge which is more reliable, with a reason.",
+        "I can back my verdicts with evidence from a trusted source."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "routine",
+          "definition": "A fixed set of steps applied the same way to every output."
+        },
+        {
+          "term": "verdict",
+          "definition": "Your conclusion on a claim: verified, false, or unclear."
+        },
+        {
+          "term": "evidence",
+          "definition": "The trusted-source information that backs your verdict."
+        },
+        {
+          "term": "independent sources",
+          "definition": "Sources that do not copy each other, so they are unlikely to share the same error."
+        },
+        {
+          "term": "reliable",
+          "definition": "A method you can trust to give the right result repeatedly."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "A routine keeps you fair",
+      "body": [
+        "When you check many outputs, it is tempting to judge each one by how confident it sounds. A verification [[routine]] stops that: the same fixed steps apply to every output, so a slick output gets no easy pass.",
+        "Our routine has four steps - isolate the claim, pick an independent trusted source, compare, and record a verdict. The [[verdict]] can be verified, false, or unclear, and 'unclear' is an honest answer when the evidence is not there."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Not all checks are equally reliable",
+      "body": [
+        "A single-source check is quick, but if that one source is wrong or out of date, your verdict is wrong too. A two-source cross-check is slower but far harder to fool, because two [[independent sources]] rarely share the same mistake.",
+        "Judging which strategy is more [[reliable]] means weighing speed against confidence and asking a sharp question: could these sources fail together? The more independent they are, the more you can trust their agreement."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Work in groups with roles: claim-isolator, source-checker, verdict-recorder, reporter. Run the routine on the whole batch, then compare two strategies on a tricky output."
+      ],
+      "items": [
+        "Copy the four routine steps onto your sheet.",
+        "For each output, isolate the claim and pick a trusted source.",
+        "Compare and record a verdict with its evidence.",
+        "Choose one tricky output and check it single-source, then two-source.",
+        "Judge which strategy is more reliable and why.",
+        "For one false output, write the harm and the check that de-risks it."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which verdict was hardest to reach, and what made it hard?",
+        "When is the slower two-source check worth the extra time?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "State which verification strategy you would use and the trade-off you accept.",
+        "Note one responsible-use habit this workshop reinforced."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Verify and De-risk Workshop (Lab)",
+    "questions": [
+      {
+        "id": "g6-bridging-w4-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Apply the four-step routine to each suspect output. Record a verdict and the trusted-source evidence for each.",
+        "stem": "The claim is ___\nMy verdict is ___\nEvidence: ___",
+        "lookFor": "Every verdict must cite the trusted source, not a feeling. Model: 'Verdict: false. The output said the tower was 900 metres; the official source lists a different height, so the claim does not match a trusted source.' Accept 'unclear' as a valid, honest verdict when no source on the reference sheet covers the claim.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Verify one tricky output single-source, then two-source. Judge which is more reliable and explain using source independence.",
+        "stem": "Single-source result: ___\nTwo-source result: ___\nThe more reliable strategy is ___ because ___",
+        "lookFor": "Model: single-source was faster but the one source was out of date; the two-source cross-check caught the error, so it is more reliable. Look for reasoning about source independence and the speed-versus-confidence trade-off, not just which was quicker. Agreement raises confidence but is not proof if the sources could fail together.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Log every suspect output, your verdict, the evidence, and the strategy used.",
+        "stem": "Columns: Output | Claim checked | Verdict | Evidence (trusted source) | Strategy used",
+        "lookFor": "Mastery: a verdict for each output, each backed by cited trusted-source evidence and a named strategy. Partial: verdicts for most outputs but some lack cited evidence. Not yet: verdicts are guesses with no trusted-source evidence.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Give a verdict on one output with its evidence, and judge which verification strategy is more reliable and why.",
+        "lookFor": "Applies the routine to reach an evidence-based verdict and judges which verification strategy is more reliable with a reason. Reward evidence-backed verdicts; push students who prefer speed to weigh reliability and source independence.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w4-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Design a three-layer verification for a high-stakes claim about a UAE record, and explain when the extra effort is worth it and when it is not.",
+        "lookFor": "Stretch target from the pack: designs a three-layer verification for a high-stakes claim and justifies when the extra effort is worth it and when it is not, reasoning about how independent the three sources really are.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -121,6 +121,9 @@ const mock = `
   function simulate(student, lesson, seedBase) {
     var answers = {};
     (lesson.worksheet.questions || []).forEach(function (q, qi) {
+      // Open tasks have no answer key by design; there is nothing to simulate, and
+      // reaching for q.answer on one throws.
+      if (q.autoMarked === false) return;
       if (seeded(seedBase + qi * 7.13) > student.skill) return;
       switch (q.type) {
         case 'mcq': case 'truefalse': answers[q.id] = q.answer; break;

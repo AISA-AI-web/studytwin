@@ -1,0 +1,207 @@
+{
+  "id": "g6-bridging-w1-lab",
+  "number": 2,
+  "week": 1,
+  "track": "bridging",
+  "type": "lab",
+  "title": "Data Quality Investigation (Lab)",
+  "summary": "Teams run a fair test across four versions of one dataset, record how each output shifts from the clean baseline, and rank the datasets with output evidence.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU"
+  ],
+  "objectives": [
+    "Run a hands-on comparison of clean vs noisy data and record how the output changes.",
+    "Rank data sets by expected output quality and justify the order.",
+    "Use evidence from the comparison, rather than opinion, to explain the data-to-output link."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Data Quality Investigation (Lab)",
+      "body": [
+        "In the Core lesson you predicted one AI mistake from its data. Today you run a proper investigation: four versions of the same dataset, four sets of outputs, and one big question - which data quality problem does the most damage? By the end you will rank them and defend your order with evidence, just like a real AI auditor."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can run a fair comparison of clean and noisy data and record what changes in the output.",
+        "I can rank several datasets from best to worst expected output and justify my ranking.",
+        "I can use evidence from the comparison to explain the data-to-output link."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "fair test",
+          "definition": "A comparison where you change only one thing so you can tell what caused a result."
+        },
+        {
+          "term": "baseline",
+          "definition": "The clean result you compare all other versions against."
+        },
+        {
+          "term": "evidence",
+          "definition": "A specific observation that supports a claim."
+        },
+        {
+          "term": "ranking",
+          "definition": "Ordering items from best to worst using a clear reason."
+        },
+        {
+          "term": "audit",
+          "definition": "A careful check of data or a system before you trust it."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Make the comparison fair",
+      "body": [
+        "To find out how data quality changes an output, you must be fair: keep the task and the model the same, and change only the dataset.",
+        "Then any difference you see in the output can be traced back to the data - that is what makes your evidence trustworthy."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Rank with evidence",
+      "body": [
+        "After you see how each dataset changed the output, you rank them from best to worst expected quality.",
+        "The hard part is the middle: when two datasets are both weak, you decide which flaw hurt the output more, and you point to the exact output change that proves it."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Your team compares four output sets against a clean baseline, records what changed, and ranks the datasets from best to worst with evidence."
+      ],
+      "items": [
+        "Study the clean baseline output so you know what correct looks like.",
+        "For each degraded version, write exactly how the output changed.",
+        "Match each change to its data flaw.",
+        "Score each dataset on accuracy, completeness, and consistency.",
+        "Place all four on the ranking line and justify the order."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which data flaw did the most damage, and what evidence proves it?",
+        "When two datasets are both weak, how did your team decide which was worse?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the one output change that most convinced you of your top ranking.",
+        "Describe how you would audit a dataset before trusting an AI built on it."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 1 - Lab - Worksheet | Data Quality Investigation (Lab)",
+    "questions": [
+      {
+        "id": "g6-bridging-w1-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Change from baseline: for each degraded version, describe exactly how the output changed from the clean baseline, and name the data flaw responsible.",
+        "stem": "Compared to the baseline, this output ___.\nThe flaw responsible is ___.",
+        "lookFor": "A specific output difference tied to a specific flaw - for example, the error version confidently mislabels some items because its training labels were wrong, so it repeats the wrong label as if it were correct. Partial: some changes recorded but the link to the flaw is vague or a version is missed.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Defend the ranking: write your full best-to-worst ranking and justify the two placements you found hardest to separate, using output evidence.",
+        "stem": "My order is ___.\nThe hardest pair was ___ because the output ___.",
+        "lookFor": "A defensible full ranking justified with output evidence, including the hardest pair - a model order is clean best, then noise, then gaps, then error worst, because wrong labels teach an actively false pattern while noise only adds confusion. Accept other orders if the justification cites output evidence; if a ranking has no evidence, prompt 'point to the output change that proves it'.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Investigation log: record each dataset version, its output change, its data flaw, and its dimension scores.",
+        "stem": "Version ___ | Output change vs baseline ___ | Data flaw ___ | Accuracy/Complete/Consistent score ___",
+        "lookFor": "Specific, accurate output changes recorded for every version, each linked to its data flaw, with the three dimensions scored. Not yet: vague impressions with no link to a data flaw.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: which single data flaw would you fix first to improve the output the most, and why?",
+        "lookFor": "Names one flaw from their own log and justifies it from the output evidence they gathered, rather than from opinion or a general statement about data quality.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): invent a fifth dataset that combines two flaws. Predict where it lands on the ranking line and justify your prediction with the evidence you gathered.",
+        "lookFor": "Weighs two flaws against each other and places the combined dataset using evidence from the four-way comparison rather than a hunch.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "id": "g6-bridging-w1-core",
+  "number": 1,
+  "week": 1,
+  "track": "bridging",
+  "type": "core",
+  "title": "Data Quality and AI Outputs",
+  "summary": "Students trace the causal chain from a specific data-quality problem to the specific output mistake it causes, and separate the quality of a dataset from its size.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU"
+  ],
+  "objectives": [
+    "Explain, with an example, how higher- or lower-quality data changes an AI output.",
+    "Predict the effect on the output when the data quality is degraded or improved.",
+    "Distinguish the quality of a dataset from the quantity of data in it."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "heading": "Data Quality and AI Outputs",
+      "body": [
+        "Imagine teaching a younger cousin to recognise dates using a photo album. If half the photos are blurry and one photo is actually a stone, incorrectly labelled as a date, what will your cousin get wrong? An AI learns the same way you would teach - from the examples it is shown. Today you become a data detective who can predict an AI's mistakes just by studying its data."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can explain, using a clear example, how the quality of data changes what an AI produces.",
+        "I can predict whether an output will get better or worse when the data is made cleaner or noisier, and say why.",
+        "I can tell the difference between the amount of data and the quality of data."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "data quality",
+          "definition": "How accurate, complete, consistent, and representative a dataset is."
+        },
+        {
+          "term": "label",
+          "definition": "The name attached to an example that tells the model what it is."
+        },
+        {
+          "term": "noise",
+          "definition": "Irrelevant or inconsistent detail in data that confuses the pattern."
+        },
+        {
+          "term": "representative",
+          "definition": "The data covers the real range of cases the model will meet."
+        },
+        {
+          "term": "causal chain",
+          "definition": "A step-by-step link from a cause to its effect."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "The model learns from its examples",
+      "body": [
+        "An AI model is not filled with rules that a person typed. Instead it studies a dataset and adjusts itself to match the patterns it finds.",
+        "This means the dataset is really the model's teacher. If the teacher shows wrong examples, the model learns the wrong lesson - and it does so confidently."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Quality is not the same as quantity",
+      "body": [
+        "It is tempting to think more data always helps. But a huge dataset full of mistakes just teaches the wrong pattern more strongly.",
+        "A small, clean, well-chosen dataset can beat a giant messy one. Before trusting any output, a careful builder checks the quality of the data behind it - and never puts personal or identifying information into a tool."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "You will study a dataset card, predict the exact mistake the AI will make, then watch the real outputs to check your detective work."
+      ],
+      "items": [
+        "Read your dataset card and note how each item is labelled.",
+        "Decide the quality problem: error, gap, or noise.",
+        "Predict one exact output mistake and write it down before the reveal.",
+        "Compare your prediction with the revealed clean and degraded outputs.",
+        "Write one sentence linking the data cause to the output effect."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "When could a bigger dataset actually make an AI worse?",
+        "How can an output be wrong and still sound completely sure of itself?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write one thing you can now predict about an AI just by looking at its data.",
+        "Name one place in daily life where poor-quality data could lead to an unfair result."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 1 - Core - Worksheet | Data Quality and AI Outputs",
+    "questions": [
+      {
+        "id": "g6-bridging-w1-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Trace the chain: for your dataset card, fill each box: the data problem, the learned pattern problem, and the predicted output problem. Use an arrow between each.",
+        "stem": "The data problem is ___.\nSo the model learns ___.\nSo the output will ___.",
+        "lookFor": "All three links completed so the chain runs from a named data problem (an error, a gap or noise) through the pattern the model learns to one specific output error - for example inconsistent 'date'/'dat'/'DATE' labels and a stone labelled 'date', so the model reads a small stone as a date. Not yet: the output is said to be 'bad' with no data cause named.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Quality or quantity? Read four short scenarios and decide whether the dataset's problem is about quality or quantity. Justify each choice in one sentence.",
+        "stem": "This is a ___ problem because ___.",
+        "lookFor": "Separates volume from correctness: strong answers say that adding thousands more mislabelled examples would make the wrong pattern stronger, not weaker, so a bigger dataset can still be a worse dataset. Watch for the misconception that more data always makes an AI better.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-core-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Prediction vs reveal log: record your prediction before the reveal, then what the outputs actually showed, then whether you were right. Log each dataset version, your predicted output error, the actual revealed output, and Match? (Y/N) and why.",
+        "stem": "Dataset version ___ | My predicted output error ___ | Actual revealed output ___ | Match? (Y/N) and why ___",
+        "lookFor": "A specific predicted mistake tied to a specific bad example, written before the reveal, and an honest match judgement afterwards. Partial: the prediction records a general direction of change with weak justification.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: in one or two sentences, explain how making a dataset noisier would change an AI's output, and why.",
+        "lookFor": "Predicts a specific, correct change in the output when the data is degraded and justifies it - noise confuses the pattern so the model still answers confidently but gets more cases wrong. Not yet: cannot predict, or the prediction is unrelated to the data change.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w1-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): design your own dataset card with a hidden quality problem, swap with a partner, and see if they can predict the exact output mistake it would cause.",
+        "lookFor": "Builds a card whose flaw is real but hidden, and can state in advance the exact output error it should cause. Stretch further by asking for two overlapping quality problems and how the errors would combine.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

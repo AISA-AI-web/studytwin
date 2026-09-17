@@ -1,0 +1,199 @@
+{
+  "id": "g6-bridging-w2-lab",
+  "number": 4,
+  "week": 2,
+  "track": "bridging",
+  "type": "lab",
+  "title": "Prompt Refinement Workshop (Lab)",
+  "summary": "Teams iterate a weak prompt across several versions with a one-change-per-version log, then refine for clarity and accuracy together and justify a best-balanced version from their trade-off evidence.",
+  "duration": "45 minutes",
+  "strands": [
+    "SD"
+  ],
+  "objectives": [
+    "Iterate a prompt across several versions to raise output quality, logging each change and its effect.",
+    "Refine for two goals at once (clarity and accuracy) and discuss the trade-off."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "In the Core lesson you made one smart change to a prompt. Today you run a full workshop: version 1, 2, 3, maybe 4 - each a single change you can defend.",
+        "Then comes the real challenge of a designer: chasing two goals at once, clarity and accuracy, and discovering that helping one can cost the other. Your log will prove exactly what worked."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can iterate a prompt across several versions and log each change and its effect.",
+        "I can refine for two goals at once and explain the trade-off between them.",
+        "I can use my log as evidence for which change helped the most."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "iterate",
+          "definition": "To improve something step by step across several versions."
+        },
+        {
+          "term": "trade-off",
+          "definition": "When improving one goal makes another goal worse."
+        },
+        {
+          "term": "balance",
+          "definition": "The best compromise between competing goals for a purpose."
+        },
+        {
+          "term": "accuracy",
+          "definition": "How correct and on-topic the output is."
+        },
+        {
+          "term": "clarity",
+          "definition": "How easy the output is to understand."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Iterate and keep the receipts",
+      "body": [
+        "A designer does not stop at the first improvement. You [[iterate]] - version by version - changing one thing each time and logging its effect.",
+        "The log is your **evidence**. When someone asks which change helped most, you point to the row that proves it, because you changed only one thing that version."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Two goals, one trade-off",
+      "body": [
+        "Now aim for two goals at once: [[clarity]] and [[accuracy]]. Sometimes a change that makes the output clearer quietly drops an accurate detail.",
+        "That is a [[trade-off]]. Your job is not to pretend it away but to choose the version that best balances both goals for your purpose - and to say why."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Your team iterates a weak prompt across several versions, logging each change and effect, then balances clarity and accuracy and chooses the best version with evidence."
+      ],
+      "items": [
+        "Set the goal and judge the v1 output.",
+        "Make v2 with one change; log the reason and revealed effect.",
+        "Iterate to v3 and v4, one change each, logging cause and effect.",
+        "Add accuracy as a second goal alongside clarity.",
+        "Find and record a trade-off where one goal cost the other.",
+        "Choose the best-balanced version and justify it from your log."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which single change gave the biggest quality jump, and how does your log prove it?",
+        "Where did clarity and accuracy pull against each other, and how did you decide?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the best-balanced version your team chose and one sentence on why.",
+        "Explain what balancing two goals taught you about making design decisions."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 2 - Lab - Worksheet | Prompt Refinement Workshop (Lab)",
+    "questions": [
+      {
+        "id": "g6-bridging-w2-lab-q1",
+        "type": "shortText",
+        "prompt": "For each version, write the one change you made, your reason, and the effect on the output.",
+        "stem": "Version ___ change: ___.\nReason: ___.\nEffect: ___.",
+        "lookFor": "One single change per version with a clear cause-and-effect entry (e.g. v2 added the audience 'Grade 3'; reason: remove guessing; effect: output became simpler and on-level). Watch for entries that bundle several edits or that only lengthen the prompt with no reason.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-lab-q2",
+        "type": "shortText",
+        "prompt": "Describe one point where improving clarity hurt accuracy (or the reverse), then choose your best-balanced version and justify it.",
+        "stem": "Improving ___ hurt ___ when I ___.\nMy best-balanced version is ___ because ___.",
+        "lookFor": "A specific place where one goal cost the other (e.g. cutting the notice to two sentences for clarity dropped the accurate event time), plus a best-balanced version justified from the log against the purpose. Accept any version if justified; the last version is not automatically best.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-lab-q3",
+        "type": "shortText",
+        "prompt": "Record each version's change, reason, clarity effect, and accuracy effect.",
+        "stem": "Version | Single change | Reason | Effect on clarity / accuracy",
+        "lookFor": "Several versions logged, each with one change and a clear cause-effect entry across both goals. Quality of reasoning per row matters more than the number of rows.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-lab-q4",
+        "type": "shortText",
+        "prompt": "Which version was your best balance of clarity and accuracy, and what did choosing it cost you?",
+        "stem": "",
+        "lookFor": "Names a version as the best balance and states the cost explicitly - what was given up on the other goal - showing the student expects trade-offs rather than claiming every goal improved at no cost.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      },
+      {
+        "id": "g6-bridging-w2-lab-q5",
+        "type": "shortText",
+        "prompt": "Add a third goal, tone, and describe in a few lines how balancing three goals is harder than balancing two, using your log.",
+        "stem": "",
+        "lookFor": "Adds tone as a third goal and explains, with reference to log evidence, why more goals means more competing costs and a harder choice of best balance.",
+        "autoMarked": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          }
+        ]
+      }
+    ]
+  }
+}

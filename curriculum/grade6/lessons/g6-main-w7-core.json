@@ -1,0 +1,322 @@
+{
+  "id": "g6-main-w7-core",
+  "number": 13,
+  "week": 7,
+  "track": "main",
+  "type": "core",
+  "title": "Signature Solution - Planning",
+  "summary": "Students plan a five-part signature solution - goal, prompt structure, inputs, evaluation method and risk plan - and take it through an approve-to-build gate.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Plan a structured AI solution: state the goal, the prompt structure, and the check steps.",
+    "Identify the inputs/data and the output-evaluation method.",
+    "Describe one risk and how the plan reduces it."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Today you become a designer, not just a prompter. Before anyone types a single word into an AI tool, you will plan a small solution with five parts that fit together: a goal, a prompt structure, inputs, a check, and a risk plan. A good plan is like a bridge design drawn before the first bolt is placed - it lets you find weak spots on paper, where fixing them is cheap."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can state the goal of my solution in one clear sentence.",
+        "I can lay out a prompt structure with a role, a task, and one rule.",
+        "I can name the inputs my solution needs and how I will check the output.",
+        "I can describe one risk and one way my plan reduces it."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Signature solution",
+          "definition": "A small, reusable AI design with a clear goal and connected parts that solves one simple task."
+        },
+        {
+          "term": "Prompt structure",
+          "definition": "The shape of a prompt: a role for the AI, a clear task, and at least one rule or limit."
+        },
+        {
+          "term": "Input",
+          "definition": "The information a prompt works on, chosen to contain no personal or identifying data."
+        },
+        {
+          "term": "Evaluation method",
+          "definition": "The agreed way you will judge whether an output is accurate."
+        },
+        {
+          "term": "Risk mitigation",
+          "definition": "A design choice that lowers the chance or impact of something going wrong."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "From one prompt to a whole solution",
+      "body": [
+        "In Grade 5 you improved a single prompt. This term you design a solution: a set of parts that work together to do one simple job well.",
+        "The five parts are the goal, the [[prompt structure]], the inputs, the [[evaluation method]], and the risk plan. If any part is missing, the solution is harder to trust."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Writing a prompt structure",
+      "body": [
+        "A [[prompt structure]] names a role ('You are a timetable helper'), a task ('list the three earliest buses'), and one rule ('if a time is missing, say so').",
+        "The role focuses the AI, the task says exactly what to do, and the rule keeps the output honest and easy to check."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Checks and risks before you build",
+      "body": [
+        "An [[evaluation method]] says how you will judge accuracy, such as comparing the output to a known-correct answer key.",
+        "A risk plan names one thing that could go wrong, like a confident wrong answer, and one design choice that reduces it, like a 'say if unsure' rule plus a human check. Never put personal or identifying data into a prompt."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "You will now plan your own signature solution on the plan sheet. You will not log in to any tool; the teacher runs any AI on the board. Your job is to make the plan complete and safe."
+      ],
+      "items": [
+        "Read your task card and write the goal in one clear sentence.",
+        "Fill the role-task-rule slots for your prompt structure.",
+        "List the inputs your prompt needs, checking there is no personal data.",
+        "Write your evaluation method and one risk with its mitigation.",
+        "Self-check against the five-part list, then submit for the approve-to-build gate."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which part of a plan is easiest to forget, and why does that matter?",
+        "How does a 'say if unsure' rule make an output safer to trust?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the one part of your plan you are most confident about.",
+        "Write the one part you will strengthen before building next week."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 7 - Core - Worksheet | Signature Solution - Planning",
+    "questions": [
+      {
+        "id": "g6-main-w7-core-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Name the five parts: using your task card, complete each part of the plan in one line.",
+        "stem": "The goal is to ___.\nThe AI acts as a ___ (role).\nThe task is to ___.\nOne rule is ___.\nThe inputs are ___ (no personal data).\nI will check accuracy by ___.\nOne risk is ___; my plan reduces it by ___.",
+        "lookFor": "All five parts are present: a goal naming the task and who it helps, a role + task + one rule structure, inputs with no personal or identifying data, a checkable evaluation method (e.g. compare labelled items to a teacher answer key), and one risk with a mitigation that clearly reduces that named risk. Evaluation and risk are the parts most often left blank or thin.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-core-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Spot the weak plan: read the two sample plans provided",
+        "stem": "The stronger plan is ___ because ___.",
+        "lookFor": "Chooses the complete plan and names a specific missing part - the evaluation method or the risk row - as the reason, rather than saying the plan is longer or neater. Structure beats size: a missing check is a hidden weak spot.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-core-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "My plan review record: fill one row for each of the five parts (plan part / what I wrote / ready? Y/N) and mark whether it is ready.",
+        "lookFor": "One row per part, each quoting what the student actually wrote plus an honest Y/N. Check the evaluation and risk rows hardest: a 'Y' there should sit beside a method that can really be checked and a mitigation tied to the named risk.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-core-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: write your goal sentence and the one risk your plan reduces.",
+        "lookFor": "Goal is one clear sentence saying what the solution does and who it helps. The risk is realistic (e.g. a confident but wrong answer) and is one the plan genuinely reduces through its rule, check or human step.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-core-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): add a second rule to your prompt structure and explain which kind of wrong answer it is designed to stop.",
+        "lookFor": "Writes a second rule that fits the same prompt structure and names the kind of wrong answer it blocks (e.g. a confident guess, a dropped item, an unclear label). The link between the rule and the error it stops is what to look for.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

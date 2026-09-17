@@ -1,0 +1,315 @@
+{
+  "id": "g6-main-w7-lab",
+  "number": 14,
+  "week": 7,
+  "track": "main",
+  "type": "lab",
+  "title": "Prototype and Pressure-Test the Plan (Lab)",
+  "summary": "Students prototype their approved plan on the board, break it on purpose with a tricky curated input, and design an if-then fallback branch that keeps a person in the loop.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Prototype the prompt structure and pressure-test the plan against a tricky input.",
+    "Add a fallback branch for when the output fails a check.",
+    "Record what changed and why after the pressure test."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "A plan on paper looks tidy. Today you find out how it behaves under pressure. You will build a quick prototype, then throw your hardest inputs at it on purpose - the missing item, the messy note, the two-in-one line. When it stumbles, you will not hide the failure; you will design a fallback branch that catches it safely. Engineers stress-test bridges before people cross them. You will stress-test your solution before it is trusted."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can run my prompt structure on a normal input and read the output.",
+        "I can pressure-test it with a tricky input and spot where it fails.",
+        "I can add a fallback branch that says what to do when a check fails.",
+        "I can record the change I made and the reason for it."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Prototype",
+          "definition": "A first working version built quickly to see how a design really behaves."
+        },
+        {
+          "term": "Pressure test",
+          "definition": "Deliberately trying a tricky input to reveal a weak spot."
+        },
+        {
+          "term": "Edge case",
+          "definition": "An unusual input at the edge of what a solution expects, like a missing or double value."
+        },
+        {
+          "term": "Fallback branch",
+          "definition": "A planned 'if a check fails, then...' response that handles a failure safely."
+        },
+        {
+          "term": "Error type",
+          "definition": "A label for what went wrong: wrong, unclear, or missing."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Prototype first, judge second",
+      "body": [
+        "A [[prototype]] is a fast first version. Running it shows how your design behaves, not just how you hoped it would.",
+        "The teacher runs your prompt on the board with a normal curated input. You read the output and decide: did it meet the goal?"
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Design the fallback branch",
+      "body": [
+        "When a check fails, a good solution follows a [[fallback branch]] instead of giving a confident wrong answer.",
+        "Write it as 'If the check fails, then ___ and ask a person.' Keeping a human in the loop is part of responsible design.",
+        "Remember: only curated, made-up inputs - never real names or personal data."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "You will prototype your approved plan, pressure-test it, and add a fallback branch. The teacher runs the AI on the board; you do not log in. Log every run."
+      ],
+      "items": [
+        "Copy your prompt structure into the prototype slot of your log.",
+        "Watch the normal-input run on the board and record whether it met the goal.",
+        "Pressure-test with a tricky curated input and record the error type.",
+        "Write your fallback branch as an if-then sentence that asks a person.",
+        "Log the one change you made and the reason it will help."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which tricky input broke the most prototypes, and why?",
+        "Why is a handled failure safer than a confident wrong answer?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write the weak spot your pressure test exposed.",
+        "Write how your fallback branch will handle it next week."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 7 - Lab - Worksheet | Prototype and Pressure-Test the Plan (Lab)",
+    "questions": [
+      {
+        "id": "g6-main-w7-lab-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Predict then test: before the board run, predict how your prompt will handle one tricky input. After the run, record what actually happened.",
+        "stem": "I predict the output will be ___.\nThe actual output was ___.\nThe error type was ___ (wrong / unclear / missing).",
+        "lookFor": "The prediction is written before the run and the actual output after it, and the error type is one of the three labels. A real pressure test exposes something - e.g. 'found: charger and a scarf' returning 'devices' only is a missing error, not a wrong one.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-lab-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Write your fallback branch: turn your exposed failure into a safe fallback using the if-then frame",
+        "stem": "If ___ then ___ and ask a person.",
+        "lookFor": "The branch handles the failure the pressure test actually exposed and keeps a person in the loop (e.g. 'if a notice names two items, then label each one separately, and if still unclear label it other and ask a person'). A vague branch, or one that does not match the observed failure, is only approaching.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Prototype build/test log: record each run - the input used (curated), the output, whether it met the goal (Y/N), and the error type if any.",
+        "lookFor": "At least one normal run and one pressure test are logged, each with its curated input, the output, a Y/N against the goal, and a classified error type for any run that failed. Logs without an error type are returned.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: write the weak spot you found and the fallback branch you designed for it.",
+        "lookFor": "Names one specific weak spot from their own log, not a general worry, and gives a fallback branch that visibly answers that weak spot.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-main-w7-lab-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): design a second fallback for a different error type and say which failure is more likely and why.",
+        "lookFor": "A second branch aimed at a different error type (wrong / unclear / missing) from the first, plus a judgement about which failure is more likely with a reason drawn from the runs they logged.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CE·G6·E"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·GE·G6·E"
+          }
+        ],
+        "tierProbed": "emerging",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

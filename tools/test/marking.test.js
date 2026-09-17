@@ -40,50 +40,113 @@ function check(name, condition, detail) {
   else { failed++; console.error(`  FAIL ${name}${detail ? ' — ' + detail : ''}`); }
 }
 
-/** Builds the fully-correct answer set for a worksheet from its answer keys. */
+/*
+ * FIXTURES, not curriculum.
+ *
+ * These tests used to run against whatever lessons happened to be in the repo, so they
+ * broke the moment the placeholder content was replaced — and, worse, they would have
+ * gone quiet if real content contained no auto-marked questions, which is exactly what
+ * the published Grade 6 pack turns out to be. The marking engine still has to work for
+ * grades and worksheets that do carry closed items, so it is tested against fixtures
+ * that exercise every supported type regardless of what content is loaded.
+ */
+const REF = [{ framework: 'AIF', strand: 'CU', grade: 6, tier: 'E', code: 'AIF\u00B7CU\u00B7G6\u00B7E' }];
+
+const FIXTURE = {
+  title: 'Marking engine fixture',
+  questions: [
+    { id: 'q-mcq', type: 'mcq', marks: 2, frameworkRefs: REF,
+      prompt: 'Which best describes a learning system?',
+      options: [{ id: 'a', text: 'It follows written rules' },
+                { id: 'b', text: 'It finds patterns in examples' },
+                { id: 'c', text: 'It stores a lookup table' },
+                { id: 'd', text: 'It runs faster' }],
+      answer: 'b',
+      feedback: { correct: 'Yes.', incorrect: 'Reread the section on learning.' } },
+
+    { id: 'q-tf', type: 'truefalse', marks: 1, frameworkRefs: REF,
+      prompt: 'General AI exists today.', answer: false },
+
+    { id: 'q-multi', type: 'multi', marks: 3, frameworkRefs: REF,
+      prompt: 'Select all that use machine learning.',
+      options: [{ id: 'a', text: 'Voice assistant' }, { id: 'b', text: 'Calculator' },
+                { id: 'c', text: 'Recommendations' }, { id: 'd', text: 'Spam filter' },
+                { id: 'e', text: 'Digital clock' }],
+      answer: ['a', 'c', 'd'] },
+
+    { id: 'q-match', type: 'matching', marks: 4, frameworkRefs: REF,
+      prompt: 'Match each system to the data it learns from.',
+      left: [{ id: 'l1', text: 'Face recognition' }, { id: 'l2', text: 'Translation' },
+             { id: 'l3', text: 'Spam filter' }, { id: 'l4', text: 'Music picks' }],
+      right: [{ id: 'r1', text: 'Labelled photos' }, { id: 'r2', text: 'Translated sentences' },
+              { id: 'r3', text: 'Junk-marked email' }, { id: 'r4', text: 'Listening history' }],
+      answer: { l1: 'r1', l2: 'r2', l3: 'r3', l4: 'r4' } },
+
+    { id: 'q-order', type: 'ordering', marks: 4, frameworkRefs: REF,
+      prompt: 'Put the stages in order.',
+      items: [{ id: 's1', text: 'Collect examples' }, { id: 's2', text: 'Train' },
+              { id: 's3', text: 'Test on unseen items' }, { id: 's4', text: 'Improve and retrain' }],
+      answer: ['s1', 's2', 's3', 's4'] },
+
+    { id: 'q-num', type: 'numeric', marks: 2, frameworkRefs: REF,
+      prompt: '17 correct out of 20. Accuracy as a percentage?',
+      answer: 85, tolerance: 0.5 },
+
+    { id: 'q-fill', type: 'fillBlank', marks: 2, frameworkRefs: REF,
+      prompt: 'Complete: machine learning finds patterns in ___ instead of following ___.',
+      blanks: ['first blank', 'second blank'],
+      answer: [['data', 'examples', 'training data'], ['rules', 'instructions', 'a rule']] },
+
+    { id: 'q-short', type: 'shortText', marks: 3, frameworkRefs: REF,
+      prompt: 'Explain why examples beat rules for recognising a cat.',
+      keywordsAny: ['pattern', 'example', 'learn', 'rule', 'vary', 'different'],
+      keywordsNeeded: 2,
+      modelAnswer: 'Cats vary so much that the rules would be endless; examples let the ' +
+                   'system find the pattern itself.' }
+  ]
+};
+
+/** The fully-correct answer set for a worksheet, built from its own answer keys. */
 function perfectAnswers(worksheet) {
   const answers = {};
   worksheet.questions.forEach((q) => {
+    if (q.autoMarked === false) return;
     switch (q.type) {
-      case 'mcq': answers[q.id] = q.answer; break;
-      case 'truefalse': answers[q.id] = q.answer; break;
-      case 'multi': answers[q.id] = q.answer.slice(); break;
+      case 'mcq': case 'truefalse': case 'numeric': answers[q.id] = q.answer; break;
+      case 'multi': case 'ordering': answers[q.id] = q.answer.slice(); break;
       case 'matching': answers[q.id] = Object.assign({}, q.answer); break;
-      case 'ordering': answers[q.id] = q.answer.slice(); break;
-      case 'numeric': answers[q.id] = q.answer; break;
       case 'fillBlank':
-        answers[q.id] = q.answer.map((a) => (Array.isArray(a) ? a[0] : a));
-        break;
-      case 'shortText':
-        // Answer with the model answer — it should satisfy the keyword rules.
-        answers[q.id] = q.modelAnswer;
-        break;
+        answers[q.id] = q.answer.map((a) => (Array.isArray(a) ? a[0] : a)); break;
+      case 'shortText': answers[q.id] = q.modelAnswer; break;
     }
   });
   return answers;
 }
 
+const FIXTURE_TOTAL = FIXTURE.questions
+  .reduce((sum, q) => sum + (q.autoMarked === false ? 0 : q.marks), 0);
+
 console.log('\nFull marks on a perfect paper');
-['g6-l01', 'g6-l02'].forEach((id) => {
-  const lesson = api.CURRICULUM.grade6.lessons[id];
-  const result = api.markWorksheet_(lesson.worksheet, perfectAnswers(lesson.worksheet));
-  check(`${id} scores 100%`, result.percent === 100,
-    `got ${result.percent}% (${result.marksAwarded}/${result.marksAvailable}); ` +
-    result.results.filter((r) => !r.correct).map((r) => r.questionId).join(', '));
-});
+const perfect = api.markWorksheet_(FIXTURE, perfectAnswers(FIXTURE));
+check('a perfect paper scores 100%', perfect.percent === 100,
+  `got ${perfect.percent}% (${perfect.marksAwarded}/${perfect.marksAvailable}); wrong: ` +
+  perfect.results.filter((r) => !r.correct).map((r) => r.questionId).join(', '));
+check('every supported question type is exercised',
+  new Set(FIXTURE.questions.map((q) => q.type)).size === 8,
+  'the fixture must cover all eight markable types');
+check('marks available equal the paper total',
+  perfect.marksAvailable === FIXTURE_TOTAL, `${perfect.marksAvailable} vs ${FIXTURE_TOTAL}`);
 
 console.log('\nZero on an empty paper');
-['g6-l01', 'g6-l02'].forEach((id) => {
-  const lesson = api.CURRICULUM.grade6.lessons[id];
-  const result = api.markWorksheet_(lesson.worksheet, {});
-  check(`${id} scores 0%`, result.percent === 0, `got ${result.percent}%`);
-  check(`${id} marks every question unanswered`,
-    result.results.every((r) => r.answered === false));
-});
+const empty = api.markWorksheet_(FIXTURE, {});
+check('an empty paper scores 0%', empty.percent === 0, `got ${empty.percent}%`);
+check('every question is recorded unanswered',
+  empty.results.every((r) => r.answered === false));
+check('an unanswered paper still reports the marks that were available',
+  empty.marksAvailable === FIXTURE_TOTAL);
 
 console.log('\nPartial credit');
-const l01 = api.CURRICULUM.grade6.lessons['g6-l01'];
-const multi = l01.worksheet.questions.find((q) => q.id === 'l01q3');
+const multi = FIXTURE.questions.find((q) => q.id === 'q-multi');
 check('multi: two of three correct earns 2/3 of the marks',
   api.markQuestion_(multi, ['a', 'c']).marksAwarded === Math.round((2 / 3) * multi.marks * 100) / 100,
   `got ${api.markQuestion_(multi, ['a', 'c']).marksAwarded} of ${multi.marks}`);
@@ -98,17 +161,16 @@ check('multi: all correct with no distractors picked earns full marks',
 check('multi: duplicate submissions of the same option are not double counted',
   api.markQuestion_(multi, ['a', 'a', 'c', 'd']).marksAwarded === multi.marks);
 
-const matching = l01.worksheet.questions.find((q) => q.id === 'l01q4');
+const matching = FIXTURE.questions.find((q) => q.id === 'q-match');
 check('matching: half the pairs earns half the marks',
   api.markQuestion_(matching, { l1: 'r1', l2: 'r2', l3: 'r1', l4: 'r1' }).marksAwarded === matching.marks / 2);
 
-const ordering = api.CURRICULUM.grade6.lessons['g6-l02'].worksheet.questions
-  .find((q) => q.id === 'l02q1');
+const ordering = FIXTURE.questions.find((q) => q.id === 'q-order');
 check('ordering: reversed sequence scores zero',
   api.markQuestion_(ordering, ordering.answer.slice().reverse()).marksAwarded === 0);
 
 console.log('\nText normalisation');
-const fill = l01.worksheet.questions.find((q) => q.id === 'l01q5');
+const fill = FIXTURE.questions.find((q) => q.id === 'q-fill');
 check('fillBlank accepts any listed synonym',
   api.markQuestion_(fill, ['examples', 'instructions']).correct);
 check('fillBlank ignores case and surrounding whitespace',
@@ -116,7 +178,7 @@ check('fillBlank ignores case and surrounding whitespace',
 check('fillBlank rejects a wrong word',
   api.markQuestion_(fill, ['pizza', 'rules']).marksAwarded === fill.marks / 2);
 
-const short = l01.worksheet.questions.find((q) => q.id === 'l01q6');
+const short = FIXTURE.questions.find((q) => q.id === 'q-short');
 check('shortText credits an answer containing enough keywords',
   api.markQuestion_(short, 'Cats vary a lot so you learn from examples and patterns.').correct);
 check('shortText gives partial credit for one keyword',
@@ -125,8 +187,7 @@ check('shortText scores an off-topic answer zero',
   api.markQuestion_(short, 'I do not know.').marksAwarded === 0);
 
 console.log('\nNumeric tolerance');
-const numeric = api.CURRICULUM.grade6.lessons['g6-l02'].worksheet.questions
-  .find((q) => q.id === 'l02q2');
+const numeric = FIXTURE.questions.find((q) => q.id === 'q-num');
 check('numeric accepts the exact value', api.markQuestion_(numeric, 85).correct);
 check('numeric accepts a value inside tolerance', api.markQuestion_(numeric, 85.4).correct);
 check('numeric rejects a value outside tolerance', api.markQuestion_(numeric, 80).marksAwarded === 0);
@@ -171,19 +232,45 @@ check('an all-open worksheet reports 0 available rather than a misleading 0%',
   api.markWorksheet_({ questions: [openQ] }, { open1: 'x' }).marksAvailable === 0);
 
 console.log('\nAnswer keys never reach the browser');
-const safe = api.getLessonForStudent_('grade6', 'g6-l01');
+const safe = api.stripAnswerKey_({ id: 'fixture', worksheet: FIXTURE });
 const serialised = JSON.stringify(safe);
-check('stripped lesson has no "answer" field',
+check('stripped worksheet has no "answer" field',
   safe.worksheet.questions.every((q) => q.answer === undefined));
-check('stripped lesson has no acceptedAnswers or keyword lists',
+check('stripped worksheet has no acceptedAnswers or keyword lists',
   safe.worksheet.questions.every((q) =>
     q.acceptedAnswers === undefined && q.keywordsAny === undefined && q.keywordsAll === undefined));
-check('stripped lesson has no modelAnswer', !/modelAnswer/.test(serialised));
-check('stripped lesson has no feedback text', !/"feedback"/.test(serialised));
-check('stripped lesson keeps options students need to answer',
-  safe.worksheet.questions.find((q) => q.id === 'l01q1').options.length === 4);
+check('stripped worksheet has no modelAnswer', !/modelAnswer/.test(serialised));
+check('stripped worksheet has no feedback text', !/"feedback"/.test(serialised));
+check('stripped worksheet keeps options students need to answer',
+  safe.worksheet.questions.find((q) => q.id === 'q-mcq').options.length === 4);
 check('the authoritative copy is untouched by stripping',
-  api.CURRICULUM.grade6.lessons['g6-l01'].worksheet.questions[0].answer === 'b');
+  FIXTURE.questions.find((q) => q.id === 'q-mcq').answer === 'b');
+
+/*
+ * The same guarantee, swept across the real curriculum.
+ *
+ * The fixture proves the function works; this proves it holds for every lesson actually
+ * shipped, which is what matters. It is also the check that would catch an authoring
+ * mistake putting a teacher-only field somewhere stripAnswerKey_ does not look.
+ */
+const gradeKeys = Object.keys(api.CURRICULUM);
+let lessonsSwept = 0;
+const leaks = [];
+gradeKeys.forEach((gradeKey) => {
+  Object.keys(api.CURRICULUM[gradeKey].lessons || {}).forEach((lessonId) => {
+    lessonsSwept++;
+    const student = JSON.stringify(api.getLessonForStudent_(gradeKey, lessonId));
+    ['answer', 'lookFor', 'modelAnswer', 'acceptedAnswers', 'keywordsAny', 'keywordsAll',
+     'feedback', 'tierProbed'].forEach((field) => {
+      if (new RegExp('"' + field + '"').test(student)) {
+        leaks.push(`${lessonId}: "${field}"`);
+      }
+    });
+  });
+});
+check('every shipped lesson was swept', lessonsSwept > 0, `swept ${lessonsSwept}`);
+check(`no teacher-only field reaches a student in any of ${lessonsSwept} lessons`,
+  leaks.length === 0, leaks.slice(0, 5).join('; '));
 
 const safeOpen = api.stripAnswerKey_({
   worksheet: { questions: [openQ] }

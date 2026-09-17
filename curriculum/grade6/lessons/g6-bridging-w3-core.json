@@ -1,0 +1,204 @@
+{
+  "id": "g6-bridging-w3-core",
+  "number": 5,
+  "week": 3,
+  "track": "bridging",
+  "type": "core",
+  "title": "How Data Shapes a Solution's Outcome",
+  "summary": "Students trace how the examples a fruit-ripeness sorter learned from decide the answer it gives, then predict how changing that data would move the outcome.",
+  "duration": "45 minutes",
+  "strands": [
+    "CE"
+  ],
+  "objectives": [
+    "Explain how the data used changes the outcome of a given solution.",
+    "Predict how a change in the data would change the solution's result."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Two apps can share the exact same code and still disagree about the same photo. The secret is not in the code it is in what each app was shown. Today you become a data detective, tracing how the examples an app learns from decide the answer it gives."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can explain, in my own words, how the data fed into a solution shapes the outcome it produces.",
+        "I can predict what would happen to the outcome if the data were changed, and give a reason.",
+        "I can point to a specific part of the data that most affects the result."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "solution",
+          "definition": "The whole system that solves a problem - the data plus the model built from it."
+        },
+        {
+          "term": "data",
+          "definition": "The examples a solution learns from."
+        },
+        {
+          "term": "outcome",
+          "definition": "The answer or result the solution gives."
+        },
+        {
+          "term": "pattern",
+          "definition": "The regularity a model finds across many examples."
+        },
+        {
+          "term": "balance",
+          "definition": "Whether the data has roughly fair amounts of each category."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "A solution is data plus a model",
+      "body": [
+        "When people say an app 'decides', they often picture a programmer writing every rule by hand. Machine-learning solutions do not work that way. They build a **model** by studying [[data]] - lots of examples - and capturing the [[pattern]]s inside.",
+        "Because the pattern comes from the examples, the examples quietly control the answer. Feed the model different data and it learns a different pattern, so it gives a different [[outcome]], even with the very same code."
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Amount and balance both matter",
+      "body": [
+        "Data influences an outcome in two ways. First, the *amount*: if the model saw 100 sunny photos and only 3 rainy ones, it treats sunny as normal and stumbles on rain.",
+        "Second, the [[balance]]: adding more of what the model already has plenty of changes little, but adding examples of a rare or missing category can move the outcome a lot. A data detective looks for the gap."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Hands-on",
+      "heading": "Let's try it - hands-on",
+      "body": [
+        "Your teacher will run a fruit-ripeness sorter on the board. Your job is not to run it - it is to trace why it answers the way it does, using the data list on your card."
+      ],
+      "items": [
+        "Read the data list on your card and say what the sorter mostly saw.",
+        "Watch one fruit go through and note the outcome.",
+        "Draw an arrow from the data batch you think caused that outcome.",
+        "Write: 'The outcome is ___ because the data mostly showed ___.'",
+        "Check your reason against a second fruit - does the story still hold?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which data batch had the biggest effect on the outcome, and how do you know?",
+        "If you could add only one batch of new data, which would you add to make the sorter fairer?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "Write one sentence explaining how data shaped today's outcome.",
+        "Note one thing you would check before trusting a solution's answer."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 3 - Core - Worksheet | How Data Shapes a Solution's Outcome",
+    "questions": [
+      {
+        "id": "g6-bridging-w3-core-g6-bw3c-q1",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Trace the data: use the worked solution card. Draw an arrow from the data batch to the outcome, then explain the link in one sentence.",
+        "stem": "The outcome is ___\nbecause the data mostly showed ___",
+        "lookFor": "A named data feature causing the outcome - for example that the training data was mostly ripe brown dates, so the sorter treats brown as the normal ripe look - rather than a general 'the data did it'.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w3-core-g6-bw3c-q2",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "What if the data changed? Predict how the outcome changes if we add 50 green unripe date photos. Point to the exact data that causes your predicted change.",
+        "stem": "I predict the outcome will ___\nbecause the added data ___",
+        "lookFor": "Reasoning that links the added category to the shifted outcome - more green dates labelled 'unripe' correctly because the sorter now has examples of a category it was missing. A plausible shift with only vague justification is partial.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w3-core-g6-bw3c-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Data change log: for each data change, record what changed and how the outcome moved. Use the columns Data change | Predicted outcome | Which data caused it | Confidence (high/med/low).",
+        "lookFor": "Each row attributes the predicted movement to a specific data batch rather than to luck or to the code, and the confidence rating is used honestly on the rows where the data link is weaker.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "process"
+      },
+      {
+        "id": "g6-bridging-w3-core-g6-bw3c-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Exit ticket: explain in two sentences how the data shaped the sorter's outcome, and predict one data change that would flip it.",
+        "lookFor": "A clear path traced from specific data to the outcome, plus a prediction of the shift justified by pointing to the exact data changed. Attributing the outcome to luck, the code or something being broken is not yet there.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w3-core-g6-bw3c-q5",
+        "type": "shortText",
+        "autoMarked": false,
+        "prompt": "Challenge (stretch): design the smallest possible data change that would flip the sorter from 'ripe' to 'unripe' on a brown date, and explain why so small a change can have such a big effect.",
+        "lookFor": "The gap-filling idea: a small batch that supplies a category the sorter barely had moves the outcome more than adding to a category it already has plenty of. Look for the smallest change named precisely, not just 'add more data'.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          }
+        ],
+        "tierProbed": "advanced",
+        "evidenceType": "product"
+      }
+    ]
+  }
+}

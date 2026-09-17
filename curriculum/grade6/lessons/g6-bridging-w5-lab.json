@@ -1,0 +1,252 @@
+{
+  "id": "g6-bridging-w5-lab",
+  "number": 10,
+  "week": 5,
+  "track": "bridging",
+  "type": "lab",
+  "title": "Trustworthy AI Helper - Build & Refine the Prompt (Part 1 Lab)",
+  "summary": "Students turn their Week 5 Core design into a working prototype and improve it by changing one part of the prompt at a time, logging each version, change and effect.",
+  "duration": "45 minutes",
+  "strands": [
+    "CU",
+    "SD",
+    "CE",
+    "GE"
+  ],
+  "objectives": [
+    "Build a working prototype of the helper using the structured prompt and improved data.",
+    "Refine the prompt across versions to raise output quality, logging each change and its effect."
+  ],
+  "sections": [
+    {
+      "type": "text",
+      "body": [
+        "Now build it! Today you turn your design into a working helper and make it better by refining the prompt, one change at a time."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "I can…",
+      "items": [
+        "I can build a working prototype of my helper.",
+        "I can refine the prompt across versions and explain what improved."
+      ]
+    },
+    {
+      "type": "vocabulary",
+      "heading": "Words to know",
+      "terms": [
+        {
+          "term": "Prototype",
+          "definition": "A first working version you can test and improve."
+        },
+        {
+          "term": "Iterate",
+          "definition": "To improve something step by step, testing each change."
+        },
+        {
+          "term": "Version",
+          "definition": "One attempt at your prompt that you can compare with the next."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "Build, run, refine",
+      "body": [
+        "Run your prompt on the improved data and read the output.",
+        "Judge it against your task. Then change one part of the prompt and run it again.",
+        "Changing one thing at a time tells you what actually helped."
+      ]
+    },
+    {
+      "type": "activity",
+      "label": "Let's try it - hands-on",
+      "body": [
+        "Build your prototype and refine the prompt across versions."
+      ],
+      "items": [
+        "Run prompt v1 on your data.",
+        "Judge it against your task.",
+        "Change one part; run again.",
+        "Log the change and its effect.",
+        "Repeat until it meets the task.",
+        "Record your best version."
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "Think about it",
+      "items": [
+        "Which change improved your output the most?",
+        "Why refine one change at a time?",
+        "Is your best prompt precise or just long?"
+      ]
+    },
+    {
+      "type": "list",
+      "heading": "My reflection",
+      "items": [
+        "My best prompt version is ...",
+        "The change that helped most was ... because ...",
+        "Next I will check ..."
+      ]
+    }
+  ],
+  "worksheet": {
+    "title": "Week 5 - Lab - Worksheet | Trustworthy AI Helper - Build & Refine the Prompt (Part 1 Lab)",
+    "instructions": "Name: __________________________________  Class: ________________  Date: ________________",
+    "questions": [
+      {
+        "id": "g6-bridging-w5-lab-q1",
+        "type": "shortText",
+        "stem": "v1: ... | effect: ...\nv2: ... | change: ... | effect: ...\nBest version: ...",
+        "autoMarked": false,
+        "lookFor": "Distinct versions where exactly ONE part of the prompt changes between them, each with its effect, ending in a named best version. Model: v1 'suggest a book' gave a vague list; v2 added 'one book, with a reason, using the survey' and the output became specific and justified. Watch for pairs changing several things at once, or assuming a longer prompt is a better prompt.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Log each prompt version, the change you made, and its effect."
+      },
+      {
+        "id": "g6-bridging-w5-lab-q2",
+        "type": "shortText",
+        "stem": "Columns: Version | Change made | Effect on the output",
+        "autoMarked": false,
+        "lookFor": "A complete log from v1 to the best version with a reasoned justification for the key change. This is the formative evidence for SD: iterates the prompt to a measurably better output and explains the causal reason for the improvement. For trial-and-error, prompt 'name the change and its effect'. Record SD as mastery/partial/not-yet.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Record each version, the change, and the effect on the output."
+      },
+      {
+        "id": "g6-bridging-w5-lab-q3",
+        "type": "shortText",
+        "autoMarked": false,
+        "lookFor": "Names a specific version, identifies a single change, and gives a causal reason for why that change improved the output (usually added detail, a named data source, or a required form). Reward a one-change improvement with a causal reason; 'it just got better' is partial.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Name your best prompt version and the one change that improved it most, with a reason."
+      },
+      {
+        "id": "g6-bridging-w5-lab-q4",
+        "type": "shortText",
+        "autoMarked": false,
+        "lookFor": "Recognises that detail added for accuracy can make the prompt longer and harder to follow, while a short clear prompt may leave the output vague - and names the balance they struck. Precise beats long; look for that judgement being made explicitly.",
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "prompt": "Refine your prompt for accuracy AND clarity at once. Explain the trade-off you had to balance."
+      }
+    ]
+  }
+}

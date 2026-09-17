@@ -41,14 +41,21 @@ anywhere; worksheet marks are recorded as *product evidence*, one of the three s
 ADEK requires a judgement to triangulate across. See
 [`docs/adek-alignment.md`](docs/adek-alignment.md).
 
-**Content: provisional.** Grade 6 ships with one core lesson and one lab written as
-structurally complete placeholders, so the whole system can be seen working end to end.
-Every file carrying placeholder content is marked `"provisional": true`.
+**Content: the published Grade 6 pack.** 32 lessons — 12 Bridging (*Building Trustworthy
+AI*) and 20 Main Course (*Rule-Based vs Learning Systems*), a Core and a Lab each week,
+organised by week as the pack is.
 
-> The lesson content and worksheet questions currently in `curriculum/grade6/lessons/`
-> are **not** the official ADEK material and must be replaced with the published Grade 6
-> pack before this is used for real reporting. The standards themselves are real: they are
-> extracted from ADEK's published Scope & Sequence into `curriculum/framework/`.
+Of 159 worksheet questions, **none are auto-markable**. That is not a gap in the
+extraction: the published Grade 6 worksheets are sentence stems, logs, exit tickets and
+justifications throughout. The platform captures each response verbatim and puts it in
+front of the teacher beside the pack's own look-for, rather than inventing a score for
+work no mark scheme can judge.
+
+> Every week was extracted from the published pack and then independently re-verified
+> against it — one question per published worksheet block, sections only from the student
+> lesson, nothing scored without a real answer key. A first extraction pass that used
+> looser rules produced fabricated questions in several weeks; all 16 weeks were
+> re-extracted under the strict rules and re-checked before anything was committed.
 
 ## Repository layout
 
@@ -94,6 +101,13 @@ Writes `preview/index.html` — open it in any browser. It inlines the real mark
 content and attainment code with a demo cohort, so worksheets are genuinely marked by
 the same engine that runs in production. A bar at the top switches between the student,
 teacher and admin views. Nothing is saved; reload to reset.
+
+**The build refuses to run against the real curriculum.** The preview has to inline the
+authoritative lessons in order to mark client-side, which means it would carry every
+answer key and teacher look-for. The published packs are licensed to the school and
+marked *"not for distribution to students"*, so the preview only builds from content
+explicitly flagged `provisional`. To demo the real lessons, use the deployment — there
+answer keys are stripped server-side and never reach a browser.
 
 To deploy it for real, follow [`docs/deployment.md`](docs/deployment.md).
 To write or edit lessons, follow [`docs/authoring-lessons.md`](docs/authoring-lessons.md).
