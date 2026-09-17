@@ -1,0 +1,1197 @@
+{
+  "source": "ADEK AI Literacy Curriculum — Scope & Sequence, KG to Grade 12, Term 1",
+  "framework": "ADEK K–12 AI Fluency Framework",
+  "extractedFrom": "curriculum/source/ADEK_Scope_and_Sequence_Term1.html",
+  "tiers": [
+    {
+      "key": "emerging",
+      "label": "Emerging",
+      "letter": "E",
+      "ordinal": 1
+    },
+    {
+      "key": "proficient",
+      "label": "Proficient",
+      "letter": "P",
+      "ordinal": 2
+    },
+    {
+      "key": "advanced",
+      "label": "Advanced",
+      "letter": "A",
+      "ordinal": 3
+    }
+  ],
+  "strandRows": [
+    {
+      "code": "CU",
+      "row": "Knowing how intelligent systems learn and operate",
+      "theme": "How AI works"
+    },
+    {
+      "code": "SD",
+      "row": "Working with data, and designing solutions",
+      "theme": "Data & design"
+    },
+    {
+      "code": "CE",
+      "row": "Exercising judgement in the use of AI systems",
+      "theme": "Judgement"
+    },
+    {
+      "code": "GE",
+      "row": "Assessing AI systems for ethical use",
+      "theme": "Ethics & governance"
+    }
+  ],
+  "grades": {
+    "kg1": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·KG1·E",
+            "descriptor": "Notices that machines or objects respond to human actions through unplugged observation."
+          },
+          "proficient": {
+            "code": "AIF·CU·KG1·P",
+            "descriptor": "Identifies simple sensors (e.g., cameras, microphones) and distinguishes them from human senses."
+          },
+          "advanced": {
+            "code": "AIF·CU·KG1·A",
+            "descriptor": "Describes simple cause-and-effect relationships independently during physical play."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "Data Awareness",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·KG1·E",
+            "descriptor": "Recognises that information is needed to complete a task in guided physical examples."
+          },
+          "proficient": {
+            "code": "AIF·SD·KG1·P",
+            "descriptor": "Sorts physical objects and explains grouping by one attribute (e.g., colour, shape, size)."
+          },
+          "advanced": {
+            "code": "AIF·SD·KG1·A",
+            "descriptor": "Sorts using multiple attributes and explains how grouping supports decision-making."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·KG1·E",
+            "descriptor": "Follows one-step instructions from a peer or teacher during role-play."
+          },
+          "proficient": {
+            "code": "AIF·CE·KG1·P",
+            "descriptor": "Follows and gives simple 1–2 step instructions clearly."
+          },
+          "advanced": {
+            "code": "AIF·CE·KG1·A",
+            "descriptor": "Identifies unclear instructions and suggests simple improvements independently."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Ethics & Privacy",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·KG1·E",
+            "descriptor": "Recognises personal information (e.g., name, age) when prompted."
+          },
+          "proficient": {
+            "code": "AIF·GE·KG1·P",
+            "descriptor": "Explains that some information is private and seeks adult help when unsure."
+          },
+          "advanced": {
+            "code": "AIF·GE·KG1·A",
+            "descriptor": "Demonstrates safe behaviour in social play and explains why it is important."
+          }
+        }
+      }
+    },
+    "kg2": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·KG2·E",
+            "descriptor": "Recognises that some digital tools respond to inputs (e.g., voice, touch)."
+          },
+          "proficient": {
+            "code": "AIF·CU·KG2·P",
+            "descriptor": "Explains simple differences between human decisions and machine responses."
+          },
+          "advanced": {
+            "code": "AIF·CU·KG2·A",
+            "descriptor": "Explores how sensors and patterns influence responses through structured play."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "Data Awareness",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·KG2·E",
+            "descriptor": "Understands that machines use information to respond."
+          },
+          "proficient": {
+            "code": "AIF·SD·KG2·P",
+            "descriptor": "Sorts and groups objects using more than one attribute and explains reasoning."
+          },
+          "advanced": {
+            "code": "AIF·SD·KG2·A",
+            "descriptor": "Demonstrates that incomplete or incorrect information leads to incorrect outcomes."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·KG2·E",
+            "descriptor": "Recognises that clearer instructions lead to better responses."
+          },
+          "proficient": {
+            "code": "AIF·CE·KG2·P",
+            "descriptor": "Gives clear 2–3 step instructions and adjusts wording when needed."
+          },
+          "advanced": {
+            "code": "AIF·CE·KG2·A",
+            "descriptor": "Demonstrates persistence in refining instructions through iterative play."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Ethics & Privacy",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·KG2·E",
+            "descriptor": "Understands basic ideas of privacy and fairness in simple contexts."
+          },
+          "proficient": {
+            "code": "AIF·GE·KG2·P",
+            "descriptor": "Identifies personal information and explains why it should be kept private."
+          },
+          "advanced": {
+            "code": "AIF·GE·KG2·A",
+            "descriptor": "Consistently demonstrates safe, fair, and respectful behaviour in interactions."
+          }
+        }
+      }
+    },
+    "grade1": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G1·E",
+            "descriptor": "Recognises that machines follow simple rules to respond."
+          },
+          "proficient": {
+            "code": "AIF·CU·G1·P",
+            "descriptor": "Describes inputs and outputs using everyday examples."
+          },
+          "advanced": {
+            "code": "AIF·CU·G1·A",
+            "descriptor": "Explains how changing an input changes the output."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "Data Awareness",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G1·E",
+            "descriptor": "Sorts information into simple groups with guidance."
+          },
+          "proficient": {
+            "code": "AIF·SD·G1·P",
+            "descriptor": "Sorts information independently using one attribute."
+          },
+          "advanced": {
+            "code": "AIF·SD·G1·A",
+            "descriptor": "Explains how different information leads to different results."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G1·E",
+            "descriptor": "Follows simple step-by-step instructions with support."
+          },
+          "proficient": {
+            "code": "AIF·CE·G1·P",
+            "descriptor": "Creates simple step sequences to complete a task."
+          },
+          "advanced": {
+            "code": "AIF·CE·G1·A",
+            "descriptor": "Adjusts steps when outcomes are not correct."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Responsible AI Use",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G1·E",
+            "descriptor": "Identifies personal information and safe sharing."
+          },
+          "proficient": {
+            "code": "AIF·GE·G1·P",
+            "descriptor": "Follows rules for safe and respectful use."
+          },
+          "advanced": {
+            "code": "AIF·GE·G1·A",
+            "descriptor": "Explains fairness in simple situations."
+          }
+        }
+      }
+    },
+    "grade2": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G2·E",
+            "descriptor": "Recognises that systems follow rules and make simple choices."
+          },
+          "proficient": {
+            "code": "AIF·CU·G2·P",
+            "descriptor": "Explains simple decision logic (if/then)."
+          },
+          "advanced": {
+            "code": "AIF·CU·G2·A",
+            "descriptor": "Explains how rules affect outcomes in different situations."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "Data Awareness",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G2·E",
+            "descriptor": "Sorts information using one attribute."
+          },
+          "proficient": {
+            "code": "AIF·SD·G2·P",
+            "descriptor": "Sorts using more than one attribute."
+          },
+          "advanced": {
+            "code": "AIF·SD·G2·A",
+            "descriptor": "Explains how incorrect or missing information affects outcomes."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G2·E",
+            "descriptor": "Uses simple step-by-step instructions."
+          },
+          "proficient": {
+            "code": "AIF·CE·G2·P",
+            "descriptor": "Creates multi-step instructions to solve a task."
+          },
+          "advanced": {
+            "code": "AIF·CE·G2·A",
+            "descriptor": "Improves instructions to make outcomes more accurate."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Responsible AI Use",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G2·E",
+            "descriptor": "Identifies safe vs unsafe sharing."
+          },
+          "proficient": {
+            "code": "AIF·GE·G2·P",
+            "descriptor": "Explains fairness in simple examples."
+          },
+          "advanced": {
+            "code": "AIF·GE·G2·A",
+            "descriptor": "Recognises when outcomes may be unfair."
+          }
+        }
+      }
+    },
+    "grade3": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G3·E",
+            "descriptor": "Recognises that multiple rules can be combined."
+          },
+          "proficient": {
+            "code": "AIF·CU·G3·P",
+            "descriptor": "Explains how combining rules affects outcomes."
+          },
+          "advanced": {
+            "code": "AIF·CU·G3·A",
+            "descriptor": "Predicts outcomes when rules are changed."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "Data Awareness",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G3·E",
+            "descriptor": "Recognises that different information affects decisions."
+          },
+          "proficient": {
+            "code": "AIF·SD·G3·P",
+            "descriptor": "Explains how missing or incorrect information changes outcomes."
+          },
+          "advanced": {
+            "code": "AIF·SD·G3·A",
+            "descriptor": "Identifies simple errors in information and suggests improvements."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G3·E",
+            "descriptor": "Creates multi-step instructions with support."
+          },
+          "proficient": {
+            "code": "AIF·CE·G3·P",
+            "descriptor": "Creates structured instructions combining steps and conditions."
+          },
+          "advanced": {
+            "code": "AIF·CE·G3·A",
+            "descriptor": "Refines instructions independently to improve outcomes."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Responsible AI Use",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G3·E",
+            "descriptor": "Recognises when results may not be fair."
+          },
+          "proficient": {
+            "code": "AIF·GE·G3·P",
+            "descriptor": "Explains how rules can create unfair outcomes."
+          },
+          "advanced": {
+            "code": "AIF·GE·G3·A",
+            "descriptor": "Suggests simple ways to make outcomes fairer."
+          }
+        }
+      }
+    },
+    "grade4": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G4·E",
+            "descriptor": "Recognises that systems use data to make decisions."
+          },
+          "proficient": {
+            "code": "AIF·CU·G4·P",
+            "descriptor": "Explains how data is represented and used."
+          },
+          "advanced": {
+            "code": "AIF·CU·G4·A",
+            "descriptor": "Explains how patterns in data influence outcomes."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "Data Awareness",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G4·E",
+            "descriptor": "Labels and organises simple data."
+          },
+          "proficient": {
+            "code": "AIF·SD·G4·P",
+            "descriptor": "Identifies errors or imbalance in data."
+          },
+          "advanced": {
+            "code": "AIF·SD·G4·A",
+            "descriptor": "Improves data to make it more accurate and balanced."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G4·E",
+            "descriptor": "Uses block-based tools to simulate decisions."
+          },
+          "proficient": {
+            "code": "AIF·CE·G4·P",
+            "descriptor": "Creates simple solutions using data and logic."
+          },
+          "advanced": {
+            "code": "AIF·CE·G4·A",
+            "descriptor": "Explains how data influences the outcome of a solution."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Responsible AI Use",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G4·E",
+            "descriptor": "Recognises that data can affect fairness."
+          },
+          "proficient": {
+            "code": "AIF·GE·G4·P",
+            "descriptor": "Explains how biased data leads to unfair outcomes."
+          },
+          "advanced": {
+            "code": "AIF·GE·G4·A",
+            "descriptor": "Evaluates fairness based on input data."
+          }
+        }
+      }
+    },
+    "grade5": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G5·E",
+            "descriptor": "Recognises that AI systems generate outputs using data."
+          },
+          "proficient": {
+            "code": "AIF·CU·G5·P",
+            "descriptor": "Explains how AI uses data to generate responses."
+          },
+          "advanced": {
+            "code": "AIF·CU·G5·A",
+            "descriptor": "Explains how data quality affects AI outputs."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "Data Literacy",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G5·E",
+            "descriptor": "Recognises that data affects outputs."
+          },
+          "proficient": {
+            "code": "AIF·SD·G5·P",
+            "descriptor": "Identifies when data is incomplete or biased."
+          },
+          "advanced": {
+            "code": "AIF·SD·G5·A",
+            "descriptor": "Suggests improvements to make data more reliable."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "AI Solution Design & Development",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G5·E",
+            "descriptor": "Uses AI tools to generate simple outputs with guidance."
+          },
+          "proficient": {
+            "code": "AIF·CE·G5·P",
+            "descriptor": "Uses structured prompts to generate useful outputs."
+          },
+          "advanced": {
+            "code": "AIF·CE·G5·A",
+            "descriptor": "Refines prompts to improve output quality and explains why."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Ethics & Responsible Use",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G5·E",
+            "descriptor": "Recognises when outputs may be incorrect."
+          },
+          "proficient": {
+            "code": "AIF·GE·G5·P",
+            "descriptor": "Evaluates outputs for accuracy and fairness."
+          },
+          "advanced": {
+            "code": "AIF·GE·G5·A",
+            "descriptor": "Explains misinformation risks and proposes verification strategies."
+          }
+        }
+      }
+    },
+    "grade6": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G6·E",
+            "descriptor": "Recognises the difference between rule-based and learning systems."
+          },
+          "proficient": {
+            "code": "AIF·CU·G6·P",
+            "descriptor": "Explains how AI systems learn from data to generate outputs."
+          },
+          "advanced": {
+            "code": "AIF·CU·G6·A",
+            "descriptor": "Explains how training data affects output quality and performance."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "AI Solution Design & Development",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G6·E",
+            "descriptor": "Uses AI tools with structured prompts to complete tasks."
+          },
+          "proficient": {
+            "code": "AIF·SD·G6·P",
+            "descriptor": "Applies simple structured processes (input to output) to generate results."
+          },
+          "advanced": {
+            "code": "AIF·SD·G6·A",
+            "descriptor": "Builds structured AI-assisted solutions using guided inputs and data."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G6·E",
+            "descriptor": "Identifies when outputs are incorrect or unclear."
+          },
+          "proficient": {
+            "code": "AIF·CE·G6·P",
+            "descriptor": "Evaluates outputs for accuracy and relevance."
+          },
+          "advanced": {
+            "code": "AIF·CE·G6·A",
+            "descriptor": "Explains how changes to inputs or data improve outputs."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Ethics & Governance",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G6·E",
+            "descriptor": "Recognises basic risks (e.g. incorrect outputs, unsafe use)."
+          },
+          "proficient": {
+            "code": "AIF·GE·G6·P",
+            "descriptor": "Explains bias, privacy, and the need for responsible use."
+          },
+          "advanced": {
+            "code": "AIF·GE·G6·A",
+            "descriptor": "Identifies biased outputs and suggests simple ways to improve fairness and safety."
+          }
+        }
+      }
+    },
+    "grade7": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G7·E",
+            "descriptor": "Describes how AI systems follow a sequence of steps (input to process to output)."
+          },
+          "proficient": {
+            "code": "AIF·CU·G7·P",
+            "descriptor": "Explains how workflows structure AI systems."
+          },
+          "advanced": {
+            "code": "AIF·CU·G7·A",
+            "descriptor": "Explains how different workflow designs affect outcomes."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "AI Solution Design & Development",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G7·E",
+            "descriptor": "Builds simple AI solutions using guided steps."
+          },
+          "proficient": {
+            "code": "AIF·SD·G7·P",
+            "descriptor": "Designs multi-step AI workflows to complete tasks."
+          },
+          "advanced": {
+            "code": "AIF·SD·G7·A",
+            "descriptor": "Refines workflows by improving structure, sequencing, and tool selection."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G7·E",
+            "descriptor": "Identifies issues in outputs or workflow steps."
+          },
+          "proficient": {
+            "code": "AIF·CE·G7·P",
+            "descriptor": "Evaluates outputs using criteria such as accuracy and usefulness."
+          },
+          "advanced": {
+            "code": "AIF·CE·G7·A",
+            "descriptor": "Improves workflows through iteration and explains the impact of changes."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Ethics & Governance",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G7·E",
+            "descriptor": "Identifies risks in AI-generated outputs."
+          },
+          "proficient": {
+            "code": "AIF·GE·G7·P",
+            "descriptor": "Explains bias, misuse, and limitations in workflows."
+          },
+          "advanced": {
+            "code": "AIF·GE·G7·A",
+            "descriptor": "Proposes ways to reduce risks and improve responsible use of AI systems."
+          }
+        }
+      }
+    },
+    "grade8": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Conceptual Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G8·E",
+            "descriptor": "Describes how AI systems process inputs and generate outputs."
+          },
+          "proficient": {
+            "code": "AIF·CU·G8·P",
+            "descriptor": "Explains how different factors (data, inputs, design) affect performance."
+          },
+          "advanced": {
+            "code": "AIF·CU·G8·A",
+            "descriptor": "Compares approaches and explains why some solutions perform better."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "AI Solution Design & Development",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G8·E",
+            "descriptor": "Develops AI-powered solutions for specific tasks."
+          },
+          "proficient": {
+            "code": "AIF·SD·G8·P",
+            "descriptor": "Designs structured workflows combining multiple steps or tools."
+          },
+          "advanced": {
+            "code": "AIF·SD·G8·A",
+            "descriptor": "Designs and refines solutions considering how components interact."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G8·E",
+            "descriptor": "Identifies limitations in outputs."
+          },
+          "proficient": {
+            "code": "AIF·CE·G8·P",
+            "descriptor": "Evaluates solutions using criteria such as accuracy, bias, and reliability."
+          },
+          "advanced": {
+            "code": "AIF·CE·G8·A",
+            "descriptor": "Refines solutions systematically and justifies improvements using evidence."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Ethics & Governance",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G8·E",
+            "descriptor": "Identifies ethical concerns in AI use."
+          },
+          "proficient": {
+            "code": "AIF·GE·G8·P",
+            "descriptor": "Conducts structured evaluation of risks (bias, privacy, misuse)."
+          },
+          "advanced": {
+            "code": "AIF·GE·G8·A",
+            "descriptor": "Proposes mitigation strategies and explains their impact."
+          }
+        }
+      }
+    },
+    "grade9": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Systems Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G9·E",
+            "descriptor": "Describes how AI systems use inputs to generate outputs."
+          },
+          "proficient": {
+            "code": "AIF·CU·G9·P",
+            "descriptor": "Explains how data, tools, and prompts interact within a solution."
+          },
+          "advanced": {
+            "code": "AIF·CU·G9·A",
+            "descriptor": "Explains how design choices affect output quality and reliability."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "AI Solution Design & Development",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G9·E",
+            "descriptor": "Uses AI tools to complete structured tasks."
+          },
+          "proficient": {
+            "code": "AIF·SD·G9·P",
+            "descriptor": "Designs structured AI workflows to solve defined problems."
+          },
+          "advanced": {
+            "code": "AIF·SD·G9·A",
+            "descriptor": "Refines workflows to improve outputs and usability."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G9·E",
+            "descriptor": "Identifies when outputs are incorrect or unclear."
+          },
+          "proficient": {
+            "code": "AIF·CE·G9·P",
+            "descriptor": "Evaluates outputs for accuracy, bias, and usefulness."
+          },
+          "advanced": {
+            "code": "AIF·CE·G9·A",
+            "descriptor": "Explains limitations and suggests targeted improvements."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Ethics & Responsible Use",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G9·E",
+            "descriptor": "Identifies risks in AI-generated content."
+          },
+          "proficient": {
+            "code": "AIF·GE·G9·P",
+            "descriptor": "Explains bias, misinformation, and misuse."
+          },
+          "advanced": {
+            "code": "AIF·GE·G9·A",
+            "descriptor": "Proposes actions to ensure responsible and safe use."
+          }
+        }
+      }
+    },
+    "grade10": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Systems Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G10·E",
+            "descriptor": "Describes how different AI tools can be used together."
+          },
+          "proficient": {
+            "code": "AIF·CU·G10·P",
+            "descriptor": "Explains how components interact as a system."
+          },
+          "advanced": {
+            "code": "AIF·CU·G10·A",
+            "descriptor": "Evaluates how system design affects performance and reliability."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "AI Solution Design & Development",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G10·E",
+            "descriptor": "Designs simple AI workflows for specific tasks."
+          },
+          "proficient": {
+            "code": "AIF·SD·G10·P",
+            "descriptor": "Designs multi-step solutions combining tools and data."
+          },
+          "advanced": {
+            "code": "AIF·SD·G10·A",
+            "descriptor": "Selects and structures tools strategically to improve performance."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G10·E",
+            "descriptor": "Identifies strengths and weaknesses of outputs."
+          },
+          "proficient": {
+            "code": "AIF·CE·G10·P",
+            "descriptor": "Evaluates solutions using criteria (accuracy, fairness, usefulness)."
+          },
+          "advanced": {
+            "code": "AIF·CE·G10·A",
+            "descriptor": "Refines solutions and explains the impact of improvements."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Governance & Ethics",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G10·E",
+            "descriptor": "Identifies ethical concerns in AI use."
+          },
+          "proficient": {
+            "code": "AIF·GE·G10·P",
+            "descriptor": "Conducts structured evaluation of risks (bias, privacy, misuse)."
+          },
+          "advanced": {
+            "code": "AIF·GE·G10·A",
+            "descriptor": "Proposes mitigation strategies and explains their effectiveness."
+          }
+        }
+      }
+    },
+    "grade11": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Systems Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G11·E",
+            "descriptor": "Describes how AI solutions operate within broader systems."
+          },
+          "proficient": {
+            "code": "AIF·CU·G11·P",
+            "descriptor": "Explains interactions between data, tools, and users."
+          },
+          "advanced": {
+            "code": "AIF·CU·G11·A",
+            "descriptor": "Evaluates trade-offs (accuracy, efficiency, usability, reliability)."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "AI Solution Design & Development",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G11·E",
+            "descriptor": "Designs AI-powered solutions for real-world tasks."
+          },
+          "proficient": {
+            "code": "AIF·SD·G11·P",
+            "descriptor": "Designs structured multi-step solutions addressing user needs."
+          },
+          "advanced": {
+            "code": "AIF·SD·G11·A",
+            "descriptor": "Optimises solutions to improve efficiency, usability, and performance."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G11·E",
+            "descriptor": "Identifies limitations in solutions."
+          },
+          "proficient": {
+            "code": "AIF·CE·G11·P",
+            "descriptor": "Evaluates solutions using multiple criteria and evidence."
+          },
+          "advanced": {
+            "code": "AIF·CE·G11·A",
+            "descriptor": "Justifies improvements using data and structured reasoning."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Governance & Impact",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G11·E",
+            "descriptor": "Identifies potential impacts of AI solutions."
+          },
+          "proficient": {
+            "code": "AIF·GE·G11·P",
+            "descriptor": "Conducts structured analysis of ethical and societal implications."
+          },
+          "advanced": {
+            "code": "AIF·GE·G11·A",
+            "descriptor": "Proposes responsible-use approaches considering broader impact."
+          }
+        }
+      }
+    },
+    "grade12": {
+      "CU": {
+        "code": "CU",
+        "label": "AI Systems Understanding",
+        "theme": "How AI works",
+        "frameworkRow": "Knowing how intelligent systems learn and operate",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CU·G12·E",
+            "descriptor": "Explains how AI solutions function in real-world contexts."
+          },
+          "proficient": {
+            "code": "AIF·CU·G12·P",
+            "descriptor": "Analyses how system components interact and influence outcomes."
+          },
+          "advanced": {
+            "code": "AIF·CU·G12·A",
+            "descriptor": "Evaluates system effectiveness considering performance, risk, and scalability."
+          }
+        }
+      },
+      "SD": {
+        "code": "SD",
+        "label": "AI Solution Design & Development",
+        "theme": "Data & design",
+        "frameworkRow": "Working with data, and designing solutions",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·SD·G12·E",
+            "descriptor": "Designs AI-powered solutions for defined problems."
+          },
+          "proficient": {
+            "code": "AIF·SD·G12·P",
+            "descriptor": "Designs and refines solutions addressing complex challenges."
+          },
+          "advanced": {
+            "code": "AIF·SD·G12·A",
+            "descriptor": "Designs integrated, multi-component solutions with strategic intent."
+          }
+        }
+      },
+      "CE": {
+        "code": "CE",
+        "label": "Critical Evaluation & Informed Interaction",
+        "theme": "Judgement",
+        "frameworkRow": "Exercising judgement in the use of AI systems",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·CE·G12·E",
+            "descriptor": "Identifies areas for improvement."
+          },
+          "proficient": {
+            "code": "AIF·CE·G12·P",
+            "descriptor": "Evaluates solutions using evidence and defined criteria."
+          },
+          "advanced": {
+            "code": "AIF·CE·G12·A",
+            "descriptor": "Justifies refinements using data, evidence, and structured reasoning."
+          }
+        }
+      },
+      "GE": {
+        "code": "GE",
+        "label": "Governance, Ethics & Societal Impact",
+        "theme": "Ethics & governance",
+        "frameworkRow": "Assessing AI systems for ethical use",
+        "tiers": {
+          "emerging": {
+            "code": "AIF·GE·G12·E",
+            "descriptor": "Identifies ethical and societal risks."
+          },
+          "proficient": {
+            "code": "AIF·GE·G12·P",
+            "descriptor": "Conducts structured impact analysis (bias, privacy, societal implications)."
+          },
+          "advanced": {
+            "code": "AIF·GE·G12·A",
+            "descriptor": "Designs responsible-use approaches and defends decisions considering impact."
+          }
+        }
+      }
+    }
+  }
+}
