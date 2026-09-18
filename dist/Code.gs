@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-18T09:55:51.687Z
+ * Built: 2026-09-18T09:57:52.344Z
  */
 
 /* ==========================================================================
@@ -1238,8 +1238,17 @@ function suggestLevelsFromEvidence_(gradeKey, submissions) {
       marksAwarded: row.marksAwarded,
       marksAvailable: row.marksAvailable,
       enoughEvidence: enough,
-      // Surfaced so a teacher can see when a score came from repeated attempts.
+      // Surfaced so a teacher can see when a score came from repeated attempts. The
+      // proposal is NOT lowered for it: ADEK says heavy scaffolding means Emerging
+      // rather than Proficient, but that is a judgement about what the student needed,
+      // which the platform cannot see. Lowering it here would be a second invented rule
+      // on top of the thresholds. The panel puts the fact in front of the teacher and
+      // asks them to decide, which is where ADEK puts it too.
       notIndependent: row.notIndependent,
+      highestAttemptUsed: row.highestAttemptUsed,
+      // True where the attempts could have lifted the proposal above the expected tier.
+      attemptsCouldInflate: row.notIndependent &&
+        (suggested === 'proficient' || suggested === 'advanced'),
       reason: !enough
         ? 'Only ' + row.itemsMarked + ' marked item(s) so far \u2014 too little to suggest from.'
         : Math.round(percent) + '% across ' + row.itemsMarked + ' marked items.'

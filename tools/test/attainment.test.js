@@ -302,5 +302,39 @@ console.log('\nA proposal is only made when there is enough marked work to make 
     strandsCovered === 'CE,CU,GE,SD', strandsCovered);
 }
 
+console.log('\nA score reached across attempts is flagged where it could have inflated the level');
+{
+  // "Counting scaffolding as independence. If the workflow order or the risk rating
+  // needed heavy teacher prompting, it is Emerging, not Proficient." The platform cannot
+  // see how much help a student had, so it never lowers the proposal for this — it puts
+  // the fact in front of the teacher on the rows where it could have made a difference.
+  const item = (pct, lessonId, attempt) => ({
+    lessonId: lessonId, percent: pct, attempt: attempt,
+    resultsJson: JSON.stringify([{
+      questionId: lessonId + '-q', marksAwarded: pct / 100, marksAvailable: 1,
+      frameworkRefs: [{ strand: 'CU', grade: 6, tier: 'E' }]
+    }])
+  });
+  const at = (pct, attempt) => api.suggestLevelsFromEvidence_('grade6',
+    [item(pct, 'l1', attempt), item(pct, 'l2', 1), item(pct, 'l3', 1)])
+    .filter((s) => s.strand === 'CU')[0];
+
+  const clean = at(95, 1);
+  check('a first-attempt Advanced carries no caution',
+    clean.suggested === 'advanced' && clean.attemptsCouldInflate === false);
+  check('and reports the attempts it drew on', clean.highestAttemptUsed === 1);
+
+  const repeated = at(95, 3);
+  check('the same score from a third attempt is still proposed as Advanced',
+    repeated.suggested === 'advanced', 'the platform must not invent a second rule');
+  check('but the teacher is told it took three attempts',
+    repeated.attemptsCouldInflate === true && repeated.highestAttemptUsed === 3);
+
+  check('a repeated attempt below the expected tier raises no caution',
+    at(55, 3).attemptsCouldInflate === false,
+    'attempts cannot have inflated a level that is at or below expectation');
+  check('nor does one at working towards', at(30, 3).attemptsCouldInflate === false);
+}
+
 console.log(`\n${passed} passed, ${failed} failed.`);
 process.exit(failed ? 1 : 0);

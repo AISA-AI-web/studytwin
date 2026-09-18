@@ -1373,6 +1373,16 @@
           '<div class="eyebrow">Ask, to check the proposed level</div>' +
           '<p class="ask" data-ask="' + esc(sug.strand) + '">' +
             esc(promptFor.ask || GENERIC_ASK) + '</p>' +
+          // ADEK names this as a moderation pitfall in as many words: "Counting
+          // scaffolding as independence. If the workflow order or the risk rating
+          // needed heavy teacher prompting, it is Emerging, not Proficient." The
+          // platform cannot see how much help a student had, so it says so here
+          // rather than quietly proposing a level the attempts may not support.
+          (sug.attemptsCouldInflate
+            ? '<p class="ask-caution">This score is the best of ' +
+              esc(sug.highestAttemptUsed) + ' attempts. A result that needed repeated ' +
+              'tries is not evidence of independence \u2014 if it did, this is Emerging.</p>'
+            : '') +
         '</div>' +
 
         '<div class="confirm-row__levels">' +
