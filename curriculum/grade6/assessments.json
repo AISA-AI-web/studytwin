@@ -216,7 +216,7 @@
       "id": "g6-bridging-w2-lab-aq3",
       "type": "numeric",
       "marks": 2,
-      "prompt": "Using the same log (v1 clarity 2 / accuracy 3; v2 clarity 4 / accuracy 3; v3 clarity 5 / accuracy 1; v4 clarity 4 / accuracy 4), how many accuracy points did the team give up when they moved from v2 to v3?",
+      "prompt": "Using the same log (v1 clarity 2 / accuracy 3; v2 clarity 4 / accuracy 3; v3 clarity 5 / accuracy 1; v4 clarity 4 / accuracy 4): v3’s accuracy score is how many points lower than v2’s?",
       "answer": 2,
       "tolerance": 0,
       "frameworkRefs": [
@@ -347,7 +347,7 @@
         },
         {
           "id": "b",
-          "text": "The wrong pattern will be taught more strongly than before, because thousands of examples now repeat it."
+          "text": "The wrong pattern will be taught more strongly than before, because far more examples now repeat it."
         },
         {
           "id": "c",
@@ -734,7 +734,11 @@
           "the baseline",
           "base line",
           "clean baseline",
-          "the clean baseline"
+          "the clean baseline",
+          "base-line",
+          "control",
+          "the control",
+          "clean result"
         ]
       ],
       "acceptedAnswers": [
@@ -3413,7 +3417,7 @@
       "type": "fillBlank",
       "marks": 2,
       "prompt": "A spellchecker flags a word only when that word is missing from a fixed list its makers typed in. Complete the classification sentence.",
-      "stem": "This is a {{1}} system, because the logic came from a {{2}}.",
+      "stem": "This is a {{1}} system, because a {{2}} wrote the logic.",
       "blanks": [
         {
           "id": "1",
@@ -4642,7 +4646,20 @@
             "a classmate",
             "classmate",
             "a pupil",
-            "pupil"
+            "pupil",
+            "a person",
+            "person",
+            "someone",
+            "anonymous",
+            "student a",
+            "a learner",
+            "learner",
+            "a child",
+            "child",
+            "student 1",
+            "pupil a",
+            "a name",
+            "initials"
           ]
         },
         {
@@ -5108,7 +5125,7 @@
       "options": [
         "His accuracy verdict, with a reason he can check against the source",
         "His risk verdict, with the mitigation he chose",
-        "A note of which parts of the output he could not check",
+        "The parts he marked unclear in his accuracy verdict, named so someone else can check them",
         "The output is neatly laid out and sounds confident",
         "The tool produced the answer in under two seconds",
         "The output is longer and more detailed than his classmates' outputs"
@@ -6957,7 +6974,12 @@
           "severe",
           "harmful",
           "bad",
-          "great"
+          "great",
+          "big",
+          "large",
+          "much",
+          "damaging",
+          "costly"
         ],
         [
           "personal",
@@ -6970,7 +6992,10 @@
           "freeze",
           "frozen",
           "locked",
-          "locked in"
+          "locked in",
+          "locked it down",
+          "froze it",
+          "locked it"
         ]
       ],
       "frameworkRefs": [

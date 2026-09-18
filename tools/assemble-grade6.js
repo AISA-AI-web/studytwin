@@ -155,7 +155,15 @@ function normaliseAnswerShape(question) {
     if (!Array.isArray(list) || !list.length) return;
     original[field] = list.slice();
     if (list.every((entry) => entry && typeof entry === 'object')) return;
-    if (!list.every((entry) => typeof entry === 'string')) return;
+    if (!list.every((entry) => typeof entry === 'string')) {
+      // A list that is part strings and part objects gets no ids assigned, so every key
+      // against it silently stops resolving. Editing one option of an object list and
+      // leaving a bare string behind is an easy way to cause it, and nothing downstream
+      // says so — the question just quietly stops marking.
+      problems.push(`${question.id || '(unknown question)'}: "${field}" mixes plain ` +
+        'strings with {id, text} objects — use one form or the other');
+      return;
+    }
 
     question[field] = list.map((text, i) => ({
       id: field === 'options' ? String.fromCharCode(97 + i) : `${ID_PREFIX[field]}${i + 1}`,

@@ -243,6 +243,33 @@ function markableCheck(lesson, where) {
     if (empty.marksAwarded > 0) {
       err(at, `an empty answer scores ${empty.marksAwarded}/${empty.marksAvailable}`);
     }
+
+    // Every spelling an author listed as acceptable must actually be accepted. An entry
+    // that does not score is worse than not listing it: it reads as covered, and the
+    // child it was written for is still marked wrong with nobody to appeal to.
+    if (q.type === 'fillBlank' && Array.isArray(q.answer)) {
+      q.answer.forEach((blank, i) => {
+        const accepted = Array.isArray(blank) ? blank : [blank];
+        accepted.forEach((variant) => {
+          const response = q.answer.map((b, j) =>
+            j === i ? String(variant) : String(Array.isArray(b) ? b[0] : b));
+          const scored = markWorksheet(sheet, { [q.id]: response });
+          if (scored.marksAwarded !== scored.marksAvailable) {
+            err(at, `blank ${i + 1} lists "${variant}" as accepted, but answering with ` +
+                    'it does not score full marks');
+          }
+        });
+      });
+    }
+
+    if (q.type === 'shortText') {
+      (q.acceptedAnswers || []).forEach((variant) => {
+        const scored = markWorksheet(sheet, { [q.id]: String(variant) });
+        if (scored.marksAwarded !== scored.marksAvailable) {
+          err(at, `"${variant}" is listed as an accepted answer but does not score`);
+        }
+      });
+    }
   });
 }
 

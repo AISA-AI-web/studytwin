@@ -310,7 +310,7 @@
         "type": "fillBlank",
         "marks": 2,
         "prompt": "A spellchecker flags a word only when that word is missing from a fixed list its makers typed in. Complete the classification sentence.",
-        "stem": "This is a {{1}} system, because the logic came from a {{2}}.",
+        "stem": "This is a {{1}} system, because a {{2}} wrote the logic.",
         "blanks": [
           "",
           ""

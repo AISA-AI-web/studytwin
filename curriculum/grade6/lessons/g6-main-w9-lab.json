@@ -381,7 +381,12 @@
             "severe",
             "harmful",
             "bad",
-            "great"
+            "great",
+            "big",
+            "large",
+            "much",
+            "damaging",
+            "costly"
           ],
           [
             "personal",
@@ -394,7 +399,10 @@
             "freeze",
             "frozen",
             "locked",
-            "locked in"
+            "locked in",
+            "locked it down",
+            "froze it",
+            "locked it"
           ]
         ],
         "frameworkRefs": [

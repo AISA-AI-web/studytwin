@@ -204,7 +204,7 @@
         "id": "g6-bridging-w2-lab-aq3",
         "type": "numeric",
         "marks": 2,
-        "prompt": "Using the same log (v1 clarity 2 / accuracy 3; v2 clarity 4 / accuracy 3; v3 clarity 5 / accuracy 1; v4 clarity 4 / accuracy 4), how many accuracy points did the team give up when they moved from v2 to v3?",
+        "prompt": "Using the same log (v1 clarity 2 / accuracy 3; v2 clarity 4 / accuracy 3; v3 clarity 5 / accuracy 1; v4 clarity 4 / accuracy 4): v3’s accuracy score is how many points lower than v2’s?",
         "answer": 2,
         "tolerance": 0,
         "frameworkRefs": [

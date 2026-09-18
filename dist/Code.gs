@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-18T10:41:13.783Z
+ * Built: 2026-09-18T10:44:41.770Z
  */
 
 /* ==========================================================================
