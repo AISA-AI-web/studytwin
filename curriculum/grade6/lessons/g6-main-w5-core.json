@@ -72,6 +72,28 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "branch",
+      "label": "Two families, different responses",
+      "heading": "What kind of risk is this?",
+      "source": "Something that could go wrong",
+      "altText": "A risk splits into two families: the output being wrong, and the tool being used unsafely. Each has a different response.",
+      "branches": [
+        {
+          "label": "The output is wrong",
+          "detail": "→ check it before anyone acts on it"
+        },
+        {
+          "label": "The use is unsafe",
+          "detail": "→ change what goes in, or do not use it",
+          "accent": true
+        }
+      ],
+      "caption": "Naming the family tells you the response. **Checking harder does not fix a privacy problem**, and removing personal details does not make a wrong fact right.",
+      "role": "diagram"
+    },
+    {
       "type": "text",
       "heading": "Every risk has a who",
       "body": [

@@ -108,6 +108,36 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "loop",
+      "label": "How to prove a change worked",
+      "heading": "One change at a time, with evidence",
+      "altText": "A loop: judge the solution against the criteria, change one thing, run it again, and judge again to see whether that change helped.",
+      "steps": [
+        {
+          "label": "Judge it",
+          "detail": "against your criteria"
+        },
+        {
+          "label": "Change one thing",
+          "detail": "and write down which"
+        },
+        {
+          "label": "Run it again",
+          "detail": "on the same input"
+        },
+        {
+          "label": "Judge again",
+          "detail": "did that change help?",
+          "accent": true
+        }
+      ],
+      "repeatLabel": "still short of the criteria — go round again",
+      "caption": "Same input each time, one change each time. **Change two things at once and you cannot say which one worked** — which is the evidence you are being asked for.",
+      "role": "diagram"
+    },
+    {
       "type": "activity",
       "label": "Let's try it - hands-on",
       "heading": "Let's try it - hands-on",

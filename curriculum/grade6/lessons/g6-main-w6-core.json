@@ -73,6 +73,46 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "flow",
+      "label": "The whole term in one line",
+      "heading": "Four skills, one chain",
+      "altText": "A chain of four steps: work out the system type, write a structured prompt, triage the output, then run a risk check.",
+      "nodes": [
+        {
+          "label": "Name the system",
+          "detail": "rule-based or learning"
+        },
+        {
+          "label": "Write the prompt",
+          "detail": "goal, context, format"
+        },
+        {
+          "label": "Triage the output",
+          "detail": "correct, incorrect, unclear"
+        },
+        {
+          "label": "Check the risk",
+          "detail": "and choose what to do",
+          "accent": true
+        }
+      ],
+      "edges": [
+        {
+          "label": "so you know what to expect"
+        },
+        {
+          "label": "so the output is worth judging"
+        },
+        {
+          "label": "so you know what you are risking"
+        }
+      ],
+      "caption": "Each step only makes sense because of the one before it. **Skip the first and you do not know what the tool was ever going to be able to do.**",
+      "role": "diagram"
+    },
+    {
       "type": "text",
       "heading": "Explain the links",
       "body": [

@@ -71,6 +71,33 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "parts",
+      "label": "The shape of a structured prompt",
+      "heading": "One prompt, three slots",
+      "whole": "A structured prompt",
+      "altText": "A single bar split into three labelled slots — Goal, Context and Format — which together make a prompt the tool can act on.",
+      "parts": [
+        {
+          "label": "Goal",
+          "detail": "What you want it to do"
+        },
+        {
+          "label": "Context",
+          "detail": "What it needs to know first"
+        },
+        {
+          "label": "Format",
+          "detail": "How the answer should look",
+          "accent": true
+        }
+      ],
+      "result": "A prompt the tool can act on",
+      "caption": "Leave a slot empty and the tool fills it with a guess of its own. **Format is the one most often left out**, and it is why an answer comes back in the wrong shape.",
+      "role": "diagram"
+    },
+    {
       "type": "text",
       "heading": "Check, then improve",
       "body": [

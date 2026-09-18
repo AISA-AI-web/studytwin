@@ -458,15 +458,34 @@
       'not part of the ADEK material.</p>';
   }
 
+  var DIAGRAM_VARIANTS = {
+    compare: diagramCompare,
+    parts:   diagramParts,
+    branch:  diagramBranch,
+    loop:    diagramLoop,
+    flow:    diagramFlow
+  };
+
   function renderDiagram(section) {
-    var svg = section.variant === 'compare' ? diagramCompare(section) : diagramFlow(section);
+    var svg = (DIAGRAM_VARIANTS[section.variant] || diagramFlow)(section);
     return '<figure class="diagram">' +
       (section.heading ? '<div class="eyebrow">' + esc(section.label || 'Diagram') + '</div>' +
         '<h3>' + esc(section.heading) + '</h3>' : '') +
-      svg +
+      '<p class="diagram__hint">Scroll sideways to see all of it \u2192</p>' +
+      // The minimum width comes from the figure's own drawing width, so labels stay a
+      // readable size on a phone instead of shrinking to four or five pixels. A fixed
+      // minimum cannot do this: these figures range from 500 to 1100 units wide.
+      '<div class="diagram__scroll" style="--dg-w:' + diagramWidth(svg) + '">' +
+        svg + '</div>' +
       (section.caption ? '<figcaption>' + richText(section.caption) + '</figcaption>' : '') +
       authoredNote(section) +
       '</figure>';
+  }
+
+  /** The drawing width a figure was laid out at, read back off its viewBox. */
+  function diagramWidth(svg) {
+    var match = /viewBox="0 0 (\d+(?:\.\d+)?)/.exec(svg);
+    return match ? Math.round(Number(match[1])) : 900;
   }
 
   function svgOpen(w, h, label) {
@@ -494,7 +513,7 @@
   function diagramFlow(section) {
     var nodes = section.nodes || [];
     var edges = section.edges || [];
-    var boxW = 180, boxH = 92, gap = 96, padX = 8, padY = 46;
+    var boxW = 180, boxH = 92, gap = 96, padX = 8, padY = 52;
     var w = padX * 2 + nodes.length * boxW + (nodes.length - 1) * gap;
     var h = padY + boxH + 30;
 
@@ -527,8 +546,13 @@
           '" stroke="currentColor" stroke-width="1.5" marker-end="url(#dgArrow)"/>');
         var edge = edges[i];
         if (edge && edge.label) {
-          wrapLines(edge.label, 14).forEach(function (line, li) {
-            parts.push('<text x="' + ((ax + ax2) / 2) + '" y="' + (ay - 12 - (li ? 0 : 0) + li * 12) +
+          // Stack the label UPWARDS from the arrow. Stacking down put the second line
+          // straight through the arrow it belongs to, which only showed up once an edge
+          // label was long enough to wrap.
+          var lines = wrapLines(edge.label, 14);
+          lines.forEach(function (line, li) {
+            parts.push('<text x="' + ((ax + ax2) / 2) + '" y="' +
+              (ay - 10 - (lines.length - 1 - li) * 12) +
               '" text-anchor="middle" font-size="11" fill="currentColor" ' +
               'opacity="0.8">' + esc(line) + '</text>');
           });
@@ -536,6 +560,176 @@
       }
     });
     return parts.join('') + '</svg>';
+  }
+
+  /**
+   * One thing made of named parts, drawn as one bar rather than a list.
+   *
+   * For the lessons that teach a structure by naming its pieces — "Goal, Context,
+   * Format", "a helper has three parts". Written out as a list, the pieces read as three
+   * separate things to remember. Drawn as one bar, they read as one thing with three
+   * slots, which is what the lesson is actually claiming.
+   */
+  function diagramParts(section) {
+    var parts_ = section.parts || [];
+    var padX = 8, padY = 48, barH = 78, gap = 6;
+    var boxW = 200;
+    var w = padX * 2 + parts_.length * boxW + (parts_.length - 1) * gap;
+    var h = padY + barH + 46;
+
+    var out = [svgOpen(w, h, section.altText || section.heading || 'Parts of one thing')];
+
+    if (section.whole) {
+      out.push('<text x="' + (w / 2) + '" y="' + (padY - 16) + '" text-anchor="middle" ' +
+        'font-size="13" font-weight="700" fill="currentColor">' + esc(section.whole) + '</text>');
+    }
+
+    parts_.forEach(function (part, i) {
+      var x = padX + i * (boxW + gap);
+      var accent = part.accent === true;
+      var first = i === 0, last = i === parts_.length - 1;
+      // Square inner edges so the pieces read as one continuous bar, not three boxes.
+      out.push('<path d="' + roundedSide(x, padY, boxW, barH, 8, first, last) + '" fill="' +
+        (accent ? '#D8B664' : 'currentColor') + '" fill-opacity="' + (accent ? 0.16 : 0.07) +
+        '" stroke="' + (accent ? '#D8B664' : 'currentColor') +
+        '" stroke-width="' + (accent ? 2.5 : 1.4) + '"/>');
+
+      out.push('<text x="' + (x + boxW / 2) + '" y="' + (padY + 26) + '" text-anchor="middle" ' +
+        'font-size="13" font-weight="700" fill="currentColor">' + esc(part.label) + '</text>');
+
+      wrapLines(part.detail || '', 26).slice(0, 3).forEach(function (line, li) {
+        out.push('<text x="' + (x + boxW / 2) + '" y="' + (padY + 46 + li * 14) +
+          '" text-anchor="middle" font-size="11" fill="currentColor" ' +
+          'opacity="0.75">' + esc(line) + '</text>');
+      });
+    });
+
+    if (section.result) {
+      var ry = padY + barH;
+      out.push('<line x1="' + (w / 2) + '" y1="' + (ry + 4) + '" x2="' + (w / 2) + '" y2="' +
+        (ry + 20) + '" stroke="currentColor" stroke-width="1.5" marker-end="url(#dgArrow)"/>');
+      out.push('<text x="' + (w / 2) + '" y="' + (ry + 38) + '" text-anchor="middle" ' +
+        'font-size="12" font-weight="700" fill="currentColor">' + esc(section.result) + '</text>');
+    }
+    return out.join('') + '</svg>';
+  }
+
+  /** A rectangle rounded on its outer corners only, so a row of them reads as one bar. */
+  function roundedSide(x, y, w, h, r, roundLeft, roundRight) {
+    var l = roundLeft ? r : 0, rr = roundRight ? r : 0;
+    return 'M ' + (x + l) + ' ' + y +
+      ' H ' + (x + w - rr) + (rr ? ' a ' + rr + ' ' + rr + ' 0 0 1 ' + rr + ' ' + rr : '') +
+      ' V ' + (y + h - rr) + (rr ? ' a ' + rr + ' ' + rr + ' 0 0 1 ' + (-rr) + ' ' + rr : '') +
+      ' H ' + (x + l) + (l ? ' a ' + l + ' ' + l + ' 0 0 1 ' + (-l) + ' ' + (-l) : '') +
+      ' V ' + (y + l) + (l ? ' a ' + l + ' ' + l + ' 0 0 1 ' + l + ' ' + (-l) : '') + ' Z';
+  }
+
+  /**
+   * One thing that sorts into several named outcomes.
+   *
+   * For a decision with more than two results — triaging an output as correct, incorrect
+   * or unclear. A linear chain implies the three follow one another, and a two-column
+   * comparison cannot hold a third, so both would misrepresent the lesson.
+   */
+  function diagramBranch(section) {
+    var branches = section.branches || [];
+    // Kept deliberately wide. The figure scales to the column width, so a tall, narrow
+    // layout blows the type up to twice the size of the text around it.
+    var padX = 8, padY = 40, srcW = 230, srcH = 62, pitch = 74, boxW = 290, boxH = 62;
+    var colX = padX + srcW + 80;
+    var w = colX + boxW + padX;
+    var h = padY + Math.max(srcH, branches.length * pitch) + 12;
+
+    var out = [svgOpen(w, h, section.altText || section.heading || 'One input, several outcomes')];
+    var srcY = padY + (h - padY - srcH) / 2 - 8;
+
+    out.push('<rect x="' + padX + '" y="' + srcY + '" width="' + srcW + '" height="' + srcH +
+      '" rx="8" fill="none" stroke="currentColor" stroke-width="1.5"/>');
+    wrapLines(section.source || '', 22).forEach(function (line, li) {
+      out.push('<text x="' + (padX + srcW / 2) + '" y="' + (srcY + 26 + li * 15) +
+        '" text-anchor="middle" font-size="13" font-weight="700" ' +
+        'fill="currentColor">' + esc(line) + '</text>');
+    });
+
+    branches.forEach(function (branch, i) {
+      var by = padY + i * pitch;
+      var accent = branch.accent === true;
+      var cy = by + boxH / 2;
+      var sx = padX + srcW, sy = srcY + srcH / 2;
+
+      // An elbow rather than a straight line: three arrows fanning from one point
+      // crowd each other and the labels stop being readable.
+      out.push('<path d="M ' + sx + ' ' + sy + ' H ' + (sx + 34) + ' V ' + cy + ' H ' +
+        (colX - 10) + '" fill="none" stroke="currentColor" stroke-width="1.4" ' +
+        'opacity="0.75" marker-end="url(#dgArrow)"/>');
+
+      out.push('<rect x="' + colX + '" y="' + by + '" width="' + boxW + '" height="' + boxH +
+        '" rx="8" fill="none" stroke="' + (accent ? '#D8B664' : 'currentColor') +
+        '" stroke-width="' + (accent ? 2.5 : 1.4) + '"/>');
+      out.push('<text x="' + (colX + boxW / 2) + '" y="' + (by + 24) + '" text-anchor="middle" ' +
+        'font-size="13" font-weight="700" fill="currentColor">' + esc(branch.label) + '</text>');
+      wrapLines(branch.detail || '', 40).slice(0, 2).forEach(function (line, li) {
+        out.push('<text x="' + (colX + boxW / 2) + '" y="' + (by + 42 + li * 14) +
+          '" text-anchor="middle" font-size="11" fill="currentColor" ' +
+          'opacity="0.75">' + esc(line) + '</text>');
+      });
+    });
+    return out.join('') + '</svg>';
+  }
+
+  /**
+   * A cycle you go round until it is good enough.
+   *
+   * Refining a prompt is the one process in the course that is explicitly not linear —
+   * "judge, change one thing, judge again". Drawn as a chain it looks like something you
+   * finish, which is the opposite of what the lesson teaches.
+   */
+  function diagramLoop(section) {
+    var steps = section.steps || [];
+    var padX = 8, padY = 44, boxW = 176, boxH = 78, gap = 58;
+    var w = padX * 2 + steps.length * boxW + (steps.length - 1) * gap;
+    var h = padY + boxH + 76;
+    var mid = padY + boxH / 2;
+
+    var out = [svgOpen(w, h, section.altText || section.heading || 'A loop you repeat')];
+
+    steps.forEach(function (step, i) {
+      var x = padX + i * (boxW + gap);
+      var accent = step.accent === true;
+      out.push('<rect x="' + x + '" y="' + padY + '" width="' + boxW + '" height="' + boxH +
+        '" rx="8" fill="none" stroke="' + (accent ? '#D8B664' : 'currentColor') +
+        '" stroke-width="' + (accent ? 2.5 : 1.5) + '"/>');
+      var label = wrapLines(step.label, 20);
+      label.forEach(function (line, li) {
+        out.push('<text x="' + (x + boxW / 2) + '" y="' + (padY + 26 + li * 15) +
+          '" text-anchor="middle" font-size="13" font-weight="700" ' +
+          'fill="currentColor">' + esc(line) + '</text>');
+      });
+      wrapLines(step.detail || '', 24).slice(0, 2).forEach(function (line, li) {
+        out.push('<text x="' + (x + boxW / 2) + '" y="' +
+          (padY + 30 + label.length * 15 + li * 13) +
+          '" text-anchor="middle" font-size="11" fill="currentColor" ' +
+          'opacity="0.75">' + esc(line) + '</text>');
+      });
+      if (i < steps.length - 1) {
+        out.push('<line x1="' + (x + boxW + 8) + '" y1="' + mid + '" x2="' + (x + boxW + gap - 10) +
+          '" y2="' + mid + '" stroke="currentColor" stroke-width="1.5" ' +
+          'marker-end="url(#dgArrow)"/>');
+      }
+    });
+
+    // The return leg, under the row and back to the start. This is the whole point.
+    var lastX = padX + (steps.length - 1) * (boxW + gap) + boxW;
+    var backY = padY + boxH + 34;
+    out.push('<path d="M ' + (lastX - boxW / 2) + ' ' + (padY + boxH) + ' V ' + backY +
+      ' H ' + (padX + boxW / 2) + ' V ' + (padY + boxH + 8) +
+      '" fill="none" stroke="#D8B664" stroke-width="2" stroke-dasharray="5 4" ' +
+      'marker-end="url(#dgArrow)"/>');
+    out.push('<text x="' + (w / 2) + '" y="' + (backY + 18) + '" text-anchor="middle" ' +
+      'font-size="11.5" font-weight="700" fill="#A8863A">' +
+      esc(section.repeatLabel || 'not good enough yet \u2014 go round again') + '</text>');
+
+    return out.join('') + '</svg>';
   }
 
   /** Two mechanisms side by side, so the difference is the thing you look at. */

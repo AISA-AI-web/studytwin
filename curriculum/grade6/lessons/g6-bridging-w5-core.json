@@ -64,6 +64,33 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "parts",
+      "label": "The three parts you are designing",
+      "heading": "A helper has three parts",
+      "whole": "Your trustworthy AI helper",
+      "altText": "A bar split into three parts — the data it uses, the prompt that drives it, and the checks that catch mistakes — which together make a helper you can trust.",
+      "parts": [
+        {
+          "label": "Its data",
+          "detail": "what it draws on"
+        },
+        {
+          "label": "Its prompt",
+          "detail": "what you ask it to do"
+        },
+        {
+          "label": "Its checks",
+          "detail": "how you catch mistakes",
+          "accent": true
+        }
+      ],
+      "result": "A helper you can defend",
+      "caption": "All three are yours to design. **A helper with no checks is not finished** — it is a helper you are hoping about.",
+      "role": "diagram"
+    },
+    {
       "type": "text",
       "heading": "Test the data quality",
       "body": [

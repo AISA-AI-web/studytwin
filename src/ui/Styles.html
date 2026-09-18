@@ -302,9 +302,25 @@
     border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
     background: var(--aisa-white);
   }
+  /* A wide figure squeezed into a phone screen renders its labels at three or four
+     pixels — present, and unreadable. On a narrow screen the figure keeps a usable
+     minimum width and the frame scrolls sideways instead. */
+  .diagram__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .diagram svg {
     display: block; width: 100%; max-width: 100%; height: auto;
     margin: .5rem auto .4rem; color: var(--aisa-purple);
+  }
+  .diagram__hint { display: none; }
+
+  @media (max-width: 720px) {
+    .diagram { padding: 1rem .8rem; }
+    /* 0.9 of the width it was drawn at: small enough to cut the scrolling down, large
+       enough that the 11px labels land near 10px rather than 5. */
+    .diagram svg { min-width: calc(var(--dg-w, 900) * 0.9px); }
+    .diagram__hint {
+      display: block; font-size: .72rem; color: var(--aisa-muted-gray);
+      text-align: center; margin-bottom: .2rem;
+    }
   }
   .diagram figcaption {
     font-size: .86rem; color: var(--aisa-muted-gray); text-align: center;

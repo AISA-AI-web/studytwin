@@ -69,6 +69,29 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "parts",
+      "label": "What a solution is made of",
+      "heading": "Data plus a model",
+      "whole": "An AI solution",
+      "altText": "A bar split into two parts — the data and the model — which together produce the outcome.",
+      "parts": [
+        {
+          "label": "The data",
+          "detail": "the examples it learned from",
+          "accent": true
+        },
+        {
+          "label": "The model",
+          "detail": "the pattern it found in them"
+        }
+      ],
+      "result": "The outcome you see",
+      "caption": "Change the data and the outcome changes, even with the same model. **That is why tracing a bad outcome starts at the data**, not at the answer.",
+      "role": "diagram"
+    },
+    {
       "type": "text",
       "heading": "Amount and balance both matter",
       "body": [

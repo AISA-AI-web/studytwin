@@ -81,6 +81,32 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "branch",
+      "label": "What to do with an output",
+      "heading": "Three verdicts, not two",
+      "source": "An output you have just read",
+      "altText": "One output leads to three possible verdicts: correct, incorrect, or unclear.",
+      "branches": [
+        {
+          "label": "Correct",
+          "detail": "You checked it against something else"
+        },
+        {
+          "label": "Incorrect",
+          "detail": "You found something that is wrong"
+        },
+        {
+          "label": "Unclear",
+          "detail": "You could not check it either way",
+          "accent": true
+        }
+      ],
+      "caption": "**Unclear is a real verdict**, not a way of avoiding one. It records what you were unable to check, which is information the next person needs.",
+      "role": "diagram"
+    },
+    {
       "type": "activity",
       "label": "Let's try it - hands-on",
       "heading": "Let's try it - hands-on",

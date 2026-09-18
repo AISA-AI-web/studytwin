@@ -79,6 +79,36 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "loop",
+      "label": "Refining is a loop, not a line",
+      "heading": "Judge, change one thing, judge again",
+      "altText": "A loop: judge the output you got, change one thing about the prompt, run it again, then judge whether that change helped.",
+      "steps": [
+        {
+          "label": "Judge what you got",
+          "detail": "against what you wanted"
+        },
+        {
+          "label": "Change one thing",
+          "detail": "and write down which"
+        },
+        {
+          "label": "Run it again",
+          "detail": ""
+        },
+        {
+          "label": "Judge again",
+          "detail": "better, worse, or no change?",
+          "accent": true
+        }
+      ],
+      "repeatLabel": "not good enough yet — go round again",
+      "caption": "A prompt is rarely right first time, and that is normal. **Keeping the receipts — which change, what happened — is what turns guessing into refining.**",
+      "role": "diagram"
+    },
+    {
       "type": "activity",
       "label": "Let's try it - hands-on",
       "heading": "Let's try it - hands-on",

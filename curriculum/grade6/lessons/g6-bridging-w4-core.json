@@ -70,6 +70,39 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "flow",
+      "label": "Why a wrong answer can sound right",
+      "heading": "Fluent and true are decided separately",
+      "altText": "A chain: the model predicts what usually comes next, which makes the answer read smoothly, which is why it sounds right whether or not it is true.",
+      "nodes": [
+        {
+          "label": "It predicts what usually comes next",
+          "detail": "from the examples it saw"
+        },
+        {
+          "label": "So the answer reads smoothly",
+          "detail": "well-formed sentences"
+        },
+        {
+          "label": "So it sounds right",
+          "detail": "whether or not it is",
+          "accent": true
+        }
+      ],
+      "edges": [
+        {
+          "label": "which makes it"
+        },
+        {
+          "label": "which makes it"
+        }
+      ],
+      "caption": "Nothing in that chain checks a fact. **Sounding right is produced by the same process whether the answer is true or false**, so it can never be your evidence.",
+      "role": "diagram"
+    },
+    {
       "type": "text",
       "heading": "Name the risk, then check it",
       "body": [

@@ -73,6 +73,33 @@
       "role": "explain"
     },
     {
+      "authored": true,
+      "type": "diagram",
+      "variant": "compare",
+      "label": "The distinction the whole unit rests on",
+      "heading": "Where did the rule come from?",
+      "altText": "Two columns. In a rule-based machine a person writes the rule and the machine follows it. In a learning machine, examples go in and the machine works the rule out for itself.",
+      "left": {
+        "title": "Rule-based machine",
+        "steps": [
+          "A person works out the rule",
+          "They write it down as steps",
+          "The machine follows the steps"
+        ]
+      },
+      "right": {
+        "title": "Learning machine",
+        "accent": true,
+        "steps": [
+          "A person collects examples",
+          "The machine finds the rule in them",
+          "The machine uses what it found"
+        ]
+      },
+      "caption": "Same job, different source. Ask **who worked out the rule** — that is the question this unit keeps coming back to.",
+      "role": "diagram"
+    },
+    {
       "type": "text",
       "heading": "Why it matters",
       "body": [

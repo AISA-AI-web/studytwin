@@ -13,7 +13,28 @@
     "scheme or a framework tag — only what a student reads.",
     "",
     "insertAfter names the heading of the published section this should follow; 'start' places",
-    "it first."
+    "it first.",
+    "",
+    "DIAGRAMS",
+    "",
+    "A diagram is added where the lesson teaches something that is structural — a sequence, a",
+    "comparison, a set of named parts, a decision with several outcomes, a loop — and prose",
+    "alone leaves the student assembling the shape themselves. Not for decoration, and not to",
+    "reconstruct figures from the PDF that nobody has seen.",
+    "",
+    "Five variants, chosen to fit what the lesson actually claims:",
+    "  flow     a chain where each step causes the next, with the link named on the arrow",
+    "  compare  two mechanisms side by side, so the difference is the thing you look at",
+    "  parts    one thing made of named parts, drawn as one bar rather than a list",
+    "  branch   one input sorting into several named outcomes",
+    "  loop     a cycle you go round until it is good enough",
+    "",
+    "Picking the wrong variant misrepresents the lesson: drawn as a chain, refining a prompt",
+    "looks like something you finish, which is the opposite of what the lesson teaches. If a",
+    "concept does not fit any of the five, add a variant rather than forcing it into one.",
+    "",
+    "altText is required and is what a screen reader announces, so it must carry the same",
+    "information as the picture, not name it."
   ],
   "g6-bridging-w1-core": [
     {
@@ -82,6 +103,161 @@
       }
     }
   ],
+  "g6-bridging-w2-core": [
+    {
+      "insertAfter": "Change one thing, and know why",
+      "section": {
+        "type": "diagram",
+        "variant": "loop",
+        "label": "Refining is a loop, not a line",
+        "heading": "Judge, change one thing, judge again",
+        "altText": "A loop: judge the output you got, change one thing about the prompt, run it again, then judge whether that change helped.",
+        "steps": [
+          {
+            "label": "Judge what you got",
+            "detail": "against what you wanted"
+          },
+          {
+            "label": "Change one thing",
+            "detail": "and write down which"
+          },
+          {
+            "label": "Run it again",
+            "detail": ""
+          },
+          {
+            "label": "Judge again",
+            "detail": "better, worse, or no change?",
+            "accent": true
+          }
+        ],
+        "repeatLabel": "not good enough yet — go round again",
+        "caption": "A prompt is rarely right first time, and that is normal. **Keeping the receipts — which change, what happened — is what turns guessing into refining.**"
+      }
+    }
+  ],
+  "g6-bridging-w3-core": [
+    {
+      "insertAfter": "A solution is data plus a model",
+      "section": {
+        "type": "diagram",
+        "variant": "parts",
+        "label": "What a solution is made of",
+        "heading": "Data plus a model",
+        "whole": "An AI solution",
+        "altText": "A bar split into two parts — the data and the model — which together produce the outcome.",
+        "parts": [
+          {
+            "label": "The data",
+            "detail": "the examples it learned from",
+            "accent": true
+          },
+          {
+            "label": "The model",
+            "detail": "the pattern it found in them"
+          }
+        ],
+        "result": "The outcome you see",
+        "caption": "Change the data and the outcome changes, even with the same model. **That is why tracing a bad outcome starts at the data**, not at the answer."
+      }
+    }
+  ],
+  "g6-bridging-w4-core": [
+    {
+      "insertAfter": "Why fluent is not the same as true",
+      "section": {
+        "type": "diagram",
+        "variant": "flow",
+        "label": "Why a wrong answer can sound right",
+        "heading": "Fluent and true are decided separately",
+        "altText": "A chain: the model predicts what usually comes next, which makes the answer read smoothly, which is why it sounds right whether or not it is true.",
+        "nodes": [
+          {
+            "label": "It predicts what usually comes next",
+            "detail": "from the examples it saw"
+          },
+          {
+            "label": "So the answer reads smoothly",
+            "detail": "well-formed sentences"
+          },
+          {
+            "label": "So it sounds right",
+            "detail": "whether or not it is",
+            "accent": true
+          }
+        ],
+        "edges": [
+          {
+            "label": "which makes it"
+          },
+          {
+            "label": "which makes it"
+          }
+        ],
+        "caption": "Nothing in that chain checks a fact. **Sounding right is produced by the same process whether the answer is true or false**, so it can never be your evidence."
+      }
+    }
+  ],
+  "g6-bridging-w5-core": [
+    {
+      "insertAfter": "A helper has three parts",
+      "section": {
+        "type": "diagram",
+        "variant": "parts",
+        "label": "The three parts you are designing",
+        "heading": "A helper has three parts",
+        "whole": "Your trustworthy AI helper",
+        "altText": "A bar split into three parts — the data it uses, the prompt that drives it, and the checks that catch mistakes — which together make a helper you can trust.",
+        "parts": [
+          {
+            "label": "Its data",
+            "detail": "what it draws on"
+          },
+          {
+            "label": "Its prompt",
+            "detail": "what you ask it to do"
+          },
+          {
+            "label": "Its checks",
+            "detail": "how you catch mistakes",
+            "accent": true
+          }
+        ],
+        "result": "A helper you can defend",
+        "caption": "All three are yours to design. **A helper with no checks is not finished** — it is a helper you are hoping about."
+      }
+    }
+  ],
+  "g6-main-w1-core": [
+    {
+      "insertAfter": "Two kinds of machine",
+      "section": {
+        "type": "diagram",
+        "variant": "compare",
+        "label": "The distinction the whole unit rests on",
+        "heading": "Where did the rule come from?",
+        "altText": "Two columns. In a rule-based machine a person writes the rule and the machine follows it. In a learning machine, examples go in and the machine works the rule out for itself.",
+        "left": {
+          "title": "Rule-based machine",
+          "steps": [
+            "A person works out the rule",
+            "They write it down as steps",
+            "The machine follows the steps"
+          ]
+        },
+        "right": {
+          "title": "Learning machine",
+          "accent": true,
+          "steps": [
+            "A person collects examples",
+            "The machine finds the rule in them",
+            "The machine uses what it found"
+          ]
+        },
+        "caption": "Same job, different source. Ask **who worked out the rule** — that is the question this unit keeps coming back to."
+      }
+    }
+  ],
   "g6-main-w2-core": [
     {
       "insertAfter": "intro",
@@ -112,6 +288,133 @@
       }
     }
   ],
+  "g6-main-w3-core": [
+    {
+      "insertAfter": "Goal, Context, Format",
+      "section": {
+        "type": "diagram",
+        "variant": "parts",
+        "label": "The shape of a structured prompt",
+        "heading": "One prompt, three slots",
+        "whole": "A structured prompt",
+        "altText": "A single bar split into three labelled slots — Goal, Context and Format — which together make a prompt the tool can act on.",
+        "parts": [
+          {
+            "label": "Goal",
+            "detail": "What you want it to do"
+          },
+          {
+            "label": "Context",
+            "detail": "What it needs to know first"
+          },
+          {
+            "label": "Format",
+            "detail": "How the answer should look",
+            "accent": true
+          }
+        ],
+        "result": "A prompt the tool can act on",
+        "caption": "Leave a slot empty and the tool fills it with a guess of its own. **Format is the one most often left out**, and it is why an answer comes back in the wrong shape."
+      }
+    }
+  ],
+  "g6-main-w4-core": [
+    {
+      "insertAfter": "Three verdicts",
+      "section": {
+        "type": "diagram",
+        "variant": "branch",
+        "label": "What to do with an output",
+        "heading": "Three verdicts, not two",
+        "source": "An output you have just read",
+        "altText": "One output leads to three possible verdicts: correct, incorrect, or unclear.",
+        "branches": [
+          {
+            "label": "Correct",
+            "detail": "You checked it against something else"
+          },
+          {
+            "label": "Incorrect",
+            "detail": "You found something that is wrong"
+          },
+          {
+            "label": "Unclear",
+            "detail": "You could not check it either way",
+            "accent": true
+          }
+        ],
+        "caption": "**Unclear is a real verdict**, not a way of avoiding one. It records what you were unable to check, which is information the next person needs."
+      }
+    }
+  ],
+  "g6-main-w5-core": [
+    {
+      "insertAfter": "Two risk families",
+      "section": {
+        "type": "diagram",
+        "variant": "branch",
+        "label": "Two families, different responses",
+        "heading": "What kind of risk is this?",
+        "source": "Something that could go wrong",
+        "altText": "A risk splits into two families: the output being wrong, and the tool being used unsafely. Each has a different response.",
+        "branches": [
+          {
+            "label": "The output is wrong",
+            "detail": "→ check it before anyone acts on it"
+          },
+          {
+            "label": "The use is unsafe",
+            "detail": "→ change what goes in, or do not use it",
+            "accent": true
+          }
+        ],
+        "caption": "Naming the family tells you the response. **Checking harder does not fix a privacy problem**, and removing personal details does not make a wrong fact right."
+      }
+    }
+  ],
+  "g6-main-w6-core": [
+    {
+      "insertAfter": "One connected chain",
+      "section": {
+        "type": "diagram",
+        "variant": "flow",
+        "label": "The whole term in one line",
+        "heading": "Four skills, one chain",
+        "altText": "A chain of four steps: work out the system type, write a structured prompt, triage the output, then run a risk check.",
+        "nodes": [
+          {
+            "label": "Name the system",
+            "detail": "rule-based or learning"
+          },
+          {
+            "label": "Write the prompt",
+            "detail": "goal, context, format"
+          },
+          {
+            "label": "Triage the output",
+            "detail": "correct, incorrect, unclear"
+          },
+          {
+            "label": "Check the risk",
+            "detail": "and choose what to do",
+            "accent": true
+          }
+        ],
+        "edges": [
+          {
+            "label": "so you know what to expect"
+          },
+          {
+            "label": "so the output is worth judging"
+          },
+          {
+            "label": "so you know what you are risking"
+          }
+        ],
+        "caption": "Each step only makes sense because of the one before it. **Skip the first and you do not know what the tool was ever going to be able to do.**"
+      }
+    }
+  ],
   "g6-main-w9-core": [
     {
       "insertAfter": "Judging your solution three ways",
@@ -137,6 +440,37 @@
             "test": "Check for unfair results and for any private data being exposed."
           }
         ]
+      }
+    },
+    {
+      "insertAfter": "One change, proven",
+      "section": {
+        "type": "diagram",
+        "variant": "loop",
+        "label": "How to prove a change worked",
+        "heading": "One change at a time, with evidence",
+        "altText": "A loop: judge the solution against the criteria, change one thing, run it again, and judge again to see whether that change helped.",
+        "steps": [
+          {
+            "label": "Judge it",
+            "detail": "against your criteria"
+          },
+          {
+            "label": "Change one thing",
+            "detail": "and write down which"
+          },
+          {
+            "label": "Run it again",
+            "detail": "on the same input"
+          },
+          {
+            "label": "Judge again",
+            "detail": "did that change help?",
+            "accent": true
+          }
+        ],
+        "repeatLabel": "still short of the criteria — go round again",
+        "caption": "Same input each time, one change each time. **Change two things at once and you cannot say which one worked** — which is the evidence you are being asked for."
       }
     }
   ]
