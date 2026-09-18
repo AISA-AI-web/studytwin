@@ -281,5 +281,104 @@ check('a stripped open response keeps its autoMarked flag so the UI can say so',
 check('but never carries the teacher look-for to the browser',
   safeOpen.lookFor === undefined && !/lookFor/.test(JSON.stringify(safeOpen)));
 
+console.log('\nEvery readable authoring shape survives the trip to the marking engine');
+{
+  /*
+   * normaliseAnswerShape lives in the assembler, but what it has to produce is defined
+   * entirely by this engine, so it is tested against it.
+   *
+   * Each case below is a shape an author (or a generating agent) actually wrote. They
+   * all share one failure mode: handed to markQuestion_ unconverted, none of them throws
+   * or warns — they award zero to every student on every attempt while the worksheet
+   * still submits and still shows a score. That is why these are worth a test each.
+   */
+  const assembler = fs.readFileSync(path.join(root, 'tools/assemble-grade6.js'), 'utf8');
+  const fnSource = assembler.match(/function normaliseAnswerShape\(question\) \{[\s\S]*?\n\}/)[0];
+  const normalise = new Function(`${fnSource}; return normaliseAnswerShape;`)();
+
+  /** Marks a question the way a browser would submit a correct answer. */
+  function scoreCorrect(q) {
+    normalise(q);
+    let response;
+    switch (q.type) {
+      case 'matching':
+        response = {};
+        (q.left || []).forEach((l) => { response[String(l.id)] = String((q.answer || {})[l.id]); });
+        break;
+      case 'ordering': case 'multi': response = (q.answer || []).map(String); break;
+      case 'fillBlank':
+        response = (q.answer || []).map((a) => String(Array.isArray(a) ? a[0] : a));
+        break;
+      default: response = String(q.answer);
+    }
+    return api.markWorksheet_({ questions: [q] }, { [q.id]: response }).percent;
+  }
+
+  check('mcq: options as plain strings, answer as a position',
+    scoreCorrect({ id: 'q', type: 'mcq', marks: 1,
+      options: ['Rule-based', 'Learning'], answer: 1 }) === 100);
+
+  check('mcq: options already carrying ids is left alone',
+    scoreCorrect({ id: 'q', type: 'mcq', marks: 1,
+      options: [{ id: 'a', text: 'Rule-based' }, { id: 'b', text: 'Learning' }],
+      answer: 'b' }) === 100);
+
+  check('multi: answer as positions',
+    scoreCorrect({ id: 'q', type: 'multi', marks: 3,
+      options: ['Remove names', 'Check the fact', 'Share it anyway', 'Mark what is unclear'],
+      answer: [0, 1, 3] }) === 100);
+
+  check('ordering: answer as the item texts in order',
+    scoreCorrect({ id: 'q', type: 'ordering', marks: 4,
+      items: ['Name the system', 'Write the prompt', 'Triage the output', 'Check the risk'],
+      answer: ['Name the system', 'Write the prompt', 'Triage the output', 'Check the risk'] }) === 100);
+
+  check('matching: a list of {left, right} pairs',
+    scoreCorrect({ id: 'q', type: 'matching', marks: 2,
+      left: [{ id: 'L1', text: 'Rules a person wrote' }, { id: 'L2', text: 'Learned from data' }],
+      right: [{ id: 'R1', text: 'Rule-based' }, { id: 'R2', text: 'Learning' }],
+      answer: [{ left: 'L1', right: 'R1' }, { left: 'L2', right: 'R2' }] }) === 100);
+
+  check('matching: plain strings with the key given as positions',
+    scoreCorrect({ id: 'q', type: 'matching', marks: 2,
+      left: ['Rules a person wrote', 'Learned from data'],
+      right: ['Rule-based', 'Learning'],
+      answer: [0, 1] }) === 100);
+
+  check('matching: a key already in the shape the engine wants',
+    scoreCorrect({ id: 'q', type: 'matching', marks: 2,
+      left: [{ id: 'L1', text: 'a' }, { id: 'L2', text: 'b' }],
+      right: [{ id: 'R1', text: 'x' }, { id: 'R2', text: 'y' }],
+      answer: { L1: 'R1', L2: 'R2' } }) === 100);
+
+  check('fillBlank: accepted answers authored per blank',
+    scoreCorrect({ id: 'q', type: 'fillBlank', marks: 2,
+      stem: 'This is a {{1}} system, because the logic came from a {{2}}.',
+      blanks: [{ id: '1', answer: 'rule-based', acceptedAnswers: ['rule based'] },
+               { id: '2', answer: 'person', acceptedAnswers: ['human'] }] }) === 100);
+
+  check('fillBlank: a blank\u2019s label never leaks the answer', (function () {
+    const q = { id: 'q', type: 'fillBlank', marks: 1,
+      blanks: [{ id: '1', answer: 'rule-based', acceptedAnswers: [] }] };
+    normalise(q);
+    // The label is rendered as the input's placeholder.
+    return q.blanks.every((label) => !/rule-based/.test(String(label)));
+  })());
+
+  check('an unresolvable key is left alone for the validator, not guessed at', (function () {
+    const q = { id: 'q', type: 'mcq', marks: 1,
+      options: ['Rule-based', 'Learning'], answer: 'something else entirely' };
+    normalise(q);
+    return q.answer === 'something else entirely';
+  })());
+
+  check('an open question is never rewritten', (function () {
+    const q = { id: 'q', type: 'shortText', autoMarked: false,
+      blanks: [{ id: '1', answer: 'x' }] };
+    normalise(q);
+    return q.blanks[0].answer === 'x';
+  })());
+}
+
 console.log(`\n${passed} passed, ${failed} failed.`);
 process.exit(failed ? 1 : 0);

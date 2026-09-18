@@ -130,34 +130,106 @@ function normaliseFields(question, lessonId) {
 }
 
 /**
- * Puts answer keys into the one shape the marking engine reads.
+ * Puts a question into the one shape the marking engine reads.
  *
- * A matching key is naturally written as an ordered list of pairs — it reads like the
- * table it came from — but markMatching_ indexes the key by left id. Handed a list, it
- * reads the array indices as left ids, finds nothing, and awards **zero to every student
- * on every attempt**, silently and with no error anywhere. The worksheet still submits,
- * still shows a score, and the score is just wrong.
+ * Authors write choices and keys the way the source table reads — a plain list of
+ * strings, an ordered list of {left, right} pairs, a key given as positions. The engine
+ * wants ids, and looks keys up by id. Handed anything else it does not error: it awards
+ * **zero to every student on every attempt**, silently, while the worksheet still submits
+ * and still shows a score.
  *
- * Accepting both shapes here costs nothing and removes the failure entirely. The same
- * goes for an ordering key written as objects rather than bare ids.
+ * So every readable shape is accepted here and converted once, rather than each author
+ * having to know what markQuestion_ indexes by. Anything genuinely ambiguous is left
+ * untouched so validate-content.js reports it, instead of being guessed at.
  */
 function normaliseAnswerShape(question) {
   if (question.autoMarked === false) return;
 
-  if (question.type === 'matching' && Array.isArray(question.answer)) {
-    const map = {};
-    question.answer.forEach((pair) => {
-      if (!pair || typeof pair !== 'object') return;
-      const left = pair.left ?? pair.from ?? pair.l;
-      const right = pair.right ?? pair.to ?? pair.r;
-      if (left !== undefined && right !== undefined) map[String(left)] = String(right);
-    });
-    if (Object.keys(map).length) question.answer = map;
-  }
+  const ID_PREFIX = { options: '', items: 'i', left: 'L', right: 'R' };
+  const original = {};
 
-  if (question.type === 'ordering' && Array.isArray(question.answer)) {
-    question.answer = question.answer.map((item) =>
-      item && typeof item === 'object' ? String(item.id ?? item.item ?? item) : item);
+  // A plain list of strings becomes {id, text}. The original list is kept so a key
+  // written as positions still resolves against it.
+  ['options', 'items', 'left', 'right'].forEach((field) => {
+    const list = question[field];
+    if (!Array.isArray(list) || !list.length) return;
+    original[field] = list.slice();
+    if (list.every((entry) => entry && typeof entry === 'object')) return;
+    if (!list.every((entry) => typeof entry === 'string')) return;
+
+    question[field] = list.map((text, i) => ({
+      id: field === 'options' ? String.fromCharCode(97 + i) : `${ID_PREFIX[field]}${i + 1}`,
+      text
+    }));
+  });
+
+  const idsOf = (field) => (question[field] || []).map((entry) => String(entry.id));
+
+  /* Resolves one key entry to an id: an id already, a position, or an exact text. */
+  const resolve = (field, value) => {
+    const list = question[field] || [];
+    if (!list.length) return undefined;
+
+    const ids = idsOf(field);
+    if (ids.includes(String(value))) return String(value);
+
+    if (typeof value === 'number' && Number.isInteger(value) &&
+        value >= 0 && value < list.length) {
+      return String(list[value].id);
+    }
+
+    if (typeof value === 'string') {
+      const byText = list.filter((entry) => String(entry.text).trim() === value.trim());
+      if (byText.length === 1) return String(byText[0].id);
+    }
+    return undefined;
+  };
+
+  switch (question.type) {
+    case 'mcq': {
+      const id = resolve('options', question.answer);
+      if (id !== undefined) question.answer = id;
+      break;
+    }
+
+    case 'multi': {
+      if (!Array.isArray(question.answer)) break;
+      const ids = question.answer.map((v) => resolve('options', v));
+      if (ids.every((id) => id !== undefined)) question.answer = ids;
+      break;
+    }
+
+    case 'ordering': {
+      if (!Array.isArray(question.answer)) break;
+      const ids = question.answer.map((v) =>
+        resolve('items', v && typeof v === 'object' ? (v.id ?? v.item) : v));
+      if (ids.every((id) => id !== undefined)) question.answer = ids;
+      break;
+    }
+
+    case 'matching': {
+      if (!Array.isArray(question.answer)) break;
+      const left = question.left || [];
+      const map = {};
+      let ok = left.length > 0;
+
+      question.answer.forEach((entry, i) => {
+        // Either an explicit pair, or the right-hand choice for left[i] by position.
+        const pair = entry && typeof entry === 'object'
+          ? { l: entry.left ?? entry.from ?? entry.l, r: entry.right ?? entry.to ?? entry.r }
+          : { l: left[i] && left[i].id, r: entry };
+
+        const l = resolve('left', pair.l);
+        const r = resolve('right', pair.r);
+        if (l === undefined || r === undefined) { ok = false; return; }
+        map[l] = r;
+      });
+
+      if (ok && Object.keys(map).length === left.length) question.answer = map;
+      break;
+    }
+
+    default: break;
   }
 
   // fillBlank is naturally authored per blank — {id, answer, acceptedAnswers} — which
@@ -267,6 +339,24 @@ const formativePath = path.join(root, 'curriculum/grade6/formative.json');
 const formative = fs.existsSync(formativePath)
   ? JSON.parse(fs.readFileSync(formativePath, 'utf8')) : {};
 let formativeApplied = 0;
+
+/*
+ * Auto-marked questions written to replace the pack's open response cells.
+ *
+ * AISA cannot staff teacher marking, so an open question in a worksheet is never
+ * assessed at all — it counts in the denominator and can never score. These replace
+ * them: the same reasoning demand, expressed in a form a machine can mark. See
+ * docs/authoring-lessons.md for the conversion patterns.
+ *
+ * Substituted here rather than edited into the lesson files, because the lesson files
+ * are regenerated by this script and anything written into them directly is lost on the
+ * next run.
+ */
+const assessmentsPath = path.join(root, 'curriculum/grade6/assessments.json');
+const assessments = fs.existsSync(assessmentsPath)
+  ? JSON.parse(fs.readFileSync(assessmentsPath, 'utf8')) : {};
+let lessonsReplaced = 0;
+
 let openCount = 0;
 let scoredCount = 0;
 
@@ -281,6 +371,15 @@ weeks.forEach((week) => {
     catch (e) { problems.push(`${where}: worksheetJson is not valid JSON — ${e.message}`); return; }
 
     sections.forEach(assignRole);
+
+    // The generated set replaces the extracted questions wholesale, rather than being
+    // merged with them. Keeping both would leave every open question in place, scoring
+    // nothing and dragging the strand's evidence down with it.
+    const generated = assessments[raw.id];
+    if (Array.isArray(generated) && generated.length) {
+      worksheet.questions = JSON.parse(JSON.stringify(generated));
+      lessonsReplaced++;
+    }
 
     const strands = normaliseStrands(raw.strands, where);
     if (!strands.length) problems.push(`${where}: no strands resolved`);
@@ -409,6 +508,7 @@ console.log(`Lessons written : ${byTrack.bridging.length + byTrack.main.length} 
             `(${byTrack.bridging.length} bridging, ${byTrack.main.length} main)`);
 console.log(`Questions       : ${openCount} open (teacher-read), ${scoredCount} auto-marked`);
 console.log(`Formative block : ${formativeApplied}/32 lesson(s)`);
+console.log(`Auto-marked set : ${lessonsReplaced}/32 lesson(s) replaced`);
 const typeCounts = {};
 fs.readdirSync(outDir).forEach((f) => {
   JSON.parse(fs.readFileSync(path.join(outDir, f), 'utf8')).worksheet.questions
