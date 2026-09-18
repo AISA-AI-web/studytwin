@@ -327,5 +327,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Checks planning of the signature solution against the Emerging project criteria",
+    "check": "Plan review against the project rubric (Emerging); approve-to-build gate",
+    "successCriteria": "Plan states goal, prompt structure, inputs, an evaluation method, and one risk mitigation.",
+    "evidence": "Approved plan sheet."
   }
 }

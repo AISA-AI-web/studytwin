@@ -302,5 +302,11 @@
         "prompt": "Predict how much noise your data can take before the output becomes untrustworthy, and explain your reasoning."
       }
     ]
+  },
+  "formative": {
+    "targets": "Integrated mastery - CU (data quality affects outputs) and SD (design a promptdriven solution)",
+    "check": "Helper design planner + clean-vs-noisy data test reviewed against the mastery criteria",
+    "successCriteria": "Designs a helper with a clear task, structured prompt and data, and explains how data quality changed the output.",
+    "evidence": "Completed helper planner (Trustworthy AI Helper Log, Part 1)."
   }
 }

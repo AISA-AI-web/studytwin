@@ -312,5 +312,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Summative Term-1 task samples all four strands at Emerging; reflection informs Term 2",
+    "check": "Short Term-1 performance task marked with the analytic rubric + structured self-reflection",
+    "successCriteria": "Demonstrates each strand at Emerging; articulates two justified design/evaluation choices.",
+    "evidence": "Assessed task + reflection; results reported per strand."
   }
 }

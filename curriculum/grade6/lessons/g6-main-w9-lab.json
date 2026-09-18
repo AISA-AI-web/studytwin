@@ -310,5 +310,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Self- and peer-evaluation against the tiered rubric (Emerging = expected)",
+    "check": "Final iteration completed and a full risk review with a safe-and-fair statement",
+    "successCriteria": "Meets the Emerging criteria; completes a risk matrix, acts on one improvement, and confirms no personal data is used.",
+    "evidence": "Final iteration log + completed risk matrix + safe-and-fair statement."
   }
 }

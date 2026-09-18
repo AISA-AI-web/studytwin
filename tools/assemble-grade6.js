@@ -261,6 +261,12 @@ let supplementsApplied = 0;
 const supplementsPath = path.join(root, 'curriculum/grade6/supplements.json');
 const supplements = fs.existsSync(supplementsPath)
   ? JSON.parse(fs.readFileSync(supplementsPath, 'utf8')) : {};
+
+/* The pack's own formative block per lesson, verbatim; see its own _readme. */
+const formativePath = path.join(root, 'curriculum/grade6/formative.json');
+const formative = fs.existsSync(formativePath)
+  ? JSON.parse(fs.readFileSync(formativePath, 'utf8')) : {};
+let formativeApplied = 0;
 let openCount = 0;
 let scoredCount = 0;
 
@@ -340,6 +346,16 @@ weeks.forEach((week) => {
       worksheet,
     };
 
+    // The pack prints these for every lesson and they are the closest thing it has to
+    // a mark scheme students may see. successCriteria reaches them; the rest is teacher
+    // planning language and stripAnswerKey_ keeps it server-side.
+    if (formative[raw.id]) {
+      lesson.formative = formative[raw.id];
+      formativeApplied++;
+    } else {
+      problems.push(`${where}: no formative block — students see no success criteria`);
+    }
+
     fs.writeFileSync(path.join(outDir, `${raw.id}.json`),
       JSON.stringify(lesson, null, 2) + '\n');
     byTrack[raw.track].push(lesson);
@@ -392,6 +408,7 @@ console.log(`Weeks assembled : ${weeks.length}`);
 console.log(`Lessons written : ${byTrack.bridging.length + byTrack.main.length} ` +
             `(${byTrack.bridging.length} bridging, ${byTrack.main.length} main)`);
 console.log(`Questions       : ${openCount} open (teacher-read), ${scoredCount} auto-marked`);
+console.log(`Formative block : ${formativeApplied}/32 lesson(s)`);
 const typeCounts = {};
 fs.readdirSync(outDir).forEach((f) => {
   JSON.parse(fs.readFileSync(path.join(outDir, f), 'utf8')).worksheet.questions

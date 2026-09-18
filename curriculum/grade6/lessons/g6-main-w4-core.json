@@ -212,5 +212,11 @@
         "tierProbed": "emerging"
       }
     ]
+  },
+  "formative": {
+    "targets": "Directly checks 'identifies when outputs are incorrect or unclear'",
+    "check": "Output-triage exit card: flag correct / incorrect / unclear with a reason each",
+    "successCriteria": "Correctly triages at least 2 of 3 outputs and gives a valid reason for each judgement.",
+    "evidence": "Output-triage card."
   }
 }

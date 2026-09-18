@@ -201,5 +201,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Directly checks 'recognises basic risks (incorrect outputs, unsafe use)'",
+    "check": "Risk-spotting exit card: name two risks + one responsible-use rule",
+    "successCriteria": "Names two genuine risks, explains who is affected, and states a matching responsible-use rule.",
+    "evidence": "Risk-spotting card."
   }
 }

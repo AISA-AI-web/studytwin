@@ -319,5 +319,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Checks that the plan survives a tricky input and gains a fallback branch",
+    "check": "Build/test log review: one normal run, one pressure test, one fallback branch, one logged change",
+    "successCriteria": "Prototype is run, a tricky input exposes a weak spot, and a fallback branch plus a logged reason are added.",
+    "evidence": "Completed build/test log with fallback branch."
   }
 }

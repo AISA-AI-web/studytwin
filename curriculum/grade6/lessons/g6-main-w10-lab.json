@@ -313,5 +313,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Summative Term-1 task samples all four strands at Emerging; reflection informs Term 2",
+    "check": "Structured peer feedback across the carousel plus a completed four-strand summary and Term-2 goal",
+    "successCriteria": "Gives specific strand-tagged feedback, confirms responsible use, and sets one clear Term-2 goal.",
+    "evidence": "Feedback slips + completed four-strand Emerging summary with goal."
   }
 }

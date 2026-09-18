@@ -317,5 +317,11 @@
         "tierProbed": "emerging"
       }
     ]
+  },
+  "formative": {
+    "targets": "Confirms a completed solution is evaluated across several inputs, handles a failure, and passes a basic risk check",
+    "check": "Test-set evaluation log (accuracy count) + documented fix + completed risk check",
+    "successCriteria": "Solution is completed, evaluated across several inputs with an accuracy count, a failure is handled gracefully, and the risk check confirms no personal data.",
+    "evidence": "Completed test-set log, documented fix, and risk-check sheet."
   }
 }

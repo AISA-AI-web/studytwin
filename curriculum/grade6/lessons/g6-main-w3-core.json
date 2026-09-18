@@ -208,5 +208,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Directly checks 'uses AI tools with structured prompts to complete tasks'",
+    "check": "Task-completion log: structured prompt, output, 'task complete?' + one adjustment",
+    "successCriteria": "Completes the task using a structured prompt and records one adjustment that improved completion.",
+    "evidence": "Task-completion log."
   }
 }

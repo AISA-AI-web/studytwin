@@ -208,5 +208,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Extends 'uses AI tools with structured prompts to complete tasks' toward reusable, evaluated solutions",
+    "check": "A reusable prompt template plus a comparison of two structures with accuracy checks",
+    "successCriteria": "Compares two structures on completion and accuracy and designs a reusable template with a verification step.",
+    "evidence": "Comparison notes and the reusable template with its risk check."
   }
 }

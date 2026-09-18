@@ -584,6 +584,7 @@
     var openCount = worksheet.questions.filter(function (q) { return q.autoMarked === false; }).length;
     var markedCount = worksheet.questions.length - openCount;
     var locked = !data.canAttempt;
+    var criteria = ((data.lesson || {}).formative || {}).successCriteria || '';
 
     var head = '<section class="section" style="margin-top:2.5rem;padding-top:1.5rem;' +
       'border-top:2px solid var(--aisa-purple-tint)">' +
@@ -596,7 +597,13 @@
         (openCount ? openCount + ' written response' + (openCount === 1 ? '' : 's') +
           ' your teacher reads' : '') +
         ' · attempt ' + Math.min(data.attempts + 1, data.maxAttempts) + ' of ' +
-        data.maxAttempts + '</p>';
+        data.maxAttempts + '</p>' +
+      // The pack's own success criteria, verbatim. It is the nearest thing students get
+      // to the mark scheme, and showing it before they start is the point of it.
+      (criteria
+        ? '<div class="criteria"><div class="eyebrow">What a good answer shows</div>' +
+          '<p>' + richText(criteria) + '</p></div>'
+        : '');
 
     if (locked) {
       head += '<div class="callout" style="margin-top:1rem"><div class="eyebrow">Attempts used</div>' +

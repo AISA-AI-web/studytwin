@@ -202,5 +202,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 5 Advanced: refines prompts to improve output quality and explains why",
+    "check": "Prompt-refinement log: v1 to v2 with a reasoned justification",
+    "successCriteria": "Makes a refinement that measurably improves the output and explains the causal reason.",
+    "evidence": "Before/after prompt log."
   }
 }

@@ -207,5 +207,11 @@
         "tierProbed": "emerging"
       }
     ]
+  },
+  "formative": {
+    "targets": "Directly checks 'identifies when outputs are incorrect or unclear'",
+    "check": "Completed clinic record sheet plus a defended trust-ladder ranking",
+    "successCriteria": "Triages the full set with valid reasons, chooses a verification action each, and defends a sensible ranking.",
+    "evidence": "Clinic record sheet and trust ladder photo."
   }
 }

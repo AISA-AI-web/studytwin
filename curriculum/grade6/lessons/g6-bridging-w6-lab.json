@@ -301,5 +301,11 @@
         "tierProbed": "advanced"
       }
     ]
+  },
+  "formative": {
+    "targets": "Integrated mastery confirmation - GE (verification and risk) with CU, SD, CE from earlier, plus reflection",
+    "check": "Completed verification + risk mitigation on the Log, a one-minute showcase, and the four-skill reflection",
+    "successCriteria": "Verifies a claim against a trusted source, applies a risk mitigation (refining if needed), argues trust with evidence, presents, and reflects across the four skills.",
+    "evidence": "Trustworthy AI Helper Log (Part 2 Lab) and observed showcase."
   }
 }

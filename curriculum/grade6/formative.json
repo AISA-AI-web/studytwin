@@ -1,0 +1,203 @@
+{
+  "_readme": [
+    "The five formative fields the pack prints for every lesson, extracted verbatim.",
+    "",
+    "successCriteria is written for students and is shown to them before the worksheet.",
+    "targets, check and evidence are teacher planning language and are stripped from the",
+    "student payload by stripAnswerKey_ — they belong beside a judgement, not on a lesson.",
+    "",
+    "Source: Grade 6 Curriculum and Sample Core Lesson, per-lesson formative assessment block."
+  ],
+  "g6-bridging-w1-core": {
+    "targets": "Grade 5 Advanced: explains how data quality affects AI outputs",
+    "check": "Data-quality contrast task: predict, reveal, explain the output difference",
+    "successCriteria": "Explains the data-quality to output link with an example and predicts the effect of a quality change.",
+    "evidence": "Contrast task record / think-aloud."
+  },
+  "g6-bridging-w1-lab": {
+    "targets": "Grade 5 Advanced: explains how data quality affects AI outputs",
+    "check": "Four-way contrast plus ranking task with written justification",
+    "successCriteria": "Ranks datasets by expected output quality and justifies the order using evidence from the output changes.",
+    "evidence": "Investigation log and ranking line with justification."
+  },
+  "g6-bridging-w2-core": {
+    "targets": "Grade 5 Advanced: refines prompts to improve output quality and explains why",
+    "check": "Prompt-refinement log: v1 to v2 with a reasoned justification",
+    "successCriteria": "Makes a refinement that measurably improves the output and explains the causal reason.",
+    "evidence": "Before/after prompt log."
+  },
+  "g6-bridging-w2-lab": {
+    "targets": "Grade 5 Advanced: refines prompts to improve output quality and explains why",
+    "check": "Iteration log across several versions plus a two-goal trade-off justification",
+    "successCriteria": "Iterates a prompt with a reasoned log and chooses a best-balanced version, explaining the trade-off with evidence.",
+    "evidence": "Multi-version refinement log with trade-off note."
+  },
+  "g6-bridging-w3-core": {
+    "targets": "Grade 4 Advanced: explains how data influences the outcome of a solution",
+    "check": "Data-to-outcome explanation on a worked solution (with a 'what if the data changed' probe)",
+    "successCriteria": "Correctly explains the data's influence and predicts the effect of a data change.",
+    "evidence": "Explanation slip + prediction."
+  },
+  "g6-bridging-w3-lab": {
+    "targets": "Grade 4 Advanced: explains how data influences the outcome of a solution",
+    "check": "Investigation log showing before/after outcomes for several single data swaps, plus a ranked conclusion",
+    "successCriteria": "Records outcomes for controlled single swaps and identifies, with evidence, the most influential change.",
+    "evidence": "Completed investigation log + one-sentence evidence-based conclusion."
+  },
+  "g6-bridging-w4-core": {
+    "targets": "Grade 5 Advanced: explains misinformation risks and proposes verification strategies",
+    "check": "Risk-and-verify card: name the misinformation risk + a verification step",
+    "successCriteria": "Explains a plausible misinformation risk and proposes a workable verification strategy with a reason.",
+    "evidence": "Risk-and-verify card."
+  },
+  "g6-bridging-w4-lab": {
+    "targets": "Grade 5 Advanced: explains misinformation risks and proposes verification strategies",
+    "check": "Completed verification workshop sheet with verdicts and evidence for a batch, plus a reasoned comparison of two strategies",
+    "successCriteria": "Applies the routine to reach evidence-based verdicts and judges which verification strategy is more reliable with a reason.",
+    "evidence": "Workshop sheet with per-output verdicts + strategy comparison and judgement."
+  },
+  "g6-bridging-w5-core": {
+    "targets": "Integrated mastery - CU (data quality affects outputs) and SD (design a promptdriven solution)",
+    "check": "Helper design planner + clean-vs-noisy data test reviewed against the mastery criteria",
+    "successCriteria": "Designs a helper with a clear task, structured prompt and data, and explains how data quality changed the output.",
+    "evidence": "Completed helper planner (Trustworthy AI Helper Log, Part 1)."
+  },
+  "g6-bridging-w5-lab": {
+    "targets": "Integrated mastery - SD (refine prompts to improve output quality and explain why)",
+    "check": "Prompt-refinement log (v1 to best) with a reasoned justification for the key change",
+    "successCriteria": "Iterates the prompt to a measurably better output and explains the causal reason for the improvement.",
+    "evidence": "Prompt-refinement log (Trustworthy AI Helper Log, Part 1 Lab)."
+  },
+  "g6-bridging-w6-core": {
+    "targets": "Integrated mastery - CE (data influences the outcome) and planning for GE (verification and risk)",
+    "check": "Data-influence trace + verification/risk plan on the Log, reviewed against the mastery criteria",
+    "successCriteria": "Explains the data's influence on the outcome, predicts a data change, and plans a trustedsource verification and a risk check.",
+    "evidence": "Trustworthy AI Helper Log, Part 2 (Core section)."
+  },
+  "g6-bridging-w6-lab": {
+    "targets": "Integrated mastery confirmation - GE (verification and risk) with CU, SD, CE from earlier, plus reflection",
+    "check": "Completed verification + risk mitigation on the Log, a one-minute showcase, and the four-skill reflection",
+    "successCriteria": "Verifies a claim against a trusted source, applies a risk mitigation (refining if needed), argues trust with evidence, presents, and reflects across the four skills.",
+    "evidence": "Trustworthy AI Helper Log (Part 2 Lab) and observed showcase."
+  },
+  "g6-main-w1-core": {
+    "targets": "Baseline for the rule-based vs learning-system distinction and safe-use norms",
+    "check": "Diagnostic KWL + question wall + rule/learning sort (not graded)",
+    "successCriteria": "Poses at least 2 genuine questions and sorts at least 2 of 3 systems with a reason.",
+    "evidence": "Sorted systems + question wall on the baseline sheet."
+  },
+  "g6-main-w1-lab": {
+    "targets": "Checks whether students can observe and articulate the rule-based vs learning distinction through investigation",
+    "check": "Comparison log with at least three logged differences and one devised test",
+    "successCriteria": "Logs at least three real differences and writes a test that would actually separate rules from learning.",
+    "evidence": "Completed comparison log and the group's devised test."
+  },
+  "g6-main-w10-core": {
+    "targets": "Summative Term-1 task samples all four strands at Emerging; reflection informs Term 2",
+    "check": "Short Term-1 performance task marked with the analytic rubric + structured self-reflection",
+    "successCriteria": "Demonstrates each strand at Emerging; articulates two justified design/evaluation choices.",
+    "evidence": "Assessed task + reflection; results reported per strand."
+  },
+  "g6-main-w10-lab": {
+    "targets": "Summative Term-1 task samples all four strands at Emerging; reflection informs Term 2",
+    "check": "Structured peer feedback across the carousel plus a completed four-strand summary and Term-2 goal",
+    "successCriteria": "Gives specific strand-tagged feedback, confirms responsible use, and sets one clear Term-2 goal.",
+    "evidence": "Feedback slips + completed four-strand Emerging summary with goal."
+  },
+  "g6-main-w2-core": {
+    "targets": "Directly checks 'recognises the difference between rule-based and learning systems'",
+    "check": "Exit ticket: classify two systems and give the feature that distinguishes them",
+    "successCriteria": "Correctly classifies both and names a distinguishing feature (not a surface trait).",
+    "evidence": "Exit slips sorted secure / partial / not-yet."
+  },
+  "g6-main-w2-lab": {
+    "targets": "Deepens 'recognises the difference between rule-based and learning systems' by building a learning system and seeing how data shapes it",
+    "check": "Training-and-testing log with results and an explanation of how the data shaped the model",
+    "successCriteria": "Trains and tests a model on separate example sets and explains how the training examples changed what it learned.",
+    "evidence": "Completed training/testing log plus the data-safety and risk check."
+  },
+  "g6-main-w3-core": {
+    "targets": "Directly checks 'uses AI tools with structured prompts to complete tasks'",
+    "check": "Task-completion log: structured prompt, output, 'task complete?' + one adjustment",
+    "successCriteria": "Completes the task using a structured prompt and records one adjustment that improved completion.",
+    "evidence": "Task-completion log."
+  },
+  "g6-main-w3-lab": {
+    "targets": "Extends 'uses AI tools with structured prompts to complete tasks' toward reusable, evaluated solutions",
+    "check": "A reusable prompt template plus a comparison of two structures with accuracy checks",
+    "successCriteria": "Compares two structures on completion and accuracy and designs a reusable template with a verification step.",
+    "evidence": "Comparison notes and the reusable template with its risk check."
+  },
+  "g6-main-w4-core": {
+    "targets": "Directly checks 'identifies when outputs are incorrect or unclear'",
+    "check": "Output-triage exit card: flag correct / incorrect / unclear with a reason each",
+    "successCriteria": "Correctly triages at least 2 of 3 outputs and gives a valid reason for each judgement.",
+    "evidence": "Output-triage card."
+  },
+  "g6-main-w4-lab": {
+    "targets": "Directly checks 'identifies when outputs are incorrect or unclear'",
+    "check": "Completed clinic record sheet plus a defended trust-ladder ranking",
+    "successCriteria": "Triages the full set with valid reasons, chooses a verification action each, and defends a sensible ranking.",
+    "evidence": "Clinic record sheet and trust ladder photo."
+  },
+  "g6-main-w5-core": {
+    "targets": "Directly checks 'recognises basic risks (incorrect outputs, unsafe use)'",
+    "check": "Risk-spotting exit card: name two risks + one responsible-use rule",
+    "successCriteria": "Names two genuine risks, explains who is affected, and states a matching responsible-use rule.",
+    "evidence": "Risk-spotting card."
+  },
+  "g6-main-w5-lab": {
+    "targets": "Directly checks 'recognises basic risks (incorrect outputs, unsafe use)'",
+    "check": "Completed audit sheet with a matrix-placed priority risk and a proposed mitigation rule",
+    "successCriteria": "Finds a genuine gap, places risks sensibly on the matrix, and proposes a realistic rule that reduces the top risk.",
+    "evidence": "Audit sheet and risk matrix photo."
+  },
+  "g6-main-w6-core": {
+    "targets": "Integrates all Term-1 Emerging outcomes before the signature solution",
+    "check": "Guided integration task reviewed against project success criteria; forward feedback",
+    "successCriteria": "Connects system+prompt to output, triages the output, and names a risk-reduction choice.",
+    "evidence": "Integration task + feedback note."
+  },
+  "g6-main-w6-lab": {
+    "targets": "Integrates all Term-1 Emerging outcomes end-to-end as a rehearsal for the signature solution",
+    "check": "Completed build-and-check record with accuracy verdict, risk verdict, use decision, and weakeststrand diagnosis",
+    "successCriteria": "Runs all four strands end-to-end, records both checks, makes a justified use decision, and names a weakest strand.",
+    "evidence": "Build-and-check record."
+  },
+  "g6-main-w7-core": {
+    "targets": "Checks planning of the signature solution against the Emerging project criteria",
+    "check": "Plan review against the project rubric (Emerging); approve-to-build gate",
+    "successCriteria": "Plan states goal, prompt structure, inputs, an evaluation method, and one risk mitigation.",
+    "evidence": "Approved plan sheet."
+  },
+  "g6-main-w7-lab": {
+    "targets": "Checks that the plan survives a tricky input and gains a fallback branch",
+    "check": "Build/test log review: one normal run, one pressure test, one fallback branch, one logged change",
+    "successCriteria": "Prototype is run, a tricky input exposes a weak spot, and a fallback branch plus a logged reason are added.",
+    "evidence": "Completed build/test log with fallback branch."
+  },
+  "g6-main-w8-core": {
+    "targets": "Monitors build against the plan; each student logs one evaluation-based improvement",
+    "check": "Build check-in against plan + one logged improvement ('evaluate -> change -> result')",
+    "successCriteria": "Solution follows the plan, outputs are evaluated, and one improvement is made and explained.",
+    "evidence": "Build progress + improvement log."
+  },
+  "g6-main-w8-lab": {
+    "targets": "Confirms a completed solution is evaluated across several inputs, handles a failure, and passes a basic risk check",
+    "check": "Test-set evaluation log (accuracy count) + documented fix + completed risk check",
+    "successCriteria": "Solution is completed, evaluated across several inputs with an accuracy count, a failure is handled gracefully, and the risk check confirms no personal data.",
+    "evidence": "Completed test-set log, documented fix, and risk-check sheet."
+  },
+  "g6-main-w9-core": {
+    "targets": "Self- and peer-evaluation against the tiered rubric (Emerging = expected)",
+    "check": "Structured self/peer review using the rubric; one improvement acted upon",
+    "successCriteria": "Meets the Emerging criteria; names an accuracy/usefulness/risk judgement and one improvement.",
+    "evidence": "Completed self/peer rubric + refinement note."
+  },
+  "g6-main-w9-lab": {
+    "targets": "Self- and peer-evaluation against the tiered rubric (Emerging = expected)",
+    "check": "Final iteration completed and a full risk review with a safe-and-fair statement",
+    "successCriteria": "Meets the Emerging criteria; completes a risk matrix, acts on one improvement, and confirms no personal data is used.",
+    "evidence": "Final iteration log + completed risk matrix + safe-and-fair statement."
+  }
+}

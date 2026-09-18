@@ -201,5 +201,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Directly checks 'recognises basic risks (incorrect outputs, unsafe use)'",
+    "check": "Completed audit sheet with a matrix-placed priority risk and a proposed mitigation rule",
+    "successCriteria": "Finds a genuine gap, places risks sensibly on the matrix, and proposes a realistic rule that reduces the top risk.",
+    "evidence": "Audit sheet and risk matrix photo."
   }
 }

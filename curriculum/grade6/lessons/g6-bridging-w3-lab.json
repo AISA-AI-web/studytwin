@@ -210,5 +210,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 4 Advanced: explains how data influences the outcome of a solution",
+    "check": "Investigation log showing before/after outcomes for several single data swaps, plus a ranked conclusion",
+    "successCriteria": "Records outcomes for controlled single swaps and identifies, with evidence, the most influential change.",
+    "evidence": "Completed investigation log + one-sentence evidence-based conclusion."
   }
 }

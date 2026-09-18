@@ -74,7 +74,8 @@ if (loadError) { console.log(`\n${passed} passed, ${failed} failed.`); process.e
 const api = vm.runInContext(`({
   CONFIG, CURRICULUM: getCurriculum_(), FRAMEWORK, LEVEL_ORDINAL,
   markWorksheet_, markQuestion_, overallLevelFrom_, buildStrandProfile_,
-  getLessonForStudent_, getStandardsIndex_, stripAnswerKey_, getCurriculum_
+  getLessonForStudent_, getLessonAuthoritative_, getStandardsIndex_, stripAnswerKey_,
+  getCurriculum_
 })`, sandbox);
 
 check('CONFIG survived concatenation', !!api.CONFIG && api.CONFIG.ALLOWED_DOMAIN === 'aisa.sch.ae');
@@ -120,6 +121,25 @@ check('the Grade 6 decision rule still applies',
 check('answer keys are still stripped for students',
   api.getLessonForStudent_('grade6', lessonIds[0]).worksheet.questions
     .every((q) => q.answer === undefined && q.lookFor === undefined));
+
+// The formative block is the pack's own teacher planning language. `targets` names the
+// tier a lesson is pitched at — "Grade 5 Advanced: explains how data quality affects AI
+// outputs" — which tells a student exactly how they are being levelled, on every lesson.
+check('every lesson carries the pack\u2019s formative block server-side',
+  lessonIds.every((id) => {
+    const f = api.getLessonAuthoritative_('grade6', id).formative;
+    return f && f.successCriteria && f.targets;
+  }));
+
+check('students receive the success criteria',
+  lessonIds.every((id) =>
+    (api.getLessonForStudent_('grade6', id).formative || {}).successCriteria));
+
+check('students receive no other formative field',
+  lessonIds.every((id) => {
+    const keys = Object.keys(api.getLessonForStudent_('grade6', id).formative || {});
+    return keys.length === 1 && keys[0] === 'successCriteria';
+  }));
 
 console.log('\nApps Script API usage suits a standalone web app');
 

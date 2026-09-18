@@ -318,5 +318,11 @@
         "tierProbed": "emerging"
       }
     ]
+  },
+  "formative": {
+    "targets": "Monitors build against the plan; each student logs one evaluation-based improvement",
+    "check": "Build check-in against plan + one logged improvement ('evaluate -> change -> result')",
+    "successCriteria": "Solution follows the plan, outputs are evaluated, and one improvement is made and explained.",
+    "evidence": "Build progress + improvement log."
   }
 }

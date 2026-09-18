@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-18T09:50:47.807Z
+ * Built: 2026-09-18T09:52:48.340Z
  */
 
 /* ==========================================================================
@@ -415,6 +415,15 @@ function stripAnswerKey_(lesson) {
       return safe;
     });
   }
+
+  // The pack's formative block is mostly teacher planning language — "Grade 5 Advanced:
+  // explains how data quality affects AI outputs" means nothing to a student and gives
+  // away how they are being levelled. Only the success criteria, which the pack writes
+  // for students, crosses to the browser.
+  if (copy.formative) {
+    copy.formative = { successCriteria: copy.formative.successCriteria || '' };
+  }
+
   return copy;
 }
 

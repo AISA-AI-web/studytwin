@@ -255,5 +255,11 @@
         "prompt": "Refine your prompt for accuracy AND clarity at once. Explain the trade-off you had to balance."
       }
     ]
+  },
+  "formative": {
+    "targets": "Integrated mastery - SD (refine prompts to improve output quality and explain why)",
+    "check": "Prompt-refinement log (v1 to best) with a reasoned justification for the key change",
+    "successCriteria": "Iterates the prompt to a measurably better output and explains the causal reason for the improvement.",
+    "evidence": "Prompt-refinement log (Trustworthy AI Helper Log, Part 1 Lab)."
   }
 }

@@ -211,5 +211,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 5 Advanced: explains how data quality affects AI outputs",
+    "check": "Four-way contrast plus ranking task with written justification",
+    "successCriteria": "Ranks datasets by expected output quality and justifies the order using evidence from the output changes.",
+    "evidence": "Investigation log and ranking line with justification."
   }
 }

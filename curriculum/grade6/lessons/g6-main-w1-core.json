@@ -321,5 +321,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Baseline for the rule-based vs learning-system distinction and safe-use norms",
+    "check": "Diagnostic KWL + question wall + rule/learning sort (not graded)",
+    "successCriteria": "Poses at least 2 genuine questions and sorts at least 2 of 3 systems with a reason.",
+    "evidence": "Sorted systems + question wall on the baseline sheet."
   }
 }

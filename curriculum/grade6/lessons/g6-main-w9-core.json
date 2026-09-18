@@ -335,5 +335,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Self- and peer-evaluation against the tiered rubric (Emerging = expected)",
+    "check": "Structured self/peer review using the rubric; one improvement acted upon",
+    "successCriteria": "Meets the Emerging criteria; names an accuracy/usefulness/risk judgement and one improvement.",
+    "evidence": "Completed self/peer rubric + refinement note."
   }
 }

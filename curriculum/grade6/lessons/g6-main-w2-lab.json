@@ -205,5 +205,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Deepens 'recognises the difference between rule-based and learning systems' by building a learning system and seeing how data shapes it",
+    "check": "Training-and-testing log with results and an explanation of how the data shaped the model",
+    "successCriteria": "Trains and tests a model on separate example sets and explains how the training examples changed what it learned.",
+    "evidence": "Completed training/testing log plus the data-safety and risk check."
   }
 }

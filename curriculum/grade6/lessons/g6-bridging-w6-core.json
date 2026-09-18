@@ -309,5 +309,11 @@
         "tierProbed": "advanced"
       }
     ]
+  },
+  "formative": {
+    "targets": "Integrated mastery - CE (data influences the outcome) and planning for GE (verification and risk)",
+    "check": "Data-influence trace + verification/risk plan on the Log, reviewed against the mastery criteria",
+    "successCriteria": "Explains the data's influence on the outcome, predicts a data change, and plans a trustedsource verification and a risk check.",
+    "evidence": "Trustworthy AI Helper Log, Part 2 (Core section)."
   }
 }

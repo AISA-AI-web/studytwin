@@ -310,5 +310,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Integrates all Term-1 Emerging outcomes before the signature solution",
+    "check": "Guided integration task reviewed against project success criteria; forward feedback",
+    "successCriteria": "Connects system+prompt to output, triages the output, and names a risk-reduction choice.",
+    "evidence": "Integration task + feedback note."
   }
 }

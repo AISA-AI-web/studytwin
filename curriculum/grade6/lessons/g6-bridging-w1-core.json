@@ -274,5 +274,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 5 Advanced: explains how data quality affects AI outputs",
+    "check": "Data-quality contrast task: predict, reveal, explain the output difference",
+    "successCriteria": "Explains the data-quality to output link with an example and predicts the effect of a quality change.",
+    "evidence": "Contrast task record / think-aloud."
   }
 }

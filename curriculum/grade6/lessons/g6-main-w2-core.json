@@ -230,5 +230,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Directly checks 'recognises the difference between rule-based and learning systems'",
+    "check": "Exit ticket: classify two systems and give the feature that distinguishes them",
+    "successCriteria": "Correctly classifies both and names a distinguishing feature (not a surface trait).",
+    "evidence": "Exit slips sorted secure / partial / not-yet."
   }
 }

@@ -200,5 +200,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 5 Advanced: explains misinformation risks and proposes verification strategies",
+    "check": "Risk-and-verify card: name the misinformation risk + a verification step",
+    "successCriteria": "Explains a plausible misinformation risk and proposes a workable verification strategy with a reason.",
+    "evidence": "Risk-and-verify card."
   }
 }

@@ -208,5 +208,11 @@
         "evidenceType": "product"
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 4 Advanced: explains how data influences the outcome of a solution",
+    "check": "Data-to-outcome explanation on a worked solution (with a 'what if the data changed' probe)",
+    "successCriteria": "Correctly explains the data's influence and predicts the effect of a data change.",
+    "evidence": "Explanation slip + prediction."
   }
 }

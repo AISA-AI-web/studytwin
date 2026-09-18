@@ -310,5 +310,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Integrates all Term-1 Emerging outcomes end-to-end as a rehearsal for the signature solution",
+    "check": "Completed build-and-check record with accuracy verdict, risk verdict, use decision, and weakeststrand diagnosis",
+    "successCriteria": "Runs all four strands end-to-end, records both checks, makes a justified use decision, and names a weakest strand.",
+    "evidence": "Build-and-check record."
   }
 }

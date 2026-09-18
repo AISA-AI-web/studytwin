@@ -321,5 +321,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Checks whether students can observe and articulate the rule-based vs learning distinction through investigation",
+    "check": "Comparison log with at least three logged differences and one devised test",
+    "successCriteria": "Logs at least three real differences and writes a test that would actually separate rules from learning.",
+    "evidence": "Completed comparison log and the group's devised test."
   }
 }

@@ -203,5 +203,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 5 Advanced: refines prompts to improve output quality and explains why",
+    "check": "Iteration log across several versions plus a two-goal trade-off justification",
+    "successCriteria": "Iterates a prompt with a reasoned log and chooses a best-balanced version, explaining the trade-off with evidence.",
+    "evidence": "Multi-version refinement log with trade-off note."
   }
 }

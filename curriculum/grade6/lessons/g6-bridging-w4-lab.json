@@ -201,5 +201,11 @@
         ]
       }
     ]
+  },
+  "formative": {
+    "targets": "Grade 5 Advanced: explains misinformation risks and proposes verification strategies",
+    "check": "Completed verification workshop sheet with verdicts and evidence for a batch, plus a reasoned comparison of two strategies",
+    "successCriteria": "Applies the routine to reach evidence-based verdicts and judges which verification strategy is more reliable with a reason.",
+    "evidence": "Workshop sheet with per-output verdicts + strategy comparison and judgement."
   }
 }
