@@ -31,7 +31,8 @@ vm.createContext(sandbox);
 const api = vm.runInContext(`({
   CONFIG, FRAMEWORK, LEVEL_ORDINAL,
   overallLevelFrom_, buildStrandProfile_, computeClassProfile_,
-  worksheetEvidenceByStrand_, getStandardsIndex_, levelDef_
+  worksheetEvidenceByStrand_, getStandardsIndex_, levelDef_,
+  suggestLevelsFromEvidence_, interviewPrompts_
 })`, sandbox);
 
 let passed = 0, failed = 0;
@@ -246,6 +247,60 @@ check('students with an incomplete profile are reported as incomplete',
   klass.overall.incomplete === 1);
 check('class rollup exposes no average and no band',
   klass.averagePercent === undefined && klass.band === undefined);
+
+console.log('\nEvery level a teacher can pick has a question to ask');
+{
+  // The panel lets a teacher select any of the four levels and tells them the question
+  // beside it checks the one proposed. A level with no prompt used to fall through to
+  // the first in the list — an Emerging question shown while proposing Working towards,
+  // which is the decision that routes a student into bridging.
+  const selectable = api.CONFIG.ATTAINMENT_LEVELS.map((l) => l.key);
+
+  api.CONFIG.STRANDS.forEach((strand) => {
+    const prompts = api.interviewPrompts_('grade6', strand);
+    const levels = prompts.map((p) => p.level);
+
+    check(`${strand}: a prompt exists for every selectable level`,
+      selectable.every((key) => levels.indexOf(key) !== -1),
+      `has ${levels.join(', ')}`);
+    check(`${strand}: no prompt is blank`,
+      prompts.every((p) => p.ask && p.ask.trim().length > 10),
+      prompts.filter((p) => !p.ask).map((p) => p.level).join(', '));
+    check(`${strand}: every level carries a descriptor to judge against`,
+      prompts.every((p) => p.descriptor && p.descriptor.length));
+    check(`${strand}: each prompt is distinct`,
+      new Set(prompts.map((p) => p.ask)).size === prompts.length);
+  });
+
+  check('working towards is offered but is not a framework tier',
+    api.interviewPrompts_('grade6', 'CU')[0].level === 'working_towards' &&
+    api.interviewPrompts_('grade6', 'CU')[0].isTier === false);
+}
+
+console.log('\nA proposal is only made when there is enough marked work to make one');
+{
+  const item = (strand, pct, lessonId) => ({
+    lessonId: lessonId, percent: pct, attempt: 1,
+    resultsJson: JSON.stringify([{
+      questionId: lessonId + '-q', marksAwarded: pct / 100, marksAvailable: 1,
+      frameworkRefs: [{ strand: strand, grade: 6, tier: 'E' }]
+    }])
+  });
+
+  const thin = api.suggestLevelsFromEvidence_('grade6', [item('CU', 100, 'l1')]);
+  const cu = thin.filter((s) => s.strand === 'CU')[0];
+  check('one marked item produces no proposal', !cu.suggested, cu.suggested);
+  check('and says why rather than going blank', /too little/i.test(cu.reason), cu.reason);
+
+  const enough = api.suggestLevelsFromEvidence_('grade6',
+    [item('CU', 100, 'l1'), item('CU', 100, 'l2'), item('CU', 100, 'l3')]);
+  const cu2 = enough.filter((s) => s.strand === 'CU')[0];
+  check('three marked items at 100% propose Advanced', cu2.suggested === 'advanced', cu2.suggested);
+
+  const strandsCovered = enough.map((s) => s.strand).sort().join(',');
+  check('a proposal row is returned for every strand, proposed or not',
+    strandsCovered === 'CE,CU,GE,SD', strandsCovered);
+}
 
 console.log(`\n${passed} passed, ${failed} failed.`);
 process.exit(failed ? 1 : 0);

@@ -351,11 +351,19 @@ function interviewPrompts_(gradeKey, strandCode) {
   if (!strand) return [];
   const prompts = (INTERVIEW_PROMPTS[gradeKey] || {})[strandCode] || {};
 
-  return CONFIG.ATTAINMENT_LEVELS.filter(function (l) { return l.isTier; }).map(function (level) {
+  // Every level the teacher can select, not just the three framework tiers. Working
+  // towards is selectable in the panel, and a missing prompt for it meant the panel
+  // showed the Emerging question instead — on the one decision that routes a student
+  // into bridging.
+  return CONFIG.ATTAINMENT_LEVELS.map(function (level) {
+    const tier = level.isTier ? level.key : 'emerging';
     return {
       level: level.key,
       levelLabel: level.label,
-      descriptor: strand.tiers[level.key].descriptor,
+      // Working towards has no descriptor of its own; it is defined by not yet meeting
+      // Emerging, so that is the descriptor to show beside it.
+      descriptor: strand.tiers[tier].descriptor,
+      isTier: !!level.isTier,
       ask: prompts[level.key] || ''
     };
   });

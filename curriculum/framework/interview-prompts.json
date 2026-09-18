@@ -7,27 +7,41 @@
     "prompt per tier, each written to elicit exactly what that tier's descriptor describes.",
     "A student who answers the Proficient prompt well but not the Advanced one is Proficient.",
     "",
+    "The working_towards prompts are doing a different job from the other three. ADEK calls",
+    "that state \"diagnostic information, not a failure\", and the response to it is bridging",
+    "content and a re-check — so the question is not \"does this reach the bar\" but \"what part",
+    "can they already do\", because the answer decides which bridging a student needs. They are",
+    "pitched below the Emerging descriptor and ask for pointing or recognition, not explanation.",
+    "",
+    "Every level a teacher can select must have a prompt here. Without one the panel used to",
+    "fall back to the first prompt in the list, which showed an Emerging question while",
+    "proposing Working towards — a teacher would ask it, get a decent answer, and be misled",
+    "on the one decision that routes a student into bridging.",
+    "",
     "They are a conversation aid, not a test. The teacher is confirming or overriding a level",
     "the platform has already proposed from marked work, which takes a minute per strand."
   ],
-
   "grade6": {
     "CU": {
+      "working_towards": "Pick any two of these systems. Is there anything the same about how they work? Anything different? You can point rather than explain.",
       "emerging": "Show me one system that follows rules a person wrote, and one that learned from examples. How can you tell which is which?",
       "proficient": "Take the model you trained. Explain how it got from the examples it saw to the answer it gave.",
       "advanced": "If half its training examples were labelled wrongly, what exactly would change about its answers — and which cases would go wrong first?"
     },
     "SD": {
+      "working_towards": "Show me what you typed to get this. If you wanted a different answer, what would you change about it?",
       "emerging": "Show me the prompt you used to get that result. Which parts of it were doing the work?",
       "proficient": "Walk me through your solution from input to output. What happens at each step?",
       "advanced": "Why did you build it that way rather than another way? What would break if you took one step out?"
     },
     "CE": {
+      "working_towards": "Read this answer the tool gave. Is there anything in it you are not sure about?",
       "emerging": "Point to an output here that is wrong or unclear. How did you know?",
       "proficient": "How did you check that one? What did you compare it against, and what made that a good source?",
       "advanced": "What single change to the input or the data would most improve these outputs — and how would you prove it worked?"
     },
     "GE": {
+      "working_towards": "If a friend used this and it got something wrong, what would happen next?",
       "emerging": "What could go wrong if someone used this without checking it first?",
       "proficient": "Who could be treated unfairly by this, and why? What about anyone's private information?",
       "advanced": "Trace this unfair result back to the data behind it. What one change would make it fairer, and how would you check that it had?"

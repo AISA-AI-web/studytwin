@@ -1325,6 +1325,8 @@
    * What is recorded says which of the two it was, so the record shows how each level was
    * actually reached.
    */
+  var GENERIC_ASK = 'Talk this strand through with the student and judge what you hear.';
+
   function renderConfirmPanel(data) {
     var suggestions = data.suggestions || [];
     var byStrand = {};
@@ -1334,8 +1336,10 @@
       var current = byStrand[sug.strand] || {};
       var chosen = current.judged ? current.level : sug.suggested;
       var prompts = (data.interview || {})[sug.strand] || [];
-      var promptFor = prompts.filter(function (p) { return p.level === chosen; })[0] ||
-                      prompts[0] || {};
+      // Never fall back to another level's question. The heading says the question checks
+      // the proposed level, so showing a different tier's question actively misleads:
+      // the teacher asks it, gets a good answer, and confirms the wrong level.
+      var promptFor = prompts.filter(function (p) { return p.level === chosen; })[0] || {};
 
       return '<div class="confirm-row" data-confirm="' + esc(sug.strand) + '">' +
         '<div class="confirm-row__head">' +
@@ -1361,7 +1365,7 @@
         '<div class="confirm-row__ask">' +
           '<div class="eyebrow">Ask, to check the proposed level</div>' +
           '<p class="ask" data-ask="' + esc(sug.strand) + '">' +
-            esc(promptFor.ask || 'Talk through this strand with the student.') + '</p>' +
+            esc(promptFor.ask || GENERIC_ASK) + '</p>' +
         '</div>' +
 
         '<div class="confirm-row__levels">' +
@@ -1420,7 +1424,7 @@
       var match = prompts.filter(function (p) { return p.level === input.value; })[0];
       var ask = panel.querySelector('[data-ask="' + strand + '"]');
       if (ask) {
-        ask.textContent = match ? match.ask : 'Talk through this strand with the student.';
+        ask.textContent = (match && match.ask) || GENERIC_ASK;
       }
     });
 
