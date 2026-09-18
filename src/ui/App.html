@@ -952,6 +952,12 @@
       '<p class="muted small"><strong>Rule:</strong> ' + esc(o.rule) + '</p></div>';
   }
 
+  /** The human label for a level key, from whatever the server sent. */
+  function levelLabelOf(levels, key) {
+    var match = (levels || []).filter(function (l) { return l.key === key; })[0];
+    return match ? match.label : '';
+  }
+
   /** One strand row: descriptors, level, evidence, note. */
   function strandRowHtml(s, opts) {
     opts = opts || {};
@@ -1194,7 +1200,9 @@
           '<div>' + overallBlock(p) + '</div>' +
         '</div>';
 
-      html += '<h2 style="margin-bottom:.5rem">Observation record</h2>' +
+      html += renderConfirmPanel(data);
+
+      html += '<h2 style="margin:2rem 0 .5rem">Observation record</h2>' +
         '<p class="muted small" style="margin-bottom:.9rem">Judge each strand on its own ' +
         'evidence. A strong plan in one strand does not lift a weak argument in another.</p>';
 
@@ -1280,8 +1288,156 @@
 
       view.innerHTML = html;
       document.getElementById('back').onclick = function () { route('teacher', {}); };
+      bindConfirmPanel(data);
       bindJudging(data);
     });
+  }
+
+  /**
+   * The confirmation step: four proposed levels, one conversation, one click.
+   *
+   * The platform proposes a level per strand from the auto-marked work. The teacher asks
+   * the prompt shown beside each — pitched at the tier being proposed, so the answer either
+   * supports it or does not — then confirms or changes it. The whole thing is meant to take
+   * about a minute per student, because the alternative was staff marking 159 written
+   * answers, which was never going to happen.
+   *
+   * What is recorded says which of the two it was, so the record shows how each level was
+   * actually reached.
+   */
+  function renderConfirmPanel(data) {
+    var suggestions = data.suggestions || [];
+    var byStrand = {};
+    data.profile.byStrand.forEach(function (r) { byStrand[r.strand] = r; });
+
+    var rows = suggestions.map(function (sug) {
+      var current = byStrand[sug.strand] || {};
+      var chosen = current.judged ? current.level : sug.suggested;
+      var prompts = (data.interview || {})[sug.strand] || [];
+      var promptFor = prompts.filter(function (p) { return p.level === chosen; })[0] ||
+                      prompts[0] || {};
+
+      return '<div class="confirm-row" data-confirm="' + esc(sug.strand) + '">' +
+        '<div class="confirm-row__head">' +
+          '<div><span class="code">' + esc(sug.strand) + '</span> <strong>' +
+            esc(sug.label) + '</strong>' +
+            // Without this, a re-check shows a level ticked that disagrees with the
+            // proposal beside it and nothing says which is which.
+            (current.judged
+              ? '<div class="confirm-row__standing">Already recorded as <strong>' +
+                esc(current.levelLabel) + '</strong>' +
+                (current.judgedAt ? ' on ' + esc(formatDate(current.judgedAt)) : '') +
+                (current.level === sug.suggested
+                  ? ' \u2014 the work still supports it.'
+                  : ', but the work now suggests <strong>' +
+                    esc(levelLabelOf(data.levels, sug.suggested)) + '</strong>.') +
+                '</div>'
+              : '') +
+          '</div>' +
+          '<span class="muted small">' + esc(sug.reason) +
+            (sug.notIndependent ? ' \u00B7 best of several attempts' : '') + '</span>' +
+        '</div>' +
+
+        '<div class="confirm-row__ask">' +
+          '<div class="eyebrow">Ask, to check the proposed level</div>' +
+          '<p class="ask" data-ask="' + esc(sug.strand) + '">' +
+            esc(promptFor.ask || 'Talk through this strand with the student.') + '</p>' +
+        '</div>' +
+
+        '<div class="confirm-row__levels">' +
+          data.levels.map(function (l) {
+            var isSuggested = l.key === sug.suggested;
+            return '<label class="level-pick' + (l.key === chosen ? ' is-chosen' : '') + '">' +
+              '<input type="radio" name="confirm-' + esc(sug.strand) + '" value="' + esc(l.key) +
+                '"' + (l.key === chosen ? ' checked' : '') + '>' +
+              '<span class="level-pick__label" style="--lv:' + esc(l.color) + '">' +
+                esc(l.label) + (isSuggested ? ' <em>proposed</em>' : '') + '</span></label>';
+          }).join('') +
+        '</div>' +
+
+        '<input type="text" class="confirm-note" data-note="' + esc(sug.strand) + '" ' +
+          'value="' + esc(current.note || '') + '" placeholder="Optional note \u2014 what they said">' +
+        '</div>';
+    }).join('');
+
+    var anySuggestion = suggestions.some(function (s) { return s.suggested; });
+
+    return '<section class="confirm-panel">' +
+      '<div class="eyebrow">Record attainment</div>' +
+      '<h2>Confirm the four strand levels</h2>' +
+      '<p class="muted small">Levels below are proposed from this student\u2019s auto-marked work. ' +
+      'Ask each question, then confirm or change. ' +
+      '<strong>The proposal is AISA\u2019s convention, not an ADEK rule</strong> \u2014 the record ' +
+      'stores which levels you confirmed and which you changed.</p>' +
+      (anySuggestion ? rows
+        : '<p class="muted" style="margin-top:.8rem">Not enough marked work yet to propose levels. ' +
+          'They appear once the student has completed some worksheets.</p>') +
+      (anySuggestion
+        ? '<div class="row" style="margin-top:1rem">' +
+          '<button class="btn btn--primary" id="confirmAll">Record all four levels</button>' +
+          '<span class="muted small">Takes effect immediately and can be changed later.</span>' +
+          '</div>'
+        : '') +
+      '</section>';
+  }
+
+  /** Keeps the visible prompt matched to whichever level is currently selected. */
+  function bindConfirmPanel(data) {
+    var panel = view.querySelector('.confirm-panel');
+    if (!panel) return;
+
+    panel.addEventListener('change', function (e) {
+      var input = e.target;
+      if (input.type !== 'radio') return;
+      var strand = input.name.replace('confirm-', '');
+
+      Array.prototype.forEach.call(
+        panel.querySelectorAll('[name="' + input.name + '"]'), function (r) {
+          r.closest('.level-pick').classList.toggle('is-chosen', r.checked);
+        });
+
+      var prompts = (data.interview || {})[strand] || [];
+      var match = prompts.filter(function (p) { return p.level === input.value; })[0];
+      var ask = panel.querySelector('[data-ask="' + strand + '"]');
+      if (ask) {
+        ask.textContent = match ? match.ask : 'Talk through this strand with the student.';
+      }
+    });
+
+    var btn = document.getElementById('confirmAll');
+    if (!btn) return;
+    btn.onclick = function () {
+      var decisions = {};
+      (data.suggestions || []).forEach(function (sug) {
+        var picked = panel.querySelector('[name="confirm-' + sug.strand + '"]:checked');
+        if (!picked) return;
+        var noteEl = panel.querySelector('[data-note="' + sug.strand + '"]');
+        var prompts = (data.interview || {})[sug.strand] || [];
+        var used = prompts.filter(function (p) { return p.level === picked.value; })[0];
+        decisions[sug.strand] = {
+          level: picked.value,
+          suggested: sug.suggested,
+          note: noteEl ? noteEl.value : '',
+          evidenceProducts: sug.reason,
+          evidenceConversations: used ? 'Asked: ' + used.ask : ''
+        };
+      });
+
+      if (!Object.keys(decisions).length) { toast('Nothing to record.', true); return; }
+      btn.disabled = true;
+      btn.textContent = 'Recording\u2026';
+
+      call('api_confirmSuggestions', { email: data.student.email, grade: '6', decisions: decisions })
+        .then(function () {
+          toast('Levels recorded');
+          route('student-detail', { email: data.student.email });
+        })
+        .catch(function (err) {
+          btn.disabled = false;
+          btn.textContent = 'Record all four levels';
+          toast(err.message, true);
+        });
+    };
   }
 
   /** Wires the per-strand judgement forms. */

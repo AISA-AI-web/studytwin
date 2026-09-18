@@ -172,6 +172,26 @@ const mock = `
     });
   });
 
+  function writeJudgement(payload) {
+    judgements.filter(function (j) {
+      return j.email === payload.email && j.strand === payload.strand && !j.supersededBy;
+    }).forEach(function (j) { j.supersededBy = 'superseded'; });
+
+    judgements.push({
+      id: 'j' + (++uid), email: payload.email, grade: '6', track: 'main',
+      strand: payload.strand, level: payload.level, scale: 'summative_tier',
+      assessmentEvent: payload.assessmentEvent || 'final',
+      source: payload.source || 'teacher',
+      suggestedLevel: payload.suggestedLevel || '',
+      evidenceProducts: payload.evidenceProducts || '',
+      evidenceObservations: payload.evidenceObservations || '',
+      evidenceConversations: payload.evidenceConversations || '',
+      note: payload.note || '', accessArrangements: payload.accessArrangements || '',
+      nextStep: payload.nextStep || '',
+      judgedBy: window.CURRENT_USER.email, judgedAt: new Date(2026, 8, 17), supersededBy: ''
+    });
+  }
+
   function mine(email) { return submissions.filter(function (s) { return s.email === email; }); }
   function judgedFor(email) { return judgements.filter(function (j) { return j.email === email; }); }
   function bestByLesson(rows) {
@@ -308,6 +328,11 @@ const mock = `
                    className: entry.className, bridgingStrands: [] },
         profile: buildStrandProfile_(GRADE, judgedFor(email)),
         evidence: worksheetEvidenceByStrand_(GRADE, values(best)),
+        suggestions: suggestLevelsFromEvidence_(GRADE, values(best)),
+        interview: CONFIG.STRANDS.reduce(function (acc, code) {
+          acc[code] = interviewPrompts_(GRADE, code);
+          return acc;
+        }, {}),
         levels: CONFIG.ATTAINMENT_LEVELS,
         evidenceSources: CONFIG.EVIDENCE_SOURCES,
         history: judgedFor(email).slice().reverse(),
@@ -328,21 +353,30 @@ const mock = `
     },
 
     api_recordJudgement: function (payload) {
-      judgements.filter(function (j) {
-        return j.email === payload.email && j.strand === payload.strand && !j.supersededBy;
-      }).forEach(function (j) { j.supersededBy = 'superseded'; });
+      writeJudgement(payload);
+      return buildStrandProfile_(GRADE, judgedFor(payload.email));
+    },
 
-      judgements.push({
-        id: 'j' + (++uid), email: payload.email, grade: '6', track: 'main',
-        strand: payload.strand, level: payload.level, scale: 'summative_tier',
-        assessmentEvent: payload.assessmentEvent || 'final',
-        evidenceProducts: payload.evidenceProducts || '',
-        evidenceObservations: payload.evidenceObservations || '',
-        evidenceConversations: payload.evidenceConversations || '',
-        note: payload.note || '', accessArrangements: payload.accessArrangements || '',
-        nextStep: payload.nextStep || '',
-        judgedBy: window.CURRENT_USER.email, judgedAt: new Date(2026, 8, 17), supersededBy: ''
+    // The one-conversation path: four strands, one click. Mirrors the server, which
+    // writes all four under a single lock and refuses a partial result.
+    api_confirmSuggestions: function (payload) {
+      var decisions = (payload || {}).decisions || {};
+      var recorded = [];
+      CONFIG.STRANDS.forEach(function (strand) {
+        var decision = decisions[strand];
+        if (!decision || !decision.level) return;
+        writeJudgement({
+          email: payload.email, strand: strand, level: decision.level,
+          assessmentEvent: payload.assessmentEvent || 'final',
+          source: decision.level === decision.suggested ? 'suggestion_confirmed' : 'teacher_override',
+          suggestedLevel: decision.suggested || '',
+          evidenceProducts: decision.evidenceProducts || 'Auto-marked worksheets',
+          evidenceConversations: decision.evidenceConversations || '',
+          note: decision.note || ''
+        });
+        recorded.push(strand);
       });
+      if (!recorded.length) throw new Error('NOTHING_TO_RECORD');
       return buildStrandProfile_(GRADE, judgedFor(payload.email));
     },
 

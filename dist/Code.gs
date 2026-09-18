@@ -5,7 +5,7 @@
  * Do not edit this in the Apps Script editor: regenerate with `npm run bundle`
  * and paste it again, or the next rebuild will silently discard your change.
  *
- * Built: 2026-09-17T16:51:10.249Z
+ * Built: 2026-09-18T09:40:33.989Z
  */
 
 /* ==========================================================================
@@ -1189,6 +1189,71 @@ function computeClassProfile_(gradeKey, studentProfiles) {
 
 // round2_ lives in Marking.gs; Apps Script shares one global scope across files.
 
+/**
+ * Proposes a level per strand from the auto-marked evidence.
+ *
+ * A PROPOSAL, never a judgement. ADEK awards levels by matching performance to a written
+ * descriptor and publishes no conversion from marks; this mapping is the school's own,
+ * adopted so that no staff time goes on correcting. A teacher confirms it in a short
+ * conversation before it is recorded, and the record keeps which of the two happened.
+ *
+ * Returns nothing for a strand with too little marked work behind it — an unsupported
+ * suggestion is worse than none, because it looks equally confident.
+ */
+function suggestLevelsFromEvidence_(gradeKey, submissions) {
+  const evidence = worksheetEvidenceByStrand_(gradeKey, submissions);
+  const standardsIndex = getStandardsIndex_(gradeKey);
+
+  return evidence.map(function (row) {
+    const enough = row.itemsMarked >= CONFIG.SUGGESTION_MIN_ITEMS && row.marksAvailable > 0;
+    const percent = row.worksheetScore;
+
+    let suggested = null;
+    if (enough && percent !== null) {
+      const band = CONFIG.SUGGESTION_THRESHOLDS.filter(function (t) {
+        return percent >= t.min;
+      })[0];
+      suggested = band ? band.level : 'working_towards';
+    }
+    const def = suggested ? levelDef_(suggested) : null;
+    const definition = standardsIndex[row.strand] || {};
+
+    return {
+      strand: row.strand,
+      label: definition.label || row.strand,
+      suggested: suggested,
+      suggestedLabel: def ? def.label : null,
+      suggestedColor: def ? def.color : null,
+      percent: percent,
+      itemsMarked: row.itemsMarked,
+      marksAwarded: row.marksAwarded,
+      marksAvailable: row.marksAvailable,
+      enoughEvidence: enough,
+      // Surfaced so a teacher can see when a score came from repeated attempts.
+      notIndependent: row.notIndependent,
+      reason: !enough
+        ? 'Only ' + row.itemsMarked + ' marked item(s) so far \u2014 too little to suggest from.'
+        : Math.round(percent) + '% across ' + row.itemsMarked + ' marked items.'
+    };
+  });
+}
+
+/** Interview prompts for a strand, pitched at each tier so the answer places the student. */
+function interviewPrompts_(gradeKey, strandCode) {
+  const strand = getStrand_(gradeKey, strandCode);
+  if (!strand) return [];
+  const prompts = (INTERVIEW_PROMPTS[gradeKey] || {})[strandCode] || {};
+
+  return CONFIG.ATTAINMENT_LEVELS.filter(function (l) { return l.isTier; }).map(function (level) {
+    return {
+      level: level.key,
+      levelLabel: level.label,
+      descriptor: strand.tiers[level.key].descriptor,
+      ask: prompts[level.key] || ''
+    };
+  });
+}
+
 /* ==========================================================================
  * Api.gs
  * ========================================================================== */
@@ -1278,6 +1343,8 @@ function friendlyError_(code) {
       return 'That is not one of the four framework strands.';
     case 'INVALID_LEVEL':
       return 'That is not a valid attainment level.';
+    case 'NOTHING_TO_RECORD':
+      return 'No levels were chosen, so nothing was recorded.';
     default:
       return 'Something went wrong. Please tell your teacher if this keeps happening.';
   }
@@ -1519,6 +1586,12 @@ function api_getStudentDetail(email) {
       },
       profile: buildStrandProfile_(gradeKey, judgements),
       evidence: worksheetEvidenceByStrand_(gradeKey, valuesOf_(best)),
+      // A proposal from the marked work, for a teacher to confirm or override.
+      suggestions: suggestLevelsFromEvidence_(gradeKey, valuesOf_(best)),
+      interview: CONFIG.STRANDS.reduce(function (acc, code) {
+        acc[code] = interviewPrompts_(gradeKey, code);
+        return acc;
+      }, {}),
       levels: CONFIG.ATTAINMENT_LEVELS,
       evidenceSources: CONFIG.EVIDENCE_SOURCES,
       history: judgements
@@ -1545,6 +1618,106 @@ function api_getStudentDetail(email) {
   });
 }
 
+/** Turns whatever the client called the grade into a curriculum key. */
+function gradeKeyOf_(grade) {
+  return 'grade' + (String(grade || '6').replace(/[^0-9]/g, '') || '6');
+}
+
+/**
+ * Checks one judgement and puts it in the shape the sheet wants.
+ *
+ * Kept separate from writing it so the confirmation panel can check all four strands
+ * BEFORE it writes any of them. Sheets have no transaction to roll back, so validating
+ * first is the only way a rejected fourth strand does not leave three already recorded
+ * and the teacher told the whole thing failed.
+ *
+ * Throws on anything invalid; callers are inside handle_, which turns the throw into a
+ * message the teacher actually sees.
+ */
+function normaliseJudgement_(payload) {
+  payload = payload || {};
+
+  const target = normaliseEmail_(payload.email);
+  if (!isAllowedDomain_(target)) throw new Error('DOMAIN_NOT_ALLOWED');
+
+  const strand = String(payload.strand || '').toUpperCase();
+  if (CONFIG.STRANDS.indexOf(strand) === -1) throw new Error('INVALID_STRAND');
+
+  const level = String(payload.level || '');
+  if (CONFIG.SCALES.summative_tier.indexOf(level) === -1) throw new Error('INVALID_LEVEL');
+
+  const gradeKey = gradeKeyOf_(payload.grade);
+  const strandDef = getStrand_(gradeKey, strand);
+
+  return {
+    target: target,
+    strand: strand,
+    level: level,
+    gradeKey: gradeKey,
+    track: payload.track === 'bridging' ? 'bridging' : 'main',
+    event: String(payload.assessmentEvent || 'final'),
+    frameworkRefs: strandDef
+      ? strandDef.tiers[level === 'working_towards' ? 'emerging' : level].code : '',
+    source: String(payload.source || 'teacher'),
+    suggestedLevel: String(payload.suggestedLevel || ''),
+    evidenceProducts: String(payload.evidenceProducts || ''),
+    evidenceObservations: String(payload.evidenceObservations || ''),
+    evidenceConversations: String(payload.evidenceConversations || ''),
+    note: String(payload.note || ''),
+    accessArrangements: String(payload.accessArrangements || ''),
+    nextStep: String(payload.nextStep || ''),
+    bridgingRef: String(payload.bridgingRef || '')
+  };
+}
+
+/**
+ * Writes one validated judgement, superseding whatever currently stands for that strand.
+ *
+ * Assumes the caller has checked staff access and holds the script lock, so confirming
+ * four strands costs one lock rather than four.
+ */
+function writeJudgement_(user, j) {
+  const id = Utilities.getUuid();
+  const existing = judgementsFor_(j.target).filter(function (row) {
+    return String(row.strand).toUpperCase() === j.strand &&
+           String(row.scale) === 'summative_tier' &&
+           String(row.assessmentEvent) === j.event &&
+           !row.supersededBy;
+  });
+  existing.forEach(function (row) {
+    const updated = stripRowMeta_(row);
+    updated.supersededBy = id;
+    updateRow_('JUDGEMENTS', row._rowIndex, updated);
+  });
+
+  appendRow_('JUDGEMENTS', {
+    id: id,
+    email: j.target,
+    grade: j.gradeKey.replace('grade', ''),
+    track: j.track,
+    strand: j.strand,
+    level: j.level,
+    scale: 'summative_tier',
+    assessmentEvent: j.event,
+    frameworkRefs: j.frameworkRefs,
+    // Provenance. A record that hides how a level was reached is not defensible.
+    source: j.source,
+    suggestedLevel: j.suggestedLevel,
+    evidenceProducts: j.evidenceProducts,
+    evidenceObservations: j.evidenceObservations,
+    evidenceConversations: j.evidenceConversations,
+    note: j.note,
+    accessArrangements: j.accessArrangements,
+    nextStep: j.nextStep,
+    bridgingRef: j.bridgingRef,
+    judgedBy: user.email,
+    judgedAt: new Date(),
+    supersededBy: ''
+  });
+
+  return id;
+}
+
 /**
  * Records a teacher's judgement of one strand.
  *
@@ -1555,59 +1728,63 @@ function api_getStudentDetail(email) {
 function api_recordJudgement(payload) {
   return handle_(function (user) {
     requireStaff_(user);
-    payload = payload || {};
+    const j = normaliseJudgement_(payload);
+    return withLock_(function () {
+      writeJudgement_(user, j);
+      logAudit_(user.email, 'JUDGE', j.target + ' ' + j.strand + ' -> ' + j.level);
+      return buildStrandProfile_(j.gradeKey, judgementsFor_(j.target));
+    });
+  });
+}
 
+/**
+ * Confirms suggested levels for several strands in one go.
+ *
+ * The teacher has just had the conversation; this is the click at the end of it. Each
+ * strand still becomes its own judgement row, marked as a confirmed suggestion rather
+ * than an independent judgement, so the record shows what actually happened.
+ *
+ * All four are checked before any is written, and all four are written under one lock.
+ * A panel that reported four levels recorded when two were written would put wrong
+ * attainment in front of the next person to open the student.
+ */
+function api_confirmSuggestions(payload) {
+  return handle_(function (user) {
+    requireStaff_(user);
+    payload = payload || {};
     const target = normaliseEmail_(payload.email);
     if (!isAllowedDomain_(target)) throw new Error('DOMAIN_NOT_ALLOWED');
 
-    const strand = String(payload.strand || '').toUpperCase();
-    if (CONFIG.STRANDS.indexOf(strand) === -1) throw new Error('INVALID_STRAND');
+    const decisions = payload.decisions || {};
+    const gradeKey = gradeKeyOf_(payload.grade);
 
-    const level = String(payload.level || '');
-    if (CONFIG.SCALES.summative_tier.indexOf(level) === -1) throw new Error('INVALID_LEVEL');
+    // Check everything first. A throw here has written nothing.
+    const pending = CONFIG.STRANDS.map(function (strand) {
+      const decision = decisions[strand];
+      if (!decision || !decision.level) return null;
+      return normaliseJudgement_({
+        email: target,
+        grade: payload.grade || '6',
+        track: payload.track,
+        strand: strand,
+        level: decision.level,
+        assessmentEvent: payload.assessmentEvent || 'final',
+        source: decision.level === decision.suggested ? 'suggestion_confirmed' : 'teacher_override',
+        suggestedLevel: decision.suggested || '',
+        evidenceProducts: decision.evidenceProducts || 'Auto-marked worksheets',
+        evidenceConversations: decision.evidenceConversations || '',
+        evidenceObservations: decision.evidenceObservations || '',
+        note: decision.note || '',
+        nextStep: decision.nextStep || ''
+      });
+    }).filter(Boolean);
 
-    const gradeKey = 'grade' + (String(payload.grade || '6').replace(/[^0-9]/g, '') || '6');
-    const track = payload.track === 'bridging' ? 'bridging' : 'main';
-    const strandDef = getStrand_(gradeKey, strand);
+    if (!pending.length) throw new Error('NOTHING_TO_RECORD');
 
     return withLock_(function () {
-      // Supersede whatever currently stands for this strand and event.
-      const id = Utilities.getUuid();
-      const existing = judgementsFor_(target).filter(function (j) {
-        return String(j.strand).toUpperCase() === strand &&
-               String(j.scale) === 'summative_tier' &&
-               String(j.assessmentEvent) === String(payload.assessmentEvent || 'final') &&
-               !j.supersededBy;
-      });
-      existing.forEach(function (row) {
-        const updated = stripRowMeta_(row);
-        updated.supersededBy = id;
-        updateRow_('JUDGEMENTS', row._rowIndex, updated);
-      });
-
-      appendRow_('JUDGEMENTS', {
-        id: id,
-        email: target,
-        grade: gradeKey.replace('grade', ''),
-        track: track,
-        strand: strand,
-        level: level,
-        scale: 'summative_tier',
-        assessmentEvent: String(payload.assessmentEvent || 'final'),
-        frameworkRefs: strandDef ? strandDef.tiers[level === 'working_towards' ? 'emerging' : level].code : '',
-        evidenceProducts: String(payload.evidenceProducts || ''),
-        evidenceObservations: String(payload.evidenceObservations || ''),
-        evidenceConversations: String(payload.evidenceConversations || ''),
-        note: String(payload.note || ''),
-        accessArrangements: String(payload.accessArrangements || ''),
-        nextStep: String(payload.nextStep || ''),
-        bridgingRef: String(payload.bridgingRef || ''),
-        judgedBy: user.email,
-        judgedAt: new Date(),
-        supersededBy: ''
-      });
-
-      logAudit_(user.email, 'JUDGE', target + ' ' + strand + ' -> ' + level);
+      pending.forEach(function (j) { writeJudgement_(user, j); });
+      logAudit_(user.email, 'CONFIRM_SUGGESTIONS', target + ' ' +
+        pending.map(function (j) { return j.strand; }).join(','));
       return buildStrandProfile_(gradeKey, judgementsFor_(target));
     });
   });
@@ -1666,8 +1843,8 @@ function api_exportCsv() {
     CONFIG.STRANDS.forEach(function (s) {
       header.push((strands[s] ? strands[s].label : s), s + ' note');
     });
-    header.push('Overall level', 'Decision rule', 'Access arrangements', 'Next step',
-                'Judged by', 'Judged at');
+    header.push('Overall level', 'Decision rule', 'How levels were set',
+                'Access arrangements', 'Next step', 'Judged by', 'Judged at');
 
     const rows = roster.map(function (entry) {
       const email = normaliseEmail_(entry.email);
@@ -1682,6 +1859,7 @@ function api_exportCsv() {
       const judged = profile.byStrand.filter(function (s) { return s.judged; });
       row.push(profile.overall.level ? profile.overall.label : 'Not yet complete');
       row.push(profile.overall.rule || '');
+      row.push(describeSources_(judgementsByEmail[email] || []));
       row.push(judged.map(function (s) { return s.accessArrangements; }).filter(Boolean)[0] || '');
       row.push(judged.map(function (s) { return s.nextStep; }).filter(Boolean).join('; '));
       row.push(judged.map(function (s) { return s.judgedBy; }).filter(Boolean)[0] || '');
@@ -1834,6 +2012,26 @@ function switchAccountUrl_() {
   } catch (err) {
     return 'https://accounts.google.com/AccountChooser';
   }
+}
+
+/** Plain-English summary of how a student's levels were arrived at, for the export. */
+function describeSources_(judgements) {
+  const counts = {};
+  judgements.filter(function (j) {
+    return String(j.scale) === 'summative_tier' && !j.supersededBy;
+  }).forEach(function (j) {
+    const src = String(j.source || 'teacher');
+    counts[src] = (counts[src] || 0) + 1;
+  });
+
+  const wording = {
+    teacher: 'teacher judgement',
+    suggestion_confirmed: 'auto-suggested, teacher confirmed',
+    teacher_override: 'auto-suggested, teacher overrode'
+  };
+  return Object.keys(counts).map(function (k) {
+    return counts[k] + ' ' + (wording[k] || k);
+  }).join('; ');
 }
 
 function normaliseEmail_(value) {
@@ -2080,7 +2278,7 @@ function verifyInstall() {
   // features fail — which is far harder to diagnose than a file that will not parse.
   [
     'api_getBootstrap', 'api_getLesson', 'api_submitWorksheet', 'api_getMyResults',
-    'api_getClassOverview', 'api_getStudentDetail', 'api_recordJudgement',
+    'api_getClassOverview', 'api_getStudentDetail', 'api_recordJudgement', 'api_confirmSuggestions',
     'api_recordReadiness', 'api_exportCsv', 'api_getAdminData', 'api_importRoster',
     'api_setStaffRole'
   ].forEach(function (name) {
@@ -2092,7 +2290,8 @@ function verifyInstall() {
     'requireStaff_', 'requireAdmin_', 'withLock_', 'appendRow_', 'updateRow_',
     'readSheetObjects_', 'buildStrandProfile_', 'computeClassProfile_',
     'overallLevelFrom_', 'worksheetEvidenceByStrand_', 'getStandardsIndex_',
-    'markWorksheet_', 'stripAnswerKey_'
+    'markWorksheet_', 'stripAnswerKey_', 'normaliseJudgement_', 'writeJudgement_',
+    'suggestLevelsFromEvidence_', 'interviewPrompts_'
   ].forEach(function (name) {
     need('Helper ' + name, function () { return typeof globalThis[name] === 'function'; });
   });

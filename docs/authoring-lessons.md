@@ -221,13 +221,63 @@ idea, not one who guessed your exact vocabulary. List synonyms, and pitch
 A student wrongly marked down loses trust in the platform faster than a lenient mark
 costs you.
 
-## What auto-marking cannot do
+## Every worksheet question must be auto-marked
 
-This platform marks objective and keyword-matchable work. It does not judge the quality
-of an argument, the elegance of an explanation, or anything genuinely open-ended. For
-work like that, set it as an `activity` section and assess it off-platform — do not
-disguise it as a `shortText` question, because the mark would not mean anything and it
-would still count toward the student's recorded attainment.
+**No question in a worksheet may need a person to mark it.** AISA cannot staff teacher
+marking, so an open question in a worksheet is not "assessed later" — it is never
+assessed at all, and it silently drags the strand's evidence down because it counts in
+the denominator and can never score.
+
+This is a constraint on the *response format*, not on what you are allowed to assess.
+The pack's own reasoning demands stay; you change how the student expresses them.
+
+### Turning an open prompt into a closed one that tests the same thing
+
+The pack usually pairs a closed cell with a reason cell (*"one mark per correct sort
+with a matching reason"*). Keep the reason — make it selectable rather than written:
+
+| Published prompt | Open form (don't) | Closed form that still tests it |
+|---|---|---|
+| "Sort each item and say why" | free text reason | `matching` — item → the reason that applies |
+| "Explain how the sorter learns" | paragraph | `ordering` — put the training steps in sequence |
+| "Which output is unfair, and why?" | paragraph | `mcq` for the output + `mcq` for which criterion decided it |
+| "Give an example of…" | free text | `multi` — select every item that is an example |
+| "What would you change?" | free text | `mcq` over the pack's own listed improvements |
+
+The test of a good conversion: **a student who understands can pick the right option,
+and one who doesn't can't.** If the distractors are so weak that the answer is obvious,
+or so fine that it tests reading rather than the concept, the item is not doing the
+pack's work — rewrite it or drop the mark.
+
+`shortText` is still auto-marked (keyword matching, above) and is fine for a one-word or
+one-phrase answer. It is **not** a way to smuggle in an essay: if a correct answer could
+reasonably be phrased ten different ways, keyword matching will mark some of them wrong,
+and a student wrongly marked down loses trust in the platform faster than a lenient mark
+costs you.
+
+### What genuinely cannot be closed
+
+Some things can't be honestly assessed in a closed format: the quality of an argument,
+a build, a showcase, a peer review. Put those in an `activity` section, which carries no
+marks and no scoring. They are real work and students still do them — they are just not
+part of the machine-marked evidence. **Never disguise one as a question**: the mark would
+not mean anything and it would still count toward recorded attainment.
+
+## How question marks become attainment
+
+Marks never become a level on their own. Per strand, the platform proposes a level from
+that student's auto-marked work (`CONFIG.SUGGESTION_THRESHOLDS` — 90 / 70 / 45, an AISA
+convention that ADEK does not publish), a teacher asks one question pitched at that
+tier, and confirms or changes it. Nothing reaches the record without that click.
+
+Two consequences for you as an author:
+
+- **Tag questions with the strand they actually evidence.** A mis-tagged question moves a
+  proposal on the wrong strand, and the teacher sees a percentage that doesn't match the
+  student in front of them.
+- **Below three marked items a strand gets no proposal at all** (`SUGGESTION_MIN_ITEMS`).
+  A strand with one question in the whole term is worse than one with none, because it
+  reads as coverage that isn't there. Spread the tags.
 
 ## Before you commit
 

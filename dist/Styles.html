@@ -485,6 +485,81 @@
     background: #FDF1DC; color: #8A5A00; font-weight: 600;
   }
 
+  /* ---------- Confirming suggested levels ---------- */
+  /* The primary way a level gets recorded: the platform proposes, the teacher asks one
+     question and confirms. Everything here is sized so four strands fit on one screen —
+     if a teacher has to scroll to finish one student, the minute-per-student promise
+     breaks and the panel stops getting used. */
+  .confirm-panel {
+    border: 1px solid var(--aisa-purple); border-radius: var(--aisa-radius);
+    padding: 1.15rem 1.25rem; margin-bottom: 1.4rem; background: var(--aisa-white);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .confirm-row {
+    border: 1px solid var(--aisa-purple-border); border-radius: var(--aisa-radius);
+    padding: .85rem 1rem; margin-top: .85rem; background: #FCFCFD;
+  }
+
+  .confirm-row__head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: .75rem; flex-wrap: wrap;
+  }
+  .confirm-row__head .code {
+    font-weight: 700; color: var(--aisa-gold); font-size: .78rem; letter-spacing: .06em;
+  }
+
+  .confirm-row__standing {
+    font-size: .8rem; color: var(--aisa-muted-gray); margin-top: .15rem;
+  }
+  .confirm-row__standing strong { color: var(--aisa-purple); }
+
+  /* The question is the whole point of the step, so it gets the emphasis, not the levels. */
+  .confirm-row__ask {
+    background: var(--aisa-purple-tint); border-radius: 6px;
+    padding: .6rem .8rem; margin: .65rem 0;
+  }
+  .confirm-row__ask .eyebrow { margin-bottom: .2rem; }
+  .ask { font-size: .95rem; color: var(--aisa-purple); font-weight: 500; }
+
+  .confirm-row__levels { display: flex; gap: .45rem; flex-wrap: wrap; }
+
+  /* The radio stays in the DOM for keyboard and screen readers; only the pill is drawn. */
+  .level-pick { position: relative; cursor: pointer; }
+  .level-pick input {
+    position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none;
+  }
+  .level-pick__label {
+    display: inline-flex; align-items: center; gap: .45rem;
+    padding: .4rem .8rem; border-radius: 999px; font-size: .84rem;
+    border: 1px solid var(--aisa-purple-border); background: var(--aisa-white);
+    color: var(--aisa-near-black); transition: .12s; white-space: nowrap;
+  }
+  /* A swatch rather than a filled pill: the level colours include gold and grey, and text
+     on those fails contrast. The colour still reads at a glance; the words stay legible. */
+  .level-pick__label::before {
+    content: ''; width: 10px; height: 10px; border-radius: 50%; flex: none;
+    background: var(--lv, var(--aisa-purple-border));
+  }
+  .level-pick__label em {
+    font-style: normal; font-size: .62rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--aisa-muted-gray); font-weight: 700;
+  }
+  .level-pick:hover .level-pick__label { background: var(--aisa-purple-tint); }
+  .level-pick.is-chosen .level-pick__label {
+    border-color: var(--lv, var(--aisa-purple)); border-width: 2px; padding: calc(.4rem - 1px) calc(.8rem - 1px);
+    background: var(--aisa-purple-tint); font-weight: 700;
+  }
+  .level-pick.is-chosen .level-pick__label::before {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--lv, var(--aisa-purple)) 30%, transparent);
+  }
+  .level-pick.is-chosen .level-pick__label em { color: var(--aisa-purple); }
+  .level-pick input:focus-visible + .level-pick__label {
+    outline: 2px solid var(--aisa-purple); outline-offset: 2px;
+  }
+
+  .confirm-note { margin-top: .6rem; font-size: .87rem; }
+
   /* ---------- Judging ---------- */
   .judge-block { margin-bottom: 1.4rem; }
   .judge-evidence {

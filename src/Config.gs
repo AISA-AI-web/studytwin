@@ -110,6 +110,34 @@ const CONFIG = {
     bridging_readiness: ['not_yet', 'partial', 'mastery']
   },
 
+  /**
+   * Thresholds mapping auto-marked evidence to a SUGGESTED level.
+   *
+   * These are AISA's convention, not ADEK's. ADEK publishes no mark-to-tier conversion
+   * anywhere: its levels are awarded by matching observed performance to a written
+   * descriptor. The school has chosen to auto-suggest a level from the marked work so
+   * that no staff time goes on correcting, with a teacher confirming it in a short
+   * conversation before it is recorded.
+   *
+   * So the number never becomes the judgement on its own — it becomes a proposal. Every
+   * judgement row records whether it was confirmed by a teacher or left as the automatic
+   * suggestion, and the export says so, because a record that hides how a level was
+   * reached is not one the school can defend.
+   *
+   * Deliberately conservative at the top: Advanced is a stretch tier in the framework,
+   * and a high score on comprehension questions is not the same as the reasoning the
+   * Advanced descriptors ask for.
+   */
+  SUGGESTION_THRESHOLDS: [
+    { level: 'advanced',   min: 90 },
+    { level: 'proficient', min: 70 },
+    { level: 'emerging',   min: 45 },
+    { level: 'working_towards', min: 0 }
+  ],
+
+  /** Below this many marked items, a suggestion is too thin to offer. */
+  SUGGESTION_MIN_ITEMS: 3,
+
   /** The four strands of Phase 3. Codes are stable; labels vary by grade. */
   STRANDS: ['CU', 'SD', 'CE', 'GE'],
 
@@ -153,7 +181,7 @@ const COLUMNS = {
   SUBMISSIONS: ['email', 'lessonId', 'track', 'attempt', 'submittedAt', 'marksAwarded',
                 'marksAvailable', 'percent', 'answersJson', 'resultsJson'],
   JUDGEMENTS:  ['id', 'email', 'grade', 'track', 'strand', 'level', 'scale',
-                'assessmentEvent', 'frameworkRefs',
+                'assessmentEvent', 'frameworkRefs', 'source', 'suggestedLevel',
                 'evidenceProducts', 'evidenceObservations', 'evidenceConversations',
                 'note', 'accessArrangements', 'nextStep', 'bridgingRef',
                 'judgedBy', 'judgedAt', 'supersededBy'],

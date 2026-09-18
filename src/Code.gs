@@ -111,7 +111,7 @@ function verifyInstall() {
   // features fail — which is far harder to diagnose than a file that will not parse.
   [
     'api_getBootstrap', 'api_getLesson', 'api_submitWorksheet', 'api_getMyResults',
-    'api_getClassOverview', 'api_getStudentDetail', 'api_recordJudgement',
+    'api_getClassOverview', 'api_getStudentDetail', 'api_recordJudgement', 'api_confirmSuggestions',
     'api_recordReadiness', 'api_exportCsv', 'api_getAdminData', 'api_importRoster',
     'api_setStaffRole'
   ].forEach(function (name) {
@@ -123,7 +123,8 @@ function verifyInstall() {
     'requireStaff_', 'requireAdmin_', 'withLock_', 'appendRow_', 'updateRow_',
     'readSheetObjects_', 'buildStrandProfile_', 'computeClassProfile_',
     'overallLevelFrom_', 'worksheetEvidenceByStrand_', 'getStandardsIndex_',
-    'markWorksheet_', 'stripAnswerKey_'
+    'markWorksheet_', 'stripAnswerKey_', 'normaliseJudgement_', 'writeJudgement_',
+    'suggestLevelsFromEvidence_', 'interviewPrompts_'
   ].forEach(function (name) {
     need('Helper ' + name, function () { return typeof globalThis[name] === 'function'; });
   });

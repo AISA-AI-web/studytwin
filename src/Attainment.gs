@@ -295,3 +295,68 @@ function computeClassProfile_(gradeKey, studentProfiles) {
 }
 
 // round2_ lives in Marking.gs; Apps Script shares one global scope across files.
+
+/**
+ * Proposes a level per strand from the auto-marked evidence.
+ *
+ * A PROPOSAL, never a judgement. ADEK awards levels by matching performance to a written
+ * descriptor and publishes no conversion from marks; this mapping is the school's own,
+ * adopted so that no staff time goes on correcting. A teacher confirms it in a short
+ * conversation before it is recorded, and the record keeps which of the two happened.
+ *
+ * Returns nothing for a strand with too little marked work behind it — an unsupported
+ * suggestion is worse than none, because it looks equally confident.
+ */
+function suggestLevelsFromEvidence_(gradeKey, submissions) {
+  const evidence = worksheetEvidenceByStrand_(gradeKey, submissions);
+  const standardsIndex = getStandardsIndex_(gradeKey);
+
+  return evidence.map(function (row) {
+    const enough = row.itemsMarked >= CONFIG.SUGGESTION_MIN_ITEMS && row.marksAvailable > 0;
+    const percent = row.worksheetScore;
+
+    let suggested = null;
+    if (enough && percent !== null) {
+      const band = CONFIG.SUGGESTION_THRESHOLDS.filter(function (t) {
+        return percent >= t.min;
+      })[0];
+      suggested = band ? band.level : 'working_towards';
+    }
+    const def = suggested ? levelDef_(suggested) : null;
+    const definition = standardsIndex[row.strand] || {};
+
+    return {
+      strand: row.strand,
+      label: definition.label || row.strand,
+      suggested: suggested,
+      suggestedLabel: def ? def.label : null,
+      suggestedColor: def ? def.color : null,
+      percent: percent,
+      itemsMarked: row.itemsMarked,
+      marksAwarded: row.marksAwarded,
+      marksAvailable: row.marksAvailable,
+      enoughEvidence: enough,
+      // Surfaced so a teacher can see when a score came from repeated attempts.
+      notIndependent: row.notIndependent,
+      reason: !enough
+        ? 'Only ' + row.itemsMarked + ' marked item(s) so far \u2014 too little to suggest from.'
+        : Math.round(percent) + '% across ' + row.itemsMarked + ' marked items.'
+    };
+  });
+}
+
+/** Interview prompts for a strand, pitched at each tier so the answer places the student. */
+function interviewPrompts_(gradeKey, strandCode) {
+  const strand = getStrand_(gradeKey, strandCode);
+  if (!strand) return [];
+  const prompts = (INTERVIEW_PROMPTS[gradeKey] || {})[strandCode] || {};
+
+  return CONFIG.ATTAINMENT_LEVELS.filter(function (l) { return l.isTier; }).map(function (level) {
+    return {
+      level: level.key,
+      levelLabel: level.label,
+      descriptor: strand.tiers[level.key].descriptor,
+      ask: prompts[level.key] || ''
+    };
+  });
+}

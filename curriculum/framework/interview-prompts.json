@@ -1,0 +1,36 @@
+{
+  "_readme": [
+    "Short spoken prompts for the teacher confirmation step, written by AISA.",
+    "",
+    "The published pack contains only four 'Advanced probe' questions in total, not enough for",
+    "a per-strand script, so these are authored from the framework's own tier descriptors: one",
+    "prompt per tier, each written to elicit exactly what that tier's descriptor describes.",
+    "A student who answers the Proficient prompt well but not the Advanced one is Proficient.",
+    "",
+    "They are a conversation aid, not a test. The teacher is confirming or overriding a level",
+    "the platform has already proposed from marked work, which takes a minute per strand."
+  ],
+
+  "grade6": {
+    "CU": {
+      "emerging": "Show me one system that follows rules a person wrote, and one that learned from examples. How can you tell which is which?",
+      "proficient": "Take the model you trained. Explain how it got from the examples it saw to the answer it gave.",
+      "advanced": "If half its training examples were labelled wrongly, what exactly would change about its answers — and which cases would go wrong first?"
+    },
+    "SD": {
+      "emerging": "Show me the prompt you used to get that result. Which parts of it were doing the work?",
+      "proficient": "Walk me through your solution from input to output. What happens at each step?",
+      "advanced": "Why did you build it that way rather than another way? What would break if you took one step out?"
+    },
+    "CE": {
+      "emerging": "Point to an output here that is wrong or unclear. How did you know?",
+      "proficient": "How did you check that one? What did you compare it against, and what made that a good source?",
+      "advanced": "What single change to the input or the data would most improve these outputs — and how would you prove it worked?"
+    },
+    "GE": {
+      "emerging": "What could go wrong if someone used this without checking it first?",
+      "proficient": "Who could be treated unfairly by this, and why? What about anyone's private information?",
+      "advanced": "Trace this unfair result back to the data behind it. What one change would make it fairer, and how would you check that it had?"
+    }
+  }
+}

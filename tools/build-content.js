@@ -59,6 +59,10 @@ const framework = readJson(frameworkFile);
 const sequencesFile = path.join(curriculumDir, 'framework', 'sequences.json');
 const sequences = fs.existsSync(sequencesFile) ? readJson(sequencesFile) : {};
 
+/* Spoken prompts for the teacher confirmation step; see the file's own _readme. */
+const promptsFile = path.join(curriculumDir, 'framework', 'interview-prompts.json');
+const interviewPrompts = fs.existsSync(promptsFile) ? readJson(promptsFile) : {};
+
 const curriculum = {};
 const grades = fs.readdirSync(curriculumDir, { withFileTypes: true })
   .filter((e) => e.isDirectory() && /^grade\d+$/.test(e.name))
@@ -183,6 +187,9 @@ const FRAMEWORK = ${JSON.stringify(trimmedFramework)};
 
 /** Published week-by-week Main Course and Bridging sequences. */
 const SEQUENCES = ${JSON.stringify(trimmedSequences)};
+
+/** Teacher interview prompts, one per tier per strand. */
+const INTERVIEW_PROMPTS = ${JSON.stringify(interviewPrompts)};
 
 /** Every lesson shipped, and whether it is placeholder content. */
 const CURRICULUM_MANIFEST = ${JSON.stringify(manifest)};

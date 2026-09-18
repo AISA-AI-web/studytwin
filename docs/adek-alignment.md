@@ -267,7 +267,28 @@ Add `track` and `weekNumber` to `COLUMNS.PROGRESS`, and `bridgingStrands` to `CO
 
 The flow: teacher opens a student's strand row → sees the Grade 6 Emerging / Proficient / Advanced descriptors verbatim for that strand → sees the auto-marked worksheet evidence for that strand, clearly labelled *Products — one of three sources* → sees the observation and conversation notes they have entered → selects a level, types a note, records access arrangements and a next step.
 
-The platform may **suggest** a level from auto-marked evidence, but only if it is labelled in the UI as *"StudyTwin suggestion — school convention, not an ADEK rule"* and never pre-fills the stored value. ADEK publishes no mark-to-tier conversion, and inventing one silently is what makes a record indefensible. My recommendation is to ship without a suggestion engine for Term 1 and see whether teachers ask for one.
+The platform may **suggest** a level from auto-marked evidence, but only if it is labelled in the UI as *"StudyTwin suggestion — school convention, not an ADEK rule"* and never pre-fills the stored value. ADEK publishes no mark-to-tier conversion, and inventing one silently is what makes a record indefensible. My recommendation was to ship without a suggestion engine for Term 1 and see whether teachers ask for one.
+
+**That recommendation was overtaken by an operational constraint, and the design changed accordingly.** AISA cannot staff any teacher marking: every worksheet is auto-graded, and no open response is queued for a person to correct. A suggestion engine is therefore not an optional convenience — without it there is no route from evidence to a level at all, and the four strand rows would simply stay empty all term.
+
+So the platform does suggest, and §3.3a describes exactly how, what it does not claim, and what a teacher still has to do before a level is recorded.
+
+### 3.3a The confirmation step: what replaced teacher marking
+
+The constraint is on **marking**, not on **judgement**. Those are different tasks, and the distinction is what keeps the record defensible:
+
+- *Marking* is scoring 159 written answers against a mark scheme. That is the work the school cannot staff, and it is the work the auto-graded item types remove.
+- *Judgement* is deciding that a student is Proficient on Systems & Data. ADEK requires a person to make it, and it takes about a minute per student — not per answer.
+
+The implemented flow: the platform proposes a level per strand from that student's auto-marked work → the teacher is shown, beside each proposal, one question pitched at the tier being proposed → they ask it → they confirm or change the level → one click records all four.
+
+Three properties make this survive scrutiny rather than being mark-to-tier conversion with an extra click:
+
+1. **The thresholds are labelled as ours.** `CONFIG.SUGGESTION_THRESHOLDS` (90 / 70 / 45) is an AISA convention. The panel says so on screen, in those words. ADEK publishes no such mapping and we do not imply one exists.
+2. **What was proposed and what was recorded are both stored.** Every judgement row carries `source` (`suggestion_confirmed` or `teacher_override`) and `suggestedLevel`. A moderation or inspection question — *how many of these levels did a person actually think about?* — is answerable from the sheet. A record that cannot answer it is not a record.
+3. **The question supplies the missing evidence leg.** This matters most for the two strands §4.1 identifies: for Grade 6, products are **not** an evidence source for CU or GE. A CU or GE level resting on auto-marked worksheets alone is evidencing the wrong thing, whatever the percentage. The prompt the teacher asks is a *conversation*, which is precisely the source the pack names for those strands — so the confirmation step is not a formality on CU and GE, it is the evidence.
+
+The platform still refuses to synthesise. `suggestLevelsFromEvidence_` returns no proposal at all below `SUGGESTION_MIN_ITEMS` (3) marked items — it says *too little to suggest from* rather than guessing — and nothing is written to the record until a teacher clicks. A proposal that is never confirmed is not attainment, and does not appear as such anywhere.
 
 ### 3.4 The overall level: a count, implemented literally
 
@@ -376,7 +397,9 @@ Beyond coverage, three things a mark scheme structurally cannot see, all named a
 
 It would be wrong to say nothing in the curriculum is machine-markable. Published Grade 6/7 material contains card sorts into Input/Process/Output, four-option MCQs, multi-selects, "Matches the answer key? (tick or fix)" columns, checkbox dataset rules, and accuracy arithmetic. Integration weeks are not wall-to-wall performance tasks.
 
-But **no closed cell ever stands alone**. Every one is paired in the same row with a reason / evidence / correction cell, and the published mark is conditional on that reason: *"One mark per correct sort with a matching reason; the reason must reference giving-in, changing, or coming-out."* Auto-marking the closed column alone would systematically over-award. So: mark the closed cell, **queue the paired open cell for the teacher**, and do not report the item as marked until both are resolved.
+But **no closed cell ever stands alone**. Every one is paired in the same row with a reason / evidence / correction cell, and the published mark is conditional on that reason: *"One mark per correct sort with a matching reason; the reason must reference giving-in, changing, or coming-out."* Auto-marking the closed column alone would systematically over-award.
+
+The original answer was: mark the closed cell, queue the paired open cell for the teacher, and do not report the item as marked until both are resolved. **With no teacher marking available (§3.3a) that queue has nowhere to go**, so the reason has to be captured in a form a machine can judge — the student selects *which* reason from the published set, orders the steps, or matches the verdict to the criterion that decided it. The reason is still assessed and still conditions the mark; it is the response format that changed, not the demand. Where a reason genuinely cannot be put in a closed form without testing something other than what the pack asks, the item carries no mark and the strand leans on the confirmation conversation instead.
 
 ### 4.3 What needs teacher judgement, concretely (Grade 6)
 
@@ -386,7 +409,7 @@ Everything in the Final Assessment. All four parts are performance evidence at 2
 
 1. **Never synthesise a level.** A strand with no teacher judgement renders as *Not yet judged*, not as a computed value and not as a blank that reads as zero.
 2. **Label every number by its evidence type.** `worksheetScore` sits under *Products*, visibly one of three.
-3. **Give observations and conversations first-class capture.** A phone-friendly quick-entry for the teacher mid-lesson: student → strand → level → one line of note → source tag. Without this the triangulation requirement is unmeetable and teachers will keep a paper record instead, which defeats the platform.
+3. **Give observations and conversations first-class capture.** A phone-friendly quick-entry for the teacher mid-lesson: student → strand → level → one line of note → source tag. Without this the triangulation requirement is unmeetable and teachers will keep a paper record instead, which defeats the platform. *Delivered by the confirmation panel (§3.3a): the question asked is stored as conversation evidence on the row it produced, so triangulation is a by-product of recording the level rather than a second task to remember.*
 4. **Carry the pack's own prompts.** Each lesson's five formative fields (*Targets, Check, Success criteria, Evidence, Feedback / adjustment*) and the rubric look-fors should be on screen at the point of judgement, verbatim. That is what makes two teachers reach the same level, which is the pack's stated reliability criterion.
 5. **Flag single-source judgements** rather than blocking them — a warning icon and a tooltip naming which sources are missing.
 6. **Show the decision rule** next to every overall level.
