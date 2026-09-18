@@ -421,6 +421,26 @@
   .blanks { display: flex; gap: .5rem; flex-wrap: wrap; }
   .blanks input { width: auto; min-width: 8rem; flex: 1; }
 
+  /* An input sitting inside a sentence. It has to read as part of the line, so it keeps
+     the surrounding type size and shows only an underline. */
+  .stem--blanks { line-height: 2.2; }
+  /* Written as input[type="text"].blank-inline, not .blank-inline: the generic field rule
+     above is an attribute selector and outranks a bare class, so a plain class here loses
+     on width and each blank takes a line of its own, breaking the sentence apart. */
+  input[type="text"].blank-inline {
+    width: auto; min-width: 6rem; max-width: 12rem; display: inline-block;
+    font-size: inherit; padding: .05rem .45rem; vertical-align: baseline;
+    border: none; border-bottom: 2px solid var(--aisa-purple-border);
+    border-radius: 3px 3px 0 0; background: var(--aisa-white); text-align: center;
+  }
+  input[type="text"].blank-inline:focus {
+    outline: none; border-bottom-color: var(--aisa-purple);
+    box-shadow: 0 2px 0 -1px var(--aisa-purple);
+  }
+  input[type="text"].blank-inline:disabled {
+    background: transparent; color: var(--aisa-near-black); font-weight: 600;
+  }
+
   .feedback {
     margin-top: .75rem; padding: .7rem .85rem; border-radius: 6px;
     background: var(--aisa-purple-tint); font-size: .88rem;

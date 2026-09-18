@@ -671,12 +671,32 @@
           'placeholder="' + esc(q.placeholder || 'Your answer') + '"' + dis + '>';
         break;
 
-      case 'fillBlank':
-        body = '<div class="blanks">' + (q.blanks || []).map(function (label, i) {
-          return '<input type="text" data-blank="' + esc(q.id) + '" data-index="' + i + '" ' +
-            'placeholder="' + esc(label) + '"' + dis + '>';
-        }).join('') + '</div>';
+      // Two shapes. A sentence with {{1}} markers renders the inputs where the blanks
+      // actually are — "This is a ___ system, because ___" — which is how the pack writes
+      // them and the only form in which the question makes sense to read. Anything else
+      // falls back to a labelled row of boxes.
+      case 'fillBlank': {
+        var count = (q.blanks || []).length;
+        var inline = /\{\{\s*\d+\s*\}\}/.test(q.stem || '');
+
+        if (inline) {
+          body = '<p class="stem stem--blanks">' +
+            richText(q.stem).replace(/\{\{\s*(\d+)\s*\}\}/g, function (whole, n) {
+              var i = Number(n) - 1;
+              // A marker with no matching blank would silently swallow the student's
+              // answer, so leave it visible as text rather than rendering a dead input.
+              if (i < 0 || i >= count) return whole;
+              return '<input type="text" class="blank-inline" data-blank="' + esc(q.id) +
+                '" data-index="' + i + '" aria-label="Blank ' + n + '"' + dis + '>';
+            }) + '</p>';
+        } else {
+          body = '<div class="blanks">' + (q.blanks || []).map(function (label, i) {
+            return '<input type="text" data-blank="' + esc(q.id) + '" data-index="' + i + '" ' +
+              'placeholder="' + esc(label) + '"' + dis + '>';
+          }).join('') + '</div>';
+        }
         break;
+      }
 
       case 'shortText':
       default:

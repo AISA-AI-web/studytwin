@@ -125,6 +125,68 @@ function normaliseFields(question, lessonId) {
   if (!String(question.id).startsWith(lessonId)) {
     question.id = `${lessonId}-${question.id}`;
   }
+
+  normaliseAnswerShape(question);
+}
+
+/**
+ * Puts answer keys into the one shape the marking engine reads.
+ *
+ * A matching key is naturally written as an ordered list of pairs — it reads like the
+ * table it came from — but markMatching_ indexes the key by left id. Handed a list, it
+ * reads the array indices as left ids, finds nothing, and awards **zero to every student
+ * on every attempt**, silently and with no error anywhere. The worksheet still submits,
+ * still shows a score, and the score is just wrong.
+ *
+ * Accepting both shapes here costs nothing and removes the failure entirely. The same
+ * goes for an ordering key written as objects rather than bare ids.
+ */
+function normaliseAnswerShape(question) {
+  if (question.autoMarked === false) return;
+
+  if (question.type === 'matching' && Array.isArray(question.answer)) {
+    const map = {};
+    question.answer.forEach((pair) => {
+      if (!pair || typeof pair !== 'object') return;
+      const left = pair.left ?? pair.from ?? pair.l;
+      const right = pair.right ?? pair.to ?? pair.r;
+      if (left !== undefined && right !== undefined) map[String(left)] = String(right);
+    });
+    if (Object.keys(map).length) question.answer = map;
+  }
+
+  if (question.type === 'ordering' && Array.isArray(question.answer)) {
+    question.answer = question.answer.map((item) =>
+      item && typeof item === 'object' ? String(item.id ?? item.item ?? item) : item);
+  }
+
+  // fillBlank is naturally authored per blank — {id, answer, acceptedAnswers} — which
+  // keeps each blank's accepted spellings next to the blank they belong to. The engine
+  // wants two parallel arrays. Split them here rather than making authors do it, since
+  // getting the parallel arrays out of step is silent and marks the wrong blank.
+  if (question.type === 'fillBlank' && Array.isArray(question.blanks) &&
+      question.blanks.some((b) => b && typeof b === 'object')) {
+    const labels = [];
+    const answer = [];
+
+    question.blanks.forEach((blank, i) => {
+      if (!blank || typeof blank !== 'object') {
+        labels.push(String(blank));
+        answer.push((question.answer || [])[i] ?? '');
+        return;
+      }
+      const accepted = (blank.acceptedAnswers || []).map(String);
+      if (blank.answer !== undefined && !accepted.includes(String(blank.answer))) {
+        accepted.unshift(String(blank.answer));
+      }
+      answer.push(accepted.length ? accepted : ['']);
+      // The label becomes a placeholder in the box, so it must never be the answer.
+      labels.push(String(blank.label ?? blank.hint ?? ''));
+    });
+
+    question.blanks = labels;
+    question.answer = answer;
+  }
 }
 
 /**
