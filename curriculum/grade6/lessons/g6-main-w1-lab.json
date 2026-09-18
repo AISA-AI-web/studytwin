@@ -120,15 +120,33 @@
     "title": "Week 1 - Lab - Worksheet | Rule vs Learning - Hands-On Exploration (Lab)",
     "questions": [
       {
-        "id": "g6-main-w1-lab-m-w1-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Station comparison",
-        "prompt": "Log what each station did for the same kind of input.",
-        "stem": "Station A always ___\nStation B changed when ___",
-        "lookFor": "Records behaviour actually observed, e.g. 'Station A always gave the same output; Station B's guesses changed as we saw more example cards.' Any accurate observed difference is valid.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-lab-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Sam is given a mystery machine and wants to find out whether it follows fixed rules or learns. Which test would actually tell him?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Give it a brand-new, unusual input and watch whether it reacts the same as always or tries to match a pattern."
+          },
+          {
+            "id": "b",
+            "text": "Give it only inputs it has handled before and check that the answers are still right."
+          },
+          {
+            "id": "c",
+            "text": "Give it the same easy input five times and time how fast each answer comes back."
+          },
+          {
+            "id": "d",
+            "text": "Count how many different answers the machine can give altogether."
+          }
+        ],
+        "answer": "a",
+        "feedback": {
+          "correct": "Exactly - a new, unusual input is what splits them: fixed rules react the same or break, while a learning system reaches for the pattern it built.",
+          "incorrect": "Familiar inputs, speed and the number of answers look much the same for both kinds. Only a brand-new, unusual input shows whether the machine follows a written step or matches a pattern."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -158,17 +176,42 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-lab-m-w1-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Design a test",
-        "prompt": "Write a test that would tell whether a system follows rules or learns, and what each result would mean.",
-        "lookFor": "Designs a test that would truly separate rules from learning: give the system a brand-new, unusual input; if it always reacts the same way it is rule-based, if it adapts using patterns it likely learned. Accept any test using a novel input to reveal adaptation; if the test does not separate the two, model one strong test and have the group revise.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-lab-aq2",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put these steps in order to run a fair test on a mystery machine.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Write down the unusual input you will try and what each possible result would mean."
+          },
+          {
+            "id": "i2",
+            "text": "Give that unusual input to the machine."
+          },
+          {
+            "id": "i3",
+            "text": "Record exactly what the machine did."
+          },
+          {
+            "id": "i4",
+            "text": "Use what you recorded to decide whether the machine follows fixed rules or learns."
+          }
+        ],
+        "answer": [
+          "i1",
+          "i2",
+          "i3",
+          "i4"
+        ],
+        "feedback": {
+          "correct": "That is how a detective works - decide what each result would mean before you test, so the result can't be bent to fit afterwards.",
+          "incorrect": "Plan first: write the input and what each result would mean, then test, then record what happened, and only then decide which kind of machine it is."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -198,17 +241,60 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-lab-m-w1-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Difference log",
-        "prompt": "Record the differences you observed between the two stations. For each row record: What we tried | Station A did | Station B did.",
-        "lookFor": "Logs at least three accurate differences with detail rather than one repeated observation. Look for the unusual input at Station A being noted: it had no rule for it, so it stopped or gave a wrong answer.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-lab-aq3",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Match each thing a group tried at the two stations with what happened.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Fed the rule-card machine the same card twice"
+          },
+          {
+            "id": "L2",
+            "text": "Fed the rule-card machine a strange card that no rule covered"
+          },
+          {
+            "id": "L3",
+            "text": "Gave the card game example cards that were all of one kind"
+          },
+          {
+            "id": "L4",
+            "text": "Gave the card game plenty of varied, correctly labelled example cards"
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "It gave exactly the same output both times."
+          },
+          {
+            "id": "R2",
+            "text": "It stopped, because no step had been written for that card."
+          },
+          {
+            "id": "R3",
+            "text": "The pattern it built came out lopsided and it sorted new cards badly."
+          },
+          {
+            "id": "R4",
+            "text": "The pattern it built sorted most of the new cards correctly."
+          }
+        ],
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3",
+          "L4": "R4"
+        },
+        "feedback": {
+          "correct": "Good - each machine fails in its own way: fixed rules break on a case with no rule, and a learning system is only as good as the examples it was shown.",
+          "incorrect": "The rule-card machine repeats itself and breaks when no rule fits; the card game's guesses follow the examples it was given, so one-sided examples make a lopsided pattern."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -238,17 +324,19 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-lab-m-w1-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Exit ticket",
-        "prompt": "What one input would you give a mystery machine to find out if it learns? Why?",
-        "lookFor": "Chooses a brand-new or unusual input and says what each outcome would mean - the same reaction every time points to fixed rules, while an attempt to match a pattern points to learning. A named input with a reason beats a general statement about testing.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-lab-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false? A rule-based machine can still fail: if it meets an input that none of its rules covers, it stops or gives a wrong answer.",
+        "answer": true,
+        "feedback": {
+          "correct": "Yes - following fixed rules does not mean never failing; it means failing whenever something turns up that has no rule.",
+          "incorrect": "Fixed rules are predictable, not perfect. At Station A the strange card had no rule, so the machine stopped or answered wrongly."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -278,17 +366,22 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-lab-m-w1-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Challenge (stretch)",
-        "prompt": "Add an unfair set of example cards to Station B and explain how it changed the pattern the group learned.",
-        "lookFor": "Adds a deliberately unfair set of example cards and explains how it changed the learned pattern. Strong responses reach the idea that quality and fairness of examples matter, not just how many there are - a few odd or wrong cards can make the guesses worse.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-lab-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Fill in the gaps. We tested a mystery machine with a brand-new, unusual input, and it gave exactly the answer it always gives, so we decided it ___(1). The Station B card game behaved differently: it tried to match the ___(2) it had built from the example cards.",
+        "blanks": [
+          "",
+          ""
+        ],
+        "feedback": {
+          "correct": "That is the difference in one sentence: fixed rules repeat themselves, while a learning system reaches for the pattern it built from its examples.",
+          "incorrect": "An unchanged answer to a brand-new input points to fixed rules; the card game instead matched the pattern it had built from the example cards."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -318,6 +411,24 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
+        ],
+        "evidenceType": "product",
+        "answer": [
+          [
+            "follows fixed rules",
+            "follows fixed steps",
+            "follows rules",
+            "fixed rules",
+            "is rule-based",
+            "rule-based",
+            "is a rule-based system",
+            "uses fixed rules"
+          ],
+          [
+            "pattern",
+            "the pattern",
+            "patterns"
+          ]
         ]
       }
     ]

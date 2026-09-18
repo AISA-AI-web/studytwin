@@ -114,12 +114,46 @@
     "title": "Week 4 - Lab - Worksheet | Output Triage Clinic (Lab)",
     "questions": [
       {
-        "id": "g6-main-w4-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Clinic diagnoses. For each station, record the verdict, a checkable reason, and a verification action.",
-        "stem": "Verdict:\nReason:\nVerification action:",
-        "lookFor": "Triages the full set with valid, checkable reasons that cite the source or the original text used, and matches a suitable check to each output type rather than using one generic check for all.",
+        "id": "g6-main-w4-lab-aq1",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "At each clinic station, match the output to the verification action that fits it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "An output that states the Burj Khalifa is 828 m tall."
+          },
+          {
+            "id": "L2",
+            "text": "An output that summarises the article your group read at the station."
+          },
+          {
+            "id": "L3",
+            "text": "An output that says \"follow the steps in the usual order\" without listing any steps."
+          },
+          {
+            "id": "L4",
+            "text": "An output that says 4 tickets at 25 AED each cost 90 AED in total."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Look the height up in a trusted reference or official website."
+          },
+          {
+            "id": "R2",
+            "text": "Put it side by side with the original article and see whether it matches."
+          },
+          {
+            "id": "R3",
+            "text": "Write a clearer prompt asking for the steps to be listed one by one."
+          },
+          {
+            "id": "R4",
+            "text": "Work the calculation out yourself and compare the totals."
+          }
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -130,15 +164,41 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Well matched - a claimed fact needs a trusted source, a summary needs the original text, a vague output needs a clearer prompt, and a calculation you can redo yourself.",
+          "incorrect": "Match the check to the kind of output: facts go to a trusted source, summaries go back to the original text, vague outputs need re-prompting before they can be judged, and sums can simply be redone."
+        },
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3",
+          "L4": "R4"
+        }
       },
       {
-        "id": "g6-main-w4-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Defend your ladder. Explain why your top output is more trustworthy than your bottom output.",
-        "stem": "Top is more trustworthy because ...\nBottom is least trustworthy because ...",
-        "lookFor": "Justifies the placement with trustworthiness signals - sources, match to the task, checkability - not preference. Any defensible order with signal-based reasons is acceptable.",
+        "id": "g6-main-w4-lab-aq2",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Your group put Output A above Output B on the trust ladder. Which defence of that order uses a trust signal rather than a preference?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A gives a source we looked up and it matched; B states a number with no source anyone can check."
+          },
+          {
+            "id": "b",
+            "text": "A is shorter and easier to read than B."
+          },
+          {
+            "id": "c",
+            "text": "A sounds more sure of itself than B does."
+          },
+          {
+            "id": "d",
+            "text": "Most of our group liked A better than B."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -149,15 +209,38 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "That is a signal-based defence: it points to evidence - a source that was checked - that another group could check too.",
+          "incorrect": "Length, confidence and what your group likes are preferences; a defence has to point to evidence, such as a source that was checked or a match to the task."
+        }
       },
       {
-        "id": "g6-main-w4-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Triage clinic record. Complete one row per station output.",
-        "stem": "Station | Verdict | Reason | Verification action | Ladder rank",
-        "lookFor": "Every station has a verdict, a valid reason, a chosen verification action and a ladder rank, with the ranking consistent with the reasons recorded.",
+        "id": "g6-main-w4-lab-aq3",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the five steps of the clinic routine in the order your group should work through them.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Read the task and the output at the station."
+          },
+          {
+            "id": "i2",
+            "text": "Assign a verdict and write a checkable reason."
+          },
+          {
+            "id": "i3",
+            "text": "Choose a verification action that fits that type of output."
+          },
+          {
+            "id": "i4",
+            "text": "Rank all the outputs on the trust ladder."
+          },
+          {
+            "id": "i5",
+            "text": "Agree your group's defence of the order and one risk of the least trustworthy output."
+          }
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -168,14 +251,50 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Yes - you can only rank outputs against each other once every one of them has its own verdict, reason and check.",
+          "incorrect": "Each output is triaged and given a check first; the ladder compares outputs, so it can only be built after every station has a verdict and reason, and the defence comes last."
+        },
+        "answer": [
+          "i1",
+          "i3",
+          "i2",
+          "i4",
+          "i5"
+        ]
       },
       {
-        "id": "g6-main-w4-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: name one risk of using the least trustworthy output as-is, and who it could affect.",
-        "lookFor": "States a concrete risk that follows from the specific weakness they found in that output, and names who would be affected if it were used as-is.",
+        "id": "g6-main-w4-lab-aq4",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Select ALL the outputs that belong near the BOTTOM of the trust ladder, as the least trustworthy.",
+        "options": [
+          {
+            "id": "a",
+            "text": "An output that gives a statistic but names no source, so nobody in the group can check it."
+          },
+          {
+            "id": "b",
+            "text": "An output whose date clashes with the date printed on the station card."
+          },
+          {
+            "id": "c",
+            "text": "An output that answers a different question from the one the task asked."
+          },
+          {
+            "id": "d",
+            "text": "An output that matched the original article line by line when the group compared them."
+          },
+          {
+            "id": "e",
+            "text": "An output that sets its answer out in a neatly labelled table."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -186,14 +305,20 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Good - no source, a clash with the station card, and answering the wrong task are all trust signals pushing an output down the ladder.",
+          "incorrect": "Low trust comes from signals: nothing to check against, a clash with a source, or not answering the task. A neat table is only presentation, and an output that matched the original belongs near the top."
+        }
       },
       {
-        "id": "g6-main-w4-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): redesign one unclear output's prompt so its result could be triaged as clearly correct or incorrect.",
-        "lookFor": "Re-prompts for specific steps or details, so that the new output would be checkable - an unclear output cannot be judged until it is clarified.",
+        "id": "g6-main-w4-lab-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Complete the clinic's rule for choosing a check. Write one word in each gap.\nA claimed fact needs a trusted ______, but a summary needs comparing back to the ______ text.",
+        "blanks": [
+          "",
+          ""
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -204,7 +329,23 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Exactly - the check has to match the output: facts are checked against a trusted source, summaries against the text they came from.",
+          "incorrect": "A fact is checked against a trusted source, but a summary can only be checked against the original text it was made from - a website cannot tell you whether the summary matches your article."
+        },
+        "answer": [
+          [
+            "source",
+            "sources",
+            "a source",
+            "the source"
+          ],
+          [
+            "original",
+            "the original",
+            "originals"
+          ]
+        ]
       }
     ]
   },

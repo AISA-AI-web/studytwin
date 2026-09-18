@@ -395,7 +395,10 @@
 
   .q-head { display: flex; gap: .75rem; align-items: baseline; margin-bottom: .75rem; }
   .q-num { font-weight: 700; color: var(--aisa-purple); flex: none; }
-  .q-prompt { flex: 1; font-weight: 500; }
+  /* pre-line so an authored line break survives. Several questions set out four
+     versions of a dataset with their scores, which as one prose paragraph is a reading
+     test before it is a reasoning one — and hits hardest on the support track. */
+  .q-prompt { flex: 1; font-weight: 500; white-space: pre-line; }
   .q-marks { font-size: .75rem; color: var(--aisa-muted-gray); white-space: nowrap; }
 
   .option {

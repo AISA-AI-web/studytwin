@@ -111,12 +111,33 @@
     "title": "Week 6 - Core - Worksheet | Trustworthy AI Helper - Trace the Data & Plan Checks (Part 2 Core)",
     "questions": [
       {
-        "id": "g6-bridging-w6-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Trace the data: explain how the data influences your outcome and predict a change.",
-        "stem": "The data ... drives the outcome because ...\nIf the data changed to ..., the outcome would ...",
-        "lookFor": "A specific data-to-outcome link plus a prediction - names which data drives which part of the output and says how the outcome would change if that data changed (model: the survey's most-picked genre drove the book suggestion; swapping in a class that prefers science would change the suggestion to a science book).",
+        "id": "g6-bridging-w6-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Maya's helper suggests one book for her class. It uses the class survey, in which 9 of the 20 pupils picked adventure and only 4 picked science. Maya then adds 12 more replies from the science club, and every one of them picks science. She runs the helper again on the new data. What is the best prediction of what happens to the suggestion?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It is likely to change to a science book, because science is now the most-picked genre in the data."
+          },
+          {
+            "id": "b",
+            "text": "It stays an adventure book, because the helper already chose adventure the first time."
+          },
+          {
+            "id": "c",
+            "text": "It stays an adventure book, because only a new prompt can change what the helper suggests."
+          },
+          {
+            "id": "d",
+            "text": "It becomes unpredictable, because the helper now has replies from two different groups."
+          }
+        ],
+        "answer": "a",
+        "feedback": {
+          "correct": "Exactly - the suggestion follows the data, so once science becomes the most-picked genre the suggestion moves with it.",
+          "incorrect": "The helper does not remember its earlier answer and does not need a new prompt; it counts the data it is given again, and science (16) now beats adventure (9)."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -147,16 +168,18 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Plan your checks: plan a verification and a risk check.",
-        "stem": "Claim to verify: ... | trusted source: ...\nRisk: ... | how I will reduce it: ...",
-        "lookFor": "The verification must use a trusted, independent source rather than the same tool, and the named risk must come with a mitigation (model: verify 'most pupils prefer adventure' against the survey totals; risk of a duplicate biasing the suggestion, reduced by de-duplicating the data).",
+        "id": "g6-bridging-w6-core-aq2",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "Ben's helper claims that adventure was the most popular genre in his class. Ben asks the same helper the same question again, gets the same answer, and writes on his plan that the claim is verified. Ben has verified his claim.",
+        "answer": false,
+        "feedback": {
+          "correct": "Right - asking the same tool twice only repeats it; verifying means checking the claim against a trusted source outside the tool, such as the survey totals themselves.",
+          "incorrect": "A tool that is wrong once will usually be wrong the same way twice, so repeating the question proves nothing - verification means checking the claim against a trusted, independent source."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -187,16 +210,59 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Trustworthy AI Helper Log - Part 2 (trace + check plan): record your data trace and your verification and risk plan.",
-        "stem": "Data -> outcome link | Verification plan | Risk + mitigation",
-        "lookFor": "The Core section of the Log is the assessment evidence. Mastery: explains the data's influence on the outcome, predicts a data change, and plans a trusted-source verification and a risk check with a mitigation. Partial: explanation or only one check planned.",
+        "id": "g6-bridging-w6-core-aq3",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Each row on the left is a risk a pupil found in their helper. Match each risk to the mitigation that would reduce it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "One pupil's reply was entered twice, so that pupil's opinion is counted double."
+          },
+          {
+            "id": "L2",
+            "text": "The output names a pupil and says which class they are in."
+          },
+          {
+            "id": "L3",
+            "text": "Only the pupils in the chess club answered the survey, so most of the class is missing."
+          },
+          {
+            "id": "L4",
+            "text": "The helper states a fact about the class that nobody has checked."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Check the fact against the survey totals before using it."
+          },
+          {
+            "id": "R2",
+            "text": "Delete the repeated reply so that each pupil counts once."
+          },
+          {
+            "id": "R3",
+            "text": "Take the personal details out so that the output names nobody."
+          },
+          {
+            "id": "R4",
+            "text": "Collect replies from the rest of the class before running the helper again."
+          }
+        ],
+        "answer": {
+          "L1": "R2",
+          "L2": "R3",
+          "L3": "R4",
+          "L4": "R1"
+        },
+        "feedback": {
+          "correct": "Well matched - a mitigation has to fix the particular thing that could go wrong, not just be a generally sensible action.",
+          "incorrect": "Ask what each risk would do to the output: a double-counted reply needs the duplicate removed, a named pupil needs the personal details taken out, a missing group needs more replies, and an unchecked fact needs verifying."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -227,15 +293,41 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: explain how your data shapes your outcome, and name one claim you will verify and one risk you will reduce.",
-        "lookFor": "Links the data to the outcome, names one claim to be verified against a trusted source, and names one risk together with how it will be reduced.",
+        "id": "g6-bridging-w6-core-aq4",
+        "type": "ordering",
+        "marks": 3,
+        "prompt": "Trace how the data leads to the outcome in Maya's book helper. Put these four steps into the order in which they happen.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "The helper suggests an adventure book to the class."
+          },
+          {
+            "id": "i2",
+            "text": "Every pupil's genre choice is collected in the class survey."
+          },
+          {
+            "id": "i3",
+            "text": "Adventure comes out as the most-picked genre."
+          },
+          {
+            "id": "i4",
+            "text": "The helper counts how many pupils picked each genre."
+          }
+        ],
+        "answer": [
+          "i2",
+          "i4",
+          "i3",
+          "i1"
+        ],
+        "feedback": {
+          "correct": "That is the trace: data first, then the counting, then the result, and the result drives the suggestion - which is why changing the data changes the outcome.",
+          "incorrect": "Follow the data forwards: the replies are collected, then counted, the count gives the top genre, and only then does the helper suggest a book."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -266,15 +358,44 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): find the single data change that would most alter your helper's outcome, and explain why it matters most.",
-        "lookFor": "Identifies the single data change with the largest effect and justifies it.",
+        "id": "g6-bridging-w6-core-aq5",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Which of these belong in a good check plan for an AI helper? Choose all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Compare the helper's claim with the survey totals yourself."
+          },
+          {
+            "id": "b",
+            "text": "Ask the same helper the question again and accept the answer if it matches the first one."
+          },
+          {
+            "id": "c",
+            "text": "Look for a reply that was entered twice and remove it before trusting the result."
+          },
+          {
+            "id": "d",
+            "text": "Check whether the output includes details that could identify a pupil, and take them out."
+          },
+          {
+            "id": "e",
+            "text": "Ask the helper to say its answer more confidently so that it sounds more reliable."
+          }
+        ],
+        "answer": [
+          "a",
+          "c",
+          "d"
+        ],
+        "feedback": {
+          "correct": "Yes - a real check plan compares the output with something trustworthy outside the tool and looks for ways the output could be wrong or unfair.",
+          "incorrect": "Repeating the question and making the wording sound more confident change nothing about whether the answer is true; the checks that count compare the claim with a trusted source and hunt for risks in the data and the output."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -305,8 +426,7 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       }
     ]
   },

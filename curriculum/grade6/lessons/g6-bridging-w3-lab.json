@@ -118,12 +118,29 @@
     "title": "Week 3 - Lab - Worksheet | Trace-the-Data Investigation (Lab)",
     "questions": [
       {
-        "id": "g6-bridging-w3-lab-g6-bw3l-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Run three single swaps: for each swap, record the before outcome, the after outcome, and the size of the shift. Change only one batch at a time.",
-        "stem": "Before: ___\nAfter: ___\nShift: ___",
-        "lookFor": "One batch changed at a time with a clean before value recorded before the swap, not filled in afterwards. Changing several batches at once means the outcome cannot be attributed and the swap should be redone.",
+        "id": "g6-bridging-w3-lab-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "A group swapped in the green-date batch AND the yellow-date batch at the same time. The sorter's answer changed from 'ripe' to 'unripe'. What should they write in their log?",
+        "options": [
+          {
+            "id": "a",
+            "text": "We cannot tell which batch moved the outcome, so we will redo the test changing one batch at a time."
+          },
+          {
+            "id": "b",
+            "text": "Both batches are equally influential, because the outcome moved when we swapped them together."
+          },
+          {
+            "id": "c",
+            "text": "The larger batch caused the change, because a bigger batch always has the bigger effect."
+          },
+          {
+            "id": "d",
+            "text": "The test worked fine - swapping two batches at once saves time and gives us the same evidence."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -133,16 +150,46 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "process"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - with two changes at once the result cannot be attributed to either batch, so the fair test has to be run again one batch at a time.",
+          "incorrect": "When two batches change together the shift could have come from either one, or from both; only a single controlled swap tells you which batch did it."
+        }
       },
       {
-        "id": "g6-bridging-w3-lab-g6-bw3l-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Name and verify the winner: state which swap was most influential, justify it from your log, and describe how you verified it on a fresh fruit.",
-        "stem": "The most influential swap was ___\nMy log shows ___\nI verified it by ___",
-        "lookFor": "The winner is the batch that filled the biggest data gap - typically the green-date batch - justified from the logged before/after shifts rather than opinion, and confirmed by a re-test on a fresh fruit that shows the effect repeats.",
+        "id": "g6-bridging-w3-lab-aq2",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the steps of one fair data-swap test into the order you should carry them out.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Swap in one data batch, and only that batch."
+          },
+          {
+            "id": "i2",
+            "text": "Record the outcome for your test fruit before you change anything."
+          },
+          {
+            "id": "i3",
+            "text": "Re-run the winning swap on a fresh fruit to check the effect repeats."
+          },
+          {
+            "id": "i4",
+            "text": "Compare the two recorded outcomes and write down the size of the shift."
+          },
+          {
+            "id": "i5",
+            "text": "Record the outcome for the same test fruit again."
+          }
+        ],
+        "answer": [
+          "i2",
+          "i1",
+          "i5",
+          "i4",
+          "i3"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -152,15 +199,50 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - the 'before' has to be recorded first, or there is nothing to compare the 'after' with, and verifying comes last.",
+          "incorrect": "A fair test records the before outcome first, changes one batch, records the after outcome, measures the shift, and only then verifies the winner on a fresh fruit."
+        }
       },
       {
-        "id": "g6-bridging-w3-lab-g6-bw3l-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Investigation log: log every single swap and its effect so you can rank them fairly. Use the columns Swap (one batch) | Before outcome | After outcome | Shift size | Rank.",
-        "lookFor": "Every row records one batch only, with both before and after outcomes filled in and a shift size (none / a little / a lot). A missing before value or a muddled swap makes the ranking unreliable.",
+        "id": "g6-bridging-w3-lab-aq3",
+        "type": "matching",
+        "marks": 3,
+        "prompt": "Three rows from an investigation log on a sorter trained mostly on brown ripe dates. Match each row to what the evidence in it shows.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Added 40 more brown ripe photos. Before: 'ripe'. After: 'ripe'."
+          },
+          {
+            "id": "L2",
+            "text": "Added 40 green unripe photos. Before (green date): 'ripe'. After: 'unripe'."
+          },
+          {
+            "id": "L3",
+            "text": "Kept the 40 green unripe photos and tested a second, fresh green date. Before: 'ripe'. After: 'unripe'."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "No influence - the batch repeated a pattern the sorter already had plenty of, so nothing shifted."
+          },
+          {
+            "id": "R2",
+            "text": "Influential - the batch filled a gap in the data and the outcome changed."
+          },
+          {
+            "id": "R3",
+            "text": "Verified - the same change moved the outcome again on a fresh fruit, so the effect is real, not a one-off."
+          }
+        ],
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -170,15 +252,18 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "process"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Well read - a row with no shift shows no influence, a row with a shift shows influence, and a repeat of that shift on a fresh fruit is verification.",
+          "incorrect": "Read each row's before and after: no movement means no influence, movement means influence, and the same movement repeating on a fresh fruit is what verifies it."
+        }
       },
       {
-        "id": "g6-bridging-w3-lab-g6-bw3l-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: state the most influential data change you found and give the recorded evidence that proves it.",
-        "lookFor": "Evidence, not opinion: the named swap is backed by the before/after shift written in the log, and ideally by the repeat result from the verification run.",
+        "id": "g6-bridging-w3-lab-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: once a swap has moved the outcome one time, that single result is enough proof that the batch is the most influential one - there is no need to test it again.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -188,15 +273,43 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - one result could be a coincidence, so you re-run the swap on a fresh fruit to verify the effect repeats.",
+          "incorrect": "It is false: a single moved outcome might be a one-off, so you verify by re-running the swap on a fresh fruit and checking the effect happens again."
+        }
       },
       {
-        "id": "g6-bridging-w3-lab-g6-bw3l-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): design a data swap you predict will produce zero outcome change, then test it. Explain why some data has no influence on this solution.",
-        "lookFor": "A swap that only adds more of what the sorter already has plenty of - for example another brown-date batch - with the explanation that it repeats a pattern the model already learned, so it fills no gap and moves nothing.",
+        "id": "g6-bridging-w3-lab-aq5",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Your log shows Swap A: no shift, Swap B: a big shift, Swap C: a little shift, and a re-run of Swap B on a fresh date that shifted the same way. Select ALL the conclusions your evidence actually supports.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Of the three swaps we tested, Swap B was the most influential, because our log shows it produced the biggest before/after shift."
+          },
+          {
+            "id": "b",
+            "text": "Swap B's effect is real and not a coincidence, because the re-run on a fresh date moved the outcome the same way."
+          },
+          {
+            "id": "c",
+            "text": "Swap B is the most influential data change that exists for any sorter anywhere."
+          },
+          {
+            "id": "d",
+            "text": "Swap A and Swap C can never change the outcome of any solution."
+          },
+          {
+            "id": "e",
+            "text": "Swap B must be the winner because it is the one we predicted would win before we started."
+          }
+        ],
+        "answer": [
+          "a",
+          "b"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -206,8 +319,11 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - your conclusions stay inside what you actually recorded: the biggest logged shift, confirmed by a repeat run.",
+          "incorrect": "A conclusion must not go further than the log: you tested three swaps on one sorter, and a prediction you made beforehand is not evidence - the recorded shifts are."
+        }
       }
     ]
   },

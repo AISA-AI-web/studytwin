@@ -130,12 +130,29 @@
     "title": "Week 7 - Core - Worksheet | Signature Solution - Planning",
     "questions": [
       {
-        "id": "g6-main-w7-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Name the five parts: using your task card, complete each part of the plan in one line.",
-        "stem": "The goal is to ___.\nThe AI acts as a ___ (role).\nThe task is to ___.\nOne rule is ___.\nThe inputs are ___ (no personal data).\nI will check accuracy by ___.\nOne risk is ___; my plan reduces it by ___.",
-        "lookFor": "All five parts are present: a goal naming the task and who it helps, a role + task + one rule structure, inputs with no personal or identifying data, a checkable evaluation method (e.g. compare labelled items to a teacher answer key), and one risk with a mitigation that clearly reduces that named risk. Evaluation and risk are the parts most often left blank or thin.",
+        "id": "g6-main-w7-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Layla planned a lost-property helper. Goal: \"Sort the found-items list into categories so items get back to their owners faster.\" Prompt structure: \"You are a lost-property helper. Sort each item into clothing, devices or other. If an item does not fit a category, label it other.\" Inputs: \"a made-up list of ten found items, with no names on it.\" Risk: \"the AI might put an item in the wrong category, so a person reads the sorted list before it is posted.\" Which one of the five plan parts is still missing?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The evaluation method - she has not said how she will judge whether the sorting is accurate."
+          },
+          {
+            "id": "b",
+            "text": "The goal - her first sentence does not say what the solution is for."
+          },
+          {
+            "id": "c",
+            "text": "The inputs - she has not said what information the prompt works on."
+          },
+          {
+            "id": "d",
+            "text": "The risk mitigation - she names a risk but does nothing about it."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -166,16 +183,68 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - Layla has a risk plan but no agreed way to judge accuracy, such as checking the sorted list against a teacher's answer key.",
+          "incorrect": "Look again: the goal, the inputs and a mitigation (a person checks before posting) are all there. Nothing tells you how she will judge whether the sorting is accurate."
+        }
       },
       {
-        "id": "g6-main-w7-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Spot the weak plan: read the two sample plans provided",
-        "stem": "The stronger plan is ___ because ___.",
-        "lookFor": "Chooses the complete plan and names a specific missing part - the evaluation method or the risk row - as the reason, rather than saying the plan is longer or neater. Structure beats size: a missing check is a hidden weak spot.",
+        "id": "g6-main-w7-core-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Omar wrote these five lines on his plan sheet for a bus-timetable helper. Match each line to the part of the plan it fills.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "\"Help new students find the three earliest buses home after clubs.\""
+          },
+          {
+            "id": "l2",
+            "text": "\"You are a timetable helper. List the three earliest buses. If a time is missing, say so.\""
+          },
+          {
+            "id": "l3",
+            "text": "\"A made-up timetable of twelve bus times, with no student names on it.\""
+          },
+          {
+            "id": "l4",
+            "text": "\"I will compare the three times the AI lists against the teacher's answer key.\""
+          },
+          {
+            "id": "l5",
+            "text": "\"The AI might invent a bus time, so a person checks the three times before they go on the noticeboard.\""
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "The goal"
+          },
+          {
+            "id": "r2",
+            "text": "The prompt structure"
+          },
+          {
+            "id": "r3",
+            "text": "The inputs"
+          },
+          {
+            "id": "r4",
+            "text": "The evaluation method"
+          },
+          {
+            "id": "r5",
+            "text": "The risk mitigation"
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4",
+          "l5": "r5"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -206,15 +275,18 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Well matched - a plan is complete when all five parts are written down and each one does its own job.",
+          "incorrect": "Check the last two: the evaluation method says how you judge accuracy, while the risk mitigation names something that could go wrong and the choice that reduces it."
+        }
       },
       {
-        "id": "g6-main-w7-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "My plan review record: fill one row for each of the five parts (plan part / what I wrote / ready? Y/N) and mark whether it is ready.",
-        "lookFor": "One row per part, each quoting what the student actually wrote plus an honest Y/N. Check the evaluation and risk rows hardest: a 'Y' there should sit beside a method that can really be checked and a mitigation tied to the named risk.",
+        "id": "g6-main-w7-core-aq3",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "Sara says: \"My risk plan already says a person will check the output, so I do not need an evaluation method as well.\" Is Sara right?",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -245,15 +317,46 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - the evaluation method tells that person what to compare the output against, so without it the check has no standard to judge by.",
+          "incorrect": "The two parts do different jobs: the evaluation method sets how accuracy is judged (for example, against an answer key), and the risk plan lowers the chance or impact of a failure."
+        }
       },
       {
-        "id": "g6-main-w7-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: write your goal sentence and the one risk your plan reduces.",
-        "lookFor": "Goal is one clear sentence saying what the solution does and who it helps. The risk is realistic (e.g. a confident but wrong answer) and is one the plan genuinely reduces through its rule, check or human step.",
+        "id": "g6-main-w7-core-aq4",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the steps of the plan-sheet routine into the order the lesson gives them.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "Read the task card and write the goal in one clear sentence."
+          },
+          {
+            "id": "s2",
+            "text": "Fill the role, task and rule slots of the prompt structure."
+          },
+          {
+            "id": "s3",
+            "text": "List the inputs the prompt needs, checking there is no personal data."
+          },
+          {
+            "id": "s4",
+            "text": "Write the evaluation method and one risk with its mitigation."
+          },
+          {
+            "id": "s5",
+            "text": "Self-check against the five-part list, then submit for the approve-to-build gate."
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -284,15 +387,43 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - the goal comes first because every later part has to serve it, and the gate comes last because it checks a finished plan.",
+          "incorrect": "The goal is written first, the prompt structure and inputs are built to serve it, the check and risk come next, and the approve-to-build gate is the last step."
+        }
       },
       {
-        "id": "g6-main-w7-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): add a second rule to your prompt structure and explain which kind of wrong answer it is designed to stop.",
-        "lookFor": "Writes a second rule that fits the same prompt structure and names the kind of wrong answer it blocks (e.g. a confident guess, a dropped item, an unclear label). The link between the rule and the error it stops is what to look for.",
+        "id": "g6-main-w7-core-aq5",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Rashid's solution sorts a found-items list. The risk he names is: \"the AI might add an item that was never on my list, and sound sure about it.\" Choose the TWO design choices in his plan that would reduce that risk.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Add the rule: \"Use only the items on the list I give you. If you are unsure about an item, say so.\""
+          },
+          {
+            "id": "b",
+            "text": "Check the sorted list against the original found-items list before anything is posted."
+          },
+          {
+            "id": "c",
+            "text": "Make the goal sentence longer so the AI is given more detail to work with."
+          },
+          {
+            "id": "d",
+            "text": "Give the AI twenty items at a time instead of ten so it has more to compare."
+          },
+          {
+            "id": "e",
+            "text": "Ask the AI to sound more confident so the sorted list is easier to read."
+          }
+        ],
+        "answer": [
+          "a",
+          "b"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -323,8 +454,11 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - a rule that limits the AI to the given items plus a human check against the original list both make an invented item far less likely to slip through.",
+          "incorrect": "A longer goal, a bigger batch or a more confident tone do not stop an invented item. What stops it is a rule that ties the AI to your list and a check against that list."
+        }
       }
     ]
   },

@@ -72,7 +72,15 @@ function stripAnswerKey_(lesson) {
         safe.options = q.options.map(function (o) { return { id: o.id, text: o.text }; });
       }
       if (q.left)  safe.left  = q.left.map(function (o) { return { id: o.id, text: o.text }; });
-      if (q.right) safe.right = q.right.map(function (o) { return { id: o.id, text: o.text }; });
+      // Shuffled for the same reason `items` is, and it matters more here than it looks.
+      // A matching key is most naturally written down the diagonal — the first row pairs
+      // with the first option, and so on — and two thirds of the Grade 6 set was written
+      // that way. Served in the authored order, a student who pairs row 1 with option 1
+      // and row 2 with option 2 scores full marks having read nothing. Shuffling here
+      // fixes every matching question at once, however its key was written.
+      if (q.right) safe.right = shuffle_(q.right.map(function (o) {
+        return { id: o.id, text: o.text };
+      }));
       if (q.items) safe.items = shuffle_(q.items.map(function (o) {
         return { id: o.id, text: o.text };
       }));

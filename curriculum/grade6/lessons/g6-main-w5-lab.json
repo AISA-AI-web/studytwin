@@ -118,12 +118,39 @@
     "title": "Week 5 - Lab - Worksheet | Class AI Risk Audit (Lab)",
     "questions": [
       {
-        "id": "g6-main-w5-lab-g6-m-w5-lab-q1",
-        "type": "shortText",
-        "prompt": "For each log entry, note whether it meets the rules and flag any gap.",
-        "stem": "Meets rules? Yes / No\nGap found:\nRisk and who:",
-        "autoMarked": false,
-        "lookFor": "Finds a genuine gap - e.g. a demo prompt that included a student's name - and names both the risk (privacy exposure) and the who (that student). Watch for blame-focused answers: the log is anonymised, and audits fix systems, not people.",
+        "id": "g6-main-w5-lab-aq1",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Your group is the class safety board. Put the five audit steps into the order you carry them out.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Plot each flagged risk on the likelihood-impact matrix."
+          },
+          {
+            "id": "i2",
+            "text": "Read each log entry against the rule set."
+          },
+          {
+            "id": "i3",
+            "text": "Write and pitch one rule that would close the gap."
+          },
+          {
+            "id": "i4",
+            "text": "Flag the gaps and name the risk and who it affects."
+          },
+          {
+            "id": "i5",
+            "text": "Circle the highest-priority risk."
+          }
+        ],
+        "answer": [
+          "i2",
+          "i4",
+          "i1",
+          "i5",
+          "i3"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -132,15 +159,45 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the audit order - you can only rank risks you have found, and you only write a rule once you know which risk comes first.",
+          "incorrect": "An audit compares practice with the rules first. Ranking comes after flagging, and the rule is written for the risk you circled."
+        }
       },
       {
-        "id": "g6-main-w5-lab-g6-m-w5-lab-q2",
-        "type": "shortText",
-        "prompt": "Explain why your top risk is highest priority and write a rule to fix it.",
-        "stem": "Top risk because ...\nMitigation rule:",
-        "autoMarked": false,
-        "lookFor": "Priority justified by matrix position - the high-likelihood, high-impact risk (usually privacy) comes first, rather than 'fix everything at once'. The rule must be realistic and actually reduce the named risk, e.g. replace any real name with 'a student' before using a prompt.",
+        "id": "g6-main-w5-lab-aq2",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Which of these entries in the anonymised class use-log are genuine gaps your board should flag?",
+        "options": [
+          {
+            "id": "a",
+            "text": "A demo prompt was typed in with a student's full name still in it."
+          },
+          {
+            "id": "b",
+            "text": "An AI answer about rainfall was pasted into a report without being checked anywhere else."
+          },
+          {
+            "id": "c",
+            "text": "A class photo was uploaded to a tool to turn it into a cartoon poster."
+          },
+          {
+            "id": "d",
+            "text": "A student asked the teacher whether a new app was safe before using it."
+          },
+          {
+            "id": "e",
+            "text": "A student checked an AI fact against the textbook before putting it in their work."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -149,15 +206,60 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - a gap is a place where practice does not meet the rule, and identifying data or unchecked output are exactly that.",
+          "incorrect": "Asking an adult and checking a fact against a trusted source are the rules being followed, not gaps - the gaps are the names, the photo and the unchecked answer."
+        }
       },
       {
-        "id": "g6-main-w5-lab-g6-m-w5-lab-q3",
-        "type": "shortText",
-        "prompt": "Record each flagged risk with its matrix placement and priority. Complete the table columns: Log entry | Gap / risk | Likelihood | Impact | Priority.",
-        "stem": "Log entry | Gap / risk | Likelihood | Impact | Priority",
-        "autoMarked": false,
-        "lookFor": "Risks placed sensibly on likelihood and impact with a justified priority order, each row tied back to a real log entry. Approaching: risks placed but priority weakly justified.",
+        "id": "g6-main-w5-lab-aq3",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Match each flagged risk to where it belongs on the likelihood-impact matrix.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Real names are typed into prompts in most lessons, and a named student could be exposed to strangers."
+          },
+          {
+            "id": "L2",
+            "text": "An AI sentence is copied into a personal rough draft most weeks, and nobody but the writer ever reads that draft."
+          },
+          {
+            "id": "L3",
+            "text": "One unchecked AI statistic has been printed once all year - in the newsletter sent to every family."
+          },
+          {
+            "id": "L4",
+            "text": "A tool once mis-spelled a group's name on a practice slide, which was deleted a minute later."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Low likelihood, high impact"
+          },
+          {
+            "id": "R2",
+            "text": "High likelihood, high impact"
+          },
+          {
+            "id": "R3",
+            "text": "Low likelihood, low impact"
+          },
+          {
+            "id": "R4",
+            "text": "High likelihood, low impact"
+          }
+        ],
+        "answer": {
+          "L1": "R2",
+          "L2": "R4",
+          "L3": "R1",
+          "L4": "R3"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -166,14 +268,37 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Well placed - likelihood is how often it could happen and impact is how much harm it would cause, and they are judged separately.",
+          "incorrect": "Judge the two axes one at a time: how often does it happen, and how much harm does it do when it does? Something frequent can still be low impact."
+        }
       },
       {
-        "id": "g6-main-w5-lab-g6-m-w5-lab-q4",
-        "type": "shortText",
-        "prompt": "State the highest-priority risk your group found and the one rule you would add to reduce it.",
-        "autoMarked": false,
-        "lookFor": "Names one genuine top-priority risk consistent with the group's matrix, plus one workable rule that reduces it. Emerging: a realistic rule that reduces the top risk.",
+        "id": "g6-main-w5-lab-aq4",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Your board has plotted these four risks on the likelihood-impact matrix. Which one should the class mitigate first?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The unchecked statistic in the newsletter, because it reached every family."
+          },
+          {
+            "id": "b",
+            "text": "Real names typed into prompts, because it happens often and a named student could be exposed."
+          },
+          {
+            "id": "c",
+            "text": "AI sentences copied into private rough drafts, because it happens most weeks."
+          },
+          {
+            "id": "d",
+            "text": "The mis-spelled group name, because it is the one everybody noticed."
+          }
+        ],
+        "answer": "b",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -182,14 +307,23 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - the risk that is high on both axes is the one to mitigate first, not the one that is merely frequent or merely serious.",
+          "incorrect": "Compare both axes. The newsletter is serious but rare, the rough drafts are frequent but harmless - only the names are high on likelihood and impact."
+        }
       },
       {
-        "id": "g6-main-w5-lab-g6-m-w5-lab-q5",
-        "type": "shortText",
-        "prompt": "Design a one-page class responsible-use charter that closes every gap your audit found, ordered by priority.",
-        "autoMarked": false,
-        "lookFor": "Every flagged gap is covered by a rule, and the order follows the matrix. Stretch: justifies a near-tie placement and explains how a rule would move a risk down the matrix.",
+        "id": "g6-main-w5-lab-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Complete your board's recommendation.",
+        "stem": "Before any prompt is typed, replace every real name with the words '___'. This closes the gap because identifying data is never entered, so the ___ of a student being exposed drops.",
+        "blanks": [
+          "",
+          ""
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -198,6 +332,27 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is a realistic mitigation - swapping the name keeps the prompt useful while moving the risk down the likelihood axis.",
+          "incorrect": "A workable rule keeps the task possible: use a general word like 'a student' instead of a real name, which makes exposure far less likely."
+        },
+        "answer": [
+          [
+            "a student",
+            "student",
+            "a classmate",
+            "classmate",
+            "a pupil",
+            "pupil"
+          ],
+          [
+            "likelihood",
+            "likelyhood",
+            "chance",
+            "probability"
+          ]
         ]
       }
     ]

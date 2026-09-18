@@ -122,12 +122,29 @@
     "title": "Week 7 - Lab - Worksheet | Prototype and Pressure-Test the Plan (Lab)",
     "questions": [
       {
-        "id": "g6-main-w7-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Predict then test: before the board run, predict how your prompt will handle one tricky input. After the run, record what actually happened.",
-        "stem": "I predict the output will be ___.\nThe actual output was ___.\nThe error type was ___ (wrong / unclear / missing).",
-        "lookFor": "The prediction is written before the run and the actual output after it, and the error type is one of the three labels. A real pressure test exposes something - e.g. 'found: charger and a scarf' returning 'devices' only is a missing error, not a wrong one.",
+        "id": "g6-main-w7-lab-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Bilal's prototype has the task \"label each found item as clothing, devices or other\". For his pressure test he uses the tricky note \"found: a charger and a scarf\". The output reads: \"devices\". Using the lesson's three error-type labels, which error type should he log?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Missing - the note held two items and one of them has come back with no label."
+          },
+          {
+            "id": "b",
+            "text": "Wrong - the charger has been put into the incorrect category."
+          },
+          {
+            "id": "c",
+            "text": "Unclear - the word \"devices\" could mean more than one thing."
+          },
+          {
+            "id": "d",
+            "text": "No error - the prompt asked for a label, and one label came back."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -158,16 +175,43 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - the charger is labelled correctly, so nothing is wrong; what the two-in-one note exposed is a whole item being dropped.",
+          "incorrect": "The label \"devices\" fits the charger, so this is not a wrong answer - the weak spot is the scarf, which never got a label at all."
+        }
       },
       {
-        "id": "g6-main-w7-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Write your fallback branch: turn your exposed failure into a safe fallback using the if-then frame",
-        "stem": "If ___ then ___ and ask a person.",
-        "lookFor": "The branch handles the failure the pressure test actually exposed and keeps a person in the loop (e.g. 'if a notice names two items, then label each one separately, and if still unclear label it other and ask a person'). A vague branch, or one that does not match the observed failure, is only approaching.",
+        "id": "g6-main-w7-lab-aq2",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Bilal now writes up that failure in his build/test log. Choose the TWO entries that meet what the lesson asks for: a fallback branch and a logged reason.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Fallback: \"If a note names more than one item, then label each item on its own line, and if one still does not fit, label it other and ask a person.\""
+          },
+          {
+            "id": "b",
+            "text": "Reason: \"My pressure test showed a two-in-one note loses an item, so splitting the note before labelling stops items being dropped.\""
+          },
+          {
+            "id": "c",
+            "text": "Fallback: \"If the output looks wrong, then run the prompt again until it looks right.\""
+          },
+          {
+            "id": "d",
+            "text": "Fallback: \"If a note names more than one item, then label the first item and move on.\""
+          },
+          {
+            "id": "e",
+            "text": "Reason: \"I changed my prompt because I wanted the output to sound better.\""
+          }
+        ],
+        "answer": [
+          "a",
+          "b"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -198,15 +242,18 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - the branch is an if-then that handles the failure he actually saw and keeps a person in the loop, and the reason points back to what the run showed.",
+          "incorrect": "Re-running until it looks right, or labelling only the first item, still loses the scarf, and \"I wanted it to sound better\" is not a reason drawn from the test."
+        }
       },
       {
-        "id": "g6-main-w7-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Prototype build/test log: record each run - the input used (curated), the output, whether it met the goal (Y/N), and the error type if any.",
-        "lookFor": "At least one normal run and one pressure test are logged, each with its curated input, the output, a Y/N against the goal, and a classified error type for any run that failed. Logs without an error type are returned.",
+        "id": "g6-main-w7-lab-aq3",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "Maya says: \"A prototype that always gives a confident answer, even on a messy input, is safer than one that stops and asks a person.\" Is Maya right?",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -237,15 +284,46 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - a confident wrong answer gets used without anyone noticing, while a handled failure sends the messy case to a person who can sort it out.",
+          "incorrect": "Think about who catches the mistake: a confident answer on a messy input hides the failure, but a fallback branch that asks a person makes it visible and safe."
+        }
       },
       {
-        "id": "g6-main-w7-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: write the weak spot you found and the fallback branch you designed for it.",
-        "lookFor": "Names one specific weak spot from their own log, not a general worry, and gives a fallback branch that visibly answers that weak spot.",
+        "id": "g6-main-w7-lab-aq4",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the steps of the lab routine into the order the lesson gives them.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "Copy the approved prompt structure into the prototype slot of the log."
+          },
+          {
+            "id": "s2",
+            "text": "Watch the normal-input run on the board and record whether it met the goal."
+          },
+          {
+            "id": "s3",
+            "text": "Pressure-test with a tricky curated input and record the error type."
+          },
+          {
+            "id": "s4",
+            "text": "Write the fallback branch as an if-then sentence that asks a person."
+          },
+          {
+            "id": "s5",
+            "text": "Log the one change made and the reason it will help."
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -276,15 +354,59 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - the normal run comes before the pressure test so you know the prototype works at all, and the branch is written only once a real weak spot has shown itself.",
+          "incorrect": "You cannot design a fallback for a failure you have not seen yet: prototype, run it normally, pressure-test it, then write the branch and log the reason."
+        }
       },
       {
-        "id": "g6-main-w7-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): design a second fallback for a different error type and say which failure is more likely and why.",
-        "lookFor": "A second branch aimed at a different error type (wrong / unclear / missing) from the first, plus a judgement about which failure is more likely with a reason drawn from the runs they logged.",
+        "id": "g6-main-w7-lab-aq5",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Four groups pressure-tested the same found-items prototype and each exposed a different weak spot. Match each weak spot to the fallback branch that handles it.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "The note held two items, but only one came back with a label."
+          },
+          {
+            "id": "l2",
+            "text": "A scarf came back labelled \"devices\"."
+          },
+          {
+            "id": "l3",
+            "text": "The output said \"maybe clothing, or possibly other\"."
+          },
+          {
+            "id": "l4",
+            "text": "The note had no item written on it, and the output named an item anyway."
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "If a note names more than one item, then label each item separately and ask a person about any item left over."
+          },
+          {
+            "id": "r2",
+            "text": "If the label does not match the item's own words, then flag that row for a person to re-check before it is posted."
+          },
+          {
+            "id": "r3",
+            "text": "If the answer offers more than one label, then leave the row unlabelled and ask a person to decide."
+          },
+          {
+            "id": "r4",
+            "text": "If the input has no item to label, then reply \"no item found\" and ask a person, instead of guessing."
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -315,8 +437,11 @@
             "code": "AIF·GE·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Well matched - a fallback branch is only useful when it answers the exact failure the pressure test exposed.",
+          "incorrect": "Match each branch to what actually went wrong: a dropped item, a mislabelled item, an undecided label, and an invented item each need a different if-then."
+        }
       }
     ]
   },

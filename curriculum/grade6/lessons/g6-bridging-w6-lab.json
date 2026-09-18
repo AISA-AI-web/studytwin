@@ -103,12 +103,33 @@
     "title": "Week 6 - Lab - Worksheet | Trustworthy AI Helper - Verify, De-risk & Showcase (Part 2 Lab)",
     "questions": [
       {
-        "id": "g6-bridging-w6-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Verify & de-risk: record your verification and your risk mitigation.",
-        "stem": "Claim verified: ... | source: ... | result: ...\nRisk reduced: ... | how: ... | re-check: ...",
-        "lookFor": "A trusted source, not a re-ask of the tool, and a mitigation that was actually applied and then re-checked (model: 'adventure is the most-picked genre' verified against the survey totals and it held; a duplicate entry was removed and the helper re-run, making the suggestion fairer). If a check failed, look for a refinement and a re-verify.",
+        "id": "g6-bridging-w6-lab-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Sam's helper says 'most of our class picked adventure'. He checks the class survey totals: adventure 7, science 11. His verification has failed. What should he do next?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Refine the helper so that its claim fits the data, then verify the claim again."
+          },
+          {
+            "id": "b",
+            "text": "Keep the output as it is and add a note saying that it might be wrong."
+          },
+          {
+            "id": "c",
+            "text": "Ask the helper the same question again and use whichever answer it gives."
+          },
+          {
+            "id": "d",
+            "text": "Change the survey totals so that they agree with the helper's claim."
+          }
+        ],
+        "answer": "a",
+        "feedback": {
+          "correct": "Exactly - a failed check is useful information: you refine the helper and then re-verify, rather than keeping an output you know does not match the data.",
+          "incorrect": "A failed check means the output is wrong, so warning labels, re-asking the tool, or editing the real totals all leave the mistake in place - refine the helper, then verify again."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -139,16 +160,46 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Trust argument: argue, with evidence, why your helper can be trusted.",
-        "stem": "My helper can be trusted because ...",
-        "lookFor": "Argues trust from the checks actually carried out and cites that evidence, rather than asserting trust on its own.",
+        "id": "g6-bridging-w6-lab-aq2",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Sam's first verification failed. Put these five steps into the order he should follow to fix his helper and show that it can be trusted.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "He checks the new claim against the survey totals again, and this time it matches."
+          },
+          {
+            "id": "i2",
+            "text": "He checks the helper's claim against the class survey totals."
+          },
+          {
+            "id": "i3",
+            "text": "He uses the passed check as evidence that his helper can be trusted."
+          },
+          {
+            "id": "i4",
+            "text": "He finds that the claim does not match the totals."
+          },
+          {
+            "id": "i5",
+            "text": "He changes the helper so that its claim follows the data."
+          }
+        ],
+        "answer": [
+          "i2",
+          "i4",
+          "i5",
+          "i1",
+          "i3"
+        ],
+        "feedback": {
+          "correct": "That is the verify-refine-re-verify loop: you can only argue that a helper is trustworthy after a check has actually been passed.",
+          "incorrect": "Check first, and only then find the problem, change the helper, and check again - the trust argument comes last, because it rests on the check that finally passed."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -179,16 +230,44 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Trustworthy AI Helper Log - Part 2 Lab (verify, de-risk, reflect): record your checks and reflect across the four skills.",
-        "stem": "Skill used | What I did / found | How trustworthy? (evidence)",
-        "lookFor": "Completed verification and risk mitigation on the Log, with evidence, plus reflection across the four skills - data quality, prompt refinement, data influence, and verification/risk. Mastery reflection also names a next step; partial reflects on some skills only.",
+        "id": "g6-bridging-w6-lab-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Which of these count as evidence that a helper can be trusted? Choose all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "I checked the claim 'adventure was picked most' against the survey totals, and it matched."
+          },
+          {
+            "id": "b",
+            "text": "I removed the duplicate reply, ran the helper again, and now no pupil is counted twice."
+          },
+          {
+            "id": "c",
+            "text": "The helper answered very quickly and never hesitated."
+          },
+          {
+            "id": "d",
+            "text": "I asked the helper whether it was sure, and it said yes."
+          },
+          {
+            "id": "e",
+            "text": "I took the pupils' names out of the output and checked that none were left."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "e"
+        ],
+        "feedback": {
+          "correct": "Yes - evidence is a check you actually carried out and the result it gave, not how confident or fast the helper seemed.",
+          "incorrect": "Speed and a confident 'yes' from the tool tell you nothing about whether the output is right; evidence is a check you carried out against something trustworthy, and a mitigation you applied and then re-checked."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -219,15 +298,59 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: state whether your helper can be trusted and give two reasons (one verification, one risk mitigation).",
-        "lookFor": "States a judgement on whether the helper can be trusted and gives two reasons, one verification and one risk mitigation.",
+        "id": "g6-bridging-w6-lab-aq4",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "In your reflection you look back across the four skills you used. Match each skill to the piece of work that shows it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Data quality"
+          },
+          {
+            "id": "L2",
+            "text": "Prompt refinement"
+          },
+          {
+            "id": "L3",
+            "text": "Data influence"
+          },
+          {
+            "id": "L4",
+            "text": "Verification and risk"
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "I showed that the most-picked genre in the survey is what decided the suggestion."
+          },
+          {
+            "id": "R2",
+            "text": "I found two replies from the same pupil and removed one before using the data."
+          },
+          {
+            "id": "R3",
+            "text": "I checked the claim against the survey totals and took the pupils' names out of the output."
+          },
+          {
+            "id": "R4",
+            "text": "My first instruction gave a vague answer, so I rewrote it to ask for one book and a reason."
+          }
+        ],
+        "answer": {
+          "L1": "R2",
+          "L2": "R4",
+          "L3": "R1",
+          "L4": "R3"
+        },
+        "feedback": {
+          "correct": "Well matched - each skill leaves a different trace in your work, which is what makes a reflection specific rather than vague.",
+          "incorrect": "Cleaning the data is data quality, rewriting the instruction is prompt refinement, showing which data decided the output is data influence, and checking a claim or reducing a risk is verification and risk."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -258,15 +381,36 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w6-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): your helper is safe for one use but risky for another. Explain the difference and propose a rule for when it should and should not be used.",
-        "lookFor": "Weighs a fairness/safety trade-off: distinguishes the safe use from the risky one and proposes a workable rule for when the helper should and should not be used.",
+        "id": "g6-bridging-w6-lab-aq5",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Leila's helper suggests one book for the whole class, and all of her checks passed. A friend now wants to use the same helper to label which pupils are 'good readers' and which are not. Which rule best fits what this lesson teaches about risk?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Use the helper to suggest a book for the class, but not to label individual pupils, because a wrong or unfair output would judge a real person."
+          },
+          {
+            "id": "b",
+            "text": "Use it for both, as long as you tell people that an AI made the decision."
+          },
+          {
+            "id": "c",
+            "text": "Use it for both, because the data behind the helper has already been checked once."
+          },
+          {
+            "id": "d",
+            "text": "Stop using the helper altogether, because any output it gives could turn out to be wrong."
+          }
+        ],
+        "answer": "a",
+        "feedback": {
+          "correct": "Exactly - the same helper carries a much bigger risk when its output labels a person, so the sensible rule limits it to the use where a mistake is easy to spot and easy to undo.",
+          "incorrect": "Passing checks for one job does not make a helper safe for every job - announcing that an AI decided, or checking the data once, does not undo the harm of unfairly labelling a pupil, and the book suggestion was already shown to be trustworthy."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -297,8 +441,7 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "evidenceType": "product",
-        "tierProbed": "advanced"
+        "evidenceType": "product"
       }
     ]
   },

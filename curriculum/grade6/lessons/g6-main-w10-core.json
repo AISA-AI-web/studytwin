@@ -119,13 +119,29 @@
   "worksheet": {
     "questions": [
       {
-        "id": "g6-main-w10-core-q1",
-        "type": "shortText",
-        "prompt": "Write two design or evaluation choices and give a reason and evidence for each.",
-        "title": "My two justified choices",
-        "stem": "Choice 1: ... because ... evidence ...\nChoice 2: ... because ... evidence ...",
-        "autoMarked": false,
-        "lookFor": "Explains two design/evaluation choices with reasons and evidence. For a design choice, look for a reason, not just a description (model: 'I used a rule-based check because recycling categories have fixed correct answers'). For an evaluation choice, it should link to accuracy or fairness (model: 'I tested with six known-answer cases because one lucky example is not enough evidence').",
+        "id": "g6-main-w10-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "In your pitch you have to justify a choice, not just describe it. Which sentence justifies the choice?",
+        "options": [
+          {
+            "id": "a",
+            "text": "My sorter uses five rules — one each for plastic, paper, metal, glass and food waste."
+          },
+          {
+            "id": "b",
+            "text": "I used a rule-based sorter because recycling categories have fixed correct answers, so the rules give the same reliable result every time."
+          },
+          {
+            "id": "c",
+            "text": "I used a rule-based sorter because my group voted for that one."
+          },
+          {
+            "id": "d",
+            "text": "My sorter was finished on time and looks clear on the screen."
+          }
+        ],
+        "answer": "b",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -155,16 +171,60 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "A justified choice gives the reason behind it — fixed correct answers suit fixed rules — rather than listing what the solution contains.",
+          "incorrect": "Listing the rules, reporting a vote or praising the look all describe the solution; a justification says why that choice suited the problem."
+        }
       },
       {
-        "id": "g6-main-w10-core-q2",
-        "type": "shortText",
-        "prompt": "Answer the four short prompts, one for each strand, at Emerging level.",
-        "title": "Term-1 assessment task",
-        "stem": "Concepts: ...\nDesign & build: ...\nEvaluate & use: ...\nWider effects: ...",
-        "autoMarked": false,
-        "lookFor": "Shows each strand at Emerging in the task. Approaching shows most strands at Emerging; not yet means several strands are not yet shown.",
+        "id": "g6-main-w10-core-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Your Term-1 assessment has to show all four strands. Match each piece of evidence to the strand it shows.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "I can explain how a system that follows written rules is different from one that learns from examples."
+          },
+          {
+            "id": "l2",
+            "text": "I made a working prototype that takes an item and puts it into a category."
+          },
+          {
+            "id": "l3",
+            "text": "I ran my solution on six items whose correct answers I already knew, and recorded how many it got right."
+          },
+          {
+            "id": "l4",
+            "text": "I described who might be treated unfairly if the whole school used my solution."
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "Understanding concepts"
+          },
+          {
+            "id": "r2",
+            "text": "Design and build"
+          },
+          {
+            "id": "r3",
+            "text": "Evaluate and use responsibly"
+          },
+          {
+            "id": "r4",
+            "text": "Wider effects"
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -194,16 +254,45 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Each strand needs its own evidence: explaining shows concepts, making shows design and build, testing shows evaluation, and thinking about users shows wider effects.",
+          "incorrect": "Ask what each piece of evidence proves you can do — explain, build, test or think about who is affected — and the strand follows from that."
+        }
       },
       {
-        "id": "g6-main-w10-core-q3",
-        "type": "shortText",
-        "prompt": "For each strand, note your evidence and your confidence.",
-        "title": "Strand evidence tracker",
-        "stem": "Strand | My evidence | Confidence | Next step",
-        "autoMarked": false,
-        "lookFor": "Evidence is the assessed task plus the reflection, with results reported per strand. Feedback flags each student's next tier target (to Proficient) for Term 2.",
+        "id": "g6-main-w10-core-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Which of these belong in a 60-second pitch that tells the truth? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Name your user and the problem your solution solves."
+          },
+          {
+            "id": "b",
+            "text": "Give the evidence that your results were accurate."
+          },
+          {
+            "id": "c",
+            "text": "State one honest limit of your solution."
+          },
+          {
+            "id": "d",
+            "text": "Promise that your solution never gets anything wrong, so nobody doubts it."
+          },
+          {
+            "id": "e",
+            "text": "Describe your two choices without saying why you made them."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -233,15 +322,19 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "A truthful pitch names the user and problem, backs its claims with evidence, and is open about one limit.",
+          "incorrect": "Promising perfection is not evidence, and a choice with no reason is only a description — neither makes a pitch more convincing."
+        }
       },
       {
-        "id": "g6-main-w10-core-q4",
-        "type": "shortText",
-        "prompt": "One thing I learned this term is ... and my goal for next term is ...",
-        "title": "Exit ticket",
-        "autoMarked": false,
-        "lookFor": "States one learning and one clear next-term goal. Goal should aim toward Proficient (model: 'I learned to re-test after changes; my goal is to build a solution with balanced data next term').",
+        "id": "g6-main-w10-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "Admitting one limit of your solution during your pitch makes your work less trustworthy.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -271,15 +364,47 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct — honesty about a limit makes your work more trustworthy, because your audience can believe the claims you do make.",
+          "incorrect": "The lesson says the opposite: being honest about a limit strengthens your pitch rather than weakening it."
+        }
       },
       {
-        "id": "g6-main-w10-core-q5",
-        "type": "shortText",
-        "prompt": "Explain a trade-off you made between two choices and why it was worth it.",
-        "title": "Challenge (stretch)",
-        "autoMarked": false,
-        "lookFor": "Stretch / next tier: learners explain a trade-off between two choices, reaching Extended abstract thinking.",
+        "id": "g6-main-w10-core-aq5",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the showcase and assessment steps into the order that makes each step possible.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "Set out your evidence from the term."
+          },
+          {
+            "id": "s2",
+            "text": "Complete the short assessment task on your own."
+          },
+          {
+            "id": "s3",
+            "text": "Prepare a 60-second pitch with two justified choices."
+          },
+          {
+            "id": "s4",
+            "text": "Present to your group and answer one 'why' question."
+          },
+          {
+            "id": "s5",
+            "text": "Write one thing you learned and one goal for Term 2."
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -309,7 +434,12 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Evidence first so you can draw on it, the assessment on your own before you hear other people's ideas, then prepare, present, and reflect once you know how it went.",
+          "incorrect": "Each step feeds the next: you need your evidence out before you can use it, and you can only reflect on your learning after you have presented."
+        }
       }
     ]
   },

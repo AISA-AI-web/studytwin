@@ -120,12 +120,13 @@
     "title": "Week 8 - Lab - Worksheet | Extended Build and Evaluation (Lab)",
     "questions": [
       {
-        "id": "g6-main-w8-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Run and count: record the result of each of the six curated test inputs, mark correct or not, and compute your accuracy count.",
-        "stem": "Input ___ output ___ is ___ (correct / not).\nMy accuracy is ___ out of 6.",
-        "lookFor": "Accuracy is stated as a count across the whole test set (for example 5 out of 6), judged against a definition of a correct output agreed before testing - not a claim based on one lucky case.",
+        "id": "g6-main-w8-lab-aq1",
+        "type": "numeric",
+        "marks": 2,
+        "prompt": "Omar runs his finished solution on all six curated test inputs. Inputs 1, 2, 4 and 6 give outputs that match his agreed definition of a correct output. Input 3 gives a wrong label. Input 5 gives an output so unclear that it fails his check. What number should Omar report as his accuracy count out of 6?",
+        "answer": 4,
+        "tolerance": 0,
+        "unit": "correct out of 6",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -157,15 +158,35 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "An output that is too unclear to pass the check counts as not correct, so Omar reports 4 out of 6.",
+          "incorrect": "Only outputs that meet the definition of correct are counted - the unclear one fails the check, so the honest count is 4 out of 6."
+        }
       },
       {
-        "id": "g6-main-w8-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Document the fix and risk check: record how your fallback handled a failure, the fix you made, and your three-question risk check.",
-        "stem": "The fallback handled ___ by ___.\nMy fix was ___ and the result was ___.\nRisk check - accurate? ___ clear? ___ personal data used? no.",
-        "lookFor": "Graceful handling means the fallback caught the failure and kept a person in the loop rather than the wrong output being deleted or presented as final; the fix is traceable with its effect recorded; all three risk questions are answered and the personal-data answer is no because every input is curated.",
+        "id": "g6-main-w8-lab-aq2",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Nadia's finished solution gives a wrong label for one of her test inputs. Which action counts as handling that failure gracefully, as the lesson describes it?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Her fallback catches the output and passes it to a person to check, and she records the fix she made and its effect."
+          },
+          {
+            "id": "b",
+            "text": "She deletes the wrong output so her log only shows results she trusts."
+          },
+          {
+            "id": "c",
+            "text": "She reports the output as final and adds a note saying AI is sometimes wrong."
+          },
+          {
+            "id": "d",
+            "text": "She removes that input from her test set so her accuracy count goes up."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -197,14 +218,43 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Graceful handling means the fallback catches the wrong output, a person stays in the loop, and the fix and its effect are written down.",
+          "incorrect": "Deleting the output, presenting it as final or dropping the input all hide the failure - the fallback is there to catch it and pass it to a person."
+        }
       },
       {
-        "id": "g6-main-w8-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Test-set evaluation and risk record: fill one row per test input with its result, then complete the risk-check summary below. Use the columns Input (curated), Output, Correct? (Y/N), Note / fix.",
-        "lookFor": "A completed solution that follows the plan with the fallback wired in, evaluated across all six inputs with an accuracy count, and a risk-check summary covering accuracy, clarity and data safety.",
+        "id": "g6-main-w8-lab-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Rashid tells the class 'my solution is accurate' after showing one input that came out right. According to the lesson, what is his claim missing? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "A count across all six curated test inputs, such as 5 out of 6."
+          },
+          {
+            "id": "b",
+            "text": "A definition of what counts as a correct output, agreed before testing."
+          },
+          {
+            "id": "c",
+            "text": "Which of the six inputs failed, not just the total that passed."
+          },
+          {
+            "id": "d",
+            "text": "A promise that his solution will never get an answer wrong."
+          },
+          {
+            "id": "e",
+            "text": "The names of the classmates whose details he tested it on."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -236,14 +286,49 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "An honest accuracy claim is a count across the whole curated test set, judged against a definition of correct agreed before testing, including the harder cases.",
+          "incorrect": "No solution can promise it will never be wrong, and personal data never belongs in a test set - what Rashid is missing is a checkable count across all his curated inputs."
+        }
       },
       {
-        "id": "g6-main-w8-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: write your accuracy count and confirm your risk check found no personal data.",
-        "lookFor": "States accuracy as correct out of total and confirms explicitly that no personal or identifying data was used, linking that to the inputs being curated.",
+        "id": "g6-main-w8-lab-aq4",
+        "type": "matching",
+        "marks": 3,
+        "prompt": "Match each question in the three-question risk check to the evidence from a student's lab log that answers it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Is it accurate enough?"
+          },
+          {
+            "id": "L2",
+            "text": "Is it clear enough?"
+          },
+          {
+            "id": "L3",
+            "text": "Was any personal data used?"
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "No - every input came from my curated test set, with no names or personal details."
+          },
+          {
+            "id": "R2",
+            "text": "It matched my definition of a correct output on 5 of the 6 curated inputs."
+          },
+          {
+            "id": "R3",
+            "text": "A reader can tell what each output means without asking me to explain it."
+          }
+        ],
+        "answer": {
+          "L1": "R2",
+          "L2": "R3",
+          "L3": "R1"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -275,14 +360,17 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Each risk-check question is answered with evidence: a count for accuracy, a reader test for clarity, and the curated test set for data safety.",
+          "incorrect": "Accuracy is answered by the count, clarity by whether a reader understands the output unaided, and the data question by the inputs being curated with no personal details."
+        }
       },
       {
-        "id": "g6-main-w8-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): add a seventh harder edge case, predict the result, test it, and say whether your solution generalised and why.",
-        "lookFor": "Makes a prediction before testing, compares it with the actual result, and reasons about whether the solution handles inputs it has not seen - naming rare unseen edge cases as a remaining risk.",
+        "id": "g6-main-w8-lab-aq5",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: because Layla's solution scored 6 out of 6 on her curated test set, she can skip the risk check.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -314,7 +402,10 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Accuracy is only one of the three risk-check questions - clarity and the personal-data question still have to be answered before a solution is trusted.",
+          "incorrect": "A perfect score on a small curated test set does not answer whether the outputs are clear or whether any personal data was used, so the risk check still has to be run."
+        }
       }
     ]
   },

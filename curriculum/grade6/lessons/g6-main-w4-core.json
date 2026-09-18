@@ -145,12 +145,29 @@
     "title": "Week 4 - Core - Worksheet | Judging Outputs - Correct, Incorrect, Unclear",
     "questions": [
       {
-        "id": "g6-main-w4-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Triage three outputs. For each output, circle a verdict and write a checkable reason.",
-        "stem": "This output is ... because when I checked it against ...\nI cannot verify this because ...",
-        "lookFor": "Triages at least 2 of the 3 outputs correctly, and every verdict carries a reason tied to the task or to a source rather than to a feeling.",
+        "id": "g6-main-w4-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Your task was: \"Using the class fact sheet, write how long the River Nile is.\" The fact sheet on your desk says the Nile is 6,650 km long. The AI output says: \"The River Nile is about 4,000 km long.\" Which verdict fits, and why?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Incorrect - it clashes with the length on the fact sheet, which you can check right now."
+          },
+          {
+            "id": "b",
+            "text": "Unclear - the word \"about\" means the output is not giving an exact number."
+          },
+          {
+            "id": "c",
+            "text": "Correct - it answers the task by giving a length in kilometres, as the task asked."
+          },
+          {
+            "id": "d",
+            "text": "Unclear - you would need to find a second source before you could decide."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -161,15 +178,43 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Exactly - when an output clashes with a source you can check now, the verdict is incorrect, not unclear.",
+          "incorrect": "You already have a source in front of you and 4,000 km clashes with its 6,650 km, so this is incorrect - 'unclear' is only for outputs you cannot check yet."
+        }
       },
       {
-        "id": "g6-main-w4-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Signal and action. Name one signal that an output cannot be trusted, and the action you would take.",
-        "stem": "A warning signal is ...\nMy action would be ...",
-        "lookFor": "Any one checkable signal is acceptable - it contradicts the task, has no source, or contains a detail we cannot check - paired with a sensible action such as re-check, re-prompt, or ask a person.",
+        "id": "g6-main-w4-core-aq2",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "A reason must point to a check, not to a feeling. Select ALL the reasons below that are checkable reasons for a verdict.",
+        "options": [
+          {
+            "id": "a",
+            "text": "The number in the output disagrees with the number on our fact sheet."
+          },
+          {
+            "id": "b",
+            "text": "The output names \"a recent study\" but gives no title or date, so I cannot verify it."
+          },
+          {
+            "id": "c",
+            "text": "The task asked for two examples and the output gives none."
+          },
+          {
+            "id": "d",
+            "text": "It just feels wrong when I read it."
+          },
+          {
+            "id": "e",
+            "text": "It is written confidently and has no spelling mistakes, so it must be right."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -180,15 +225,44 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Good - each of those points to something another person could check: a source, a missing detail, or the task itself.",
+          "incorrect": "A checkable reason points to the task or to a source that someone else could look at; how an answer feels or how confident it sounds is not something anyone can check."
+        }
       },
       {
-        "id": "g6-main-w4-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Output-triage record. Record your verdict, reason, and action for each output.",
-        "stem": "Output | Verdict | Reason (checkable) | Action",
-        "lookFor": "Each row pairs a verdict with a reason tied to task or source, and names a sensible action for any output judged unclear or incorrect.",
+        "id": "g6-main-w4-core-aq3",
+        "type": "matching",
+        "marks": 3,
+        "prompt": "Match each output to the verdict it should be given.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "The date in the output clashes with the date printed on the source card you were given."
+          },
+          {
+            "id": "L2",
+            "text": "The output does what the task asked and matches the trusted website you checked it against."
+          },
+          {
+            "id": "L3",
+            "text": "The output says \"a recent study proved this\" but gives no title, date or place you could look up."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Incorrect"
+          },
+          {
+            "id": "R2",
+            "text": "Correct"
+          },
+          {
+            "id": "R3",
+            "text": "Unclear"
+          }
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -199,14 +273,22 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "That is the triage routine working: a clash means incorrect, a match with a trusted source means correct, and something you cannot check yet means unclear.",
+          "incorrect": "Ask what you can check right now: a clash with a source is incorrect, a match is correct, and something with nothing to check against is unclear - not wrong, just not yet checkable."
+        },
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3"
+        }
       },
       {
-        "id": "g6-main-w4-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: flag these three outputs correct / incorrect / unclear and give a reason for each.",
-        "lookFor": "Correctly triages at least 2 of 3 outputs and gives a valid reason for each judgement. Push any 'it just feels wrong' towards a checkable reason.",
+        "id": "g6-main-w4-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: an output that is written smoothly and sounds confident is more likely to be correct than one that is written awkwardly.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -217,14 +299,38 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Right - a language model predicts likely words, so confidence is a writing style and tells you nothing about whether the facts are true.",
+          "incorrect": "Smooth, confident writing is just the style a language model produces; only a check against the task or a trusted source tells you whether it is right."
+        }
       },
       {
-        "id": "g6-main-w4-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): find the single detail in a 'correct-looking' output that actually makes it incorrect, and explain how you spotted it.",
-        "lookFor": "Isolates the one subtle detail that flips the output from correct to incorrect, and explains the check that exposed it rather than describing a general impression.",
+        "id": "g6-main-w4-core-aq5",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the five steps of the triage routine in the order you should carry them out.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Read the task the output was meant to answer."
+          },
+          {
+            "id": "i2",
+            "text": "Read the output carefully."
+          },
+          {
+            "id": "i3",
+            "text": "Check the output against the task and any source you were given."
+          },
+          {
+            "id": "i4",
+            "text": "Write your verdict: correct, incorrect, or unclear."
+          },
+          {
+            "id": "i5",
+            "text": "Add a short checkable reason and, if needed, one action."
+          }
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -235,7 +341,17 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Yes - you read the task before the output, because you cannot judge an answer until you know what was asked, and the verdict only comes after the check.",
+          "incorrect": "The task comes first (you cannot judge an answer without knowing what was asked), then the output, then the check - and only then do you write the verdict and its reason."
+        },
+        "answer": [
+          "i1",
+          "i2",
+          "i3",
+          "i4",
+          "i5"
+        ]
       }
     ]
   },

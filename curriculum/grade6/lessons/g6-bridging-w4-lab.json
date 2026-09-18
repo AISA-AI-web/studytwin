@@ -118,12 +118,34 @@
     "title": "Verify and De-risk Workshop (Lab)",
     "questions": [
       {
-        "id": "g6-bridging-w4-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Apply the four-step routine to each suspect output. Record a verdict and the trusted-source evidence for each.",
-        "stem": "The claim is ___\nMy verdict is ___\nEvidence: ___",
-        "lookFor": "Every verdict must cite the trusted source, not a feeling. Model: 'Verdict: false. The output said the tower was 900 metres; the official source lists a different height, so the claim does not match a trusted source.' Accept 'unclear' as a valid, honest verdict when no source on the reference sheet covers the claim.",
+        "id": "g6-bridging-w4-lab-aq1",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Your group is handed a new suspect output. Put the four steps of the verification routine in the order the lesson uses.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "Isolate the exact claim the output is making."
+          },
+          {
+            "id": "s2",
+            "text": "Pick a trusted source that is independent of the AI."
+          },
+          {
+            "id": "s3",
+            "text": "Compare the claim with what that source says."
+          },
+          {
+            "id": "s4",
+            "text": "Record the verdict: verified, false or unclear."
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -132,15 +154,64 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Running the same fixed steps on every output is what stops a slick answer getting an easy pass.",
+          "incorrect": "The routine gathers evidence before it judges: isolate the claim, choose an independent source, compare, and only then record the verdict."
+        }
       },
       {
-        "id": "g6-bridging-w4-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Verify one tricky output single-source, then two-source. Judge which is more reliable and explain using source independence.",
-        "stem": "Single-source result: ___\nTwo-source result: ___\nThe more reliable strategy is ___ because ___",
-        "lookFor": "Model: single-source was faster but the one source was out of date; the two-source cross-check caught the error, so it is more reliable. Look for reasoning about source independence and the speed-versus-confidence trade-off, not just which was quicker. Agreement raises confidence but is not proof if the sources could fail together.",
+        "id": "g6-bridging-w4-lab-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Your group has run the routine on four outputs. Match what the source-checker found to the verdict the recorder should write.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "The official site gives the same tower height as the output."
+          },
+          {
+            "id": "l2",
+            "text": "The official site gives a different opening date from the output."
+          },
+          {
+            "id": "l3",
+            "text": "No trusted source on the reference sheet mentions the claim at all."
+          },
+          {
+            "id": "l4",
+            "text": "Two sites agree, but the second says its figures were taken from the first."
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "Verified - an independent trusted source agrees with the claim."
+          },
+          {
+            "id": "r2",
+            "text": "False - a trusted source contradicts the claim."
+          },
+          {
+            "id": "r3",
+            "text": "Unclear - no source covers it, so there is no evidence either way."
+          },
+          {
+            "id": "r4",
+            "text": "Count it as one source - they are not independent, so they could share the same error."
+          },
+          {
+            "id": "r5",
+            "text": "Verified - the output sounded confident and nothing has contradicted it."
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -149,15 +220,37 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Every verdict is tied to what the evidence showed - including the honest 'unclear' and the copied source that only looks like two.",
+          "incorrect": "A verdict reports what the trusted source showed: agreement, contradiction, no evidence at all, or sources that copy each other and therefore count as one."
+        }
       },
       {
-        "id": "g6-bridging-w4-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Log every suspect output, your verdict, the evidence, and the strategy used.",
-        "stem": "Columns: Output | Claim checked | Verdict | Evidence (trusted source) | Strategy used",
-        "lookFor": "Mastery: a verdict for each output, each backed by cited trusted-source evidence and a named strategy. Partial: verdicts for most outputs but some lack cited evidence. Not yet: verdicts are guesses with no trusted-source evidence.",
+        "id": "g6-bridging-w4-lab-aq3",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Your group checks the claim \"the festival first ran in 1998\". None of the trusted sources on the reference sheet mention the festival's first year. What should the verdict-recorder write, and why?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Verified - nothing contradicted the claim, so it stands."
+          },
+          {
+            "id": "b",
+            "text": "False - if a trusted source does not mention it, the claim must be made up."
+          },
+          {
+            "id": "c",
+            "text": "Unclear - no trusted source covers this claim, so there is no evidence either way."
+          },
+          {
+            "id": "d",
+            "text": "Verified - the output gave the year with no hesitation, and confident claims are usually right."
+          }
+        ],
+        "answer": "c",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -166,14 +259,44 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "'Unclear' is an honest verdict: it records that the evidence is missing instead of inventing a judgement.",
+          "incorrect": "Missing evidence is not proof that a claim is false, and it is not permission to pass it either - the routine lets you record 'unclear'."
+        }
       },
       {
-        "id": "g6-bridging-w4-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Give a verdict on one output with its evidence, and judge which verification strategy is more reliable and why.",
-        "lookFor": "Applies the routine to reach an evidence-based verdict and judges which verification strategy is more reliable with a reason. Reward evidence-backed verdicts; push students who prefer speed to weigh reliability and source independence.",
+        "id": "g6-bridging-w4-lab-aq4",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Your group has ten outputs and limited time, so you will only cross-check some of them with a second source. Which of these are sound reasons for spending the extra time on a particular output? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Getting this claim wrong would matter to the people who read it, so confidence is worth more than speed here."
+          },
+          {
+            "id": "b",
+            "text": "The one source you used could be out of date, so a single check might miss an error."
+          },
+          {
+            "id": "c",
+            "text": "The output sounds confident and polished, so it needs less checking than the others."
+          },
+          {
+            "id": "d",
+            "text": "The second source you would add is run by the same organisation as the first."
+          },
+          {
+            "id": "e",
+            "text": "Your group has spare time, and spare time is what makes a check reliable."
+          }
+        ],
+        "answer": [
+          "a",
+          "b"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -182,14 +305,40 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "You spend the extra time where a wrong verdict would cost most, or where one source could quietly be wrong.",
+          "incorrect": "Choose by what is at stake and by how the first source could fail - not by how confident the output sounds, and not by adding a source that would fail alongside the first."
+        }
       },
       {
-        "id": "g6-bridging-w4-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Design a three-layer verification for a high-stakes claim about a UAE record, and explain when the extra effort is worth it and when it is not.",
-        "lookFor": "Stretch target from the pack: designs a three-layer verification for a high-stakes claim and justifies when the extra effort is worth it and when it is not, reasoning about how independent the three sources really are.",
+        "id": "g6-bridging-w4-lab-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Complete the trade-off from the lab: a single-source check is ___, but your verdict is wrong if that one source is wrong; a two-source cross-check is ___, yet much harder to fool because the two sources are ___ of each other.",
+        "blanks": [
+          "a single-source check is ___",
+          "a two-source cross-check is ___",
+          "the two sources are ___ of each other"
+        ],
+        "answer": [
+          [
+            "quick",
+            "quicker",
+            "fast",
+            "faster"
+          ],
+          [
+            "slower",
+            "slow",
+            "longer"
+          ],
+          [
+            "independent",
+            "separate"
+          ]
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -198,7 +347,12 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the judgement in one line: you trade speed for confidence, and the confidence comes from independence.",
+          "incorrect": "The cross-check costs time and buys reliability - two sources that do not copy each other rarely make the same mistake."
+        }
       }
     ]
   },

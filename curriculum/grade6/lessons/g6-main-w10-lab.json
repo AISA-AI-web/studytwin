@@ -120,13 +120,29 @@
   "worksheet": {
     "questions": [
       {
-        "id": "g6-main-w10-lab-q1",
-        "type": "shortText",
-        "prompt": "For two peers, write two stars and a wish, each tagged to a strand.",
-        "title": "Carousel feedback slips",
-        "stem": "Star (strand): ...\nStar (strand): ...\nWish (strand): ...",
-        "autoMarked": false,
-        "lookFor": "Gives specific 'two stars and a wish' tagged to strands. A star must name a strand and evidence (model: 'Star (Evaluate & use): you tested with six known-answer cases, which is strong evidence'). A wish should be specific and kind (model: 'Wish (Wider effects): explain who might be treated unfairly and how you would prevent it').",
+        "id": "g6-main-w10-lab-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "You are leaving 'two stars and a wish' at someone's station. Which wish is the most useful feedback?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Wish: your station was a bit boring to watch."
+          },
+          {
+            "id": "b",
+            "text": "Wish: make it better before you show it to anyone else."
+          },
+          {
+            "id": "c",
+            "text": "Wish (Wider effects): say who might be left out if the whole school used it, and how you would stop that happening."
+          },
+          {
+            "id": "d",
+            "text": "Wish: I really liked your colours, well done!"
+          }
+        ],
+        "answer": "c",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -156,16 +172,45 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That wish is specific, kind and tagged to a strand, so the person knows exactly what to work on next.",
+          "incorrect": "A useful wish names one thing to improve and which strand it belongs to — 'boring', 'make it better' and a compliment all leave the person with nothing to act on."
+        }
       },
       {
-        "id": "g6-main-w10-lab-q2",
-        "type": "shortText",
-        "prompt": "Write one Emerging statement per strand, then set one Term-2 goal.",
-        "title": "Four-strand Emerging summary and goal",
-        "stem": "Concepts: I can ...\nDesign & build: I can ...\nEvaluate & use: I can ...\nWider effects: I can ...\nTerm-2 goal: ...",
-        "autoMarked": false,
-        "lookFor": "Summarises all four strands at Emerging with evidence - one clause per strand at Emerging (model: 'I can explain rule-based vs learning, build a solution, evaluate it for risk, and consider wider effects'). The goal should be specific and tied to a strand toward Proficient (model: 'Next term I will use balanced data so my solution is fairer to all users').",
+        "id": "g6-main-w10-lab-aq2",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Every station needs a responsible-use message. Which statements belong in that message? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "We do not store anyone's name or photo."
+          },
+          {
+            "id": "b",
+            "text": "Our checker gets unusual items wrong about one time in five, so check its answer before you act on it."
+          },
+          {
+            "id": "c",
+            "text": "We tested it with items from lots of different homes so it works fairly for everyone."
+          },
+          {
+            "id": "d",
+            "text": "Our solution loads in under two seconds."
+          },
+          {
+            "id": "e",
+            "text": "We chose a purple background so the station looks smart."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -195,16 +240,60 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Responsible use means no personal data, honesty about limits, and fairness to users — those three statements cover exactly that.",
+          "incorrect": "Loading speed and the look of your station may be good work, but they say nothing about personal data, limits or fairness."
+        }
       },
       {
-        "id": "g6-main-w10-lab-q3",
-        "type": "shortText",
-        "prompt": "For each strand, record your Emerging evidence and next-term focus.",
-        "title": "End-of-term reflection tracker",
-        "stem": "Strand | Emerging evidence | Feedback received | Term-2 focus",
-        "autoMarked": false,
-        "lookFor": "Evidence is the feedback slips plus the completed four-strand Emerging summary with goal. Teacher flags each learner's next-tier target for Term 2.",
+        "id": "g6-main-w10-lab-aq3",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Each carousel comment has to be tagged to a strand. Match each comment to the strand it belongs to.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "Star: you explained clearly why your solution follows rules instead of learning from examples."
+          },
+          {
+            "id": "l2",
+            "text": "Star: your station showed a working prototype that sorts an item into a category."
+          },
+          {
+            "id": "l3",
+            "text": "Wish: try it on more items whose answers you already know, so your evidence is stronger."
+          },
+          {
+            "id": "l4",
+            "text": "Wish: say who might be treated unfairly if your solution was used everywhere."
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "Understanding concepts"
+          },
+          {
+            "id": "r2",
+            "text": "Design and build"
+          },
+          {
+            "id": "r3",
+            "text": "Evaluate and use responsibly"
+          },
+          {
+            "id": "r4",
+            "text": "Wider effects"
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -234,15 +323,19 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Tagging works by what the comment is about: explaining ideas, building the thing, gathering evidence that it works, or who it affects.",
+          "incorrect": "Read what each comment actually praises or asks for — an explanation, a build, more testing evidence, or the effect on people — and the strand follows."
+        }
       },
       {
-        "id": "g6-main-w10-lab-q4",
-        "type": "shortText",
-        "prompt": "My proudest strand this term is ... and my Term-2 goal toward Proficient is ...",
-        "title": "Exit ticket",
-        "autoMarked": false,
-        "lookFor": "Sets a specific goal and confirms responsible use; setting a goal or confirming responsible use but not both is only Approaching.",
+        "id": "g6-main-w10-lab-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "A wish should be kept general and vague so that nobody feels criticised.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -272,15 +365,47 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct — good feedback is specific, kind and tied to evidence, so a specific wish is a gift rather than a criticism.",
+          "incorrect": "A vague wish is kind but useless; being specific and tying the comment to evidence is what makes it helpful."
+        }
       },
       {
-        "id": "g6-main-w10-lab-q5",
-        "type": "shortText",
-        "prompt": "Combine feedback from several peers into one improved design idea to try in Term 2, and explain your choice.",
-        "title": "Challenge (stretch)",
-        "autoMarked": false,
-        "lookFor": "Stretch / next tier: learners synthesise feedback from several peers into one improved design idea for Term 2.",
+        "id": "g6-main-w10-lab-aq5",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the showcase carousel steps into the order that makes each step possible.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "Set up your station with your frozen solution, your evidence and your responsible-use message."
+          },
+          {
+            "id": "s2",
+            "text": "Present your solution in 60 seconds with two justified choices."
+          },
+          {
+            "id": "s3",
+            "text": "Rotate to other stations and leave strand-tagged feedback there."
+          },
+          {
+            "id": "s4",
+            "text": "Collect the feedback other people left at your station."
+          },
+          {
+            "id": "s5",
+            "text": "Complete your four-strand summary and set one Term-2 goal."
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -310,7 +435,12 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "You can only give feedback once stations are set up and presented, and you can only summarise your term once your feedback is collected.",
+          "incorrect": "The summary and goal come last, because they are built from the feedback you collect after presenting and visiting other stations."
+        }
       }
     ]
   },

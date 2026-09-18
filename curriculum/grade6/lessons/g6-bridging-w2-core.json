@@ -147,12 +147,29 @@
     "title": "Week 2 - Core - Worksheet | Refining Prompts for Better Outputs",
     "questions": [
       {
-        "id": "g6-bridging-w2-core-q1",
-        "type": "shortText",
-        "prompt": "For the weak prompt given, name one weakness and write a v2 that targets only that weakness.",
-        "stem": "The weakness is ___.\nMy v2 prompt is ___.",
-        "lookFor": "Names a weakness that genuinely matches the output problem (ambiguous task, or missing audience, format, or constraint), and a v2 that directly targets that one named weakness rather than bundling several edits or simply lengthening the prompt.",
-        "autoMarked": false,
+        "id": "g6-bridging-w2-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Goal: persuade Grade 6 students to join the chess club. The prompt was: \"Write 4 sentences about the chess club for Grade 6 students.\" The output was 4 clear sentences saying when and where the club meets, but it did not try to persuade anyone to join. Judging the output against the goal, which weakness should you name before writing v2?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The prompt never says what the writing should do, so the AI just described the club instead of persuading."
+          },
+          {
+            "id": "b",
+            "text": "The prompt never says who will read it, so the AI wrote for the wrong audience."
+          },
+          {
+            "id": "c",
+            "text": "The prompt never sets a length, so the AI did not know how much to write."
+          },
+          {
+            "id": "d",
+            "text": "The prompt contains too many words, so the AI got confused about the topic."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -161,15 +178,47 @@
             "tier": "A",
             "code": "AIF·SD·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - the audience and the length were already in the prompt, so the missing piece was the task itself: 'persuade' was never asked for.",
+          "incorrect": "Re-read the prompt: it already names Grade 6 students and asks for 4 sentences, so the gap is the task - it never tells the AI to persuade."
+        }
       },
       {
-        "id": "g6-bridging-w2-core-q2",
-        "type": "shortText",
-        "prompt": "After the reveal, explain the causal reason your change improved the output.",
-        "stem": "My change was ___.\nIt improved the output because ___.",
-        "lookFor": "A causal explanation linking the specific change to the improvement (e.g. naming the audience and length removed the model's need to guess, so the output became focused and age-appropriate). Reward causal reasoning, not 'it is better'.",
-        "autoMarked": false,
+        "id": "g6-bridging-w2-core-aq2",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Sara wants a better notice from her prompt. Put her actions in the order of the refinement loop taught in this lesson.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "She writes v2, changing only the one weakness she named."
+          },
+          {
+            "id": "i2",
+            "text": "She decides what the notice must achieve and writes that goal down."
+          },
+          {
+            "id": "i3",
+            "text": "She judges the v2 output against the same goal to see if it improved."
+          },
+          {
+            "id": "i4",
+            "text": "She reads the v1 output and compares it with her goal."
+          },
+          {
+            "id": "i5",
+            "text": "She names the one weakness that best explains the gap."
+          }
+        ],
+        "answer": [
+          "i2",
+          "i4",
+          "i5",
+          "i1",
+          "i3"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -178,15 +227,44 @@
             "tier": "A",
             "code": "AIF·SD·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the loop: set the goal, judge, name the weakness, make one change, then re-judge against the same goal.",
+          "incorrect": "The goal comes first because you cannot judge an output without one, and the weakness must be named before you know what to change."
+        }
       },
       {
-        "id": "g6-bridging-w2-core-q3",
-        "type": "shortText",
-        "prompt": "Record your v1, the weakness, your v2 change, the predicted effect, and the observed effect.",
-        "stem": "v1 prompt | Weakness named | v2 change | Predicted vs observed effect",
-        "lookFor": "A usable log in which one change is recorded per row with a stated reason, so the improvement can be attributed to a cause; predicted and observed effects are both recorded and compared, not just asserted.",
-        "autoMarked": false,
+        "id": "g6-bridging-w2-core-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Goal: a science-fair notice that Grade 3 students can read on their own. The prompt was \"Write a notice about the science fair.\" The output was correct but used long words like 'methodology' and 'apparatus'. Which changes to the prompt would target that weakness? Choose all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Add: \"Write it for Grade 3 students.\""
+          },
+          {
+            "id": "b",
+            "text": "Add: \"Use short sentences and words an 8-year-old knows.\""
+          },
+          {
+            "id": "c",
+            "text": "Add: \"Include the date, time and room of the fair.\""
+          },
+          {
+            "id": "d",
+            "text": "Add: \"Make it 200 words instead of 100.\""
+          },
+          {
+            "id": "e",
+            "text": "Add: \"Use a formal tone suitable for the school principal.\""
+          }
+        ],
+        "answer": [
+          "a",
+          "b"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -195,15 +273,19 @@
             "tier": "A",
             "code": "AIF·SD·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Both changes tell the AI who is reading and how to write for them, which is exactly the weakness you named.",
+          "incorrect": "The weakness was the reading level, so only changes about the audience or the words used will fix it - adding details, more length or a formal tone does not."
+        }
       },
       {
-        "id": "g6-bridging-w2-core-q4",
-        "type": "shortText",
-        "prompt": "Explain in one or two sentences which prompt change improved your output and the reason it worked.",
-        "stem": "",
-        "lookFor": "Names one specific change and gives a clear causal reason for the improvement. Partial: a general reason with a weak causal link. Not yet: states it is better with no reason.",
-        "autoMarked": false,
+        "id": "g6-bridging-w2-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "A student changes the audience, the length and the format of a prompt all at once, and the new output is much better. She can be sure which of those three changes made it better.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -212,15 +294,60 @@
             "tier": "A",
             "code": "AIF·SD·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - with three changes at once the improvement could come from any of them, which is why refiners change one thing at a time.",
+          "incorrect": "A better output only proves that something helped; changing one thing at a time is what lets you say which change caused it."
+        }
       },
       {
-        "id": "g6-bridging-w2-core-q5",
-        "type": "shortText",
-        "prompt": "Write a v3 that improves the output on a second goal (for example, making it both clearer and more accurate) without losing the first improvement.",
-        "stem": "",
-        "lookFor": "A v3 that adds a gain on a second dimension while preserving the first gain, with reasoning that shows awareness that the two goals must both be met rather than traded away.",
-        "autoMarked": false,
+        "id": "g6-bridging-w2-core-aq5",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Each output below missed the goal in a different way. Match the problem with the single change to the prompt that targets it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "The notice used words the Grade 3 class could not read."
+          },
+          {
+            "id": "L2",
+            "text": "The answer filled two pages when a short notice was wanted."
+          },
+          {
+            "id": "L3",
+            "text": "The answer came back as one long paragraph when a list was needed."
+          },
+          {
+            "id": "L4",
+            "text": "The answer was about the wrong school event entirely."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "State the exact event the writing is about."
+          },
+          {
+            "id": "R2",
+            "text": "Name who will be reading it."
+          },
+          {
+            "id": "R3",
+            "text": "Ask for the output as a bulleted list."
+          },
+          {
+            "id": "R4",
+            "text": "Set a limit, such as four sentences."
+          }
+        ],
+        "answer": {
+          "L1": "R2",
+          "L2": "R4",
+          "L3": "R3",
+          "L4": "R1"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -229,7 +356,12 @@
             "tier": "A",
             "code": "AIF·SD·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Each fix targets one named weakness - audience, constraint, format or an ambiguous task - which is why you can tell what caused the improvement.",
+          "incorrect": "Name the weakness first, then pick the change that speaks to it: a reading-level problem needs an audience, and a too-long answer needs a limit."
+        }
       }
     ]
   },

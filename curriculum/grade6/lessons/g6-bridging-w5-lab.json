@@ -105,11 +105,33 @@
     "instructions": "Name: __________________________________  Class: ________________  Date: ________________",
     "questions": [
       {
-        "id": "g6-bridging-w5-lab-q1",
-        "type": "shortText",
-        "stem": "v1: ... | effect: ...\nv2: ... | change: ... | effect: ...\nBest version: ...",
-        "autoMarked": false,
-        "lookFor": "Distinct versions where exactly ONE part of the prompt changes between them, each with its effect, ending in a named best version. Model: v1 'suggest a book' gave a vague list; v2 added 'one book, with a reason, using the survey' and the output became specific and justified. Watch for pairs changing several things at once, or assuming a longer prompt is a better prompt.",
+        "id": "g6-bridging-w5-lab-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Sam's prompt v1 is 'Suggest a book.' The output was a vague list. He wants his v2 to show him what actually helped. Which v2 is the best next step?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Using our class reading survey, suggest a book."
+          },
+          {
+            "id": "b",
+            "text": "Using our class reading survey, suggest one book, give one sentence saying why, and keep it friendly."
+          },
+          {
+            "id": "c",
+            "text": "Please could you kindly suggest a book for us? Thank you very much!"
+          },
+          {
+            "id": "d",
+            "text": "Suggest a film instead."
+          }
+        ],
+        "answer": "a",
+        "feedback": {
+          "correct": "Only one part of the prompt changed, so any improvement in the output can be pinned on naming the data.",
+          "incorrect": "Changing several parts at once hides which one helped, extra politeness adds words but no precision, and changing the task means you are no longer testing the same helper."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -140,14 +162,59 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Log each prompt version, the change you made, and its effect."
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w5-lab-q2",
-        "type": "shortText",
-        "stem": "Columns: Version | Change made | Effect on the output",
-        "autoMarked": false,
-        "lookFor": "A complete log from v1 to the best version with a reasoned justification for the key change. This is the formative evidence for SD: iterates the prompt to a measurably better output and explains the causal reason for the improvement. For trial-and-error, prompt 'name the change and its effect'. Record SD as mastery/partial/not-yet.",
+        "id": "g6-bridging-w5-lab-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Match each change Sam made to his prompt with the effect you would expect it to have on the output.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "Added 'using our class reading survey'"
+          },
+          {
+            "id": "l2",
+            "text": "Added 'name one book, not a list'"
+          },
+          {
+            "id": "l3",
+            "text": "Added 'give one sentence saying why'"
+          },
+          {
+            "id": "l4",
+            "text": "Added 'please be as helpful and friendly as you can'"
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "The answer is now based on the class's own data instead of a general guess."
+          },
+          {
+            "id": "r2",
+            "text": "The answer is a single choice instead of several."
+          },
+          {
+            "id": "r3",
+            "text": "The answer now explains the reason behind the choice."
+          },
+          {
+            "id": "r4",
+            "text": "The prompt got longer, but the answer is no more useful."
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
+        "feedback": {
+          "correct": "Each useful change targets one thing - the data, the number of answers, or the reasoning - while extra friendly words only make the prompt longer.",
+          "incorrect": "Ask what each change tells the helper to do differently; a change that adds no new instruction changes the length of the prompt, not the quality of the output."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -178,13 +245,44 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Record each version, the change, and the effect on the output."
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w5-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "lookFor": "Names a specific version, identifies a single change, and gives a causal reason for why that change improved the output (usually added detail, a named data source, or a required form). Reward a one-change improvement with a causal reason; 'it just got better' is partial.",
+        "id": "g6-bridging-w5-lab-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Maya claims her v3 is better than her v2, and that her change is what made it better. Which of these count as good evidence for her claim? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "v3's output names one book, which is what her task asked for."
+          },
+          {
+            "id": "b",
+            "text": "v3's prompt has more words in it than v2's."
+          },
+          {
+            "id": "c",
+            "text": "v3's output gives a reason, so Maya can judge whether the choice makes sense."
+          },
+          {
+            "id": "d",
+            "text": "Only one part of the prompt changed between v2 and v3, so Maya knows what caused the change."
+          },
+          {
+            "id": "e",
+            "text": "v3's prompt sounds more polite than v2's."
+          }
+        ],
+        "answer": [
+          "a",
+          "c",
+          "d"
+        ],
+        "feedback": {
+          "correct": "Better means the output meets the task and can be judged, and a single change is what lets Maya say which edit caused it.",
+          "incorrect": "A longer or politer prompt is not evidence of a better output - the evidence is that the output now meets the task, can be judged, and followed one change you can point to."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -215,13 +313,18 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Name your best prompt version and the one change that improved it most, with a reason."
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w5-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "lookFor": "Recognises that detail added for accuracy can make the prompt longer and harder to follow, while a short clear prompt may leave the output vague - and names the balance they struck. Precise beats long; look for that judgement being made explicitly.",
+        "id": "g6-bridging-w5-lab-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "Omar changes three parts of his prompt at the same time and the output gets much better. True or false: he can still say which of the three changes caused the improvement.",
+        "answer": false,
+        "feedback": {
+          "correct": "Right - with three edits made together any of them, or all of them, could be responsible, so he would have to test them one at a time.",
+          "incorrect": "A better output only tells you the new prompt as a whole works better; to name the change that helped, you have to change one part at a time."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -252,7 +355,76 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Refine your prompt for accuracy AND clarity at once. Explain the trade-off you had to balance."
+        "evidenceType": "product"
+      },
+      {
+        "id": "g6-bridging-w5-lab-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Sam's log: v2 'Using our class reading survey, suggest a book' returned a list with no explanation. v3 'Using our class reading survey, suggest one book and give one sentence saying why' returned a single title with a reason. Complete the explanation: the change from v2 to v3 improved the output because it told the helper to name ___ book and to give a ___.",
+        "blanks": [
+          "how many books",
+          "what else it must give"
+        ],
+        "answer": [
+          [
+            "one",
+            "1",
+            "a single",
+            "just one",
+            "only one",
+            "a single book",
+            "one book"
+          ],
+          [
+            "reason",
+            "a reason",
+            "reason why",
+            "justification",
+            "an explanation",
+            "explanation",
+            "sentence",
+            "one sentence",
+            "a sentence",
+            "sentence saying why",
+            "why"
+          ]
+        ],
+        "feedback": {
+          "correct": "Naming how many answers and asking for the thinking behind them is what turned a vague list into something the class can judge.",
+          "incorrect": "Compare the two prompts word by word: v3 asks for one book rather than several, and asks the helper to say why it chose it."
+        },
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·CU·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·SD·G5·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "CE",
+            "grade": 4,
+            "tier": "A",
+            "code": "AIF·CE·G4·A"
+          },
+          {
+            "framework": "AIF",
+            "strand": "GE",
+            "grade": 5,
+            "tier": "A",
+            "code": "AIF·GE·G5·A"
+          }
+        ],
+        "evidenceType": "product"
       }
     ]
   },

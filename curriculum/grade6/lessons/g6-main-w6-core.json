@@ -160,12 +160,35 @@
     "title": "Week 6 - Core - Worksheet | Bringing the Strands Together",
     "questions": [
       {
-        "id": "g6-main-w6-core-q1",
-        "type": "shortText",
-        "prompt": "Complete each of the four steps for the guided challenge.",
-        "stem": "System type:\nMy prompt:\nTriage verdict and reason:\nRisk check and choice:",
-        "lookFor": "All four steps recorded: a named system type (e.g. a learning system for a text summariser, contrasted with rule-based), a specific prompt, a triage verdict of correct / incorrect / unclear with a checkable reason, and a genuine risk-reduction choice such as keeping personal data out of the prompt.",
-        "autoMarked": false,
+        "id": "g6-main-w6-core-aq1",
+        "type": "ordering",
+        "marks": 4,
+        "autoMarked": true,
+        "prompt": "Mia wants to use an AI tool to help plan a class assembly. Put the four links of the chain in the order the lesson says they should happen, from first to last.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Triage the output as correct, incorrect or unclear"
+          },
+          {
+            "id": "i2",
+            "text": "Run a risk check and choose a responsible action"
+          },
+          {
+            "id": "i3",
+            "text": "Work out the system type so you know what to expect from the tool"
+          },
+          {
+            "id": "i4",
+            "text": "Write a clear prompt to guide the output"
+          }
+        ],
+        "answer": [
+          "i3",
+          "i4",
+          "i1",
+          "i2"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -195,15 +218,38 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the chain: the system type tells you what to expect, the prompt shapes the output, the output is then triaged, and the risk check covers the whole process.",
+          "incorrect": "Each link feeds the next - you need to know the system type before you can write a good prompt, and you cannot triage or risk-check an output you have not produced yet."
+        }
       },
       {
-        "id": "g6-main-w6-core-q2",
-        "type": "shortText",
-        "prompt": "Write two sentences linking system, prompt, and output.",
-        "stem": "Because the system was ...\nThe prompt made the output ... which means ...",
-        "lookFor": "Both stems completed so that system and prompt are clearly linked to the output - e.g. a specific prompt gave a focused, on-task summary while a vague one would drift. Approaching links only two strands; not yet treats the strands as separate.",
-        "autoMarked": false,
+        "id": "g6-main-w6-core-aq2",
+        "type": "mcq",
+        "marks": 2,
+        "autoMarked": true,
+        "prompt": "Layla is using a learning-based summarising tool on a news article. Instead of \"Summarise this article in three sentences, covering only its main argument\", she types \"Tell me about this\". Using the chain from the lesson, what is the most likely knock-on effect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The output wanders off the main argument, which makes the triage harder and leaves more risk of using something wrong"
+          },
+          {
+            "id": "b",
+            "text": "The output stays exactly on task, but the tool takes longer to produce it"
+          },
+          {
+            "id": "c",
+            "text": "The tool stops being a learning system and starts working from fixed rules instead"
+          },
+          {
+            "id": "d",
+            "text": "The triage step is no longer needed, because a short prompt always gives a short output"
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -233,15 +279,50 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - a vague prompt weakens every link after it: the output drifts, the triage gets harder, and the risk goes up.",
+          "incorrect": "The prompt cannot change what kind of system you are using; what it changes is the output, and a drifting output is harder to triage and riskier to use."
+        }
       },
       {
-        "id": "g6-main-w6-core-q3",
-        "type": "shortText",
-        "prompt": "Record your result for each strand.",
-        "stem": "Strand | What I did | Result | Link to next strand",
-        "lookFor": "One row per strand with the action taken, a result, and a link showing how each strand fed the next: system type shapes the prompt, the prompt shapes the output, the output demands a triage, and the whole process demands a responsible-use choice.",
-        "autoMarked": false,
+        "id": "g6-main-w6-core-aq3",
+        "type": "multi",
+        "marks": 3,
+        "autoMarked": true,
+        "prompt": "Omar has an AI-written summary he plans to put in a class newsletter. Which of these are genuine risk-reduction choices, as the lesson describes a risk check? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Taking his classmates' names and phone numbers out of the prompt before he sends it"
+          },
+          {
+            "id": "b",
+            "text": "Checking a surprising fact in the summary against the original article before he shares it"
+          },
+          {
+            "id": "c",
+            "text": "Marking the parts he could not check as unclear and leaving them out until he can check them"
+          },
+          {
+            "id": "d",
+            "text": "Making the prompt much longer, so the tool has more words to work with"
+          },
+          {
+            "id": "e",
+            "text": "Accepting the summary because it is written in confident, well-organised language"
+          },
+          {
+            "id": "f",
+            "text": "Choosing whichever tool gives him an answer fastest"
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -271,15 +352,20 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Each of those names something that could go wrong and does something about it - that is what a risk check is for.",
+          "incorrect": "A risk check asks what could go wrong and then acts on it. Length, confident wording and speed do not reduce any risk - confident wording can even hide a mistake."
+        }
       },
       {
-        "id": "g6-main-w6-core-q4",
-        "type": "shortText",
-        "prompt": "Explain how the system type and prompt shaped your output, and name one responsible-use choice you made.",
-        "stem": "",
-        "lookFor": "Connects system plus prompt to the output quality and names a genuine risk-reduction choice that was made during the task (e.g. no personal data in the prompt), not added afterwards.",
-        "autoMarked": false,
+        "id": "g6-main-w6-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "autoMarked": true,
+        "prompt": "True or false? Once you have written a very specific prompt, you can skip the triage step, because a specific prompt guarantees the output is correct.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -309,15 +395,61 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - a specific prompt makes the triage easier, but it never replaces it; every output still has to be judged correct, incorrect or unclear.",
+          "incorrect": "A good prompt only makes the output easier to check. Miss the triage link and the chain weakens, however carefully you wrote the prompt."
+        }
       },
       {
-        "id": "g6-main-w6-core-q5",
-        "type": "shortText",
-        "prompt": "Redesign the prompt to lower the risk further, and predict how the output and triage would change.",
-        "stem": "",
-        "lookFor": "Redesigned prompt targets the risk that was identified (e.g. removes personal data, asks for checkable statements) and the prediction explains how both the output and the risk would change - the stretch expectation for this lesson.",
-        "autoMarked": false,
+        "id": "g6-main-w6-core-aq5",
+        "type": "matching",
+        "marks": 4,
+        "autoMarked": true,
+        "prompt": "Match each link in the chain to the job it does for the link that follows it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Naming the system type"
+          },
+          {
+            "id": "L2",
+            "text": "Writing a specific prompt"
+          },
+          {
+            "id": "L3",
+            "text": "Triaging the output"
+          },
+          {
+            "id": "L4",
+            "text": "Running a risk check"
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Tells you what sort of results you can expect before you start"
+          },
+          {
+            "id": "R2",
+            "text": "Keeps the output on task, so it is easier to judge"
+          },
+          {
+            "id": "R3",
+            "text": "Decides whether what you got is correct, incorrect or unclear"
+          },
+          {
+            "id": "R4",
+            "text": "Asks what could go wrong and picks a responsible action"
+          }
+        ],
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3",
+          "L4": "R4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -347,7 +479,12 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the whole chain in one table - each link does a different job, and each one hands something to the next.",
+          "incorrect": "Look at what each link produces: the system type sets your expectations, the prompt steers the output, the triage judges it, and the risk check decides what to do about what could go wrong."
+        }
       }
     ]
   },

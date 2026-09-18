@@ -118,12 +118,34 @@
     "title": "Week 1 - Lab - Worksheet | Data Quality Investigation (Lab)",
     "questions": [
       {
-        "id": "g6-bridging-w1-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Change from baseline: for each degraded version, describe exactly how the output changed from the clean baseline, and name the data flaw responsible.",
-        "stem": "Compared to the baseline, this output ___.\nThe flaw responsible is ___.",
-        "lookFor": "A specific output difference tied to a specific flaw - for example, the error version confidently mislabels some items because its training labels were wrong, so it repeats the wrong label as if it were correct. Partial: some changes recorded but the link to the flaw is vague or a version is missed.",
+        "id": "g6-bridging-w1-lab-aq1",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "A team ran the same task with the same model on four versions of one dataset, and scored each against the clean baseline.\n\nVersion A (clean set): 19 of 20 correct.\nVersion B (blurry photos, labels spelled three ways): 14 of 20 correct, and many answers were unsure.\nVersion C (no yellow dates in the set): 11 of 20 correct - every yellow date wrong, the rest right.\nVersion D (some stones labelled \"date\"): 7 of 20 correct, and it repeated wrong labels confidently.\n\nRank the four versions by how many of the 20 items each one got right, best first.",
+        "items": [
+          {
+            "id": "v-b",
+            "text": "Version B - blurry photos and labels spelled three ways"
+          },
+          {
+            "id": "v-d",
+            "text": "Version D - some stones labelled \"date\""
+          },
+          {
+            "id": "v-a",
+            "text": "Version A - the clean set"
+          },
+          {
+            "id": "v-c",
+            "text": "Version C - no yellow dates in the set"
+          }
+        ],
+        "answer": [
+          "v-a",
+          "v-b",
+          "v-c",
+          "v-d"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -134,15 +156,36 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is a ranking built on evidence: the order follows what the outputs actually did, from 19 of 20 correct down to 7 of 20 with confident wrong labels.",
+          "incorrect": "Rank by what each version's output did, not by how bad the flaw sounds - match each version back to its recorded score before placing it on the line."
+        }
       },
       {
-        "id": "g6-bridging-w1-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Defend the ranking: write your full best-to-worst ranking and justify the two placements you found hardest to separate, using output evidence.",
-        "stem": "My order is ___.\nThe hardest pair was ___ because the output ___.",
-        "lookFor": "A defensible full ranking justified with output evidence, including the hardest pair - a model order is clean best, then noise, then gaps, then error worst, because wrong labels teach an actively false pattern while noise only adds confusion. Accept other orders if the justification cites output evidence; if a ranking has no evidence, prompt 'point to the output change that proves it'.",
+        "id": "g6-bridging-w1-lab-aq2",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "The team wants their investigation to show that the differences in the outputs really came from the data. Which plan makes it a fair test?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Keep the task and the model the same for every version, and change only the dataset."
+          },
+          {
+            "id": "b",
+            "text": "Give each dataset a different model, so every dataset gets its best chance."
+          },
+          {
+            "id": "c",
+            "text": "Change the dataset and make the task harder at the same time, so the differences are easier to see."
+          },
+          {
+            "id": "d",
+            "text": "Test each dataset on a different task, then compare the average scores."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -153,15 +196,44 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - when only the dataset changes, any difference in the output can be traced back to the data, and that is what makes your evidence trustworthy.",
+          "incorrect": "If more than one thing changes between versions, you can no longer tell whether the data or the other change caused the difference."
+        }
       },
       {
-        "id": "g6-bridging-w1-lab-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Investigation log: record each dataset version, its output change, its data flaw, and its dimension scores.",
-        "stem": "Version ___ | Output change vs baseline ___ | Data flaw ___ | Accuracy/Complete/Consistent score ___",
-        "lookFor": "Specific, accurate output changes recorded for every version, each linked to its data flaw, with the three dimensions scored. Not yet: vague impressions with no link to a data flaw.",
+        "id": "g6-bridging-w1-lab-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "A ranking has to be justified with evidence from the outputs, not opinion. Select every line below that counts as evidence.",
+        "options": [
+          {
+            "id": "a",
+            "text": "The error version called 3 of the 5 stones \"date\"; the clean version called none of them dates."
+          },
+          {
+            "id": "b",
+            "text": "The noisy version got 14 of 20 right - six fewer than the clean baseline."
+          },
+          {
+            "id": "c",
+            "text": "The gap version got every yellow date wrong, while the baseline got all of them right."
+          },
+          {
+            "id": "d",
+            "text": "Our team all agreed that the noisy dataset felt like the worst one."
+          },
+          {
+            "id": "e",
+            "text": "The error version must be worst, because wrong data is always the worst thing."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -172,14 +244,59 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - evidence is a specific observation of what the output did, and each of those points to an exact change you could show someone.",
+          "incorrect": "Agreeing as a team or stating a general rule is not evidence; evidence names the exact output change, such as how many items shifted from right to wrong."
+        }
       },
       {
-        "id": "g6-bridging-w1-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: which single data flaw would you fix first to improve the output the most, and why?",
-        "lookFor": "Names one flaw from their own log and justifies it from the output evidence they gathered, rather than from opinion or a general statement about data quality.",
+        "id": "g6-bridging-w1-lab-aq4",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Match each change the team saw in the output to the data flaw responsible for it.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "It gives a wrong name to certain items, and repeats the same wrong name confidently every time."
+          },
+          {
+            "id": "l2",
+            "text": "It gets every example of one whole category wrong, but handles the other categories well."
+          },
+          {
+            "id": "l3",
+            "text": "Its answers are unsure and inconsistent across every kind of item, with no one category failing more than the rest."
+          },
+          {
+            "id": "l4",
+            "text": "Its answers stay close to the baseline on every kind of item."
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "Wrong labels in the training data (an error)"
+          },
+          {
+            "id": "r2",
+            "text": "A missing category in the training data (a gap)"
+          },
+          {
+            "id": "r3",
+            "text": "Blurry photos and labels spelled three different ways (noise)"
+          },
+          {
+            "id": "r4",
+            "text": "No flaw - this is the clean dataset"
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -190,14 +307,55 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Well matched - each flaw leaves its own fingerprint: an error is confident and repeated, a gap hits one category only, and noise spreads uncertainty everywhere.",
+          "incorrect": "Look at where the damage lands: one category only points to a gap, confident repeated wrong names point to wrong labels, and uncertainty across everything points to noise."
+        }
       },
       {
-        "id": "g6-bridging-w1-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): invent a fifth dataset that combines two flaws. Predict where it lands on the ranking line and justify your prediction with the evidence you gathered.",
-        "lookFor": "Weighs two flaws against each other and places the combined dataset using evidence from the four-way comparison rather than a hunch.",
+        "id": "g6-bridging-w1-lab-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Complete this line from the team's investigation log: \"We kept the task and the model the same and changed only the (1), and we compared every version against the clean result, which we call the (2).\"",
+        "blanks": [
+          "(1) the one thing they changed between versions",
+          "(2) the name for the clean result everything is compared against"
+        ],
+        "answer": [
+          [
+            "dataset",
+            "data set",
+            "the dataset",
+            "data",
+            "the data",
+            "datasets"
+          ],
+          [
+            "baseline",
+            "the baseline",
+            "base line",
+            "clean baseline",
+            "the clean baseline"
+          ]
+        ],
+        "acceptedAnswers": [
+          [
+            "dataset",
+            "data set",
+            "the dataset",
+            "data",
+            "the data",
+            "datasets"
+          ],
+          [
+            "baseline",
+            "the baseline",
+            "base line",
+            "clean baseline",
+            "the clean baseline"
+          ]
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -208,7 +366,11 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the whole method in one line: change only the dataset, and measure every version against the baseline so your evidence means something.",
+          "incorrect": "Only one thing changes in a fair test - the dataset - and the clean result you compare everything against is the baseline."
+        }
       }
     ]
   },

@@ -281,6 +281,64 @@ check('a stripped open response keeps its autoMarked flag so the UI can say so',
 check('but never carries the teacher look-for to the browser',
   safeOpen.lookFor === undefined && !/lookFor/.test(JSON.stringify(safeOpen)));
 
+console.log('\nA matching question cannot be passed by pairing down the diagonal');
+{
+  /*
+   * A matching key is most naturally written down the diagonal — first row with first
+   * option, and so on. Two thirds of the Grade 6 set was written that way, which is fine
+   * in the file and fatal on screen: served in the authored order, a student pairing row 1
+   * with option 1 and row 2 with option 2 scores full marks having read nothing.
+   *
+   * The keys were all correct, so nothing that checks keys would catch this. What makes it
+   * safe is that the answer bank is shuffled on its way to the browser.
+   */
+  const lessonIds = Object.keys(api.CURRICULUM.grade6.lessons);
+  const matchingIn = (id) => api.getLessonForStudent_('grade6', id)
+    .worksheet.questions.filter((q) => q.type === 'matching');
+
+  const withMatching = lessonIds.filter((id) => matchingIn(id).length);
+  check('the curriculum has matching questions to protect',
+    withMatching.length > 0, 'nothing exercised this test');
+
+  let diagonalWins = 0, trials = 0, correctScores = 0, reordered = 0;
+  withMatching.forEach((id) => {
+    const authored = api.CURRICULUM.grade6.lessons[id].worksheet.questions;
+    for (let attempt = 0; attempt < 12; attempt++) {
+      matchingIn(id).forEach((served) => {
+        const key = authored.filter((q) => q.id === served.id)[0];
+        trials++;
+
+        // What a student sees, answered by position alone.
+        const byPosition = {};
+        served.left.forEach((l, i) => { byPosition[l.id] = served.right[i].id; });
+        if (api.markWorksheet_({ questions: [key] },
+            { [served.id]: byPosition }).percent === 100) diagonalWins++;
+
+        // And a student who actually knows it, picking each option wherever it now sits.
+        const known = {};
+        served.left.forEach((l) => { known[l.id] = key.answer[l.id]; });
+        if (api.markWorksheet_({ questions: [key] },
+            { [served.id]: known }).percent === 100) correctScores++;
+
+        if (JSON.stringify(served.right.map((r) => r.id)) !==
+            JSON.stringify(key.right.map((r) => r.id))) reordered++;
+      });
+    }
+  });
+
+  // Chance for a 3-item question is 1 in 6, so a low rate is luck and a high one is a leak.
+  check('answering by position is no better than chance',
+    diagonalWins / trials < 0.25, `${diagonalWins}/${trials} positional answers scored full marks`);
+  check('the answer bank is genuinely reordered, not just copied',
+    reordered / trials > 0.6, `${reordered}/${trials} reordered`);
+  check('a student who knows the answer still scores full marks',
+    correctScores === trials, `${correctScores}/${trials}`);
+  check('no matching question is left without a key',
+    withMatching.every((id) => api.CURRICULUM.grade6.lessons[id].worksheet.questions
+      .filter((q) => q.type === 'matching')
+      .every((q) => q.answer && Object.keys(q.answer).length === (q.left || []).length)));
+}
+
 console.log('\nEvery readable authoring shape survives the trip to the marking engine');
 {
   /*

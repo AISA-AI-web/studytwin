@@ -139,12 +139,29 @@
     "title": "Week 3 - Core - Worksheet | How Data Shapes a Solution's Outcome",
     "questions": [
       {
-        "id": "g6-bridging-w3-core-g6-bw3c-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Trace the data: use the worked solution card. Draw an arrow from the data batch to the outcome, then explain the link in one sentence.",
-        "stem": "The outcome is ___\nbecause the data mostly showed ___",
-        "lookFor": "A named data feature causing the outcome - for example that the training data was mostly ripe brown dates, so the sorter treats brown as the normal ripe look - rather than a general 'the data did it'.",
+        "id": "g6-bridging-w3-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Two date-sorting apps run exactly the same code. Shown the same photo of a brown date, one app answers 'ripe' and the other answers 'unripe'. What is the best explanation?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The two apps learned from different sets of example photos, so each one found a different pattern."
+          },
+          {
+            "id": "b",
+            "text": "One app's code must contain a mistake, because identical code always has to give identical answers."
+          },
+          {
+            "id": "c",
+            "text": "One app is guessing, because apps answer at random whenever a photo is hard to judge."
+          },
+          {
+            "id": "d",
+            "text": "The apps were given the same examples, but one of them studied the photo for longer."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -154,16 +171,41 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - the code is only half of a solution; the examples it learned from decide the pattern, and the pattern decides the outcome.",
+          "incorrect": "Identical code can still disagree: each app built its model from different examples, so each learned a different pattern and gives a different outcome."
+        }
       },
       {
-        "id": "g6-bridging-w3-core-g6-bw3c-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "What if the data changed? Predict how the outcome changes if we add 50 green unripe date photos. Point to the exact data that causes your predicted change.",
-        "stem": "I predict the outcome will ___\nbecause the added data ___",
-        "lookFor": "Reasoning that links the added category to the shifted outcome - more green dates labelled 'unripe' correctly because the sorter now has examples of a category it was missing. A plausible shift with only vague justification is partial.",
+        "id": "g6-bridging-w3-core-aq2",
+        "type": "ordering",
+        "marks": 3,
+        "prompt": "Put these steps in order to show how the data ends up shaping the sorter's answer about a new date.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "The model captures the pattern it keeps seeing across those examples."
+          },
+          {
+            "id": "i2",
+            "text": "Photos of dates, each labelled ripe or unripe, are collected as the data."
+          },
+          {
+            "id": "i3",
+            "text": "The sorter gives an outcome for a new date it has never seen."
+          },
+          {
+            "id": "i4",
+            "text": "The model studies the collected examples."
+          }
+        ],
+        "answer": [
+          "i2",
+          "i4",
+          "i1",
+          "i3"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -173,15 +215,43 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - the data comes first, the pattern comes from the data, and the outcome comes from the pattern.",
+          "incorrect": "The chain runs data first: examples are collected, the model studies them, it captures a pattern, and only then can it give an outcome for a new date."
+        }
       },
       {
-        "id": "g6-bridging-w3-core-g6-bw3c-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Data change log: for each data change, record what changed and how the outcome moved. Use the columns Data change | Predicted outcome | Which data caused it | Confidence (high/med/low).",
-        "lookFor": "Each row attributes the predicted movement to a specific data batch rather than to luck or to the code, and the confidence rating is used honestly on the rows where the data link is weaker.",
+        "id": "g6-bridging-w3-core-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "A sorter learned from 200 photos of brown ripe dates and only 5 photos of green unripe dates. Select ALL the changes that would move its outcomes a lot.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Adding 60 photos of green unripe dates."
+          },
+          {
+            "id": "b",
+            "text": "Adding 60 more photos of brown ripe dates."
+          },
+          {
+            "id": "c",
+            "text": "Adding 60 photos of half-ripe yellow dates, a colour it has never been shown."
+          },
+          {
+            "id": "d",
+            "text": "Removing 3 of the 200 brown ripe photos."
+          },
+          {
+            "id": "e",
+            "text": "Running the same 200 brown ripe photos through the model a second time."
+          }
+        ],
+        "answer": [
+          "a",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -191,15 +261,18 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "process"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - the green and yellow batches fill gaps in categories the sorter barely had, and gaps are where the outcome moves most.",
+          "incorrect": "Adding, removing or repeating brown photos only reinforces a pattern the sorter already has; it is the missing or rare categories, green and yellow, that shift the outcome."
+        }
       },
       {
-        "id": "g6-bridging-w3-core-g6-bw3c-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: explain in two sentences how the data shaped the sorter's outcome, and predict one data change that would flip it.",
-        "lookFor": "A clear path traced from specific data to the outcome, plus a prediction of the shift justified by pointing to the exact data changed. Attributing the outcome to luck, the code or something being broken is not yet there.",
+        "id": "g6-bridging-w3-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: for a sorter that already learned from 200 brown ripe dates, adding 100 more brown ripe photos will change its outcomes more than adding 20 green unripe photos would.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -209,15 +282,50 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - size alone does not decide influence; 20 photos of a category the sorter is missing shift the outcome more than 100 more of what it already has.",
+          "incorrect": "It is false: the 100 extra brown photos repeat a pattern the sorter already learned, while the 20 green photos fill a gap, and filling a gap moves the outcome far more."
+        }
       },
       {
-        "id": "g6-bridging-w3-core-g6-bw3c-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): design the smallest possible data change that would flip the sorter from 'ripe' to 'unripe' on a brown date, and explain why so small a change can have such a big effect.",
-        "lookFor": "The gap-filling idea: a small batch that supplies a category the sorter barely had moves the outcome more than adding to a category it already has plenty of. Look for the smallest change named precisely, not just 'add more data'.",
+        "id": "g6-bridging-w3-core-aq5",
+        "type": "matching",
+        "marks": 3,
+        "prompt": "The sorter learned from 200 brown ripe dates and 5 green unripe dates. Match each change to the outcome you should predict from it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Add 50 photos of green dates labelled 'unripe'."
+          },
+          {
+            "id": "L2",
+            "text": "Add 50 more photos of brown dates labelled 'ripe'."
+          },
+          {
+            "id": "L3",
+            "text": "Change nothing in the data, but let a different class use the app."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "The sorter starts calling green dates 'unripe' - a big shift, because a missing category has been filled."
+          },
+          {
+            "id": "R2",
+            "text": "The outcome barely moves, because the new examples repeat a pattern the sorter already had plenty of."
+          },
+          {
+            "id": "R3",
+            "text": "The outcome stays exactly the same, because it comes from the data and the model, not from who is using the app."
+          }
+        ],
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -227,8 +335,11 @@
             "code": "AIF·CE·G4·A"
           }
         ],
-        "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Well matched - you predicted each outcome from what the data gained, which is exactly how a data detective reasons.",
+          "incorrect": "Predict from the gap: new examples of a missing category move the outcome, more of the same barely does, and changing the user changes nothing at all."
+        }
       }
     ]
   },

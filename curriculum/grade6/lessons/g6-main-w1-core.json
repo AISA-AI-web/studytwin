@@ -147,15 +147,33 @@
     "title": "Week 1 - Core - Worksheet | Unit Launch - Rule-Based vs Learning Systems",
     "questions": [
       {
-        "id": "g6-main-w1-core-m-w1-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Sort three systems",
-        "prompt": "Write each system in the correct column and give one reason.",
-        "stem": "This follows fixed rules because ___\nThis learns from data because ___",
-        "lookFor": "Sorts at least 2 of the 3 systems correctly with a sensible reason. The traffic-light timer is fixed rules - it changes lights on a set timer that a person programmed; accept 'learns' only if the student describes a smart signal that adapts to traffic data. The spam-email filter learns from data - it was trained on many example emails marked spam or not spam, and no person wrote a rule for every email.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "A spam filter was built by showing a computer thousands of emails that people had already labelled 'spam' or 'not spam'. Nobody wrote a rule for every email. Which sorting and reason is correct?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Learns from data, because it found the pattern itself from many labelled example emails."
+          },
+          {
+            "id": "b",
+            "text": "Follows fixed rules, because a person had to label the example emails first."
+          },
+          {
+            "id": "c",
+            "text": "Learns from data, because it gets faster the more emails you send it."
+          },
+          {
+            "id": "d",
+            "text": "Follows fixed rules, because a person wrote a step for every kind of email it might meet."
+          }
+        ],
+        "answer": "a",
+        "feedback": {
+          "correct": "Right - the logic came from the examples, not from steps a person wrote, which is exactly what makes it a learning system.",
+          "incorrect": "People labelled the examples, but nobody wrote a rule for each email - the filter found the pattern in that data itself, so it learns from data."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -185,17 +203,60 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-core-m-w1-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "My two questions",
-        "prompt": "Write two genuine questions about rule-based and learning systems for the question wall.",
-        "lookFor": "Poses at least two genuine, on-topic questions, for example 'How many examples does a system need before it learns well?'. Any genuine, on-topic question counts - reward curiosity over neatness.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-core-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "A photo app was shown 10,000 photos that people had already labelled 'cat' or 'not cat', and it worked out the pattern for itself. A Salik toll gate charges every car that passes, because a person wrote that step. Match each part of the story to the word that names it.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "The 10,000 labelled photos the app was shown"
+          },
+          {
+            "id": "L2",
+            "text": "One single labelled photo out of that collection"
+          },
+          {
+            "id": "L3",
+            "text": "The pattern the app built so it can spot cats in photos it has never seen"
+          },
+          {
+            "id": "L4",
+            "text": "The toll gate, which charges every car because a person wrote that step"
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "data"
+          },
+          {
+            "id": "R2",
+            "text": "example"
+          },
+          {
+            "id": "R3",
+            "text": "model"
+          },
+          {
+            "id": "R4",
+            "text": "rule-based system"
+          }
+        ],
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3",
+          "L4": "R4"
+        },
+        "feedback": {
+          "correct": "Good - you used the words on a real case: many examples make up the data, the pattern built from them is the model, and written steps make a rule-based system.",
+          "incorrect": "The whole collection shown to the app is the data, one photo from it is an example, the pattern built from them is the model, and the toll gate with its written step is the rule-based system."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -225,17 +286,45 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-core-m-w1-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "System sort record",
-        "prompt": "Complete the table for the three systems you sorted. For each row record: System | Fixed rules or learns from data | My reason.",
-        "lookFor": "Each row carries a reason, not a guess - press for where the logic comes from. Model rows: traffic-light timer, fixed rules, 'it changes lights on a set timer that a person programmed'; spam-email filter, learns from data, 'it was trained on many example emails marked spam or not spam'. Accept 'learns' for the traffic-light timer only if the student describes a smart signal that adapts to traffic data.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-core-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "You want to work out whether a new app follows fixed rules or learns from data. Which questions would actually help you decide? Choose all that would help.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Was it shown lots of examples that people had already labelled?"
+          },
+          {
+            "id": "b",
+            "text": "Did a person write a step for every case the app has to handle?"
+          },
+          {
+            "id": "c",
+            "text": "Would the app behave differently if it had been shown different examples?"
+          },
+          {
+            "id": "d",
+            "text": "How quickly does the app give you an answer?"
+          },
+          {
+            "id": "e",
+            "text": "Which company made the app, and how new is it?"
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
+        "feedback": {
+          "correct": "Yes - good questions go after where the logic came from: written steps, or a pattern found in examples.",
+          "incorrect": "Speed and who made it are the same for both kinds. The useful questions ask where the logic came from - written steps, or examples the app learned a pattern from."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -265,17 +354,19 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-core-m-w1-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Exit ticket",
-        "prompt": "In one sentence, how is a learning system different from a rule-based system?",
-        "lookFor": "Names where the logic comes from: a rule-based system does exactly what a person has written into it step by step, while a learning system is shown many examples and finds the pattern in that data. Watch for the misconception that a learning system is just a big set of fixed rules a programmer typed in.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false? A learning system is really just a very long list of fixed rules that a programmer typed in, one rule for every case.",
+        "answer": false,
+        "feedback": {
+          "correct": "Correct - no one types a rule for every case; the system is shown many examples and builds the pattern itself.",
+          "incorrect": "That is the common mix-up. A learning system has no written rule for each case - it finds the pattern from the examples it is shown."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -305,17 +396,22 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product"
       },
       {
-        "id": "g6-main-w1-core-m-w1-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "title": "Challenge (stretch)",
-        "prompt": "Invent your own system card and swap with a partner - can they classify and justify it?",
-        "lookFor": "Invents a fourth system card that can genuinely be classified, and challenges another pair to classify and justify it. Strong responses can explain which clue in their own card settles the classification.",
-        "evidenceType": "product",
-        "tierProbed": "emerging",
+        "id": "g6-main-w1-core-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Fill in each gap with either 'follows fixed rules' or 'learns from data'. A toll gate charges every car as it passes, because a person wrote that step for it, so it ___(1). A spam filter was shown thousands of emails already labelled spam or not spam and worked out the pattern itself, so it ___(2).",
+        "blanks": [
+          "",
+          ""
+        ],
+        "feedback": {
+          "correct": "Well sorted - you used the deciding clue each time: who supplied the logic, a person or the examples.",
+          "incorrect": "Ask who supplied the logic. A person wrote the toll gate's step, so it follows fixed rules; the filter found its own pattern in the examples, so it learns from data."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -345,6 +441,28 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
+        ],
+        "evidenceType": "product",
+        "answer": [
+          [
+            "follows fixed rules",
+            "follows fixed steps",
+            "follows rules",
+            "fixed rules",
+            "is rule-based",
+            "rule-based",
+            "is a rule-based system",
+            "uses fixed rules"
+          ],
+          [
+            "learns from data",
+            "learns from examples",
+            "learns",
+            "learning",
+            "is a learning system",
+            "learning system",
+            "learns the pattern from data"
+          ]
         ]
       }
     ]

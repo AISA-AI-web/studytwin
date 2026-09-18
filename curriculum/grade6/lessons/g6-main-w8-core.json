@@ -121,12 +121,39 @@
     "title": "Week 8 - Core - Worksheet | Signature Solution - Building",
     "questions": [
       {
-        "id": "g6-main-w8-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Flag the errors: read the five curated outputs provided. Mark each correct, unclear, or wrong and flag the ones that fail the check.",
-        "stem": "Output ___ is ___ (correct / unclear / wrong) because ___.",
-        "lookFor": "Judges each output against the known-correct reference rather than a hunch, catches both seeded errors among the correct-looking rows, and gives a reason tied to the check (for example, 'other' for a tablet charger is wrong because it should be 'devices').",
+        "id": "g6-main-w8-core-aq1",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Maya is building her signature solution today. Put her five steps in the order the lesson says a build should follow.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Restate your goal and your check at the top of your log."
+          },
+          {
+            "id": "i2",
+            "text": "Run your approved prompt structure on the curated inputs and record every output."
+          },
+          {
+            "id": "i3",
+            "text": "Evaluate each output against your check and flag the ones that are wrong or unclear."
+          },
+          {
+            "id": "i4",
+            "text": "Make one change in response to a flag and re-run it."
+          },
+          {
+            "id": "i5",
+            "text": "Log what happened as evaluate -> change -> result."
+          }
+        ],
+        "answer": [
+          "i1",
+          "i2",
+          "i3",
+          "i4",
+          "i5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -158,15 +185,35 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Recording every output before you change anything is what lets you prove the change caused the improvement.",
+          "incorrect": "You evaluate and flag first, then change one thing: an improvement has to be a response to something you judged against your check."
+        }
       },
       {
-        "id": "g6-main-w8-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Log one improvement: choose one flagged output and record your improvement using the loop frame.",
-        "stem": "Evaluate: ___.\nChange: ___.\nResult: ___.",
-        "lookFor": "One change only, made in response to a specific flag, with the observed result recorded - for example 'Evaluate: charger mislabelled. Change: added a devices examples rule. Result: charger now devices, accuracy up.' Cause and effect should be visible in the loop.",
+        "id": "g6-main-w8-core-aq2",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Sami flags one wrong output. Before re-running, he adds examples to his prompt, rewrites the instruction and swaps the input - all at once. The new output is correct. What is the problem with Sami's improvement log?",
+        "options": [
+          {
+            "id": "a",
+            "text": "He cannot tell which of the three changes made the output correct."
+          },
+          {
+            "id": "b",
+            "text": "He should have waited until all his inputs had been run before flagging anything."
+          },
+          {
+            "id": "c",
+            "text": "He is not allowed to change his prompt once his plan has been approved."
+          },
+          {
+            "id": "d",
+            "text": "An output that is correct after a change does not need to go in the log."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -198,14 +245,43 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "With three changes in one re-run, the result cannot be traced to a cause, which is why the lesson asks for one change at a time.",
+          "incorrect": "The output did become correct, so the problem is not the flagging or the recording - it is that three changes at once hide which one actually worked."
+        }
       },
       {
-        "id": "g6-main-w8-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Build and improvement log: record each output, your judgement, whether you flagged it, and the improvement you made. Use the columns Input (curated), Output, Judgement, Improvement made.",
-        "lookFor": "The build follows the approved plan and prompt structure with defined, curated inputs rather than improvised prompts; every row is evaluated and flagged rather than only the obvious ones; all inputs are free of personal or identifying data.",
+        "id": "g6-main-w8-core-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Layla says her build followed today's rules. Which of these show she built her solution the way the lesson describes? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "She ran her approved prompt structure on the curated inputs she had planned."
+          },
+          {
+            "id": "b",
+            "text": "She recorded every output before she changed anything."
+          },
+          {
+            "id": "c",
+            "text": "She evaluated all five outputs, including the ones that looked right."
+          },
+          {
+            "id": "d",
+            "text": "She invented a new prompt on the spot when the first output looked odd."
+          },
+          {
+            "id": "e",
+            "text": "She used a classmate's full name as one of her test inputs."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -237,14 +313,58 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Following the approved structure, recording outputs before changing anything and checking even the outputs that look right are what make a build honest.",
+          "incorrect": "Inventing a new prompt on the spot is improvising, not building to the plan, and a classmate's name is personal data that must never go into a prompt."
+        }
       },
       {
-        "id": "g6-main-w8-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: write your one improvement as evaluate -> change -> result.",
-        "lookFor": "All three parts of the loop are present and connected, showing the change was driven by an evaluation and that the result was actually observed, not assumed.",
+        "id": "g6-main-w8-core-aq4",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "These four lines come from one student's improvement log. Match each line to the part of the loop it is doing.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Output 3 labelled a tablet charger as 'other', which fails my check."
+          },
+          {
+            "id": "L2",
+            "text": "I marked output 3 so it would get attention and a fix."
+          },
+          {
+            "id": "L3",
+            "text": "I added a rule to my prompt listing chargers and cables as devices."
+          },
+          {
+            "id": "L4",
+            "text": "On the re-run, output 3 said 'devices' and 5 of 5 were correct."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Change"
+          },
+          {
+            "id": "R2",
+            "text": "Result"
+          },
+          {
+            "id": "R3",
+            "text": "Evaluate"
+          },
+          {
+            "id": "R4",
+            "text": "Flag"
+          }
+        ],
+        "answer": {
+          "L1": "R3",
+          "L2": "R4",
+          "L3": "R1",
+          "L4": "R2"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -276,14 +396,17 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "A complete loop shows the judgement, the flag it raised, the single change made in response, and the result that was actually observed.",
+          "incorrect": "Judging an output against your check is evaluating; marking it so it gets attention and a fix is flagging; what you did to the prompt is the change; what happened on the re-run is the result."
+        }
       },
       {
-        "id": "g6-main-w8-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): make a second improvement and use your log to say which change raised accuracy more, with evidence.",
-        "lookFor": "Compares the two changes using evidence from the log rather than impression, and recognises that one change at a time is what makes the comparison possible.",
+        "id": "g6-main-w8-core-aq5",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: once you have found one output that is clearly wrong, the outputs that already look right do not need to be evaluated.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -315,7 +438,10 @@
           }
         ],
         "evidenceType": "product",
-        "tierProbed": "emerging"
+        "feedback": {
+          "correct": "Every output is judged against the check, because a subtly wrong output is the one most likely to slip through looking fine.",
+          "incorrect": "Outputs that look right can still fail the check - that is why the lesson asks you to evaluate all of them, not just the obvious failures."
+        }
       }
     ]
   },

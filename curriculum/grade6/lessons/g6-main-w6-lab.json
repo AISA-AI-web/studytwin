@@ -120,12 +120,40 @@
     "title": "Week 6 - Lab - Worksheet | Integrated Build-and-Check (Lab)",
     "questions": [
       {
-        "id": "g6-main-w6-lab-q1",
-        "type": "shortText",
-        "prompt": "Record your evidence at each of the four stations.",
-        "stem": "System type + why:\nPrompt:\nAccuracy verdict + reason:\nRisk verdict + mitigation:",
-        "lookFor": "System choice justified by the task (e.g. a learning system that finds language patterns, suited because summarising needs pattern recognition rather than fixed rules), a specific prompt, an accuracy verdict with a reason that can be checked against the source, and a risk verdict whose mitigation matches the risk (e.g. main risk is using an unverified detail; mitigation is verify before use).",
-        "autoMarked": false,
+        "id": "g6-main-w6-lab-aq1",
+        "type": "ordering",
+        "marks": 4,
+        "autoMarked": true,
+        "prompt": "Put the five steps of a build-and-check task in the order the lesson runs them, from first to last.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Triage the output for accuracy against the source"
+          },
+          {
+            "id": "i2",
+            "text": "Decide use, do not use, or use-with-changes"
+          },
+          {
+            "id": "i3",
+            "text": "Choose a system that suits the task and say why"
+          },
+          {
+            "id": "i4",
+            "text": "Assess the risk in the output and choose a mitigation"
+          },
+          {
+            "id": "i5",
+            "text": "Design a clear, specific prompt and produce the output"
+          }
+        ],
+        "answer": [
+          "i3",
+          "i5",
+          "i1",
+          "i4",
+          "i2"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -155,15 +183,38 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is build-and-check in order: you build with a system and a prompt, then check accuracy and risk, and only then decide.",
+          "incorrect": "You build first and check second, and the decision comes last - it has to be made using both verdicts, so it cannot come before them."
+        }
       },
       {
-        "id": "g6-main-w6-lab-q2",
-        "type": "shortText",
-        "prompt": "Make your use decision and name your weakest strand with a reason.",
-        "stem": "Decision: use / do not use / use-with-changes because ...\nWeakest strand:\nAction to improve:",
-        "lookFor": "A justified decision that treats use-with-changes as a real third option rather than a yes/no, plus an honest and specific weakest-strand diagnosis justified by where the evidence was thinnest, with one concrete improvement action.",
-        "autoMarked": false,
+        "id": "g6-main-w6-lab-aq2",
+        "type": "mcq",
+        "marks": 2,
+        "autoMarked": true,
+        "prompt": "Sara's build-and-check record says: accuracy verdict - two of the three facts match the article, the third cannot be found in it; risk verdict - low, because no personal data was used. Which decision best fits her two verdicts?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Use-with-changes: take out or verify the fact she could not find, then use the rest"
+          },
+          {
+            "id": "b",
+            "text": "Use: the risk verdict is low, so the output is safe to use exactly as it is"
+          },
+          {
+            "id": "c",
+            "text": "Do not use: an output with even one unchecked detail has to be thrown away completely"
+          },
+          {
+            "id": "d",
+            "text": "Use: two facts out of three are correct, so most of the output is right"
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -193,15 +244,61 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Use-with-changes is a real third option: the low risk does not excuse the unchecked fact, but one unchecked fact does not waste the whole output either.",
+          "incorrect": "A low risk verdict does not cancel out an accuracy problem, and one unchecked fact does not ruin everything - fix the weak part and use the rest."
+        }
       },
       {
-        "id": "g6-main-w6-lab-q3",
-        "type": "shortText",
-        "prompt": "Complete one row per station and finish with your decision.",
-        "stem": "Station / strand | Evidence produced | Verdict | Note for signature solution",
-        "lookFor": "All four stations completed with recorded evidence and a verdict for each, finishing with the use decision. Emerging completes all four strands with recorded evidence; approaching completes most stations with some evidence.",
-        "autoMarked": false,
+        "id": "g6-main-w6-lab-aq3",
+        "type": "matching",
+        "marks": 4,
+        "autoMarked": true,
+        "prompt": "Match each station in the lab to the piece of evidence it should leave in your build-and-check record.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "System station"
+          },
+          {
+            "id": "L2",
+            "text": "Prompt station"
+          },
+          {
+            "id": "L3",
+            "text": "Accuracy station"
+          },
+          {
+            "id": "L4",
+            "text": "Risk station"
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "A named system type with a reason why it suits this task"
+          },
+          {
+            "id": "R2",
+            "text": "The exact instruction you gave the tool, written out"
+          },
+          {
+            "id": "R3",
+            "text": "A verdict of correct, incorrect or unclear with a reason you can check against the source"
+          },
+          {
+            "id": "R4",
+            "text": "A named thing that could go wrong plus the mitigation you chose for it"
+          }
+        ],
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3",
+          "L4": "R4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -231,15 +328,50 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Four stations, four pieces of evidence - that record is what makes your final decision defensible.",
+          "incorrect": "Each station leaves its own evidence: a justified system choice, the prompt itself, an accuracy verdict with a checkable reason, and a risk with its mitigation."
+        }
       },
       {
-        "id": "g6-main-w6-lab-q4",
-        "type": "shortText",
-        "prompt": "State your use decision with a reason, and name the strand you most need to improve before the signature solution.",
-        "stem": "",
-        "lookFor": "The decision is tied back to the accuracy and risk verdicts rather than to how the output looks, and the named strand is specific enough to act on before the signature solution.",
-        "autoMarked": false,
+        "id": "g6-main-w6-lab-aq4",
+        "type": "multi",
+        "marks": 3,
+        "autoMarked": true,
+        "prompt": "Yusuf has to justify his use decision. Which of these actually support that decision, according to the lesson? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "His accuracy verdict, with a reason he can check against the source"
+          },
+          {
+            "id": "b",
+            "text": "His risk verdict, with the mitigation he chose"
+          },
+          {
+            "id": "c",
+            "text": "A note of which parts of the output he could not check"
+          },
+          {
+            "id": "d",
+            "text": "The output is neatly laid out and sounds confident"
+          },
+          {
+            "id": "e",
+            "text": "The tool produced the answer in under two seconds"
+          },
+          {
+            "id": "f",
+            "text": "The output is longer and more detailed than his classmates' outputs"
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -269,15 +401,20 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "A use decision rests on the two verdicts and on being honest about what you could not check - not on how the output looks.",
+          "incorrect": "Neat layout, speed and length tell you nothing about whether the output is true or safe - that is exactly how building without checking produces confident mistakes."
+        }
       },
       {
-        "id": "g6-main-w6-lab-q5",
-        "type": "shortText",
-        "prompt": "Rewrite your prompt so the output would earn a lower risk verdict, and predict how the use decision would change.",
-        "stem": "",
-        "lookFor": "Rewritten prompt visibly reduces the risk named at station 4 and the prediction explains the shift in the use decision (e.g. from use-with-changes to use) - the stretch expectation, which may also include a written justification of the use-with-changes option.",
-        "autoMarked": false,
+        "id": "g6-main-w6-lab-aq5",
+        "type": "truefalse",
+        "marks": 1,
+        "autoMarked": true,
+        "prompt": "True or false? Hamad finished the risk station faster than any other station, so that speed is good evidence that risk is his strongest strand.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -307,7 +444,12 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - you diagnose your strands by how thin or thick your recorded evidence is, not by how quickly you got through a station.",
+          "incorrect": "Finishing fast often means thin evidence. Your weakest link is the strand where the evidence you recorded was thinnest, whatever the clock said."
+        }
       }
     ]
   },

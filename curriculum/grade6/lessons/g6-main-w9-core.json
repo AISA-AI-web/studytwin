@@ -177,12 +177,29 @@
     "title": "Week 9 - Core - Worksheet | Signature Solution - Refining & Finishing",
     "questions": [
       {
-        "id": "g6-main-w9-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Three-lens evaluation: judge your solution on each lens. Give a score or a yes/no and the evidence behind it.",
-        "stem": "Accuracy: I tested ___ and got ___\nUsefulness: it helps my user because ___\nRisk: I checked ___ so ___",
-        "lookFor": "Judges all three lenses with evidence from testing: known-answer test cases rather than opinion for accuracy, a usefulness judgement linked to the real user's task, and a harm, fairness or privacy risk that was actually checked.",
+        "id": "g6-main-w9-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Maryam's team built a homework-reminder helper for their class teacher. It gave the right reminder on all 10 test cases where the team already knew the correct answer, but the teacher had to type every pupil's timetable in again each morning, so she stopped using it. Judging the solution through the three lenses, which statement is right?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It passes accuracy but fails usefulness, because it does not help the teacher do her real task."
+          },
+          {
+            "id": "b",
+            "text": "It fails accuracy, because a solution the teacher stops using cannot be giving right answers."
+          },
+          {
+            "id": "c",
+            "text": "It passes all three lenses, because it got every test case right."
+          },
+          {
+            "id": "d",
+            "text": "It passes usefulness because the reminders were correct, but fails accuracy because of the extra typing."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -212,15 +229,51 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - a solution can pass accuracy and still fail usefulness, because usefulness is judged against the real task the user has to do.",
+          "incorrect": "Accuracy is about how often the answers are right, and usefulness is about whether the solution helps the user do their real task - here the answers were right but the task got harder."
+        }
       },
       {
-        "id": "g6-main-w9-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "One improvement, proven: describe the single change you made and show before and after evidence.",
-        "stem": "The change I made was ___\nBefore: ___ After: ___\nNothing else broke because ___",
-        "lookFor": "One targeted change (a fixed or added rule, or cleaner example data) with before/after evidence, and a re-test confirming it helped without breaking another case.",
+        "id": "g6-main-w9-core-aq2",
+        "type": "matching",
+        "marks": 3,
+        "prompt": "Match each lens to the test that gives you evidence for it.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "Accuracy"
+          },
+          {
+            "id": "l2",
+            "text": "Usefulness"
+          },
+          {
+            "id": "l3",
+            "text": "Risk"
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "Run it on ten examples where you already know the right answer, and record the score"
+          },
+          {
+            "id": "r2",
+            "text": "Watch your real user do the actual task they need, using your solution"
+          },
+          {
+            "id": "r3",
+            "text": "Check whether any results are unfair, and whether private data could be seen"
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -250,15 +303,47 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - each lens has its own test, so a judgement only counts when it comes from the matching kind of evidence.",
+          "incorrect": "Check the criteria card: accuracy is tested with known answers, usefulness against the user's real task, and risk by looking for unfair results and exposed private data."
+        }
       },
       {
-        "id": "g6-main-w9-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Refinement log: record each check, your judgement and the evidence.",
-        "stem": "Lens | Judgement | Evidence | Action taken",
-        "lookFor": "All three lenses logged, each with a judgement, the evidence it came from, and the action taken; evidence traces back to testing rather than opinion.",
+        "id": "g6-main-w9-core-aq3",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put these steps in the order the lesson says to refine a solution and prove the change helped.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "Judge the solution against accuracy, usefulness and risk"
+          },
+          {
+            "id": "s2",
+            "text": "Choose the one improvement that matters most to your user"
+          },
+          {
+            "id": "s3",
+            "text": "Make that change to the solution"
+          },
+          {
+            "id": "s4",
+            "text": "Re-test the same known-answer cases and compare with the earlier score"
+          },
+          {
+            "id": "s5",
+            "text": "Write the refinement note saying what changed and what the evidence shows"
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -288,14 +373,19 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - you judge first so the change is chosen for a reason, and you re-test afterwards so you have evidence rather than a feeling.",
+          "incorrect": "The order matters: judge against the lenses, choose the one improvement your user needs most, make it, re-test the same cases, then record the evidence."
+        }
       },
       {
-        "id": "g6-main-w9-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: what one change improved your solution most, and how do you know?",
-        "lookFor": "Meets the Emerging criteria: names an accuracy, usefulness or risk judgement and one improvement.",
+        "id": "g6-main-w9-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "Omar re-runs his ten known-answer cases after making a change, and his score rises from 6 out of 10 to 9 out of 10. He writes in his refinement note that the change worked. He compared only the two totals and never looked at which cases changed, so he does not know whether a case that used to pass now fails. Is that enough evidence?",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -325,14 +415,45 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - the lesson asks for accuracy up AND nothing else broken. Two totals cannot show that: 6 to 9 is the same arithmetic whether three cases improved, or four improved while one that used to pass now fails.",
+          "incorrect": "A higher total is not proof on its own. 6 to 9 looks the same whether three cases improved or four improved and one broke, so you have to compare case by case."
+        }
       },
       {
-        "id": "g6-main-w9-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): compare two possible improvements and justify, with evidence, why you chose one over the other.",
-        "lookFor": "Justifies why the chosen improvement beats a second candidate improvement, using evidence.",
+        "id": "g6-main-w9-core-aq5",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "A team says their change made the solution better. Which of these count as evidence for that claim, rather than opinion? Choose all that apply.",
+        "options": [
+          {
+            "id": "o1",
+            "text": "The score on the same ten known-answer tests went from 6 out of 10 to 9 out of 10"
+          },
+          {
+            "id": "o2",
+            "text": "Their partner said the new version looks much nicer"
+          },
+          {
+            "id": "o3",
+            "text": "Re-running the cases that already worked showed that all of them still pass"
+          },
+          {
+            "id": "o4",
+            "text": "The team felt more confident once the change was made"
+          },
+          {
+            "id": "o5",
+            "text": "Their real user finished the task the solution was designed for, which they could not do before"
+          }
+        ],
+        "answer": [
+          "o1",
+          "o3",
+          "o5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -362,7 +483,12 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - evidence comes from testing that someone else could repeat, not from how the team feels about the change.",
+          "incorrect": "Evidence has to come from testing: scores on known-answer cases, re-running the cases that already passed, or the real user managing the task. How something looks or feels is an opinion."
+        }
       }
     ]
   },

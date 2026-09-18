@@ -141,11 +141,33 @@
     "instructions": "Name: __________________________________  Class: ________________  Date: ________________",
     "questions": [
       {
-        "id": "g6-bridging-w5-core-q1",
-        "type": "shortText",
-        "stem": "Task: ...\nStructured prompt (goal | details | form): ...\nData: ...",
-        "autoMarked": false,
-        "lookFor": "All three parts present and clear: a single clear task (e.g. 'recommend one library book'), a structured prompt that names the goal, the details and the form of the answer (e.g. 'Using the class survey, suggest one book most pupils would enjoy, in one sentence with a reason'), and named data (e.g. the balanced reading survey). Accept any clear task + structured prompt + named data. Mastery = clear task, structured prompt and named data; partial = two of three, or one unclear.",
+        "id": "g6-bridging-w5-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Layla's helper has one task: recommend a library book for her class. She has the class reading survey as her data. Which of these is the best structured prompt for that task?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Suggest a good book."
+          },
+          {
+            "id": "b",
+            "text": "Using our class reading survey, suggest one book most of the class would enjoy, and give one sentence saying why."
+          },
+          {
+            "id": "c",
+            "text": "Using our class reading survey, suggest some books people might like."
+          },
+          {
+            "id": "d",
+            "text": "Suggest one book and write as much as you possibly can about it, in as much detail as you can manage."
+          }
+        ],
+        "answer": "b",
+        "feedback": {
+          "correct": "That prompt gives the goal, the details (which data to use) and the form of the answer, so the helper knows exactly what to produce.",
+          "incorrect": "A structured prompt needs all three: the goal, the details such as which data to use, and the form the answer should take - being longer or politer is not the same as being structured."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -176,14 +198,59 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Write the task, a structured prompt, and the data."
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w5-core-q2",
-        "type": "shortText",
-        "stem": "Clean-data output: ...\nNoisy-data output: ...\nThe difference is because ...",
-        "autoMarked": false,
-        "lookFor": "A genuine clean-vs-noisy comparison with a stated data-quality-to-output effect, e.g. 'on clean data it suggested a popular adventure book; on noisy data (a duplicated entry) it over-suggested one title - poorer data gave a less fair output'. Look for the causal link back to the data, not just two different outputs. Watch for the misconception that a good prompt fixes bad data.",
+        "id": "g6-bridging-w5-core-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Layla's finished helper is described below. Match each part of her description to the part of the helper it is.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "Recommend one library book that most of the class would enjoy"
+          },
+          {
+            "id": "l2",
+            "text": "The 28 completed class reading surveys"
+          },
+          {
+            "id": "l3",
+            "text": "Using the class reading survey, name one book and give one sentence saying why"
+          },
+          {
+            "id": "l4",
+            "text": "'The Lost Ship' - because 19 pupils chose adventure stories"
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "The task"
+          },
+          {
+            "id": "r2",
+            "text": "The data"
+          },
+          {
+            "id": "r3",
+            "text": "The structured prompt"
+          },
+          {
+            "id": "r4",
+            "text": "The output"
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
+        "feedback": {
+          "correct": "A helper is a task, a structured prompt and data - and what comes back out of it is the output, not one of its parts.",
+          "incorrect": "The task is the job to be done, the data is what the helper reads, the structured prompt is the instruction you write, and the output is what the helper gives back."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -214,14 +281,18 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Record the output on clean data and on noisy data, and explain the difference."
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w5-core-q3",
-        "type": "shortText",
-        "stem": "Columns: Helper part | My design | Data-quality finding",
-        "autoMarked": false,
-        "lookFor": "A completed log covering each helper part (task, structured prompt, data) with a matching data-quality finding. This is the evidence for the formative check: designs a helper with a clear task, structured prompt and data, and explains how data quality changed the output. Record CU and SD as mastery/partial/not-yet.",
+        "id": "g6-bridging-w5-core-aq3",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "Sami's survey data has several entries typed in twice and a few answers copied into the wrong column. He rewrites his prompt so it is very precise. True or false: the precise prompt will make up for the messy data, so the output can be trusted.",
+        "answer": false,
+        "feedback": {
+          "correct": "Right - the output is built from the data as well as the prompt, so poor data still gives a poor output however precise the wording is.",
+          "incorrect": "A prompt only tells the helper what to do with the data it is given; if the data is wrong, a better-worded instruction cannot invent the right answer."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -252,13 +323,46 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Record your design and your data-quality test."
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w5-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "lookFor": "One sentence saying the output is produced from the data and the prompt, so poor data gives a poor output even when the prompt is good - the helper does not 'know' the answer. Reject answers implying a strong prompt can fix bad data.",
+        "id": "g6-bridging-w5-core-aq4",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the steps of a clean-versus-noisy data test in the order you would carry them out.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "Write the task your helper must do."
+          },
+          {
+            "id": "s2",
+            "text": "Write the structured prompt and prepare the clean data."
+          },
+          {
+            "id": "s3",
+            "text": "Run the helper on the clean data and note the output."
+          },
+          {
+            "id": "s4",
+            "text": "Run the same prompt on the noisy version of the data and note the output."
+          },
+          {
+            "id": "s5",
+            "text": "Compare the two outputs and explain how the data quality caused the difference."
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4",
+          "s5"
+        ],
+        "feedback": {
+          "correct": "Keeping the prompt the same and changing only the data is what makes the difference in the outputs fair to blame on data quality.",
+          "incorrect": "Design first, then run the clean data, then run the very same prompt on the noisy data - only then can you compare and explain the difference."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -289,13 +393,19 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Write one sentence: why does your helper need good data as well as a good prompt?"
+        "evidenceType": "product"
       },
       {
-        "id": "g6-bridging-w5-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "lookFor": "A reasoned threshold (a proportion or a number of bad entries) tied to the helper's own data and task, with reasoning about when the pattern the helper relies on would be swamped or skewed - e.g. one duplicated entry in a small survey already tips the recommendation. Reasoning matters more than the number.",
+        "id": "g6-bridging-w5-core-aq5",
+        "type": "numeric",
+        "marks": 2,
+        "tolerance": 0,
+        "prompt": "Kareem's helper recommends whichever genre the most survey responses chose. His clean survey has 20 responses: 11 chose adventure and 9 chose sport. By mistake, some of the sport responses are copied and counted again. What is the smallest number of copied sport responses that would make the helper recommend sport instead of adventure?",
+        "answer": 3,
+        "feedback": {
+          "correct": "Three copies take sport from 9 to 12, just past adventure's 11 - a handful of duplicated rows is enough to flip the recommendation.",
+          "incorrect": "Sport needs more than adventure's 11, and two copies only make it 11, which is a tie - so it takes three copies to overturn the real result."
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -326,7 +436,7 @@
             "code": "AIF·GE·G5·A"
           }
         ],
-        "prompt": "Predict how much noise your data can take before the output becomes untrustworthy, and explain your reasoning."
+        "evidenceType": "product"
       }
     ]
   },

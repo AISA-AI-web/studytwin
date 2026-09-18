@@ -181,12 +181,29 @@
     "title": "Week 1 - Core - Worksheet | Data Quality and AI Outputs",
     "questions": [
       {
-        "id": "g6-bridging-w1-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Trace the chain: for your dataset card, fill each box: the data problem, the learned pattern problem, and the predicted output problem. Use an arrow between each.",
-        "stem": "The data problem is ___.\nSo the model learns ___.\nSo the output will ___.",
-        "lookFor": "All three links completed so the chain runs from a named data problem (an error, a gap or noise) through the pattern the model learns to one specific output error - for example inconsistent 'date'/'dat'/'DATE' labels and a stone labelled 'date', so the model reads a small stone as a date. Not yet: the output is said to be 'bad' with no data cause named.",
+        "id": "g6-bridging-w1-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "A team trains an AI to spot dates in photos. Every photo and label is correct except one: a photo of a small grey stone has been labelled \"date\". Which mistake should you predict in the AI's output?",
+        "options": [
+          {
+            "id": "a",
+            "text": "It will sometimes look at a small grey stone and call it a date."
+          },
+          {
+            "id": "b",
+            "text": "It will refuse to answer whenever it is shown a stone."
+          },
+          {
+            "id": "c",
+            "text": "It will start calling real dates stones."
+          },
+          {
+            "id": "d",
+            "text": "It will be unaffected, because one wrong photo is too small a part of the dataset to matter."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -197,15 +214,44 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - the model copies the pattern in its examples, so one stone labelled \"date\" teaches it that a small grey lump can be a date, and it says so confidently.",
+          "incorrect": "Follow the chain from the data: the stone was labelled \"date\", so the model learns that shape counts as a date and applies that lesson to new stones."
+        }
       },
       {
-        "id": "g6-bridging-w1-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Quality or quantity? Read four short scenarios and decide whether the dataset's problem is about quality or quantity. Justify each choice in one sentence.",
-        "stem": "This is a ___ problem because ___.",
-        "lookFor": "Separates volume from correctness: strong answers say that adding thousands more mislabelled examples would make the wrong pattern stronger, not weaker, so a bigger dataset can still be a worse dataset. Watch for the misconception that more data always makes an AI better.",
+        "id": "g6-bridging-w1-core-aq2",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "A team has 40 date photos that are clear and correctly labelled. They add 4,000 more photos, but many labels in that new batch are wrong. Select every statement that is a good prediction of what happens.",
+        "options": [
+          {
+            "id": "a",
+            "text": "The dataset is now much bigger, but lower in quality."
+          },
+          {
+            "id": "b",
+            "text": "The wrong pattern will be taught more strongly than before, because thousands of examples now repeat it."
+          },
+          {
+            "id": "c",
+            "text": "Knowing only that the dataset grew does not tell you the outputs will be better."
+          },
+          {
+            "id": "d",
+            "text": "The outputs will improve, because the AI now has far more examples to learn from."
+          },
+          {
+            "id": "e",
+            "text": "The new photos cannot do any harm, because the 40 correct photos are still in the set."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -216,15 +262,59 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - quantity and quality are different things, and a huge dataset full of mistakes just teaches the wrong pattern more strongly.",
+          "incorrect": "More data only helps if the data is good: adding thousands of wrong labels repeats the wrong lesson, and the correct 40 cannot cancel that out."
+        }
       },
       {
-        "id": "g6-bridging-w1-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Prediction vs reveal log: record your prediction before the reveal, then what the outputs actually showed, then whether you were right. Log each dataset version, your predicted output error, the actual revealed output, and Match? (Y/N) and why.",
-        "stem": "Dataset version ___ | My predicted output error ___ | Actual revealed output ___ | Match? (Y/N) and why ___",
-        "lookFor": "A specific predicted mistake tied to a specific bad example, written before the reveal, and an honest match judgement afterwards. Partial: the prediction records a general direction of change with weak justification.",
+        "id": "g6-bridging-w1-core-aq3",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Four teams trained the same AI on different versions of a date-photo dataset. Match each dataset to the output you should expect from it.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "A few stones are labelled \"date\"; everything else is correct."
+          },
+          {
+            "id": "l2",
+            "text": "Every photo is correct, but the set contains only dark brown dates - no yellow ones."
+          },
+          {
+            "id": "l3",
+            "text": "Half the photos are blurry and the labels are written as \"date\", \"dat\" and \"DATE\"."
+          },
+          {
+            "id": "l4",
+            "text": "Only 12 photos, but all clear, all correctly labelled, and covering every kind of date."
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "It confidently calls small stones dates."
+          },
+          {
+            "id": "r2",
+            "text": "It handles brown dates well but gets yellow dates wrong, because it never saw one."
+          },
+          {
+            "id": "r3",
+            "text": "It is unsure and inconsistent on every kind of photo, because the pattern is hard to pick out."
+          },
+          {
+            "id": "r4",
+            "text": "It gives mostly correct answers, even though it learned from a small set."
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -235,14 +325,41 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Well matched - an error teaches a false pattern, a gap leaves a whole case unseen, noise blurs the pattern everywhere, and a small clean set can still do well.",
+          "incorrect": "Ask what each flaw teaches the model: a wrong label teaches a wrong thing, a missing kind of date cannot be learned at all, and noise makes every case harder."
+        }
       },
       {
-        "id": "g6-bridging-w1-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket: in one or two sentences, explain how making a dataset noisier would change an AI's output, and why.",
-        "lookFor": "Predicts a specific, correct change in the output when the data is degraded and justifies it - noise confuses the pattern so the model still answers confidently but gets more cases wrong. Not yet: cannot predict, or the prediction is unrelated to the data change.",
+        "id": "g6-bridging-w1-core-aq4",
+        "type": "ordering",
+        "marks": 3,
+        "prompt": "Put these four steps in order to trace how one problem in the data becomes one wrong answer.",
+        "items": [
+          {
+            "id": "s1",
+            "text": "A photo of a stone is put into the dataset with the label \"date\"."
+          },
+          {
+            "id": "s2",
+            "text": "The model studies the dataset and adjusts itself to match the patterns it finds."
+          },
+          {
+            "id": "s3",
+            "text": "The model now treats small round grey objects as dates."
+          },
+          {
+            "id": "s4",
+            "text": "Shown a new photo of a pebble, the model answers \"date\"."
+          }
+        ],
+        "answer": [
+          "s1",
+          "s2",
+          "s3",
+          "s4"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -253,14 +370,18 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the causal chain: a problem in the data, then a pattern learned from it, then the wrong output it produces.",
+          "incorrect": "Start at the data, not the answer - the flawed example comes first, the model learns from it, and only then does the wrong output appear."
+        }
       },
       {
-        "id": "g6-bridging-w1-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch): design your own dataset card with a hidden quality problem, swap with a partner, and see if they can predict the exact output mistake it would cause.",
-        "lookFor": "Builds a card whose flaw is real but hidden, and can state in advance the exact output error it should cause. Stretch further by asking for two overlapping quality problems and how the errors would combine.",
+        "id": "g6-bridging-w1-core-aq5",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "A team re-photographs every blurry item so it is sharp, and rewrites the labels that had been spelled three different ways. The dataset still holds exactly the same photos of exactly the same dates - none are added and none are taken away. Based on the lesson, the AI’s outputs should get better.",
+        "answer": true,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -271,7 +392,11 @@
           }
         ],
         "tierProbed": "advanced",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Yes - taking out noise makes the pattern easier to learn, and that is a quality improvement even though the dataset is exactly the same size.",
+          "incorrect": "The amount of data did not change, but the noise did: less blur and consistent labels make the pattern clearer, so the outputs should improve."
+        }
       }
     ]
   },

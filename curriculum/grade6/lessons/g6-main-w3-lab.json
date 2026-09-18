@@ -118,51 +118,29 @@
     "title": "Week 3 - Lab - Worksheet | Prompt-to-Task Workshop (Lab)",
     "questions": [
       {
-        "id": "g6-main-w3-lab-q1",
-        "type": "shortText",
-        "prompt": "Compare two structures",
-        "stem": "Structure A met ___ of 3\nStructure B met ___ of 3\nThe stronger structure was ___ because ___",
-        "autoMarked": false,
-        "lookFor": "The comparison must be on completion or accuracy, not length - for example 'Structure A met all three requirements; Structure B missed the tone, so A was stronger.' Emerging (expected): compares two structures on completion and accuracy with evidence. Watch for the misconception that the longest answer is the best.",
-        "frameworkRefs": [
+        "id": "g6-main-w3-lab-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "The task had three requirements: name three school clubs, give the start time, and use a friendly tone. Structure A produced six lines that named three clubs, gave the start time and sounded friendly - but one club it named closed last year. Structure B produced twelve detailed lines, named two clubs, gave no start time and sounded friendly. Which judgement is the strongest?",
+        "options": [
           {
-            "framework": "AIF",
-            "strand": "SD",
-            "grade": 6,
-            "tier": "E",
-            "code": "AIF·SD·G6·E"
-          }
-        ]
-      },
-      {
-        "id": "g6-main-w3-lab-q2",
-        "type": "shortText",
-        "prompt": "Design a reusable template",
-        "stem": "Goal: ___\nContext (no personal data): ___\nFormat: ___\nVerify: ___",
-        "autoMarked": false,
-        "lookFor": "Model template: 'Goal: [task]; Context: [details, no personal data]; Format: [exact format]; then Verify: check facts against a source.' The template must include a verify/risk step and use labelled slots rather than one fixed task. Emerging (expected): a clear reusable template with labelled slots.",
-        "frameworkRefs": [
+            "id": "a",
+            "text": "Structure B is stronger because it gave far more detail than Structure A."
+          },
           {
-            "framework": "AIF",
-            "strand": "SD",
-            "grade": 6,
-            "tier": "E",
-            "code": "AIF·SD·G6·E"
+            "id": "b",
+            "text": "Structure A is stronger on completion, but its club list must be corrected after checking the school's club page."
+          },
+          {
+            "id": "c",
+            "text": "Structure A is stronger, and because it met all three requirements there is nothing left to check."
+          },
+          {
+            "id": "d",
+            "text": "Neither is stronger, because each output has a problem of some kind."
           }
-        ]
-      },
-      {
-        "id": "g6-main-w3-lab-q3",
-        "type": "shortText",
-        "prompt": "Structure comparison record",
-        "columns": [
-          "Structure",
-          "Requirements met",
-          "Accurate?",
-          "Stronger?"
         ],
-        "autoMarked": false,
-        "lookFor": "Evidence for the comparison: both structures recorded, requirements met marked per structure, an accuracy check against a reliable source, and a stated winner. A record that marks completion but never checks accuracy is only approaching - sounding right is not being right.",
+        "answer": "b",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -171,15 +149,163 @@
             "tier": "E",
             "code": "AIF·SD·G6·E"
           }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "You compared on completion and on accuracy: A met all three requirements, and the wrong club name is a fault to fix by verifying, not a reason to prefer the longer output.",
+          "incorrect": "More words is not more complete, and meeting every requirement still does not prove the facts are right - judge completion first, then verify the winner against a reliable source."
+        }
+      },
+      {
+        "id": "g6-main-w3-lab-aq2",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Which features make a prompt a reusable template rather than a one-off prompt? Choose all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "It uses labelled slots such as 'Goal: [task]' that you fill in for each new task."
+          },
+          {
+            "id": "b",
+            "text": "It ends with a step that checks the output against a reliable source."
+          },
+          {
+            "id": "c",
+            "text": "It tells you to keep personal data out of the context."
+          },
+          {
+            "id": "d",
+            "text": "It is longer and uses more words than a one-off prompt."
+          },
+          {
+            "id": "e",
+            "text": "It names the exact topic of the first task you used it for."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Slots let the template travel to new tasks, and the built-in verify and risk checks are what stop it being reused carelessly.",
+          "incorrect": "A template is reusable because of its slots and its built-in checks - extra length adds nothing, and naming one task's topic locks the template to that task."
+        }
+      },
+      {
+        "id": "g6-main-w3-lab-aq3",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the steps of the workshop in the order that lets you compare fairly and end with a template you can trust.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "List the requirements the task has to meet."
+          },
+          {
+            "id": "i2",
+            "text": "Draft two prompts that use different structures."
+          },
+          {
+            "id": "i3",
+            "text": "Run both and mark which requirements each output met."
+          },
+          {
+            "id": "i4",
+            "text": "Check the facts in the stronger output against a reliable source."
+          },
+          {
+            "id": "i5",
+            "text": "Turn the stronger structure into a template with labelled slots and a verify step."
+          }
+        ],
+        "answer": [
+          "i1",
+          "i2",
+          "i3",
+          "i4",
+          "i5"
+        ],
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "The requirements come first because they are what you mark both structures against, and you only build a template out of a structure you have checked for accuracy.",
+          "incorrect": "You need the requirements before you can say which structure completed more, and you should not turn a structure into a template until its output has survived an accuracy check."
+        }
+      },
+      {
+        "id": "g6-main-w3-lab-aq4",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Complete the sentence about your template: A reusable template uses labelled ___ so the same skeleton fits many similar tasks, and it finishes with a step that tells you to ___ the output against a reliable source.",
+        "blanks": [
+          "",
+          ""
+        ],
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "SD",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·SD·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Slots make the template reusable and the verify step makes it safe to reuse - a template without one is only half a template.",
+          "incorrect": "A template needs both halves: labelled slots you fill in for each task, and a final instruction to verify the output against a reliable source."
+        },
+        "answer": [
+          [
+            "slots",
+            "slot",
+            "labelled slots",
+            "gaps",
+            "gap",
+            "placeholders",
+            "placeholder",
+            "blanks",
+            "blank"
+          ],
+          [
+            "verify",
+            "verifies",
+            "verifying",
+            "verification",
+            "check",
+            "checks",
+            "checking",
+            "fact-check",
+            "fact check"
+          ]
         ]
       },
       {
-        "id": "g6-main-w3-lab-q4",
-        "type": "shortText",
-        "prompt": "Exit ticket",
-        "stem": "Write your reusable template in one line and say how it checks accuracy.",
-        "autoMarked": false,
-        "lookFor": "A one-line template with labelled slots (Goal / Context / Format) plus a named verification step - checking the output against a reliable source before use. Privacy (no personal data requested) is a bonus here; both privacy and accuracy must appear in the risk check overall.",
+        "id": "g6-main-w3-lab-aq5",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: once your template has worked well on one task, you can use its output on a different task without checking it.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -188,24 +314,12 @@
             "tier": "E",
             "code": "AIF·SD·G6·E"
           }
-        ]
-      },
-      {
-        "id": "g6-main-w3-lab-q5",
-        "type": "shortText",
-        "prompt": "Challenge (stretch)",
-        "stem": "Test your template on a genuinely different task and note where it needed changing.",
-        "autoMarked": false,
-        "lookFor": "Stretch task: groups test the template on a genuinely different task type and report where it needed changing. Look for the insight that a template is a strong starting point, not a guarantee - each new task still needs its output verified.",
-        "frameworkRefs": [
-          {
-            "framework": "AIF",
-            "strand": "SD",
-            "grade": 6,
-            "tier": "E",
-            "code": "AIF·SD·G6·E"
-          }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - a template is a strong starting point, not a guarantee, so every new task still needs its output verified and risk-checked.",
+          "incorrect": "A template that worked once only makes a good output more likely; the verify and risk steps are built in precisely because each new task can still go wrong."
+        }
       }
     ]
   },

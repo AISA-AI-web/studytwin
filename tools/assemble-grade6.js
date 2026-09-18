@@ -214,10 +214,16 @@ function normaliseAnswerShape(question) {
       let ok = left.length > 0;
 
       question.answer.forEach((entry, i) => {
-        // Either an explicit pair, or the right-hand choice for left[i] by position.
-        const pair = entry && typeof entry === 'object'
-          ? { l: entry.left ?? entry.from ?? entry.l, r: entry.right ?? entry.to ?? entry.r }
-          : { l: left[i] && left[i].id, r: entry };
+        // Three ways a pair gets written: named, as a two-element [left, right], or as
+        // just the right-hand choice for left[i] by position.
+        let pair;
+        if (Array.isArray(entry) && entry.length === 2) {
+          pair = { l: entry[0], r: entry[1] };
+        } else if (entry && typeof entry === 'object') {
+          pair = { l: entry.left ?? entry.from ?? entry.l, r: entry.right ?? entry.to ?? entry.r };
+        } else {
+          pair = { l: left[i] && left[i].id, r: entry };
+        }
 
         const l = resolve('left', pair.l);
         const r = resolve('right', pair.r);

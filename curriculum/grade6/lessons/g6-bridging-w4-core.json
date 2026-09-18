@@ -150,12 +150,29 @@
     "title": "Misinformation Risks and Verification",
     "questions": [
       {
-        "id": "g6-bridging-w4-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "For each curated output, underline the doubtful claim and name the risk type and why it is risky.",
-        "stem": "The risky claim is ___\nThe risk type is ___\nIt is risky because ___",
-        "lookFor": "Names the exact claim at risk and a risk type - number, date, name or source - with a reason. Model response: the height figure for the landmark could be invented, because the AI predicts plausible numbers and may not have the real one. Reward a named risky element, not a general 'it might be wrong'.",
+        "id": "g6-bridging-w4-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "An AI answer reads: \"The festival opened in 2007 and drew 41,000 visitors on its first day.\" Your group has to name the misinformation risk. Which statement names the risk in the way this lesson asks for?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The answer is probably wrong somewhere, because AI is not always right."
+          },
+          {
+            "id": "b",
+            "text": "The date 2007 and the figure 41,000 could be invented, because the system predicts words that sound likely instead of looking facts up."
+          },
+          {
+            "id": "c",
+            "text": "The answer is written with no hedging, so the facts inside it are most likely correct."
+          },
+          {
+            "id": "d",
+            "text": "There is no risk to name, because the sentence is clear and easy to read."
+          }
+        ],
+        "answer": "b",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -164,15 +181,68 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Pointing at the exact date and number tells you precisely what to check, which \"it might be wrong\" never does.",
+          "incorrect": "Name the exact claim you doubt - the number, date, name or source - because a general worry gives you nothing to verify."
+        }
       },
       {
-        "id": "g6-bridging-w4-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "For one output, write a concrete verification strategy naming a trusted source and explaining why it reduces the risk.",
-        "stem": "I would check it by ___\nusing the trusted source ___\nThis helps because ___",
-        "lookFor": "The check must target the specific claim and name a trusted source. Model response: check the height on the landmark's official website or a reputable encyclopaedia, because those are maintained by people who verify facts. Look for the independence and reliability reasoning - an official source is independent of the AI and is kept accurate, so agreement makes the claim far more trustworthy.",
+        "id": "g6-bridging-w4-core-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Match each doubtful claim from an AI output to the check that would actually settle it.",
+        "left": [
+          {
+            "id": "l1",
+            "text": "\"The city's population passed four million last year.\""
+          },
+          {
+            "id": "l2",
+            "text": "\"This poem was written by the poet Al Khansa.\""
+          },
+          {
+            "id": "l3",
+            "text": "\"The museum stays open until 8pm on Fridays.\""
+          },
+          {
+            "id": "l4",
+            "text": "\"A 2021 study found that pupils who sleep more score higher.\""
+          }
+        ],
+        "right": [
+          {
+            "id": "r1",
+            "text": "Look the figure up in the official population statistics published for that year."
+          },
+          {
+            "id": "r2",
+            "text": "Search a library catalogue for the poem's title and see who it is credited to."
+          },
+          {
+            "id": "r3",
+            "text": "Read the opening-hours page on the museum's own website."
+          },
+          {
+            "id": "r4",
+            "text": "Find the study itself and read whether it exists and says that."
+          },
+          {
+            "id": "r5",
+            "text": "Ask the AI whether it is sure, and accept the claim if it repeats it."
+          },
+          {
+            "id": "r6",
+            "text": "Ask a friend whether the claim sounds about right to them."
+          }
+        ],
+        "answer": {
+          "l1": "r1",
+          "l2": "r2",
+          "l3": "r3",
+          "l4": "r4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -181,15 +251,19 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "A check only works if it targets the exact claim and comes from a source that is independent of the AI.",
+          "incorrect": "Match the claim to the source that holds that kind of fact - and remember the AI repeating itself, or a friend's hunch, is not a trusted source."
+        }
       },
       {
-        "id": "g6-bridging-w4-core-q3",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Record the risk and matching check for each output you evaluated.",
-        "stem": "Columns: Output | Risk (specific claim) | Verification step | Trusted source | Why it helps",
-        "lookFor": "Mastery: each row pairs the exact claim at risk with a concrete check against a named trusted source and a clear reason it reduces the risk. Partial: a risk is identified but stays general, or the source is vague and the reason thin. Not yet: no workable check, or a check that would not address the risk.",
+        "id": "g6-bridging-w4-core-aq3",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "An AI answer that is fluent and sounds confident is good evidence that the facts inside it are correct.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -198,14 +272,44 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - the system is built to sound plausible, so an invented number reads exactly like a real one.",
+          "incorrect": "Fluency is about how the words are chosen, not whether they are true; confident writing can still carry a made-up figure."
+        }
       },
       {
-        "id": "g6-bridging-w4-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Name one misinformation risk in an AI output and propose one concrete verification strategy, with a reason it helps.",
-        "lookFor": "Explains a plausible misinformation risk and proposes a workable verification strategy with a reason. Feedback move: push 'it could be wrong' toward a specific risk plus a specific check; extend confident students to layered verification.",
+        "id": "g6-bridging-w4-core-aq4",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Sara has checked an AI claim about a record-breaking building against one official website. She is deciding whether to add a second, independent trusted source. Which of these are good reasons to add one? Select all that apply.",
+        "options": [
+          {
+            "id": "a",
+            "text": "One source can be out of date, and a second source would reveal that."
+          },
+          {
+            "id": "b",
+            "text": "Two sources that do not copy each other are unlikely to carry the same mistake."
+          },
+          {
+            "id": "c",
+            "text": "Asking the AI again and getting the same answer counts as a second source."
+          },
+          {
+            "id": "d",
+            "text": "A second source makes the claim certain, so no doubt is left at all."
+          },
+          {
+            "id": "e",
+            "text": "A check that takes longer is automatically a better check."
+          }
+        ],
+        "answer": [
+          "a",
+          "b"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -214,14 +318,48 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Layering helps because the second source can fail separately from the first - that is what independence means.",
+          "incorrect": "A second source earns its place only by being independent; repeating the AI, or simply taking longer, adds no new evidence, and even two sources raise confidence rather than give certainty."
+        }
       },
       {
-        "id": "g6-bridging-w4-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Design a layered verification strategy using two independent trusted sources for one claim, and explain why two sources are more reliable than one.",
-        "lookFor": "Stretch target from the pack: designs a layered check using two independent trusted sources and explains why two beats one - a single source can also be wrong or out of date, and two genuinely independent sources rarely share the same error.",
+        "id": "g6-bridging-w4-core-aq5",
+        "type": "fillBlank",
+        "marks": 2,
+        "prompt": "Complete the rule this lesson gives: an AI system is built to sound ___ rather than to be ___, so before you share a claim you should check it against a trusted source that is ___ of the AI.",
+        "blanks": [
+          "what it sounds like",
+          "what it is not",
+          "what the source must be"
+        ],
+        "answer": [
+          [
+            "plausible",
+            "likely",
+            "believable",
+            "convincing",
+            "right",
+            "true",
+            "correct",
+            "accurate",
+            "factual"
+          ],
+          [
+            "true",
+            "correct",
+            "accurate",
+            "factual",
+            "right"
+          ],
+          [
+            "independent",
+            "separate",
+            "free"
+          ]
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -230,7 +368,12 @@
             "tier": "A",
             "code": "AIF·GE·G5·A"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the whole habit in one sentence: plausible is not true, so verify against something the AI did not produce.",
+          "incorrect": "The system aims at plausible rather than true, which is why the check has to come from a source independent of the AI."
+        }
       }
     ]
   },

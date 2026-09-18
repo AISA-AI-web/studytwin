@@ -140,12 +140,29 @@
     "title": "Week 5 - Core - Worksheet | Risks and Responsible Use",
     "questions": [
       {
-        "id": "g6-main-w5-core-g6-m-w5-core-q1",
-        "type": "shortText",
-        "prompt": "For two scenarios, complete the chain: risk, who is affected, responsible-use rule.",
-        "stem": "The risk is ...\nIt could affect ...\nA rule that reduces it is ...",
-        "autoMarked": false,
-        "lookFor": "A genuine, specific risk (not 'it is bad'), a named who - a specific person or group such as the student using the output, a classmate, or their family - and a rule that clearly reduces that named risk. The chain should hold together across both scenarios.",
+        "id": "g6-main-w5-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "Layla asks an AI tool what time the school science fair opens. She copies the answer straight onto a poster that goes up in the main corridor. Which risk family is this, and who could it affect?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Accuracy risk - if the time is wrong, everyone who reads the poster could arrive at the wrong time."
+          },
+          {
+            "id": "b",
+            "text": "Accuracy risk - but only Layla is affected, because it is her poster."
+          },
+          {
+            "id": "c",
+            "text": "Safety and privacy risk - the AI tool now knows when the science fair is."
+          },
+          {
+            "id": "d",
+            "text": "Safety and privacy risk - Layla typed a question into a tool that may store what she asks."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -154,15 +171,45 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - an unchecked output is an accuracy risk, and the harm spreads to everyone who trusts the work it goes into.",
+          "incorrect": "No personal data was entered here, so this is an accuracy risk - and a wrong time on a public poster reaches far more people than just Layla."
+        }
       },
       {
-        "id": "g6-main-w5-core-g6-m-w5-core-q2",
-        "type": "shortText",
-        "prompt": "Underline any personal data in a sample prompt and rewrite it safely.",
-        "stem": "Personal data found:\nSafe rewrite:",
-        "autoMarked": false,
-        "lookFor": "Identifies identifying details (name, address, photo, ID number) as personal data, and rewrites the prompt with the real name replaced by something like 'a student'. Watch for the misconception that typing in someone's details is fine as long as it helps - personal data may be stored or used to train systems.",
+        "id": "g6-main-w5-core-aq2",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Ravi wants an AI tool to tidy up the wording of a party invitation. Before he types his draft into the tool, which details should he take out?",
+        "options": [
+          {
+            "id": "a",
+            "text": "His classmate Sara Ahmed's full name"
+          },
+          {
+            "id": "b",
+            "text": "His home address, Villa 12, Al Rayyan Street"
+          },
+          {
+            "id": "c",
+            "text": "His mother's mobile number"
+          },
+          {
+            "id": "d",
+            "text": "The fact that the party starts at four o'clock"
+          },
+          {
+            "id": "e",
+            "text": "The fact that there will be pizza and a cake"
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -171,15 +218,51 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - names, addresses and phone numbers identify real people, so they are the parts that create a privacy risk if the tool stores them.",
+          "incorrect": "The risk is in details that identify a person - a full name, an address, a phone number. A start time and a menu identify nobody."
+        }
       },
       {
-        "id": "g6-main-w5-core-g6-m-w5-core-q3",
-        "type": "shortText",
-        "prompt": "Record each risk you find with its who and rule. Complete the table columns: Scenario | Risk family | Who is affected | Responsible-use rule.",
-        "stem": "Scenario | Risk family | Who is affected | Responsible-use rule",
-        "autoMarked": false,
-        "lookFor": "Each row sorts the scenario into accuracy or safety/privacy, names a specific who for every risk, and states a matching rule. Emerging: two different, genuine risks with a specific who each and a rule that clearly reduces the named risk.",
+        "id": "g6-main-w5-core-aq3",
+        "type": "matching",
+        "marks": 3,
+        "prompt": "Match each situation to the responsible-use rule that would reduce its risk.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "Omar pastes an AI answer about how volcanoes form straight into his science report."
+          },
+          {
+            "id": "L2",
+            "text": "Mei types a classmate's full name and home address into a chatbot so it can write a thank-you note."
+          },
+          {
+            "id": "L3",
+            "text": "Yusuf finds a new AI app online and is not sure whether it is safe to use for homework."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Never enter personal or identifying data into an AI tool."
+          },
+          {
+            "id": "R2",
+            "text": "Tell an adult if you are unsure about a tool."
+          },
+          {
+            "id": "R3",
+            "text": "Check the output against a trusted source before you use it."
+          }
+        ],
+        "answer": {
+          "L1": "R3",
+          "L2": "R1",
+          "L3": "R2"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -188,14 +271,42 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Good matching - a rule only counts as useful when it actually reduces the particular risk in front of you.",
+          "incorrect": "Ask what could go wrong in each case: a wrong fact needs checking, identifying details should never be typed in, and an unknown tool needs an adult."
+        }
       },
       {
-        "id": "g6-main-w5-core-g6-m-w5-core-q4",
-        "type": "shortText",
-        "prompt": "Name two genuine risks of using AI tools and one responsible-use rule that reduces one of them.",
-        "autoMarked": false,
-        "lookFor": "Two genuinely different risks - e.g. incorrect output used as-is (accuracy) and entering personal data (safety/privacy) - plus one rule that matches one of them, such as 'never enter personal or identifying data into an AI tool'. Redirect vague 'it is bad' answers to a specific risk plus who it affects.",
+        "id": "g6-main-w5-core-aq4",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the four steps of the risk-check routine into the order the lesson uses them.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Name who could be affected."
+          },
+          {
+            "id": "i2",
+            "text": "Read the scenario."
+          },
+          {
+            "id": "i3",
+            "text": "Attach a responsible-use rule that reduces the risk."
+          },
+          {
+            "id": "i4",
+            "text": "Decide whether it is an accuracy risk or a safety and privacy risk."
+          }
+        ],
+        "answer": [
+          "i2",
+          "i4",
+          "i1",
+          "i3"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -204,14 +315,19 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "That is the chain - risk, then who, then rule. The rule comes last because it has to fit the risk you named.",
+          "incorrect": "You cannot pick a rule until you know what the risk is and who it could harm, so the rule is always the last step."
+        }
       },
       {
-        "id": "g6-main-w5-core-g6-m-w5-core-q5",
-        "type": "shortText",
-        "prompt": "Write a class responsible-use charter of three rules, each matched to a specific risk it reduces.",
-        "autoMarked": false,
-        "lookFor": "Three realistic rules, each explicitly paired with the risk it reduces rather than listed as general advice. Stretch: a scenario that involves both risk families at once, with the overlap explained.",
+        "id": "g6-main-w5-core-aq5",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: a mistake in an AI answer only affects the person who asked the question.",
+        "answer": false,
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -220,7 +336,12 @@
             "tier": "E",
             "code": "AIF·GE·G6·E"
           }
-        ]
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - an unchecked mistake spreads into your work and on to anyone who trusts it, which is why every risk has a who.",
+          "incorrect": "Think about where the answer ends up: in a report, a poster or a message, so the mistake reaches everyone who trusts that work."
+        }
       }
     ]
   },

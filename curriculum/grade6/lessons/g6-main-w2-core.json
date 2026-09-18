@@ -133,12 +133,29 @@
     "title": "Week 2 Core worksheet - Rules vs Learning - How Each System Works",
     "questions": [
       {
-        "id": "g6-main-w2-core-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Feature chart. Complete the chart with a feature and an example for each system type.",
-        "stem": "Rule-based: logic comes from ___\nLearning: logic comes from ___",
-        "lookFor": "Both rows name a non-surface feature - that in a rule-based system a person writes the logic, and in a learning system the logic comes from data - and each row carries an example. Watch for surface traits such as 'it looks modern' standing in for a feature.",
+        "id": "g6-main-w2-core-aq1",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "A metro ticket gate opens only when a valid card is tapped. An engineer wrote out every condition the gate checks before it opens. Which classification and reason is correct?",
+        "options": [
+          {
+            "id": "a",
+            "text": "Rule-based, because a person wrote the logic the gate follows."
+          },
+          {
+            "id": "b",
+            "text": "Learning, because it builds a model from the thousands of cards tapped each day."
+          },
+          {
+            "id": "c",
+            "text": "Rule-based, because the gate is simple and does not have a modern screen."
+          },
+          {
+            "id": "d",
+            "text": "Learning, because it deals with a new passenger it has never seen before."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -148,16 +165,59 @@
             "code": "AIF·CU·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Exactly - the deciding feature is where the logic came from, and here a person wrote it as fixed steps.",
+          "incorrect": "Handling lots of taps, or looking plain, are surface traits; what decides it is that a person wrote the conditions rather than the system finding them in data."
+        }
       },
       {
-        "id": "g6-main-w2-core-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Classify and justify. Classify two systems and underline the deciding feature.",
-        "stem": "This is a ___ system because ___",
-        "lookFor": "Classifies both examples correctly with a feature reason: a metro ticket gate is rule-based because a person set fixed rules, and a voice assistant that improves with use is learning because it builds a model from data and handles new phrases. Approaching: one classified correctly, or a surface trait mixed in.",
+        "id": "g6-main-w2-core-aq2",
+        "type": "matching",
+        "marks": 4,
+        "prompt": "Each clue below is evidence about a system. Match each clue to what it proves about that system.",
+        "left": [
+          {
+            "id": "L1",
+            "text": "You can open the file and read every step the machine follows, written out by its maker."
+          },
+          {
+            "id": "L2",
+            "text": "The system was shown thousands of labelled examples before it worked at all."
+          },
+          {
+            "id": "L3",
+            "text": "It refuses any case its maker did not write a step for."
+          },
+          {
+            "id": "L4",
+            "text": "It handled a phrase correctly that nobody had ever typed into it before."
+          }
+        ],
+        "right": [
+          {
+            "id": "R1",
+            "text": "Rule-based: the logic came from a person."
+          },
+          {
+            "id": "R2",
+            "text": "Learning: the logic came from data."
+          },
+          {
+            "id": "R3",
+            "text": "Rule-based: it only handles cases its rules cover."
+          },
+          {
+            "id": "R4",
+            "text": "Learning: it handles new cases that look like its examples."
+          }
+        ],
+        "answer": {
+          "L1": "R1",
+          "L2": "R2",
+          "L3": "R3",
+          "L4": "R4"
+        },
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -167,20 +227,94 @@
             "code": "AIF·CU·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "You used both features: where the logic came from, and what happens when something new arrives.",
+          "incorrect": "Two clues are about where the logic came from and two are about what happens with a new case - sort them by which feature each one is really telling you about."
+        }
       },
       {
-        "id": "g6-main-w2-core-q3",
+        "id": "g6-main-w2-core-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "Select every piece of evidence that would be good proof that a system is a learning system.",
+        "options": [
+          {
+            "id": "a",
+            "text": "It was shown labelled examples before it could do the job."
+          },
+          {
+            "id": "b",
+            "text": "It gets new cases right that look like its examples."
+          },
+          {
+            "id": "c",
+            "text": "Changing the examples it was shown changes the answers it gives."
+          },
+          {
+            "id": "d",
+            "text": "Its screen is colourful and it updates every month."
+          },
+          {
+            "id": "e",
+            "text": "It gives its answer almost instantly."
+          },
+          {
+            "id": "f",
+            "text": "A person wrote out every step it follows."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "All three are about data building the logic - that is real proof, unlike how the system looks or how fast it is.",
+          "incorrect": "Speed and a modern look are surface traits, and a person writing every step is proof of the opposite; pick the clues that point to data building the logic."
+        }
+      },
+      {
+        "id": "g6-main-w2-core-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: because a shopping app looks modern and changes its layout often, we can be sure it is a learning system.",
+        "answer": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Right - looking modern is a surface trait, and a rule-based system can be given a shiny new layout at any time.",
+          "incorrect": "A new look tells you nothing about where the logic came from; you would need evidence that the system built its logic from examples."
+        }
+      },
+      {
+        "id": "g6-main-w2-core-aq5",
         "type": "fillBlank",
-        "autoMarked": false,
-        "prompt": "Classification record. Record each system, your classification, and the deciding feature.",
+        "marks": 2,
+        "prompt": "A spellchecker flags a word only when that word is missing from a fixed list its makers typed in. Complete the classification sentence.",
+        "stem": "This is a {{1}} system, because the logic came from a {{2}}.",
         "blanks": [
-          "System",
-          "Rule-based or learning",
-          "Deciding feature"
+          "",
+          ""
         ],
-        "lookFor": "Each row pairs a classification with a deciding feature rather than a surface look. The deciding-feature column should say where the logic comes from or how the system handles a new case.",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -190,44 +324,30 @@
             "code": "AIF·CU·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
-      },
-      {
-        "id": "g6-main-w2-core-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket. Classify two systems your teacher names and give the feature that separates them.",
-        "lookFor": "Secure: classifies both correctly and names a distinguishing feature that is not a surface trait. Sort exit slips secure / partial / not-yet; if under 70 percent distinguish correctly, re-teach with the two-column feature chart.",
-        "frameworkRefs": [
-          {
-            "framework": "AIF",
-            "strand": "CU",
-            "grade": 6,
-            "tier": "E",
-            "code": "AIF·CU·G6·E"
-          }
-        ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
-      },
-      {
-        "id": "g6-main-w2-core-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch). Find a system that is genuinely hard to classify and argue both sides using features.",
-        "lookFor": "Argues both sides using the two features - where the logic comes from, and how the system handles a new case - rather than surface traits. This is the stretch task for students who already classify securely.",
-        "frameworkRefs": [
-          {
-            "framework": "AIF",
-            "strand": "CU",
-            "grade": 6,
-            "tier": "E",
-            "code": "AIF·CU·G6·E"
-          }
-        ],
-        "tierProbed": "proficient",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "A fixed list typed in by its makers is logic written by a person, so this is rule-based.",
+          "incorrect": "Ask where the logic came from: nobody showed this spellchecker labelled examples - a person typed the list, so it is rule-based."
+        },
+        "answer": [
+          [
+            "rule-based",
+            "rule based",
+            "rulebased",
+            "a rule-based",
+            "rule-based one"
+          ],
+          [
+            "person",
+            "a person",
+            "human",
+            "a human",
+            "people",
+            "programmer",
+            "the makers",
+            "maker"
+          ]
+        ]
       }
     ]
   },

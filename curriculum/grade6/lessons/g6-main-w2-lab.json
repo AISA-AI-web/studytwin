@@ -107,12 +107,39 @@
     "title": "Week 2 Lab worksheet - Train a Simple Model",
     "questions": [
       {
-        "id": "g6-main-w2-lab-q1",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Build and test log. Record your categories, then predict and test each held-back example.",
-        "stem": "I predict this will be classified as ___\nThe model actually classified it as ___",
-        "lookFor": "Secure: the two categories are named, the prediction is written before the example is tested, and the tested examples are ones held back from training. Approaching: trains and tests but blurs the two sets.",
+        "id": "g6-main-w2-lab-aq1",
+        "type": "ordering",
+        "marks": 4,
+        "prompt": "Put the lab steps in the order that gives a fair test of the model.",
+        "items": [
+          {
+            "id": "i1",
+            "text": "Pick two categories of non-personal items."
+          },
+          {
+            "id": "i2",
+            "text": "Collect and label 8-10 examples of each category."
+          },
+          {
+            "id": "i3",
+            "text": "Hide 3 examples of each category so the model will never see them."
+          },
+          {
+            "id": "i4",
+            "text": "Train the model using the remaining examples only."
+          },
+          {
+            "id": "i5",
+            "text": "Run the hidden examples through the model and log the results."
+          }
+        ],
+        "answer": [
+          "i1",
+          "i2",
+          "i3",
+          "i4",
+          "i5"
+        ],
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -122,16 +149,36 @@
             "code": "AIF·CU·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "The testing examples have to be set aside before training, or the model has already seen them and the test proves nothing.",
+          "incorrect": "Check where the hiding step sits: examples must be held back before training, otherwise you are testing the model on work it already memorised."
+        }
       },
       {
-        "id": "g6-main-w2-lab-q2",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Data-safety and risk check. Tick the safety checks and write one risk and one improvement.",
-        "stem": "My data was safe because ___\nOne risk was ___\nOne improvement is ___",
-        "lookFor": "The safety line must confirm non-personal data - all examples were objects or drawings, no faces, voices or names. A secure improvement links quality and variety to accuracy, for example adding varied examples in different sizes, colours or angles so the model learns the real category.",
+        "id": "g6-main-w2-lab-aq2",
+        "type": "mcq",
+        "marks": 2,
+        "prompt": "A group trained a 'cup' classifier. Every cup in their training examples was white. When they tested a red cup that had been held back, the model said 'not a cup'. What is the best explanation?",
+        "options": [
+          {
+            "id": "a",
+            "text": "The model learned 'white' as well as 'cup', because every training example shared that colour."
+          },
+          {
+            "id": "b",
+            "text": "The model simply did not have enough training examples."
+          },
+          {
+            "id": "c",
+            "text": "The red cup was a testing example, and models always get testing examples wrong."
+          },
+          {
+            "id": "d",
+            "text": "The model memorised the red cup during training and got confused."
+          }
+        ],
+        "answer": "a",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -141,21 +188,95 @@
             "code": "AIF·CU·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "When every example shares a feature, the model learns that feature too - this is the red-cup version of the red-apple problem.",
+          "incorrect": "More examples of the same white cups would not help, and the red cup was never in training; the problem is that the training examples had no variety in colour."
+        }
       },
       {
-        "id": "g6-main-w2-lab-q3",
+        "id": "g6-main-w2-lab-aq3",
+        "type": "multi",
+        "marks": 3,
+        "prompt": "A group wants to find out whether their model really learned 'circle' or only memorised their pictures. Select every action that would help them find out.",
+        "options": [
+          {
+            "id": "a",
+            "text": "Test it on circles that were held back and never used in training."
+          },
+          {
+            "id": "b",
+            "text": "Include circles of different sizes and colours among the testing examples."
+          },
+          {
+            "id": "c",
+            "text": "Write down the prediction for each example before running it through the model."
+          },
+          {
+            "id": "d",
+            "text": "Test it again using the same pictures it was trained on."
+          },
+          {
+            "id": "e",
+            "text": "Add more copies of the training pictures to the testing set."
+          },
+          {
+            "id": "f",
+            "text": "Judge the model by how quickly it gives each answer."
+          }
+        ],
+        "answer": [
+          "a",
+          "b",
+          "c"
+        ],
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Unseen and varied examples, with your prediction written first, is what turns a test into real evidence.",
+          "incorrect": "Anything the model has already seen will be answered correctly whether it learned or memorised, and speed says nothing about what it learned."
+        }
+      },
+      {
+        "id": "g6-main-w2-lab-aq4",
+        "type": "truefalse",
+        "marks": 1,
+        "prompt": "True or false: a model that gets every training example right but fails almost every held-back example has learned its categories well.",
+        "answer": false,
+        "frameworkRefs": [
+          {
+            "framework": "AIF",
+            "strand": "CU",
+            "grade": 6,
+            "tier": "E",
+            "code": "AIF·CU·G6·E"
+          }
+        ],
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Correct - getting the training examples right only shows it memorised them; real learning shows up on examples it has never seen.",
+          "incorrect": "Scoring well on the examples it was trained on is easy; because it fails the held-back examples, this model memorised rather than learned."
+        }
+      },
+      {
+        "id": "g6-main-w2-lab-aq5",
         "type": "fillBlank",
-        "autoMarked": false,
-        "prompt": "Training and testing record. Log each testing example, your prediction, the result, and whether it was correct.",
+        "marks": 2,
+        "prompt": "Complete the lab's rules about safe data and a fair check.",
+        "stem": "Training examples must be non-{{1}}, which means no faces, voices or names. The examples you hide are called {{2}} data, and they are a fair check only because the model never saw them during {{3}}.",
         "blanks": [
-          "Testing example",
-          "Predicted",
-          "Model result",
-          "Correct?"
+          "",
+          "",
+          ""
         ],
-        "lookFor": "Every logged example is one the model never saw in training, and prediction and result are recorded separately so a wrong prediction is still evidence. If a group has logged training examples here, re-model the split and have them re-run on held-back data.",
         "frameworkRefs": [
           {
             "framework": "AIF",
@@ -165,44 +286,30 @@
             "code": "AIF·CU·G6·E"
           }
         ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
-      },
-      {
-        "id": "g6-main-w2-lab-q4",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Exit ticket. How did your training examples change what the model learned? Give one example.",
-        "lookFor": "Reward any accurate cause-and-effect from data to model, for example 'all our circles were large, so the model missed a small circle - it learned large as well as round'. Partial: an explanation with no named example.",
-        "frameworkRefs": [
-          {
-            "framework": "AIF",
-            "strand": "CU",
-            "grade": 6,
-            "tier": "E",
-            "code": "AIF·CU·G6·E"
-          }
-        ],
-        "tierProbed": "emerging",
-        "evidenceType": "product"
-      },
-      {
-        "id": "g6-main-w2-lab-q5",
-        "type": "shortText",
-        "autoMarked": false,
-        "prompt": "Challenge (stretch). Design a 'trick' testing example, predict whether the model will fail, then test it and explain the result.",
-        "lookFor": "Predicts whether the model will fail and why before testing, then explains the result against that prediction - the stretch task for groups whose training and testing log is already secure.",
-        "frameworkRefs": [
-          {
-            "framework": "AIF",
-            "strand": "CU",
-            "grade": 6,
-            "tier": "E",
-            "code": "AIF·CU·G6·E"
-          }
-        ],
-        "tierProbed": "proficient",
-        "evidenceType": "product"
+        "evidenceType": "product",
+        "feedback": {
+          "correct": "Safe data and a clean split between training and testing are the two things that make your log trustworthy.",
+          "incorrect": "The golden rule is non-personal examples only, and the held-back set is the testing data - it works as a check because it stayed out of training."
+        },
+        "answer": [
+          [
+            "personal",
+            "non-personal",
+            "personal data"
+          ],
+          [
+            "testing",
+            "test",
+            "testing data",
+            "test data"
+          ],
+          [
+            "training",
+            "the training",
+            "training time",
+            "the training stage"
+          ]
+        ]
       }
     ]
   },
